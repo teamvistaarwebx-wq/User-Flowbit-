@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { AlertTriangle, Building2, CalendarClock, Check, Loader2, MapPin, X } from 'lucide-react'
 import { TEAM_SIZE_VALUES } from '@/lib/account-types'
+import { PRODUCTS } from '@/lib/catalog'
+import { WORKSPACE_KIND_DEFS, WORKSPACE_KINDS, type WorkspaceKind } from '@/lib/workspace-kind'
 import { WEEKDAY_SHORT } from '@/lib/dates'
 import { cn } from '@/lib/utils'
 import { ActionForm, FormField, SubmitButton } from '@/components/ui/action-form'
@@ -61,7 +63,7 @@ function SlugField({ initial }: { initial: string }) {
   )
 }
 
-export function WorkspaceCard({ org }: { org: { name: string; slug: string; teamSize: string; mode: string } }) {
+export function WorkspaceCard({ org, canChangeKind }: { org: { name: string; slug: string; teamSize: string; mode: string; workspaceKind: WorkspaceKind }; canChangeKind: boolean }) {
   return (
     <Card variant="solid">
       <CardHeader label="Workspace" icon={<Building2 />} description="Shown in the workspace switcher, emails and the header of every PDF." />
@@ -74,6 +76,16 @@ export function WorkspaceCard({ org }: { org: { name: string; slug: string; team
         </div>
         <FormField name="teamSize" label="How many people use this workspace?">
           <ChipGroup name="teamSize" defaultValue={org.teamSize} options={TEAM_SIZE_VALUES.filter((s) => s !== '2-10' || org.teamSize === s).map((s) => ({ value: s, label: s.replace('-', '–') }))} size="sm" />
+        </FormField>
+        <FormField name="workspaceKind" label="Workspace type" help={canChangeKind ? 'Decides which products, roles and settings show. Nothing is deleted when you change it.' : 'Only the owner can change this.'}>
+          {canChangeKind ? (
+            <RadioCards name="workspaceKind" columns={3} defaultValue={org.workspaceKind} options={WORKSPACE_KINDS.map((k) => ({ value: k, title: WORKSPACE_KIND_DEFS[k].label, description: WORKSPACE_KIND_DEFS[k].products.map((p) => PRODUCTS[p].shortName).join(' · ') }))} />
+          ) : (
+            <>
+              <input type="hidden" name="workspaceKind" value={org.workspaceKind} />
+              <p className="text-sm text-white">{WORKSPACE_KIND_DEFS[org.workspaceKind].label}</p>
+            </>
+          )}
         </FormField>
         <FormField name="mode" label="How you work">
           <RadioCards

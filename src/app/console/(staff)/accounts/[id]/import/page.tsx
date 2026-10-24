@@ -25,7 +25,7 @@ export default async function StaffImportPage({ params, searchParams }: { params
   const [{ id }, sp] = await Promise.all([params, searchParams])
   const p = await requireStaff('import.run')
   if (!isValidObjectId(id)) notFound()
-  const org = await p.raw(Org).findById(id, { name: 1, dpa: 1, enabledProducts: 1, 'subscription.accountType': 1 }).lean()
+  const org = await p.raw(Org).findById(id, { name: 1, dpa: 1, enabledProducts: 1, workspaceKind: 1, 'subscription.accountType': 1 }).lean()
   if (!org || internalLocked(org.subscription?.accountType, p.staff.isFounder)) notFound()
   const db = p.forOrg(org._id).db
   const refusal = staffImportRefusal({ dpa: org.dpa, grants: await db(SupportAccess).find({ mode: 'import', staffId: p.staff.id }).lean() })

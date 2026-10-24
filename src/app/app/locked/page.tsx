@@ -7,6 +7,7 @@ import { requireMember } from '@/lib/ctx'
 import { formatINR } from '@/lib/money'
 import { first, type SearchParams } from '@/lib/list'
 import { enabled, FOLIO_INCLUDED_FIRMS, FOLIO_INCLUDED_USERS, PLAN_PRICES, productTrialOf, type PlanKey } from '@/lib/plans'
+import { kindAllowsProduct, workspaceKindOf, WORKSPACE_KIND_DEFS } from '@/lib/workspace-kind'
 import { buttonClass } from '@/components/ui/button-styles'
 import { Icon } from '@/components/ui/icon'
 import { AskAdminButton, OwnerButtons } from './_components/upsell-buttons'
@@ -37,20 +38,31 @@ export default async function LockedPage({ searchParams }: { searchParams: Promi
   const payrollOnly = feature?.requires === 'muster_business'
   // Already usable (a trial just started, or an old link): go straight to the product.
   if (featureKey ? ctx.hasFeature(featureKey) : ctx.has(product.key)) redirect(product.home)
-  const switchedOff = !payrollOnly && ctx.entitlements.entitledProducts.includes(product.key) && !enabled(ctx.org, product.key)
+  const kind = workspaceKindOf(ctx.org)
+  // The workspace kind leaves the product out (Muster for a freelancer): no upsell, just where to change the type.
+  const kindHidden = !kindAllowsProduct(kind, product.key)
+  const switchedOff = !kindHidden && !payrollOnly && ctx.entitlements.entitledProducts.includes(product.key) && !enabled(ctx.org, product.key)
   const canBuy = ctx.can('billing.manage')
   // Product trials are no longer offered (D2); one started earlier may have ended.
   const trialUsed = Boolean(productTrialOf(ctx.org, product.key))
 
-  const status = payrollOnly
-    ? 'Payroll with PF, ESI and PT is part of Muster Business. Your workspace is on Muster Starter.'
-    : switchedOff
-      ? `${product.name} is in your plan but switched off for this workspace.`
-      : trialUsed
-        ? `Your ${product.name} trial has ended. Your data is kept; add ${product.shortName} to your plan to pick up where you left off.`
-        : `${product.name} isn't part of your plan yet. Here's what it looks like with sample data.`
+  const status = kindHidden
+    ? `${product.name} isn't part of a ${WORKSPACE_KIND_DEFS[kind].label.toLowerCase()} workspace. To use it, change the workspace type in Settings → General; nothing is deleted.`
+    : payrollOnly
+      ? 'Payroll with PF, ESI and PT is part of Muster Business. Your workspace is on Muster Starter.'
+      : switchedOff
+        ? `${product.name} is in your plan but switched off for this workspace.`
+        : trialUsed
+          ? `Your ${product.name} trial has ended. Your data is kept; add ${product.shortName} to your plan to pick up where you left off.`
+          : `${product.name} isn't part of your plan yet. Here's what it looks like with sample data.`
 
-  const actions = switchedOff ? (
+  const actions = kindHidden ? (
+    ctx.can('org.manage') ? (
+      <Link href="/app/settings" className={buttonClass('primary', 'lg')}>Change workspace type</Link>
+    ) : (
+      <AskAdminButton product={product.key} />
+    )
+  ) : switchedOff ? (
     ctx.can('org.manage') ? (
       <Link href="/app/settings/modules" className={buttonClass('primary', 'lg')}>Turn it on in Modules</Link>
     ) : (

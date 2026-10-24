@@ -5,7 +5,7 @@ export type Access = {
   can: (perm?: Permission) => boolean
   has: (product: ProductKey) => boolean
   hasFeature: (feature?: FeatureKey) => boolean
-  products: Record<ProductKey, { entitled: boolean; enabled: boolean }>
+  products: Record<ProductKey, { entitled: boolean; enabled: boolean; hidden?: boolean }>
   hasEmployee: boolean
   /** The workspace connected its own WhatsApp number (links with `requires: 'whatsapp'`). */
   whatsapp?: boolean
@@ -28,12 +28,14 @@ export const previewRailKey = (entries: RailEntry[], product: ProductKey | null)
   product ? entries.find((e) => !e.special && e.products?.[0] === product)?.key : undefined
 
 /**
- * Rail items the member sees. Not entitled -> locked (upgrade dialog).
- * Entitled but switched off -> hidden. Missing permission -> fallback href or hidden.
+ * Rail items the member sees. Left out by the workspace kind -> hidden (no upsell).
+ * Not entitled -> locked (upgrade dialog). Entitled but switched off -> hidden.
+ * Missing permission -> fallback href or hidden.
  */
 export function railEntries(items: RailItem[], access: Access): RailEntry[] {
   return items.flatMap((item): RailEntry[] => {
     if (item.products?.length) {
+      if (item.products.every((p) => access.products[p].hidden)) return []
       const anyEntitled = item.products.some((p) => access.products[p].entitled)
       if (!anyEntitled) return [{ ...item, state: 'locked', target: item.href }]
       if (!item.products.some(access.has)) return []

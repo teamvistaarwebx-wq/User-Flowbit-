@@ -26,7 +26,7 @@ export async function formBySlug(slug: string) {
   return elevated('resolve a public claim form by its link', async (db) => {
     const form = await db.raw(ClaimForm).findOne({ slugLower: clean }).lean()
     if (!form) return null
-    const org = await db.raw(Org).findById(form.orgId, { name: 1, logoFileId: 1, disabled: 1, deletedAt: 1, subscription: 1, enabledProducts: 1 }).lean()
+    const org = await db.raw(Org).findById(form.orgId, { name: 1, logoFileId: 1, disabled: 1, deletedAt: 1, subscription: 1, enabledProducts: 1, workspaceKind: 1 }).lean()
     // A read-only, blocked or Muster-off workspace takes no writes from outside either.
     if (!org || !canWrite(org, 'muster')) return null
     return { form, org }

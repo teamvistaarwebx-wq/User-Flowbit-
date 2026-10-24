@@ -40,7 +40,7 @@ export function addressOf(e: Pick<EntityLike, 'address' | 'addressLines' | 'city
 }
 
 export async function brandFor(orgId: Types.ObjectId, entity: EntityLike | null): Promise<PublicBrand> {
-  const org = await Org.findById(orgId, { name: 1, logoFileId: 1, theme: 1, subscription: 1, createdAt: 1, status: 1, disabled: 1, deletedAt: 1, enabledProducts: 1 }).lean()
+  const org = await Org.findById(orgId, { name: 1, logoFileId: 1, theme: 1, subscription: 1, createdAt: 1, status: 1, disabled: 1, deletedAt: 1, enabledProducts: 1, workspaceKind: 1 }).lean()
   const logoSrc = (await imageSrc(orgId, entity?.logoFileId)) ?? (await imageSrc(orgId, org?.logoFileId))
   return {
     name: entity ? entityLabel(entity) : (org?.name ?? 'Your supplier'),

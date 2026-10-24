@@ -7,6 +7,7 @@ import { isResendConfigured } from '@/lib/env'
 import { buildHref, parseListParams, type SearchParams } from '@/lib/list'
 import { cn } from '@/lib/utils'
 import { BUILTIN_ROLE_KEYS, BUILTIN_ROLES } from '@/lib/permissions'
+import { kindAllowsRole, workspaceKindOf } from '@/lib/workspace-kind'
 import { Avatar } from '@/components/ui/avatar'
 import { buttonClass } from '@/components/ui/button-styles'
 import { DataTable, type Column } from '@/components/ui/data-table'
@@ -47,7 +48,7 @@ export default async function MembersPage({ searchParams }: { searchParams: Prom
   const filtered = Boolean(p.q || status || role)
   const roleFilterOptions = [
     { value: 'all', label: 'All roles' },
-    ...BUILTIN_ROLE_KEYS.map((k) => ({ value: k, label: BUILTIN_ROLES[k].label })),
+    ...BUILTIN_ROLE_KEYS.filter((k) => kindAllowsRole(workspaceKindOf(ctx.org), k)).map((k) => ({ value: k, label: BUILTIN_ROLES[k].label })),
     ...customRoles.map((r) => ({ value: String(r._id), label: r.label })),
   ]
 

@@ -31,7 +31,7 @@ const SLUG = /^[a-z0-9-]{2,60}$/
 export const portalPath = (slug: string, path = '') => `/portal/${slug}${path}`
 
 export type PortalOrg = NonNullable<Awaited<ReturnType<typeof loadOrg>>>
-const loadOrg = (slug: string) => Org.findOne({ slug, deletedAt: null }, { name: 1, slug: 1, subscription: 1, enabledProducts: 1, disabled: 1, deletedAt: 1, createdAt: 1, status: 1, theme: 1, logoFileId: 1 }).lean()
+const loadOrg = (slug: string) => Org.findOne({ slug, deletedAt: null }, { name: 1, slug: 1, subscription: 1, enabledProducts: 1, workspaceKind: 1, disabled: 1, deletedAt: 1, createdAt: 1, status: 1, theme: 1, logoFileId: 1 }).lean()
 
 /** The workspace behind a portal URL, with whether its portal is on (Suite, add-on, trial). Null for a bad slug. */
 export async function portalOrg(slug: string): Promise<{ org: PortalOrg; portalOn: boolean } | null> {

@@ -16,7 +16,7 @@ export const ORG_TOMBSTONE_SET = ['name', 'slug', 'status', 'deletedAt', 'purged
 
 /** Org fields kept on the tombstone: settings and billing history with no personal data. */
 export const ORG_KEPT = [
-  '_id', '__v', 'createdAt', 'updatedAt', 'avatarStyle', 'teamSize', 'mode', 'state', 'timezone', 'officeHours', 'workWeek',
+  '_id', '__v', 'createdAt', 'updatedAt', 'avatarStyle', 'teamSize', 'mode', 'workspaceKind', 'state', 'timezone', 'officeHours', 'workWeek',
   'disabled', 'disabledAt', 'activation', 'meetingsAi', 'dpa.version', 'dpa.acceptedAt',
   'subscription.status', 'subscription.plan', 'subscription.accountType', 'subscription.compedUntil', 'subscription.products',
   'subscription.seats', 'subscription.quantities', 'subscription.cycle', 'subscription.trialEndsAt', 'subscription.trialStartedAt',

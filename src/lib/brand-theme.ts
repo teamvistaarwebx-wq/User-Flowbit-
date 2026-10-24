@@ -165,7 +165,7 @@ export const brandColorsAllowed = (org: OrgLike) => (isTrial(org) && accountType
 export const workspaceTheme = (org: OrgLike & { theme?: StoredTheme }): StoredTheme => (brandColorsAllowed(org) ? (org.theme ?? null) : null)
 
 /** The Org fields workspaceTheme needs: load these wherever a brand colour is shown outside the app. */
-export const WORKSPACE_THEME_FIELDS = { theme: 1, subscription: 1, createdAt: 1, status: 1, disabled: 1, deletedAt: 1, enabledProducts: 1 } as const
+export const WORKSPACE_THEME_FIELDS = { theme: 1, subscription: 1, createdAt: 1, status: 1, disabled: 1, deletedAt: 1, enabledProducts: 1, workspaceKind: 1 } as const
 
 /** The primary colour a workspace shows on emails and public pages: Flowbit's unless its plan allows brand colours. */
 export const workspacePrimary = (org: (OrgLike & { theme?: StoredTheme }) | null | undefined): string => resolveTheme(org ? workspaceTheme(org) : null).primary

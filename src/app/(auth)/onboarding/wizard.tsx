@@ -8,16 +8,22 @@ import { play } from '@/lib/sound'
 import { guard, toast } from '@/lib/toast'
 import { Logo } from '@/components/ui/logo'
 import { Ribbon } from '../_components/ribbon'
+import { kindAllowsRole, WORKSPACE_KIND_DEFS, isWorkspaceKind, type WorkspaceKind } from '@/lib/workspace-kind'
+import { StepKind } from './step-kind'
 import { StepMode } from './step-mode'
 import { StepVerify } from './step-verify'
 import { StepWorkspace, type Invitee, type SignupLimits, type SlugState } from './step-workspace'
 
 const SLUG_DEBOUNCE_MS = 400
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-/** Unsent answers survive a refresh or browser Back (this tab only); cleared once the workspace exists. */
-const DRAFT_KEY = 'flowbit.onboarding.draft'
+/** Unsent answers survive a refresh or browser Back (this tab only); cleared once the workspace exists. v2: three steps. */
+const DRAFT_KEY = 'flowbit.onboarding.draft.v2'
 
-type Draft = { step: 1 | 2; name: string; slug: string; slugEdited: boolean; teamSize: string; taxId: string; invites: Invitee[]; mode: Mode }
+/** 1 "Who are you?", 2 "Create your workspace", 3 "Choose how you want to work". */
+type Step = 1 | 2 | 3
+const STEPS: readonly Step[] = [1, 2, 3]
+
+type Draft = { step: Step; kind: WorkspaceKind; teamSizeEdited: boolean; name: string; slug: string; slugEdited: boolean; teamSize: string; taxId: string; invites: Invitee[]; mode: Mode }
 
 function readDraft(): Partial<Draft> | null {
   try {
@@ -39,11 +45,11 @@ function writeDraft(draft: Draft | null): void {
 
 export type Mode = 'project' | 'personal'
 
-/** Two step bars, 57 x 4 (Figma): the active ones carry the blush-to-violet gradient. */
-function StepBars({ step }: { step: 1 | 2 }) {
+/** Step bars, 57 x 4 (Figma): the active ones carry the blush-to-violet gradient. */
+function StepBars({ step }: { step: Step }) {
   return (
-    <div className="mt-[31px] flex gap-2.5" role="progressbar" aria-valuemin={1} aria-valuemax={2} aria-valuenow={step} aria-label={`Step ${step} of 2`}>
-      {[1, 2].map((s) => (
+    <div className="mt-[31px] flex gap-2.5" role="progressbar" aria-valuemin={1} aria-valuemax={STEPS.length} aria-valuenow={step} aria-label={`Step ${step} of ${STEPS.length}`}>
+      {STEPS.map((s) => (
         <span key={s} className={cn('h-1 w-[57px] rounded-[2px] transition-colors duration-500', s <= step ? 'bg-[image:var(--grad-step)]' : 'bg-[#625F67]')} />
       ))}
     </div>
@@ -55,12 +61,15 @@ export function OnboardingWizard({ email, notice, verified: verifiedAtLoad, limi
   const router = useRouter()
   const [verified, setVerified] = useState(verifiedAtLoad)
   const [taxId, setTaxId] = useState('')
-  const [step, setStep] = useState<1 | 2>(1)
+  const [step, setStep] = useState<Step>(1)
+  const [kind, setKind] = useState<WorkspaceKind>('agency')
+  // Until the team size is picked by hand it follows the kind ("Just myself" for a freelancer).
+  const [teamSizeEdited, setTeamSizeEdited] = useState(false)
   const [name, setName] = useState('')
   const [slug, setSlug] = useState('')
   const [slugEdited, setSlugEdited] = useState(false)
   const [slugState, setSlugState] = useState<SlugState>({ status: 'idle' })
-  const [teamSize, setTeamSize] = useState('Just myself')
+  const [teamSize, setTeamSize] = useState(WORKSPACE_KIND_DEFS.agency.defaultTeamSize)
   const [invites, setInvites] = useState<Invitee[]>([])
   const [draft, setDraft] = useState('')
   const [mode, setMode] = useState<Mode>('project')
@@ -78,6 +87,8 @@ export function OnboardingWizard({ email, notice, verified: verifiedAtLoad, limi
   useEffect(() => {
     const saved = readDraft()
     if (saved) {
+      if (isWorkspaceKind(saved.kind)) setKind(saved.kind)
+      if (typeof saved.teamSizeEdited === 'boolean') setTeamSizeEdited(saved.teamSizeEdited)
       if (typeof saved.name === 'string') setName(saved.name)
       if (typeof saved.slug === 'string') setSlug(saved.slug)
       if (typeof saved.slugEdited === 'boolean') setSlugEdited(saved.slugEdited)
@@ -85,17 +96,26 @@ export function OnboardingWizard({ email, notice, verified: verifiedAtLoad, limi
       if (typeof saved.taxId === 'string') setTaxId(saved.taxId)
       if (Array.isArray(saved.invites)) setInvites(saved.invites.filter((i) => typeof i?.email === 'string' && typeof i?.role === 'string'))
       if (saved.mode === 'project' || saved.mode === 'personal') setMode(saved.mode)
-      if (saved.step === 2 && saved.name?.trim() && saved.slug) setStep(2)
+      if (saved.step === 2) setStep(2)
+      if (saved.step === 3 && saved.name?.trim() && saved.slug) setStep(3)
     }
     setRestored(true)
   }, [])
 
   useEffect(() => {
-    if (restored) writeDraft({ step, name, slug, slugEdited, teamSize, taxId, invites, mode })
-  }, [restored, step, name, slug, slugEdited, teamSize, taxId, invites, mode])
+    if (restored) writeDraft({ step, kind, teamSizeEdited, name, slug, slugEdited, teamSize, taxId, invites, mode })
+  }, [restored, step, kind, teamSizeEdited, name, slug, slugEdited, teamSize, taxId, invites, mode])
 
   // A field's error belongs to the value that caused it; editing the value clears it.
   const clearError = (key: string) => setErrors(({ [key]: _drop, ...rest }) => rest)
+
+  /** A new kind resets an untouched team size and drops invite roles the kind does not use (HR roles for a freelancer). */
+  const chooseKind = (next: WorkspaceKind) => {
+    setKind(next)
+    clearError('workspaceKind')
+    if (!teamSizeEdited) setTeamSize(WORKSPACE_KIND_DEFS[next].defaultTeamSize)
+    setInvites((list) => list.map((i) => (kindAllowsRole(next, i.role) ? i : { ...i, role: 'member' })))
+  }
 
   useEffect(() => {
     if (!cleanSlug) {
@@ -156,7 +176,7 @@ export function OnboardingWizard({ email, notice, verified: verifiedAtLoad, limi
     }
     setSlug(cleanSlug)
     play('whoosh')
-    setStep(2)
+    setStep(3)
   }
 
   const submit = () =>
@@ -167,6 +187,7 @@ export function OnboardingWizard({ email, notice, verified: verifiedAtLoad, limi
       fd.set('teamSize', teamSize)
       fd.set('taxId', taxId.trim())
       fd.set('mode', mode)
+      fd.set('workspaceKind', kind)
       invites.forEach((inv, i) => {
         fd.set(`invites.${i}.email`, inv.email)
         fd.set(`invites.${i}.role`, inv.role)
@@ -176,7 +197,8 @@ export function OnboardingWizard({ email, notice, verified: verifiedAtLoad, limi
         setErrors(res.fieldErrors ?? {})
         toast.error(res.error)
         if (res.fieldErrors && 'code' in res.fieldErrors) setVerified(false)
-        else if (res.fieldErrors && ['name', 'slug', 'teamSize', 'taxId'].some((k) => k in res.fieldErrors!)) setStep(1)
+        else if (res.fieldErrors && 'workspaceKind' in res.fieldErrors) setStep(1)
+        else if (res.fieldErrors && Object.keys(res.fieldErrors).some((k) => ['name', 'slug', 'teamSize', 'taxId'].includes(k) || k.startsWith('invites'))) setStep(2)
         return
       }
       writeDraft(null)
@@ -195,7 +217,7 @@ export function OnboardingWizard({ email, notice, verified: verifiedAtLoad, limi
       <span aria-hidden className="absolute right-[2px] top-[510px] hidden h-[220px] w-[64px] rotate-[-32deg] rounded-full bg-[radial-gradient(closest-side,rgba(233,169,221,0.9),rgba(160,90,170,0.35)_55%,transparent)] lg:block" />
 
       <div className="lit-edge lit-edge-bright relative overflow-hidden rounded-[16px] bg-white/[0.1] px-5 pb-8 pt-6 backdrop-blur-[40px] backdrop-saturate-[1.2] animate-scale-in sm:px-[46px] sm:pb-[41px] sm:pt-[25px]">
-        {step === 1 ? (
+        {step === 2 ? (
           <span aria-hidden className="pointer-events-none absolute right-[30px] top-[33px] hidden select-none text-[124px] font-bold leading-none tracking-[-0.01em] text-black/[0.18] [writing-mode:vertical-rl] rotate-180 sm:block">
             workspace
           </span>
@@ -203,7 +225,7 @@ export function OnboardingWizard({ email, notice, verified: verifiedAtLoad, limi
         <div className="relative">
           <Logo size={35} />
           <StepBars step={step} />
-          {notice && step === 1 ? (
+          {notice && step <= 2 ? (
             <p role="status" className="mt-5 rounded-[10px] border border-warning/30 bg-warning/10 px-4 py-3 text-sm text-warning">
               {notice}
             </p>
@@ -211,7 +233,19 @@ export function OnboardingWizard({ email, notice, verified: verifiedAtLoad, limi
           {!verified ? (
             <StepVerify email={email} onVerified={() => setVerified(true)} />
           ) : step === 1 ? (
+            <StepKind
+              kind={kind}
+              onKind={chooseKind}
+              email={email}
+              onContinue={() => {
+                play('whoosh')
+                setStep(2)
+              }}
+            />
+          ) : step === 2 ? (
             <StepWorkspace
+              kind={kind}
+              onBack={() => setStep(1)}
               limits={limits}
               name={name}
               onName={(v) => {
@@ -229,6 +263,7 @@ export function OnboardingWizard({ email, notice, verified: verifiedAtLoad, limi
               teamSize={teamSize}
               onTeamSize={(v) => {
                 setTeamSize(v)
+                setTeamSizeEdited(true)
                 clearError('teamSize')
               }}
               taxId={taxId}
@@ -250,7 +285,7 @@ export function OnboardingWizard({ email, notice, verified: verifiedAtLoad, limi
               onContinue={() => goNext(false)}
             />
           ) : (
-            <StepMode mode={mode} onMode={setMode} pending={pending} onBack={() => setStep(1)} onCreate={submit} />
+            <StepMode mode={mode} onMode={setMode} pending={pending} onBack={() => setStep(2)} onCreate={submit} />
           )}
         </div>
       </div>

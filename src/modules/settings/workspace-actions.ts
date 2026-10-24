@@ -8,6 +8,7 @@ import { PRODUCT_KEYS, PRODUCTS } from '@/lib/catalog'
 import { NotFoundError } from '@/lib/errors'
 import { readStoredFile } from '@/lib/files'
 import { objectId } from '@/lib/validation'
+import { kindAllowsProduct, workspaceKindOf, WORKSPACE_KIND_DEFS } from '@/lib/workspace-kind'
 import { Org } from '@/models/Org'
 import { Message } from '@/models/messaging/Message'
 import type { Channel } from '@/modules/messaging/events'
@@ -20,6 +21,8 @@ export const setProductEnabled = action(
   async ({ product, enabled }, ctx) => {
     const name = PRODUCTS[product].name
     if (!ctx.entitlements.entitledProducts.includes(product)) return fail(`${name} isn't in your plan.`)
+    const kind = workspaceKindOf(ctx.org)
+    if (enabled && !kindAllowsProduct(kind, product)) return fail(`${name} isn't part of a ${WORKSPACE_KIND_DEFS[kind].label.toLowerCase()} workspace. Change the workspace type in Settings → General to use it.`)
     const current = ctx.org.enabledProducts?.length ? [...ctx.org.enabledProducts] : [...PRODUCT_KEYS]
     const next = enabled ? [...new Set([...current, product])] : current.filter((p) => p !== product)
     const stillOn = PRODUCT_KEYS.filter((p) => next.includes(p) && ctx.entitlements.entitledProducts.includes(p))

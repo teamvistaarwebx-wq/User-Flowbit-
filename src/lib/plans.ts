@@ -1,6 +1,7 @@
 import { accountTypeOf, FREE_SEAT_LIMIT, freeEndsAt, isHouseAccount } from '@/lib/account-types'
 import { featureByKey, PRODUCT_KEYS, type FeatureKey, type ProductKey } from '@/lib/catalog'
 import { firstYearDiscountPaise } from '@/lib/first-year-discount'
+import { kindAllowsProduct, workspaceKindOf } from '@/lib/workspace-kind'
 
 /**
  * Plans, entitlements and pricing (SPEC section 4). Pure functions, safe on
@@ -85,6 +86,8 @@ export type OrgLike = {
   createdAt?: Date | string | null
   /** 'deleted' once the lifecycle job has removed the workspace's data (a tombstone). */
   status?: string | null
+  /** Freelancer, Agency or Business (lib/workspace-kind); a freelancer workspace never opens Muster. */
+  workspaceKind?: string | null
 }
 
 // ---------------------------------------------------------------------------
@@ -401,8 +404,9 @@ export function entitled(org: OrgLike, product: ProductKey, now = new Date()): b
   return Boolean(products[product])
 }
 
-/** Switched on by the workspace. An empty list means everything. */
+/** Switched on by the workspace and allowed by its kind (lib/workspace-kind). An empty list means everything. */
 export function enabled(org: OrgLike, product: ProductKey): boolean {
+  if (!kindAllowsProduct(workspaceKindOf(org), product)) return false
   const list = org.enabledProducts
   return !list || list.length === 0 || list.includes(product)
 }

@@ -37,7 +37,7 @@ export async function companyPdfOf(org: OrgPdfSource): Promise<CompanyPdf> {
   return { profile, brand, logoSrc, letterhead: companyLetterhead(profile, { brand, logoSrc }) }
 }
 
-const PDF_FIELDS = { name: 1, theme: 1, logoFileId: 1, address: 1, gstin: 1, pan: 1, state: 1, profile: 1, signatories: 1, subscription: 1, createdAt: 1, status: 1, disabled: 1, deletedAt: 1, enabledProducts: 1 } as const
+const PDF_FIELDS = { name: 1, theme: 1, logoFileId: 1, address: 1, gstin: 1, pan: 1, state: 1, profile: 1, signatories: 1, subscription: 1, createdAt: 1, status: 1, disabled: 1, deletedAt: 1, enabledProducts: 1, workspaceKind: 1 } as const
 
 /** The same, read by id (documents built without a member's ctx: public links, Folio renderers). */
 export async function orgPdfCompany(orgId: Types.ObjectId): Promise<CompanyPdf> {

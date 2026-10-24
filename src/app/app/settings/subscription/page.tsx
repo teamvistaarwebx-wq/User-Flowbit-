@@ -33,6 +33,7 @@ import { pickerQuery, pickerStart } from '@/modules/subscription/page-data'
 import { capacityOf } from '@/modules/subscription/usage'
 import { paymentMode } from '@/modules/subscription/guards'
 import { firstYearDiscountFor } from '@/modules/billing/first-year'
+import { kindAllowsProduct, workspaceKindOf } from '@/lib/workspace-kind'
 
 /** Server actions on this page can render PDFs, send email or process many rows. */
 export const maxDuration = 300
@@ -111,7 +112,7 @@ export default async function SubscriptionPage({ searchParams }: { searchParams:
   const persons = Math.max(cap.usage.persons, cap.usage.members + cap.usage.pendingInvites)
   const query = pickerQuery({ add: p.get('add'), muster: p.get('muster'), products: p.get('products') }, parsePlanIntentQuery(org.planIntent), Boolean(current))
   const start = pickerStart(sub, cap.usage, query)
-  const pickerProps = { initial: start, defaults: defaultSelections(cap.usage), persons, testMode, paymentsOff, supplierState, supplierGstin, billingState, prices: ctx.planConfig.prices }
+  const pickerProps = { initial: start, defaults: defaultSelections(cap.usage), persons, testMode, paymentsOff, supplierState, supplierGstin, billingState, prices: ctx.planConfig.prices, hideMuster: !kindAllowsProduct(workspaceKindOf(org), 'muster') }
   // A new checkout's yearly price gets the first-year discount when this workspace has never paid for a year.
   const firstYearPercent = await firstYearDiscountFor(ctx.orgId, 'yearly', ctx.planConfig.yearlyDiscountPercent)
 

@@ -45,6 +45,8 @@ type Props = {
   billingState: string | null
   /** Set while a plan is active: the picker changes the plan instead of starting a checkout. */
   active: ActivePlan | null
+  /** The workspace kind leaves Muster out (freelancer): no Muster row, unless the active plan already has it. */
+  hideMuster?: boolean
   /** Console prices (paise per unit per month, lib/plan-config); PLAN_PRICES when absent. */
   prices?: PriceOverrides
   /** First-year discount on a yearly plan when this workspace has never paid for a year (lib/first-year-discount); 0 = none. */
@@ -135,7 +137,7 @@ function ProductRow({ on, onToggle, name, priceLine, children }: { on: boolean; 
 }
 
 /** Suite or pick-your-products, monthly or yearly, with a live GST-inclusive price and checkout. */
-export function PlanPicker({ initial, defaults, persons, testMode, paymentsOff = false, supplierState, supplierGstin, billingState, active, prices, discountPercent = 0, onDone }: Props) {
+export function PlanPicker({ initial, defaults, persons, testMode, paymentsOff = false, supplierState, supplierGstin, billingState, active, prices, discountPercent = 0, onDone, hideMuster = false }: Props) {
   const unit = (key: PlanKey) => price(monthlyPriceOf(key, prices))
   const router = useRouter()
   const [pending, startTransition] = useTransition()
@@ -143,7 +145,8 @@ export function PlanPicker({ initial, defaults, persons, testMode, paymentsOff =
   const [plan, setPlan] = useState(initial.plan)
   const [seats, setSeats] = useState(initial.seats)
   const [work, setWork] = useState<number | null>(initial.work)
-  const [muster, setMuster] = useState(initial.muster)
+  const showMuster = !hideMuster || Boolean(active && initial.muster)
+  const [muster, setMuster] = useState(showMuster ? initial.muster : null)
   const [orbit, setOrbit] = useState<number | null>(initial.orbit)
   const [folio, setFolio] = useState(initial.folio)
   const [folioFirms, setFolioFirms] = useState(Math.max(FOLIO_INCLUDED_FIRMS, initial.folioFirms))
@@ -235,14 +238,16 @@ export function PlanPicker({ initial, defaults, persons, testMode, paymentsOff =
               <ProductRow on={Boolean(work)} onToggle={(v) => setWork(v ? defaults.work : null)} name="Flowbit Work" priceLine={`${unit('work')} per user / month · min ${PLAN_PRICES.work.minimum}`}>
                 <QuantityStepper label="users" value={work ?? defaults.work} min={PLAN_PRICES.work.minimum} onChange={setWork} error={errors['selection.work']} />
               </ProductRow>
-              <ProductRow on={Boolean(muster)} onToggle={(v) => setMuster(v ? { tier: 'business', employees: defaults.employees } : null)} name="Muster" priceLine={`Starter ${unit('muster_starter')} (no payroll) · Business ${unit('muster_business')} (payroll, PF/ESI/PT) per employee`}>
-                {muster ? (
-                  <div className="flex flex-wrap items-center gap-2">
-                    <Segmented<'starter' | 'business'> value={muster.tier} onChange={(tier) => setMuster({ ...muster, tier })} options={[{ value: 'starter', label: 'Starter' }, { value: 'business', label: 'Business' }]} />
-                    <QuantityStepper label="employees" value={muster.employees} min={PLAN_PRICES.muster_starter.minimum} onChange={(employees) => setMuster({ ...muster, employees })} error={errors['selection.muster.employees']} />
-                  </div>
-                ) : null}
-              </ProductRow>
+              {showMuster ? (
+                <ProductRow on={Boolean(muster)} onToggle={(v) => setMuster(v ? { tier: 'business', employees: defaults.employees } : null)} name="Muster" priceLine={`Starter ${unit('muster_starter')} (no payroll) · Business ${unit('muster_business')} (payroll, PF/ESI/PT) per employee`}>
+                  {muster ? (
+                    <div className="flex flex-wrap items-center gap-2">
+                      <Segmented<'starter' | 'business'> value={muster.tier} onChange={(tier) => setMuster({ ...muster, tier })} options={[{ value: 'starter', label: 'Starter' }, { value: 'business', label: 'Business' }]} />
+                      <QuantityStepper label="employees" value={muster.employees} min={PLAN_PRICES.muster_starter.minimum} onChange={(employees) => setMuster({ ...muster, employees })} error={errors['selection.muster.employees']} />
+                    </div>
+                  ) : null}
+                </ProductRow>
+              ) : null}
               <ProductRow on={Boolean(orbit)} onToggle={(v) => setOrbit(v ? defaults.orbit : null)} name="Orbit" priceLine={`${unit('orbit')} per sales user / month · min ${PLAN_PRICES.orbit.minimum}`}>
                 <QuantityStepper label="sales users" value={orbit ?? defaults.orbit} min={PLAN_PRICES.orbit.minimum} onChange={setOrbit} error={errors['selection.orbit']} />
               </ProductRow>

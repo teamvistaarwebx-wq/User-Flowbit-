@@ -51,7 +51,7 @@ export function EmailInvoiceButton({ id }: { id: string }) {
   )
 }
 
-type PickerProps = { initial: PickerInitial; defaults: { work: number; employees: number; orbit: number; suiteSeats: number }; persons: number; testMode: boolean; paymentsOff?: boolean; supplierState: string | null; supplierGstin: string | null; billingState: string | null; active: ActivePlan; prices?: PriceOverrides }
+type PickerProps = { initial: PickerInitial; defaults: { work: number; employees: number; orbit: number; suiteSeats: number }; persons: number; testMode: boolean; paymentsOff?: boolean; supplierState: string | null; supplierGstin: string | null; billingState: string | null; active: ActivePlan; prices?: PriceOverrides; hideMuster?: boolean }
 
 /** "Change plan" for an active subscription: the picker in a large dialog. */
 export function ChangePlanDialog(props: PickerProps & { defaultOpen?: boolean }) {

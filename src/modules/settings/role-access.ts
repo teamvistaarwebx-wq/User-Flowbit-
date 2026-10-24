@@ -2,6 +2,7 @@ import 'server-only'
 import type { Ctx } from '@/lib/ctx'
 import { UserError } from '@/lib/errors'
 import { BUILTIN_ROLES, isBuiltInRole, resolvePermissions, roleLabel } from '@/lib/permissions'
+import { kindAllowsRole, workspaceKindOf, WORKSPACE_KIND_DEFS } from '@/lib/workspace-kind'
 import { Role } from '@/models/Role'
 import { escalationMessage, missingGrants } from './roles'
 
@@ -23,6 +24,8 @@ export function describeRole(role: string, customRoles: CustomRoleDoc[]): { key:
  */
 export function assertCanGrant(ctx: Ctx, permissions: readonly string[], opts: { role?: string } = {}): void {
   if (opts.role === 'owner') throw new UserError('Ownership moves only through Transfer ownership.')
+  const kind = workspaceKindOf(ctx.org)
+  if (opts.role && !kindAllowsRole(kind, opts.role)) throw new UserError(`${roleLabel(opts.role)} isn't used in a ${WORKSPACE_KIND_DEFS[kind].label.toLowerCase()} workspace. Choose another role.`, { role: 'Choose another role' })
   if (ctx.isOwner) return
   const missing = missingGrants(ctx.permissions, permissions)
   if (missing.length) throw new UserError(escalationMessage(missing))

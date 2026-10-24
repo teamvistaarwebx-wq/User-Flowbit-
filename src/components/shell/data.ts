@@ -15,6 +15,7 @@ import type { AccountType } from '@/lib/account-types'
 import type { LifecycleView } from '@/lib/lifecycle-copy'
 import { canUseFeature } from '@/lib/entitlements'
 import { enabled, productTrialDaysLeft, type AccessState } from '@/lib/plans'
+import { kindAllowsProduct, workspaceKindOf, type WorkspaceKind } from '@/lib/workspace-kind'
 import { Member } from '@/models/Member'
 import { Notification } from '@/models/Notification'
 import { Org } from '@/models/Org'
@@ -30,6 +31,8 @@ export type ShellData = {
   user: { name: string; email: string; avatarUrl: string | null; sound: boolean; reducedMotion: boolean; motion: 'system' | 'reduce' | 'full'; toursSeen: string[]; locale: Locale }
   /** `logoUrl` is the workspace's own logo (Settings → General), null for initials. */
   org: { id: string; name: string; slug: string; logoUrl: string | null }
+  /** Freelancer, Agency or Business (lib/workspace-kind). */
+  workspaceKind: WorkspaceKind
   orgs: { id: string; name: string; slug: string; logoUrl: string | null }[]
   /** Public base URL (APP_URL, no trailing slash) for links people copy or share. */
   appUrl: string
@@ -39,7 +42,8 @@ export type ShellData = {
   avatarStyle: AvatarStyle
   roleLabel: string
   permissions: string[]
-  products: Record<ProductKey, { entitled: boolean; enabled: boolean }>
+  /** `hidden`: the workspace kind leaves the product out (Muster for a freelancer), so it is not even offered. */
+  products: Record<ProductKey, { entitled: boolean; enabled: boolean; hidden?: boolean }>
   /** `whatsapp`: the platform WhatsApp flag (lib/feature-flags); every WhatsApp control hides while it is off. */
   features: { payroll: boolean; whatsapp: boolean }
   hasEmployee: boolean
@@ -117,7 +121,8 @@ export async function getShellData(ctx: Ctx): Promise<ShellData> {
     ctx.has('muster') ? checkInGeoFor(ctx) : null,
   ])
   const ent = ctx.entitlements
-  const products = Object.fromEntries(PRODUCT_KEYS.map((p) => [p, { entitled: ent.entitledProducts.includes(p), enabled: enabled(ctx.org, p) }])) as ShellData['products']
+  const kind = workspaceKindOf(ctx.org)
+  const products = Object.fromEntries(PRODUCT_KEYS.map((p) => [p, { entitled: ent.entitledProducts.includes(p), enabled: enabled(ctx.org, p), hidden: !kindAllowsProduct(kind, p) }])) as ShellData['products']
   return {
     user: {
       name: ctx.user.name,
@@ -130,6 +135,7 @@ export async function getShellData(ctx: Ctx): Promise<ShellData> {
       locale: localeOfUser(ctx.user),
     },
     org: { id: String(ctx.orgId), name: ctx.org.name, slug: ctx.org.slug, logoUrl: ctx.org.logoFileId ? fileUrl(ctx.org.logoFileId) : null },
+    workspaceKind: kind,
     orgs: orgs.map((o) => ({ id: String(o._id), name: o.name, slug: o.slug, logoUrl: o.logoFileId ? fileUrl(o.logoFileId) : null })),
     appUrl: appUrl(),
     themeCss: themeCss(workspaceTheme(ctx.org)),

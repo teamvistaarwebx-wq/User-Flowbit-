@@ -2,6 +2,7 @@ import { ADD_ONS } from '@/lib/addons'
 import { AVATAR_STYLES } from '@/lib/avatar-pattern'
 import { Schema } from 'mongoose'
 import { ACCOUNT_TYPES } from '@/lib/account-types'
+import { WORKSPACE_KINDS } from '@/lib/workspace-kind'
 import { defineModel } from '@/lib/db/model'
 
 export const SUBSCRIPTION_STATUSES = ['trialing', 'active', 'past_due', 'canceled', 'expired'] as const
@@ -202,6 +203,8 @@ const OrgSchema = new Schema(
     avatarStyle: { type: String, enum: AVATAR_STYLES, default: 'initials' },
     teamSize: { type: String, default: '2-10' },
     mode: { type: String, enum: ['project', 'personal'], default: 'project' },
+    /** Freelancer, Agency or Business, picked at onboarding (lib/workspace-kind); missing reads as Agency. */
+    workspaceKind: { type: String, enum: WORKSPACE_KINDS, default: 'agency' },
     address: {
       line1: String,
       line2: String,

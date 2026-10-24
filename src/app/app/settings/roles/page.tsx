@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { breadcrumbFor, PRODUCT_KEYS } from '@/lib/catalog'
 import { requireMember } from '@/lib/ctx'
 import { BUILTIN_ROLE_KEYS, BUILTIN_ROLES } from '@/lib/permissions'
+import { kindAllowsProduct, kindAllowsRole, workspaceKindOf } from '@/lib/workspace-kind'
 import { PageHeader } from '@/components/ui/page-header'
 import { RoleMatrix } from '@/components/settings/role-matrix'
 import type { RoleColumn } from '@/components/settings/role-editor'
@@ -18,13 +19,16 @@ export default async function RolesPage() {
     ctx.db(Member).aggregate<{ _id: string; n: number }>([{ $match: { status: { $ne: 'disabled' } } }, { $group: { _id: '$role', n: { $sum: 1 } } }]),
   ])
   const holders = (key: string) => counts.find((c) => c._id === key)?.n ?? 0
-  const groups = permissionGroups()
+  const kind = workspaceKindOf(ctx.org)
+  // A product the workspace kind leaves out (Muster for a freelancer) has no permissions to show.
+  const groups = permissionGroups().filter((g) => g.area === 'core' || kindAllowsProduct(kind, g.area))
   const allKeys = groups.flatMap((g) => g.permissions.map((p) => p.key))
   const grantable = ctx.isOwner ? allKeys : allKeys.filter((k) => ctx.permissions.has(k))
   const canEdit = (perms: readonly string[]) => ctx.isOwner || missingGrants(ctx.permissions, perms).length === 0
 
   const roles: RoleColumn[] = [
-    ...BUILTIN_ROLE_KEYS.map((key) => ({
+    // Roles the workspace kind leaves out (HR roles for a freelancer) show only while someone still holds one.
+    ...BUILTIN_ROLE_KEYS.filter((key) => kindAllowsRole(kind, key) || holders(key) > 0).map((key) => ({
       id: key,
       label: BUILTIN_ROLES[key].label,
       description: BUILTIN_ROLES[key].description,

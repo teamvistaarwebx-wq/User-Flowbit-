@@ -3,6 +3,7 @@ import { builtInRoleDocs } from '@/lib/permissions'
 import { newFreeSubscription, newSignupTrialSubscription, type NewSubscriptionLimits } from '@/lib/plans'
 import { duplicateReason, freeDuplicateFilter, trialUsedFilter, type TaxIds } from '@/lib/signup-guard'
 import type { SignupUtm } from '@/lib/utm'
+import { DEFAULT_WORKSPACE_KIND, WORKSPACE_KIND_DEFS, type WorkspaceKind } from '@/lib/workspace-kind'
 import { Member } from '@/models/Member'
 import { Org } from '@/models/Org'
 import { Role } from '@/models/Role'
@@ -16,12 +17,15 @@ import { User } from '@/models/User'
 
 export { TEAM_SIZES, TEAM_SIZE_VALUES } from '@/lib/account-types'
 export const WORKSPACE_MODES = ['project', 'personal'] as const
+export { WORKSPACE_KINDS } from '@/lib/workspace-kind'
 
 export type CreateWorkspaceInput = {
   name: string
   slug: string
   teamSize: string
   mode: 'project' | 'personal'
+  /** Freelancer, Agency or Business (lib/workspace-kind); omitted = Agency (seed, tests). */
+  workspaceKind?: WorkspaceKind
   /** Normalized pricing-page pick (lib/plan-intent), kept for the subscription picker. */
   planIntent?: string | null
   /** Free (up to 5 people) or a 15-day trial; omitted = trial (seed, tests). */
@@ -97,10 +101,11 @@ export async function createWorkspace(ownerId: Types.ObjectId, input: CreateWork
     slug: input.slug,
     teamSize: input.teamSize,
     mode: input.mode,
+    workspaceKind: input.workspaceKind ?? DEFAULT_WORKSPACE_KIND,
     ...(input.taxIds?.gstin ? { gstin: input.taxIds.gstin } : {}),
     ...(input.taxIds?.pan ? { pan: input.taxIds.pan } : {}),
     subscription,
-    enabledProducts: ['work', 'muster', 'orbit', 'folio'],
+    enabledProducts: [...WORKSPACE_KIND_DEFS[input.workspaceKind ?? DEFAULT_WORKSPACE_KIND].products],
     ...(input.planIntent ? { planIntent: input.planIntent } : {}),
     ...(input.signupUtm ? { signupUtm: input.signupUtm } : {}),
     createdBy: ownerId,

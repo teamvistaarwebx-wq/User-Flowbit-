@@ -5,6 +5,7 @@ import { timeAgo, formatDate } from '@/lib/dates'
 import { fileUrl } from '@/lib/files'
 import { escapeRegex } from '@/lib/utils'
 import { BUILTIN_ROLE_KEYS, BUILTIN_ROLES, roleLabel } from '@/lib/permissions'
+import { kindAllowsRole, workspaceKindOf } from '@/lib/workspace-kind'
 import { Invite } from '@/models/Invite'
 import { Member } from '@/models/Member'
 import { Session } from '@/models/Session'
@@ -40,9 +41,10 @@ const PAGE_SIZE = 50
 /** Roles the viewer may hand out (anti-escalation), built-ins first. Owner is never offered. */
 export async function assignableRoles(ctx: Ctx): Promise<{ options: RoleOption[]; customRoles: Awaited<ReturnType<typeof customRolesOf>> }> {
   const customRoles = await customRolesOf(ctx)
+  const kind = workspaceKindOf(ctx.org)
   const allowed = (perms: readonly string[]) => ctx.isOwner || missingGrants(ctx.permissions, perms).length === 0
   const options: RoleOption[] = [
-    ...BUILTIN_ROLE_KEYS.filter((k) => k !== 'owner' && allowed(BUILTIN_ROLES[k].permissions)).map((k) => ({ value: k, label: BUILTIN_ROLES[k].label })),
+    ...BUILTIN_ROLE_KEYS.filter((k) => k !== 'owner' && kindAllowsRole(kind, k) && allowed(BUILTIN_ROLES[k].permissions)).map((k) => ({ value: k, label: BUILTIN_ROLES[k].label })),
     ...customRoles.filter((r) => allowed(r.permissions)).map((r) => ({ value: String(r._id), label: r.label, hint: 'Custom' })),
   ]
   return { options, customRoles }

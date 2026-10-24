@@ -5,6 +5,8 @@ import { CircleCheck, CircleX, LoaderCircle, X } from 'lucide-react'
 import { signupAccountType, TEAM_SIZES } from '@/lib/account-types'
 import { cn } from '@/lib/utils'
 import { play } from '@/lib/sound'
+import { PRODUCTS } from '@/lib/catalog'
+import { kindAllowsRole, WORKSPACE_KIND_DEFS, type WorkspaceKind } from '@/lib/workspace-kind'
 
 export type Invitee = { email: string; role: string }
 export type SlugState = { status: 'idle' | 'checking' | 'ok' | 'bad'; message?: string }
@@ -35,6 +37,8 @@ function Label({ htmlFor, required, children, aside }: { htmlFor?: string; requi
 const FieldError = ({ children }: { children?: string }) => (children ? <p className="mt-1.5 text-[13px] text-[#FFB0AD]">{children}</p> : null)
 
 export type StepWorkspaceProps = {
+  kind: WorkspaceKind
+  onBack: () => void
   name: string
   onName: (v: string) => void
   slug: string
@@ -59,9 +63,20 @@ export type StepWorkspaceProps = {
 /** The Console's Free seats, Free months and trial days (lib/plan-config), from the page. */
 export type SignupLimits = Readonly<{ freeSeats: number; freeMonths: number; trialDays: number }>
 
-/** Step 1, "Create your workspace" (Figma onboarding-a): name, URL, team size chips, invites. */
+/** "every product", or the products the kind gets ("Work, Orbit and Folio") when it leaves one out. */
+function productsPhrase(kind: WorkspaceKind): string {
+  const names = WORKSPACE_KIND_DEFS[kind].products.map((k) => PRODUCTS[k].shortName)
+  if (names.length === Object.keys(PRODUCTS).length) return 'every product'
+  return `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}`
+}
+
+/** Step 2, "Create your workspace" (Figma onboarding-a): name, URL, team size chips, invites. */
 export function StepWorkspace(p: StepWorkspaceProps) {
   const { freeSeats, freeMonths, trialDays } = p.limits
+  const def = WORKSPACE_KIND_DEFS[p.kind]
+  const roles = ROLES.filter((r) => kindAllowsRole(p.kind, r.value))
+  const products = productsPhrase(p.kind)
+  const freelancer = p.kind === 'freelancer'
   const plan = signupAccountType({ teamSize: p.teamSize, invites: p.invites.length }, freeSeats)
   const slugMessage = p.errors.slug ?? (p.slugState.status === 'checking' ? 'Checking…' : p.slugState.status === 'idle' ? undefined : p.slugState.message)
   return (
@@ -118,8 +133,8 @@ export function StepWorkspace(p: StepWorkspaceProps) {
 
       <p role="status" className="mt-3 text-[13px] text-white/75">
         {plan === 'free'
-          ? `Free for ${freeMonths} months: every product for up to ${freeSeats} people. No card needed.`
-          : `More than ${freeSeats} people: a ${trialDays}-day trial of every product for the whole team. No card needed.`}
+          ? `Free for ${freeMonths} months: ${products} for up to ${freeSeats} people. No card needed.`
+          : `More than ${freeSeats} people: a ${trialDays}-day trial of ${products} for the whole team. No card needed.`}
       </p>
       <FieldError>{p.errors.teamSize}</FieldError>
 
@@ -133,7 +148,7 @@ export function StepWorkspace(p: StepWorkspaceProps) {
 
       <div className="mt-[18px]">
         <Label htmlFor="ws-invite" aside="Optional — you can also do this later">
-          Invite team members
+          Invite {def.inviteNoun}
         </Label>
         <div className="mt-[7px] flex gap-3.5">
           <input
@@ -147,12 +162,12 @@ export function StepWorkspace(p: StepWorkspaceProps) {
                 p.onAddInvite()
               }
             }}
-            placeholder="teammate@company.com"
+            placeholder={freelancer ? 'collaborator@studio.com' : 'teammate@company.com'}
             aria-invalid={Boolean(p.errors.invite)}
             className={cn(glassField, 'h-[38px] flex-1')}
           />
-          <button type="button" onClick={p.onAddInvite} className="press h-9 shrink-0 self-center rounded-full bg-chip-active px-5 text-sm font-medium text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.14)] transition-colors hover:bg-[#61428a] sm:w-[153px]">
-            Add Member
+          <button type="button" onClick={p.onAddInvite} className="press h-9 shrink-0 self-center whitespace-nowrap rounded-full bg-chip-active px-5 text-sm font-medium text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.14)] transition-colors hover:bg-[#61428a] sm:min-w-[153px]">
+            {freelancer ? 'Add Collaborator' : 'Add Member'}
           </button>
         </div>
         <FieldError>{p.errors.invite}</FieldError>
@@ -167,7 +182,7 @@ export function StepWorkspace(p: StepWorkspaceProps) {
                   aria-label={`Role for ${inv.email}`}
                   className="h-7 rounded-full border border-white/[0.18] bg-transparent px-2.5 text-[13px] text-white focus:outline-none [&>option]:bg-[#1f1f1f]"
                 >
-                  {ROLES.map((r) => (
+                  {roles.map((r) => (
                     <option key={r.value} value={r.value}>
                       {r.label}
                     </option>
@@ -183,9 +198,14 @@ export function StepWorkspace(p: StepWorkspaceProps) {
       </div>
 
       <div className="mt-[37px] flex items-center justify-between gap-4">
-        <button type="button" onClick={p.onSkip} className="text-sm font-medium text-white transition-opacity hover:opacity-75">
-          Skip invites
-        </button>
+        <span className="flex items-center gap-6">
+          <button type="button" onClick={p.onBack} className="text-sm font-medium text-white transition-opacity hover:opacity-75">
+            Back
+          </button>
+          <button type="button" onClick={p.onSkip} className="text-sm font-medium text-white transition-opacity hover:opacity-75">
+            Skip invites
+          </button>
+        </span>
         <button type="button" onClick={p.onContinue} className="shimmer press h-[46px] w-[186px] rounded-full bg-grad-button-alt text-[15px] font-semibold text-white [text-shadow:0_1px_2px_rgba(40,20,80,0.35)]">
           Continue
         </button>

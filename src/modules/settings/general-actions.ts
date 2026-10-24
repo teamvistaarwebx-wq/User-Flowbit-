@@ -11,7 +11,8 @@ import { emailLayout } from '@/lib/mail'
 import { UserError } from '@/lib/errors'
 import { WORKING_HOURS_IN_HR } from '@/lib/working-hours'
 import { hhmm, slug } from '@/lib/validation'
-import { RESERVED_SLUGS, TEAM_SIZE_VALUES, WORKSPACE_MODES, isSlugAvailable } from '@/lib/workspace'
+import { RESERVED_SLUGS, TEAM_SIZE_VALUES, WORKSPACE_KINDS, WORKSPACE_MODES, isSlugAvailable } from '@/lib/workspace'
+import { kindChangeNote, workspaceKindOf, WORKSPACE_KIND_DEFS } from '@/lib/workspace-kind'
 import { Org } from '@/models/Org'
 import { Session } from '@/models/Session'
 import { cancelRazorpaySubscription } from '@/modules/subscription/razorpay'
@@ -30,9 +31,10 @@ const workspaceSchema = z.object({
   slug: slug.refine((s) => s.length <= SLUG_MAX, `Use at most ${SLUG_MAX} characters`),
   teamSize: z.enum(TEAM_SIZE_VALUES),
   mode: z.enum(WORKSPACE_MODES),
+  workspaceKind: z.enum(WORKSPACE_KINDS),
 })
 
-/** Name, URL, team size and working mode. */
+/** Name, URL, team size, working mode and (owner only) the workspace type. */
 export const updateWorkspace = action(
   workspaceSchema,
   async (input, ctx) => {
@@ -40,10 +42,17 @@ export const updateWorkspace = action(
       if (RESERVED_SLUGS.has(input.slug)) return fail('Choose another URL.', { slug: 'That URL is reserved.' })
       if (!(await isSlugAvailable(input.slug))) return fail('Choose another URL.', { slug: 'That URL is taken.' })
     }
-    const before = { name: ctx.org.name, slug: ctx.org.slug, teamSize: ctx.org.teamSize, mode: ctx.org.mode }
-    await Org.updateOne({ _id: ctx.orgId }, { $set: input })
-    await audit(ctx, { action: 'org.updated', entity: 'Org', entityId: ctx.orgId, summary: `Workspace details saved for ${input.name}`, changes: { before, after: input } })
-    return done('Workspace details saved.')
+    const kind = workspaceKindOf(ctx.org)
+    const kindChanged = input.workspaceKind !== kind
+    if (kindChanged && !ctx.isOwner) return fail('Only the owner can change the workspace type.', { workspaceKind: 'Only the owner can change this' })
+    const before = { name: ctx.org.name, slug: ctx.org.slug, teamSize: ctx.org.teamSize, mode: ctx.org.mode, workspaceKind: kind }
+    // Products the old type hid come back switched on (they were hidden by the type, not switched off by anyone).
+    const list = ctx.org.enabledProducts ?? []
+    const enabledProducts = kindChanged && list.length ? [...new Set([...list, ...WORKSPACE_KIND_DEFS[input.workspaceKind].products.filter((p) => !WORKSPACE_KIND_DEFS[kind].products.includes(p))])] : null
+    await Org.updateOne({ _id: ctx.orgId }, { $set: { ...input, ...(enabledProducts ? { enabledProducts } : {}) } })
+    await audit(ctx, { action: 'org.updated', entity: 'Org', entityId: ctx.orgId, summary: kindChanged ? `Workspace type changed to ${WORKSPACE_KIND_DEFS[input.workspaceKind].label}` : `Workspace details saved for ${input.name}`, changes: { before, after: input } })
+    const note = kindChanged ? kindChangeNote(kind, input.workspaceKind) : null
+    return done(kindChanged ? `Workspace type is now ${WORKSPACE_KIND_DEFS[input.workspaceKind].label}.${note ? ` ${note}` : ''}` : 'Workspace details saved.')
   },
   { perm: 'org.manage' },
 )

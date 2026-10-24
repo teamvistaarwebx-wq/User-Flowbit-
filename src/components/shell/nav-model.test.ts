@@ -111,3 +111,22 @@ describe('nav-model product names (audit A7)', () => {
     expect(first('folio', ['folio.read'])).toBe('Folio')
   })
 })
+
+describe('nav-model workspace kind', () => {
+  const freelancer = (entitled: boolean): Access => {
+    const base = access(['people.read', 'orbit.read', 'folio.read'])
+    const on = { entitled: true, enabled: true }
+    return { ...base, products: { work: on, muster: { entitled, enabled: false, hidden: true }, orbit: on, folio: on } }
+  }
+
+  it('hides Muster from a freelancer workspace instead of offering it locked, whatever the plan', () => {
+    expect(railTop(freelancer(false)).find((e) => e.key === 'hr')).toBeUndefined()
+    expect(railTop(freelancer(true)).find((e) => e.key === 'hr')).toBeUndefined()
+    expect(railTop(freelancer(false)).map((e) => e.key)).toEqual(expect.arrayContaining(['orbit', 'folio', 'team']))
+  })
+
+  it('still offers a product the plan lacks, locked, when the kind allows it', () => {
+    const viewer = { ...freelancer(false), products: { ...freelancer(false).products, orbit: { entitled: false, enabled: true } } }
+    expect(railTop(viewer).find((e) => e.key === 'orbit')?.state).toBe('locked')
+  })
+})

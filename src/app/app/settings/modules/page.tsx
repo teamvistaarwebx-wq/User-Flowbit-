@@ -6,6 +6,7 @@ import { requireMember } from '@/lib/ctx'
 import { formatINR } from '@/lib/money'
 import { enabled, PLAN_PRICES } from '@/lib/plans'
 import { cn } from '@/lib/utils'
+import { kindAllowsProduct, workspaceKindOf, WORKSPACE_KIND_DEFS } from '@/lib/workspace-kind'
 import { buttonClass } from '@/components/ui/button-styles'
 import { Card } from '@/components/ui/card'
 import { Icon } from '@/components/ui/icon'
@@ -35,6 +36,9 @@ export default async function ModulesPage() {
   const ownerName = owner ? (await User.findById(owner.userId, { name: 1 }).lean())?.name ?? 'the owner' : 'the owner'
   const canBuy = ctx.can('billing.manage')
   const clientsOn = (['work', 'orbit', 'folio'] as const).some((p) => ctx.has(p))
+  const kind = workspaceKindOf(org)
+  const shown = PRODUCT_KEYS.filter((p) => kindAllowsProduct(kind, p))
+  const leftOut = PRODUCT_KEYS.filter((p) => !kindAllowsProduct(kind, p)).map((p) => PRODUCTS[p].name)
 
   const stateOf = (p: ProductKey) => {
     if (!isEntitledTo(p)) return 'Not in your plan'
@@ -47,7 +51,7 @@ export default async function ModulesPage() {
     <>
       <PageHeader title="Modules" help="modules-vs-plan" description="Switch products on or off for everyone in the workspace. Switching off hides a product and keeps its data; it does not change your bill. What you pay is set in Plan & billing." breadcrumb={breadcrumbFor('/app/settings/modules')} />
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        {PRODUCT_KEYS.map((p) => {
+        {shown.map((p) => {
           const product = PRODUCTS[p]
           const isEntitled = isEntitledTo(p)
           const isOn = isEntitled && enabled(org, p)
@@ -107,6 +111,18 @@ export default async function ModulesPage() {
           )
         })}
       </div>
+      {leftOut.length ? (
+        <Card variant="solid" className="mt-4 rounded-[10px]">
+          <p className="text-[13px] font-semibold uppercase tracking-[0.04em] text-white">Not used by {WORKSPACE_KIND_DEFS[kind].label.toLowerCase()} workspaces</p>
+          <p className="mt-1 text-sm text-white/80">
+            {leftOut.join(', ')} {leftOut.length === 1 ? 'is' : 'are'} hidden. Need it? Change the workspace type in{' '}
+            <Link href="/app/settings" className="text-blush underline-offset-2 hover:underline">
+              Settings → General
+            </Link>
+            ; nothing is deleted.
+          </p>
+        </Card>
+      ) : null}
       <Card variant="solid" className="mt-4 rounded-[10px]">
         <p className="text-[13px] font-semibold uppercase tracking-[0.04em] text-white">Always on</p>
         <p className="mt-1 text-sm text-white/80">Home, Notifications and Settings{clientsOn ? ', plus Clients while Work, Orbit or Folio is on' : ''}.</p>

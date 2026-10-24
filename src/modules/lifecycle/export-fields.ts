@@ -3,7 +3,7 @@
  * v2 company data included (R3 L-30a), never Flowbit's payment internals or secrets.
  */
 export const WORKSPACE_EXPORT_FIELDS = [
-  'name', 'slug', 'teamSize', 'mode', 'address', 'gstin', 'pan', 'state', 'timezone', 'officeHours', 'workWeek', 'enabledProducts', 'createdAt',
+  'name', 'slug', 'teamSize', 'mode', 'workspaceKind', 'address', 'gstin', 'pan', 'state', 'timezone', 'officeHours', 'workWeek', 'enabledProducts', 'createdAt',
   'profile', 'signatories', 'attendanceGeo', 'breakTypes', 'security', 'meetingsAi', 'theme', 'avatarStyle',
   'subscription.plan', 'subscription.status', 'subscription.accountType', 'subscription.products', 'subscription.seats', 'subscription.cycle',
   'subscription.trialEndsAt', 'subscription.currentPeriodStart', 'subscription.currentPeriodEnd', 'subscription.billing',

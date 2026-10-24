@@ -13,9 +13,10 @@ import { requestIp } from '@/lib/request'
 import { safeNextPath } from '@/lib/safe-next'
 import { email as emailField, checkbox, requiredText, slug as slugField } from '@/lib/validation'
 import { duplicateMessage, taxIdField, trialUsedMessage } from '@/lib/signup-guard'
-import { createWorkspace, freeWorkspaceTaken, hasLiveWorkspace, isSlugAvailable, TEAM_SIZES, trialTakenByBusiness, WORKSPACE_MODES } from '@/lib/workspace'
+import { createWorkspace, freeWorkspaceTaken, hasLiveWorkspace, isSlugAvailable, TEAM_SIZES, trialTakenByBusiness, WORKSPACE_KINDS, WORKSPACE_MODES } from '@/lib/workspace'
 import { afterSignup } from '@/modules/console/signup'
 import { BUILTIN_ROLE_KEYS } from '@/lib/permissions'
+import { kindAllowsRole } from '@/lib/workspace-kind'
 import { User } from '@/models/User'
 import { acceptInvite, createInvite, inviteForEmail } from './invites'
 import { hashPassword, passwordSchema, verifyPassword } from './password'
@@ -168,6 +169,8 @@ export const acceptInviteAction = publicAction(z.object({ token: z.string().min(
 const onboardingSchema = z.object({
   name: requiredText('Workspace name', 60),
   slug: slugField,
+  /** "Who are you?": decides products, roles and settings (lib/workspace-kind). */
+  workspaceKind: z.enum(WORKSPACE_KINDS, { error: 'Choose who you are' }),
   teamSize: z.enum(TEAM_SIZES, { error: 'Choose how many people will use it' }),
   mode: z.enum(WORKSPACE_MODES, { error: 'Choose how you want to work' }),
   /** Optional GSTIN or PAN: one Free workspace per business. */
@@ -176,6 +179,11 @@ const onboardingSchema = z.object({
     .array(z.object({ email: emailField, role: z.enum(BUILTIN_ROLE_KEYS).exclude(['owner']).default('member') }))
     .max(50, 'Invite at most 50 people now; add more later from Settings')
     .default([]),
+}).superRefine((v, issue) => {
+  // HR roles act only on Muster, which a freelancer workspace does not have.
+  v.invites.forEach((invite, i) => {
+    if (!kindAllowsRole(v.workspaceKind, invite.role)) issue.addIssue({ code: 'custom', path: ['invites', i, 'role'], message: 'Choose a role this workspace uses' })
+  })
 })
 
 const UNVERIFIED = 'Verify your email first: enter the six digit code we sent you.'
@@ -199,7 +207,7 @@ export const createWorkspaceAction = publicAction(onboardingSchema, async (input
   await assertRateLimit('workspaceCreate', String(user._id))
   const planIntent = await takePlanIntent()
   const signupUtm = await takeSignupUtm()
-  const { org } = await createWorkspace(user._id, { name: input.name, slug: input.slug, teamSize: input.teamSize, mode: input.mode, planIntent, accountType, taxIds: input.taxId, limits: config, signupUtm })
+  const { org } = await createWorkspace(user._id, { name: input.name, slug: input.slug, teamSize: input.teamSize, mode: input.mode, workspaceKind: input.workspaceKind, planIntent, accountType, taxIds: input.taxId, limits: config, signupUtm })
   await setActiveOrg(org._id)
   const inviteCtx = { orgId: org._id, userId: user._id, user, org }
   let linkOnly = 0

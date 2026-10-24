@@ -6,6 +6,7 @@ import { DEFAULT_WORK_WEEK, formatDate } from '@/lib/dates'
 import { companyProfileOf } from '@/lib/company-profile'
 import { PageHeader } from '@/components/ui/page-header'
 import { ATTENDANCE_RULES_HREF, workingHoursHome } from '@/lib/working-hours'
+import { workspaceKindOf } from '@/lib/workspace-kind'
 import { CalendarCard, CompanyProfileLink, DangerZone, WorkspaceCard } from '@/components/settings/general-forms'
 
 export const metadata: Metadata = { title: 'General settings' }
@@ -25,7 +26,7 @@ export default async function GeneralSettingsPage() {
       />
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-12 space-y-4 xl:col-span-7">
-          <WorkspaceCard org={{ name: org.name, slug: org.slug, teamSize: org.teamSize ?? '2-10', mode: org.mode ?? 'project' }} />
+          <WorkspaceCard org={{ name: org.name, slug: org.slug, teamSize: org.teamSize ?? '2-10', mode: org.mode ?? 'project', workspaceKind: workspaceKindOf(org) }} canChangeKind={ctx.isOwner} />
         </div>
         <div className="col-span-12 space-y-4 xl:col-span-5">
           <CompanyProfileLink legalName={profile.legalName} gstin={profile.gstin} />
