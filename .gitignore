@@ -1,0 +1,23 @@
+node_modules
+.next
+.next-deploy
+.next-*/
+.vercel
+out
+/storage
+coverage
+.env*.local
+*.local.md
+*.tsbuildinfo
+next-env.d.ts
+.DS_Store
+.local-test/
+# Local working folders
+.plan
+.agents
+.claude
+flowbit-deploy
+scripts/compare-old-schemas.ts
+scripts/inspect-old-dbs.ts
+
+.env.example

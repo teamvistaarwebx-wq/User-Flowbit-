@@ -1,0 +1,96 @@
+import type { FaqItem } from './types'
+
+/** Folio: invoices, payments, bank import, GST reports, e-invoice, Tally, expenses. */
+export const FINANCE_FAQ: readonly FaqItem[] = [
+  {
+    id: 'gst-invoice',
+    category: 'finance',
+    q: 'How do I create a GST invoice?',
+    a: 'Click New invoice, choose the firm that is billing and the client. Folio works out the place of supply and the tax: CGST and SGST within your state, IGST across states. Add lines with SAC or HSN codes, save a draft, then Issue. Download the PDF, email it, or share its online link.',
+    guide: 'folio#folio-invoices',
+  },
+  {
+    id: 'invoice-numbers',
+    category: 'finance',
+    q: 'Do invoice numbers restart in April?',
+    a: 'Yes. Each firm has a series per financial year, for example VWX/2026-27/0001.',
+    guide: 'folio#folio-settings',
+  },
+  {
+    id: 'delete-invoice',
+    category: 'finance',
+    q: 'Can I delete an issued invoice?',
+    a: 'No. Issued invoices are voided with a reason or written off and keep their number, so your series has no gaps. Nothing is ever silently deleted.',
+    guide: 'folio#folio-invoices',
+  },
+  {
+    id: 'record-payment',
+    category: 'finance',
+    q: 'How do I record a payment from a client?',
+    a: 'Click Record payment, pick the client and firm, enter the amount, date, mode and UTR, and allocate it across their open invoices. Anything left stays on their account as an advance for the next invoice.',
+    guide: 'folio#folio-receipts',
+  },
+  {
+    id: 'online-payment',
+    category: 'finance',
+    q: 'Can clients pay online?',
+    a: 'Yes. Every invoice has an online link with an “I’ve paid” button for the UTR, and a UPI QR for the balance when your bank details have a UPI ID. Connect your own Razorpay account, then click Create payment link on the invoice: the link gets Pay now for the current balance. After a part payment, create it again for the new balance (an old link is cancelled once it no longer matches). When it is paid, Folio records the receipt and marks the invoice paid.',
+    guide: 'settings#admin-int-razorpay',
+  },
+  {
+    id: 'bank-import',
+    category: 'finance',
+    q: 'Can I import my bank statement?',
+    a: 'Yes. Folio → Bank reads CSV or Excel statements from HDFC, ICICI, SBI, Axis and Kotak, or any bank with column mapping. Each deposit is matched to the invoice it most likely pays, TDS included; confirm and the receipt is recorded. Withdrawals can be booked as expenses. Undo within 7 days.',
+    guide: 'folio#folio-bank',
+  },
+  {
+    id: 'quotes-credit-notes',
+    category: 'finance',
+    q: 'How do quotes, credit notes and retainers work?',
+    a: 'Send a quote or proforma; the client can accept it online, and you convert it to an invoice in one click. Raise a credit note for a whole invoice or some lines. For monthly clients, a retainer or billing plan creates draft invoices when they are due.',
+    guide: 'folio#folio-quotes',
+  },
+  {
+    id: 'receivables',
+    category: 'finance',
+    q: 'How do I track what clients owe?',
+    a: 'The Folio dashboard shows receivables, overdue and collected, for all firms or one. Collections is your chase list, and reminders go out automatically before, on and after the due date, each once. Every client has a ledger with a running balance, as PDF, CSV or an online statement.',
+    guide: 'folio#folio-collections',
+  },
+  {
+    id: 'gst-reports',
+    category: 'finance',
+    q: 'Does Folio give GST reports for my CA?',
+    a: 'Yes. Reports has the GSTR-1 tables (B2B, B2CL, B2CS, exports, credit notes, HSN and documents) for any month or year, plus the sales register, collections, aging and revenue, all as CSV, and charts.',
+    guide: 'folio#folio-reports',
+  },
+  {
+    id: 'gst-filing',
+    category: 'finance',
+    q: 'Does Folio file GST returns?',
+    a: 'No. It prepares the reports you or your CA file from, and the compliance calendar reminds you of GSTR-1, GSTR-3B and other due dates.',
+    guide: 'settings#admin-compliance',
+  },
+  {
+    id: 'e-invoice',
+    category: 'finance',
+    q: 'Can Folio create e-invoices (IRN) and e-way bills?',
+    a: 'Yes, for firms with turnover above ₹5 crore. Add your GSP’s API login in Folio settings → E-invoice, then click Generate IRN on an issued B2B invoice: the IRN and signed QR print on the PDF. E-way bills are made from the IRN. Exports, reverse charge and credit-note IRNs are not covered yet.',
+    guide: 'folio#folio-einvoice',
+  },
+  {
+    id: 'tally-export',
+    category: 'finance',
+    q: 'Can I send my invoices to Tally?',
+    a: 'Yes, in beta. Folio → Export downloads sales, credit notes, receipts and expenses for a period as a TallyPrime XML file. Map your Tally ledger names once, and test the first import in a copy of your company.',
+    guide: 'whats-new#new-tally',
+  },
+  {
+    id: 'expenses-pnl',
+    category: 'finance',
+    q: 'Can Folio track expenses and profit?',
+    a: 'Yes. Log expenses with the vendor, category and GST paid. Profit and loss puts billing and expenses (and salaries, in the combined view) side by side by month, and the forecast shows what retainers will bring in. It is a management view, not full accounting.',
+    guide: 'folio#folio-pnl',
+  },
+]

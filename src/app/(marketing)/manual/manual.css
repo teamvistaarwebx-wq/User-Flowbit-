@@ -1,0 +1,68 @@
+/*
+ * The user manual's article styles (content/manual HTML), adapted from the
+ * launch kit's manual for the black marketing site. Everything is scoped
+ * under .manual-doc; --c is the chapter accent set by the page.
+ */
+.manual-doc {
+  --m-text: #f4f1f8;
+  --m-text-2: rgba(255, 255, 255, 0.75);
+  --m-text-3: #979797;
+  --m-line: rgba(255, 255, 255, 0.1);
+  --m-line-2: rgba(255, 255, 255, 0.16);
+  --m-surface: rgba(255, 255, 255, 0.035);
+  --m-surface-2: rgba(255, 255, 255, 0.07);
+  --m-ok: #5eeab0;
+  --m-warn: #e8b65c;
+  color: var(--m-text-2);
+  font-size: 16px;
+  line-height: 1.65;
+}
+.manual-doc a { color: var(--c, #bb62a5); text-underline-offset: 3px; }
+
+.manual-doc .chapter > header { margin-bottom: 8px; }
+.manual-doc .chapter > header .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c, #bb62a5); }
+.manual-doc .chapter > header h2 { font-size: clamp(30px, 4.4vw, 44px); line-height: 1.08; font-weight: 600; letter-spacing: -0.015em; color: var(--m-text); margin: 10px 0 12px; text-wrap: balance; }
+.manual-doc .chapter > header p { font-size: 18px; max-width: 64ch; margin: 0 0 8px; }
+
+.manual-doc .topic { padding-top: 44px; scroll-margin-top: 88px; }
+.manual-doc .topic h3 { font-size: 26px; line-height: 1.2; font-weight: 600; letter-spacing: -0.01em; color: var(--m-text); margin: 0 0 6px; text-wrap: balance; }
+.manual-doc .topic h4 { font-size: 13px; line-height: 1.3; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--m-text-3); margin: 26px 0 8px; }
+.manual-doc .topic p, .manual-doc .topic li { max-width: 68ch; }
+.manual-doc .topic p { margin: 0 0 12px; }
+.manual-doc .where { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; color: var(--m-text-3); margin: 0 0 16px !important; }
+.manual-doc .where b { color: var(--m-text-2); font-weight: 600; }
+.manual-doc code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 12.5px; background: var(--m-surface-2); padding: 2px 7px; border-radius: 6px; color: var(--m-text-2); overflow-wrap: anywhere; }
+.manual-doc kbd { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 12px; border: 1px solid var(--m-line-2); border-bottom-width: 2px; border-radius: 5px; padding: 1px 6px; background: var(--m-surface); color: var(--m-text); }
+
+.manual-doc figure.shot { margin: 18px 0 22px; }
+.manual-doc figure.shot img { display: block; width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--m-line-2); background: var(--m-surface); }
+.manual-doc figure.shot figcaption { font-size: 13px; color: var(--m-text-3); margin-top: 8px; }
+
+.manual-doc ol.steps { counter-reset: s; list-style: none; padding: 0; margin: 0 0 14px; display: grid; gap: 8px; }
+.manual-doc ol.steps > li { counter-increment: s; position: relative; padding-left: 40px; }
+.manual-doc ol.steps > li::before {
+  content: counter(s); position: absolute; left: 0; top: 1px; width: 26px; height: 26px; border-radius: 50%;
+  display: grid; place-items: center; font-size: 13px; font-weight: 600; line-height: 1; color: #000; background: var(--c, #bb62a5); font-variant-numeric: tabular-nums;
+}
+.manual-doc .topic ul { list-style: disc; padding-left: 20px; margin: 0 0 14px; }
+.manual-doc .topic ul li { margin-bottom: 5px; }
+.manual-doc .ui { font-weight: 600; color: var(--m-text); }
+.manual-doc b { color: var(--m-text); }
+
+.manual-doc .note, .manual-doc .tip, .manual-doc .warn { border: 1px solid var(--m-line); background: var(--m-surface); border-radius: 12px; padding: 12px 16px; margin: 14px 0; font-size: 15px; max-width: 68ch; }
+.manual-doc .note::before, .manual-doc .tip::before, .manual-doc .warn::before { display: block; font-size: 11px; font-weight: 600; line-height: 1; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+.manual-doc .tip::before { content: "Tip"; color: var(--m-ok); }
+.manual-doc .note::before { content: "Good to know"; color: var(--c, #bb62a5); }
+.manual-doc .warn::before { content: "Careful"; color: var(--m-warn); }
+.manual-doc .note p:last-child, .manual-doc .tip p:last-child, .manual-doc .warn p:last-child { margin-bottom: 0; }
+
+.manual-doc .tbl { overflow-x: auto; margin: 12px 0 18px; border: 1px solid var(--m-line); border-radius: 12px; }
+.manual-doc .tbl table { border-collapse: collapse; width: 100%; font-size: 14px; min-width: 520px; }
+.manual-doc .tbl th, .manual-doc .tbl td { text-align: left; padding: 9px 14px; border-bottom: 1px solid var(--m-line); vertical-align: top; }
+.manual-doc .tbl th { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--m-text-3); background: var(--m-surface); font-weight: 600; }
+.manual-doc .tbl tr:last-child td { border-bottom: 0; }
+.manual-doc .tbl td { font-variant-numeric: tabular-nums; }
+
+@media (prefers-reduced-motion: no-preference) {
+  html:has(.manual-doc) { scroll-behavior: smooth; }
+}

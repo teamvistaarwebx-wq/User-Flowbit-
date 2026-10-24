@@ -1,0 +1,862 @@
+@import 'tailwindcss';
+
+/*
+ * Flowbit design tokens. Values come from docs/DESIGN.md (measured from the Figma captures).
+ * Dark theme only. Raw values live on :root; @theme maps them to Tailwind utilities.
+ * Token NAMES are a contract with every page (docs/FOUNDATION.md section 7); change values, not names.
+ */
+:root {
+  color-scheme: dark;
+
+  /* Surfaces: neutral charcoal, not blue-black (DESIGN 2.1). */
+  --bg: #171717;
+  --bg-2: #1a1a1a;
+  --page: #171717;
+  --panel: #1a1a1a;
+  --surface: rgba(255, 255, 255, 0.04);
+  --surface-2: rgba(255, 255, 255, 0.07);
+  --surface-3: rgba(255, 255, 255, 0.11);
+  --surface-solid: #27272b;
+  --surface-solid-2: #252629;
+  --surface-table: linear-gradient(90deg, #282829 0%, #333234 62%, #383739 100%);
+  --control: #171717;
+  --control-active: #313131;
+  --menu: #1f1f1f;
+
+  /* Lines: translucent white, never a hue. */
+  --border: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.18);
+  --line: #535353;
+  --line-soft: #6b676c;
+
+  /* Text (DESIGN 2.2). The Figma sets headings and labels in pure white. */
+  --text: #ffffff;
+  --text-2: #a3a1a4;
+  --text-3: #858386;
+  --text-4: #797779;
+  --icon-muted: #7a787a;
+  --name: #ebcbe2;
+  --link: #ca81b8;
+
+  /* Brand (DESIGN 2.3). */
+  --indigo: #210b5d;
+  --orchid: #bb62a5;
+  --blush: #eac1dc;
+  /* Readable lavender for data and badges; the Figma's deep #56397D is --chip-active. */
+  --violet: #9a80cc;
+  --violet-2: #5d4083;
+  --chip-active: #56397d;
+  --avatar-ws: #784082;
+  --avatar-ink: #200c55;
+
+  /* Status and data (DESIGN 2.4). */
+  --success: #08ad93;
+  --warning: #e4bd6d;
+  --danger: #ff4540;
+  --info: #6160ff;
+  --pink: #fab5e8;
+  --orange: #e68763;
+  --mint: #70f3c3;
+  --absent: #f5548c;
+  --priority-high: #ffa040;
+  --priority-low: #0cba65;
+  --due-today: #ff2d31;
+  --day-ink: #575d6a;
+  --ring-track: #505050;
+
+  --work: #c084fc;
+  --muster: #5eeab0;
+  --orbit: #60a5fa;
+  --folio: #f5b85c;
+
+  /* Gradients (DESIGN 3). Workspace brand colours override the --grad-* values (lib/brand-theme). */
+  --grad-brand:
+    radial-gradient(60% 55% at 12% 10%, #2a1564 0%, rgba(42, 21, 100, 0) 70%),
+    radial-gradient(55% 50% at 92% 62%, #ca81b8 0%, rgba(202, 129, 184, 0) 70%),
+    radial-gradient(65% 55% at 0% 100%, #fcfcfe 0%, rgba(252, 252, 254, 0) 70%),
+    linear-gradient(160deg, #2e1966 0%, #6a5290 35%, #c58ab9 68%, #e9c9e0 100%);
+  --grad-button:
+    radial-gradient(80% 120% at 30% 125%, rgba(255, 235, 250, 0.4), transparent 60%),
+    linear-gradient(90deg, #e2d2e3 0%, #cfa7cb 20%, #a36ca8 42%, #6d428f 60%, #4a2f7b 85%, #3c2571 100%);
+  --grad-button-alt: linear-gradient(70deg, #3c2472 0%, #6e4f92 25%, #a677b5 50%, #e4b9dd 75%, #ede0ec 92%, #d6cbdc 100%);
+  --grad-rail: linear-gradient(172deg, #281158 0%, #3e1e64 25%, #4d276b 40%, #643577 63%, #723d7e 79%, #8a4c8b 100%);
+  --grad-progress: linear-gradient(90deg, #f8eef6 0%, #e7d2e5 22%, #c8aaca 37%, #9074a5 51%, #4e387c 66%, #3e2a72 80%, #6b5e95 94%, #8e82b0 100%);
+  --grad-text: linear-gradient(90deg, #f4e5f0 0%, #e6c6de 30%, #d4abcd 50%, #b68db9 70%, #806098 90%, #654988 100%);
+  --grad-mauve: radial-gradient(520px 560px at 75% 4%, #744c6a 0%, rgba(116, 76, 106, 0.45) 40%, transparent 78%), #000;
+  --grad-page:
+    radial-gradient(48% 40% at 58% 0%, rgba(58, 40, 62, 0.85) 0%, rgba(42, 32, 44, 0.6) 35%, rgba(23, 23, 23, 0) 75%), #171717;
+  --grad-google: linear-gradient(90deg, #ea4335 0%, #fbbc05 35%, #34a853 65%, #4285f4 100%);
+  --grad-selected: linear-gradient(135deg, #ffffff 0%, #e9b1de 35%, #bf74b4 60%, #592e71 100%);
+  --grad-step: linear-gradient(90deg, #e7d5e7, #8b6aae);
+  /* Brand-tinted strokes and glows (check-in pill, Arc card, auth card); lib/brand-theme overrides them with the rest. */
+  --grad-stroke-brand: linear-gradient(100deg, #b888bd 0%, #3b2e3e 38%, #4c454c 72%, #804e97 100%);
+  --arc-glow: rgba(140, 90, 170, 0.5);
+  --grad-arc-pill: linear-gradient(90deg, rgba(120, 80, 160, 0.38), rgba(220, 200, 225, 0.36));
+  --grad-arc-word: linear-gradient(90deg, #f2c7e5, #c796c6);
+  --grad-brand-word: linear-gradient(90deg, #ae93c2 0%, #8f7ab4 55%, #7867a6 100%);
+
+  /* Lit hairline (DESIGN 4): brighter on the left and top-left, fading across the top. */
+  --edge: linear-gradient(115deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.1) 35%, rgba(255, 255, 255, 0.04) 55%, rgba(255, 255, 255, 0.2) 100%);
+  --edge-bright: linear-gradient(115deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.18) 35%, rgba(255, 255, 255, 0.1) 60%, rgba(255, 255, 255, 0.3) 100%);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  /* Depth comes from hairlines and the backdrop, not drop shadows (DESIGN 4). */
+  --shadow-card: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --shadow-pop: 0 18px 48px -18px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+@theme inline {
+  --font-sans: var(--font-work-sans), ui-sans-serif, system-ui, sans-serif;
+
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-canvas: var(--bg);
+  --color-panel: var(--bg-2);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-solid: var(--surface-solid);
+  --color-control: var(--control);
+  --color-control-active: var(--control-active);
+  --color-menu: var(--menu);
+  --color-subtle: var(--border);
+  --color-strong: var(--border-strong);
+  --color-line: var(--line);
+  --color-line-soft: var(--line-soft);
+  --color-fg: var(--text);
+  --color-fg-2: var(--text-2);
+  --color-fg-3: var(--text-3);
+  --color-fg-4: var(--text-4);
+  --color-icon-muted: var(--icon-muted);
+  --color-name: var(--name);
+  --color-link: var(--link);
+
+  --color-indigo: var(--indigo);
+  --color-orchid: var(--orchid);
+  --color-blush: var(--blush);
+  --color-violet: var(--violet);
+  --color-violet-2: var(--violet-2);
+  --color-chip-active: var(--chip-active);
+
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-info: var(--info);
+  --color-pink: var(--pink);
+  --color-orange: var(--orange);
+  --color-mint: var(--mint);
+  --color-absent: var(--absent);
+
+  --color-work: var(--work);
+  --color-muster: var(--muster);
+  --color-orbit: var(--orbit);
+  --color-folio: var(--folio);
+
+  /* Radius scale (DESIGN 5): nothing above 16. Tailwind's xl/2xl/3xl are pulled in to match. */
+  --radius-xs: 3px;
+  --radius-lg: 8px;
+  --radius-xl: 10px;
+  --radius-2xl: 12px;
+  --radius-3xl: 16px;
+  --radius-card: 12px;
+  --radius-hero: 16px;
+  --radius-rail: 10px;
+
+  --shadow-card: var(--shadow-card);
+  --shadow-pop: var(--shadow-pop);
+
+  --animate-gradient: gradient-shift 30s var(--ease-in-out) infinite alternate;
+  --animate-shimmer: shimmer 900ms var(--ease-out);
+  --animate-fade-in: fade-in 180ms var(--ease-out);
+  --animate-scale-in: scale-in 180ms var(--ease-out);
+  --animate-slide-up: slide-up 220ms var(--ease-out);
+  --animate-sheet-up: sheet-up 260ms var(--ease-out);
+  --animate-slide-in-right: slide-in-right 240ms var(--ease-out);
+  --animate-pulse-soft: pulse-soft 2.4s ease-in-out infinite;
+  --animate-break-glow: break-glow 2.6s ease-in-out infinite;
+  /* Kept for old callers: now the ribbon float (±6px, ±1.5deg, 14s). */
+  --animate-float: ribbon-float 14s var(--ease-in-out) infinite;
+}
+
+/* Text colour shorthands used across the app: text-1 / text-2 / text-3. */
+@utility text-1 {
+  color: var(--text);
+}
+@utility text-2 {
+  color: var(--text-2);
+}
+@utility text-3 {
+  color: var(--text-3);
+}
+
+/* ---------------------------------------------------------------- gradients */
+
+/* Brand mesh: four soft points that drift on their own paths (DESIGN 3.1). Position only, never hue. */
+@utility bg-grad-brand {
+  background-image: var(--grad-brand);
+  background-size: 140% 140%, 150% 150%, 140% 140%, 100% 100%;
+  background-position: 0% 0%, 100% 60%, 0% 100%, 0 0;
+  animation: mesh-shift 46s var(--ease-in-out) infinite alternate;
+}
+@utility bg-grad-button {
+  background-image: var(--grad-button);
+  background-size: 100% 100%, 112% 100%;
+  background-position: 0 0, 0% 0;
+  animation: button-drift 9s var(--ease-in-out) infinite alternate;
+}
+@utility bg-grad-button-alt {
+  background-image: var(--grad-button-alt);
+  background-size: 112% 100%;
+  animation: button-drift-single 9s var(--ease-in-out) infinite alternate;
+}
+@utility bg-grad-rail {
+  background-image: var(--grad-rail);
+}
+/* The workday fill: the gradient is static, a slow sheen crosses it (DESIGN 3.3). */
+@utility bg-grad-progress {
+  background-image: var(--grad-progress);
+}
+@utility bg-grad-mauve {
+  background: var(--grad-mauve);
+}
+@utility bg-grad-page {
+  background: var(--grad-page);
+}
+@utility bg-surface-table {
+  background: var(--surface-table);
+}
+/* Gradient text: only the wordmark and the brand word in auth headings (DESIGN 1). */
+@utility text-gradient {
+  background-image: var(--grad-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Hover lift + press scale (DESIGN 12, motion everywhere). */
+@utility lift {
+  transition:
+    transform 160ms var(--ease-out),
+    border-color 160ms var(--ease-out),
+    background-color 160ms var(--ease-out),
+    box-shadow 160ms var(--ease-out);
+  &:hover {
+    transform: translateY(-1px);
+    border-color: var(--border-strong);
+  }
+  &:active {
+    transform: scale(0.98);
+  }
+}
+@utility press {
+  transition: transform 120ms var(--ease-out);
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+/* One light sweep across a primary button on hover: 30% wide, 18% white, skewed (DESIGN 3.2). */
+@utility shimmer {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 30%;
+    z-index: 1;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+    transform: translateX(-160%) skewX(-20deg);
+    pointer-events: none;
+  }
+  &:hover::after {
+    animation: shimmer 900ms var(--ease-out);
+  }
+}
+
+/* Uppercase section label: 14/600, 0.04em (DESIGN 7, "ASSIGN TO ME"). */
+@utility section-label {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Soft top/bottom fade on a vertical scroller so cut-off items read as "more below". */
+@utility scroll-fade-y {
+  mask-image: linear-gradient(to bottom, transparent 0, #000 14px, #000 calc(100% - 18px), transparent 100%);
+}
+
+/*
+ * Touch devices (v2 step 6). `touch:` = no hover (phones, tablets): controls that only appear on hover show
+ * always. `coarse:` = a finger is the pointer: bigger tap targets. Desktop (hover + fine pointer) is untouched.
+ */
+@custom-variant touch (@media (hover: none));
+@custom-variant coarse (@media (pointer: coarse));
+
+/*
+ * A 44px hit area around a small icon button on coarse pointers, without changing how it looks: an invisible
+ * centred ::before. The element must be positioned (buttons are `relative`).
+ */
+@utility hit-area {
+  @media (pointer: coarse) {
+    &::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: max(100%, 44px);
+      height: max(100%, 44px);
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+/* Short viewports (laptops with a docked browser, landscape tablets): `short:` tightens the shell. */
+@custom-variant short (@media (max-height: 760px));
+/*
+ * The rail has up to 14 items. Full size needs about 1150px of viewport; `rail-short` tightens it (fits down to
+ * about 880px) and `rail-tiny` keeps the icons only (labels stay for screen readers and tooltips; fits down to
+ * about 600px), so every item, down to Invite and Settings, stays visible on a 13-inch laptop.
+ */
+@custom-variant rail-short (@media (max-height: 1160px));
+@custom-variant rail-tiny (@media (max-height: 890px));
+@custom-variant tiny (@media (max-height: 600px));
+
+/* The hero glass: sign-in and onboarding cards, dialogs (a utility, so `lg:glass-hero` works). */
+@utility glass-hero {
+  /* Set --hero-fill to change the tint (a bg-* utility would lose to this one). */
+  background-color: var(--hero-fill, rgba(255, 255, 255, 0.1));
+  -webkit-backdrop-filter: blur(28px) saturate(120%);
+  backdrop-filter: blur(28px) saturate(120%);
+  border-radius: var(--radius-hero);
+}
+
+/* A gradient hairline from a variable: class="edge-stroke [--stroke:linear-gradient(...)]" (default: the lit edge). */
+@utility edge-stroke {
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+    padding: var(--stroke-w, 1px);
+    background: var(--stroke, var(--edge));
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+}
+
+/*
+ * Materials. Plain classes in the components layer so any utility on the same element wins
+ * (sticky, rounded-*, p-0, bg-*): they are the base, not an override.
+ */
+@layer components {
+  /* Glass (DESIGN 4): translucent fill, backdrop blur, lit translucent hairline, soft inner highlight. */
+  .glass {
+    position: relative;
+    background: rgba(255, 255, 255, 0.045);
+    -webkit-backdrop-filter: blur(20px) saturate(120%);
+    backdrop-filter: blur(20px) saturate(120%);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+  }
+  .glass::before,
+  .lit-edge::before,
+  .edge-selected::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: var(--edge);
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    transition: opacity 160ms var(--ease-out);
+  }
+  .lit-edge {
+    position: relative;
+  }
+  .lit-edge-bright::before {
+    background: var(--edge-bright);
+  }
+  /* The chosen option card: a 3px white-to-orchid stroke (DESIGN 3.10). */
+  .edge-selected {
+    position: relative;
+  }
+  .edge-selected::before {
+    padding: 3px;
+    background: var(--grad-selected);
+  }
+  /* Opaque content card (My attendance, forms inside the app). */
+  .card-solid {
+    position: relative;
+    background: linear-gradient(180deg, var(--surface-solid) 0%, var(--surface-solid-2) 100%);
+    border-radius: var(--radius-card);
+  }
+  /* Opaque table card (Assign to me): lighter towards the right, bright left hairline. */
+  .card-table {
+    position: relative;
+    background: var(--surface-table);
+    border-radius: var(--radius-card);
+  }
+  .card-table::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(100deg, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0.07) 30%, rgba(255, 255, 255, 0.03) 70%, rgba(255, 255, 255, 0.1) 100%);
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+}
+
+/* ---------------------------------------------------------------- keyframes */
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+@keyframes mesh-shift {
+  0% {
+    background-position: 0% 0%, 100% 60%, 0% 100%, 0 0;
+  }
+  33% {
+    background-position: 8% 6%, 92% 52%, 4% 96%, 0 0;
+  }
+  66% {
+    background-position: 3% 10%, 96% 70%, 0% 90%, 0 0;
+  }
+  100% {
+    background-position: 10% 3%, 88% 64%, 6% 100%, 0 0;
+  }
+}
+@keyframes button-drift {
+  from {
+    background-position: 0 0, 0% 0;
+  }
+  to {
+    background-position: 0 0, 100% 0;
+  }
+}
+@keyframes button-drift-single {
+  from {
+    background-position: 0% 0;
+  }
+  to {
+    background-position: 100% 0;
+  }
+}
+/* Mesh blobs (BrandMesh): each drifts on its own loop, transform only. */
+@keyframes blob-a {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(4%, 3%, 0) scale(1.03);
+  }
+}
+@keyframes blob-b {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-5%, -4%, 0);
+  }
+}
+@keyframes blob-c {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(3%, -3%, 0);
+  }
+}
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.85;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.03);
+  }
+}
+@keyframes glow-wander {
+  0%,
+  100% {
+    transform: translate3d(-2%, 0, 0);
+  }
+  50% {
+    transform: translate3d(2%, 0, 0);
+  }
+}
+@keyframes ribbon-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(3px, -6px, 0) rotate(1.5deg);
+  }
+}
+@keyframes ribbon-float-b {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(-4px, 5px, 0) rotate(-1.5deg);
+  }
+}
+/* A 120px soft highlight crossing the workday fill every 7s. */
+@keyframes sheen {
+  0% {
+    transform: translateX(-140px);
+  }
+  60%,
+  100% {
+    transform: translateX(var(--sheen-to, 1400px));
+  }
+}
+@keyframes draw-line {
+  from {
+    stroke-dashoffset: var(--len, 400);
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes shimmer {
+  from {
+    transform: translateX(-160%) skewX(-20deg);
+  }
+  to {
+    transform: translateX(420%) skewX(-20deg);
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes sheet-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes slide-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+/* Workspace avatar style "pattern" (Settings → Appearance): the generated pattern replaces initials. */
+[data-avatar-style='pattern'] .avatar-initials,
+.avatar-initials.avatar-force-pattern {
+  background-image: var(--avatar-pattern) !important;
+  background-size: cover;
+  color: transparent;
+}
+/* The Appearance preview shows each style whatever the workspace uses. */
+.avatar-initials.avatar-force-initials {
+  background-image: none !important;
+  color: #fff;
+}
+
+/* On a break: the glass break icon breathes a soft halo in its own colour (--glow). */
+@keyframes break-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 var(--glow, rgba(255, 255, 255, 0.25));
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 5px transparent;
+    transform: scale(1.04);
+  }
+}
+/* Punch dial (components/shell/punch-dial): the clock's second hand and each break icon's small loop.
+   Transform and opacity only; the component drops these classes under reduced motion. */
+.dial-second {
+  transform-origin: 50px 50px;
+  animation: dial-turn 60s linear infinite;
+}
+.dial-second-tick {
+  transform-origin: 50px 50px;
+  animation: dial-turn 60s steps(60, end) infinite;
+}
+.dial-steam {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: dial-steam 2.4s ease-out infinite;
+}
+.dial-bob {
+  animation: dial-bob 2.8s ease-in-out infinite;
+}
+.dial-zzz {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: dial-zzz 3s ease-out infinite;
+}
+.dial-breathe {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: dial-breathe 4.2s ease-in-out infinite;
+}
+@keyframes dial-turn {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes dial-steam {
+  0% {
+    opacity: 0;
+    transform: translateY(4px) scaleY(0.8);
+  }
+  35% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-9px) scaleY(1.1);
+  }
+}
+@keyframes dial-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+@keyframes dial-zzz {
+  0% {
+    opacity: 0;
+    transform: translate(0, 4px) scale(0.6);
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(6px, -12px) scale(1.15);
+  }
+}
+@keyframes dial-breathe {
+  0%,
+  100% {
+    transform: scale(0.86);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 1;
+  }
+}
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@layer base {
+  html,
+  body {
+    background: var(--bg);
+    color: var(--text);
+  }
+  body {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: rgba(187, 98, 165, 0.45);
+    color: #fff;
+  }
+  :focus-visible {
+    /* Follows the brand primary: themeVars overrides --link (R2 19.2). */
+    outline: 2px solid color-mix(in srgb, var(--link) 85%, transparent);
+    outline-offset: 2px;
+  }
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: none;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--text-4);
+  }
+  table {
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+  }
+  /* Outline icons at 1.5px (DESIGN 8). Only the lucide default (2) is thinned; explicit weights stay. */
+  svg.lucide[stroke-width='2'] {
+    stroke-width: 1.5;
+  }
+  input[type='date']::-webkit-calendar-picker-indicator,
+  input[type='time']::-webkit-calendar-picker-indicator,
+  input[type='month']::-webkit-calendar-picker-indicator {
+    /* color-scheme: dark already draws a light glyph; inverting it made the icon vanish on dark fields. */
+    opacity: 0.6;
+    cursor: pointer;
+    transition: opacity 150ms;
+  }
+  input[type='date']::-webkit-calendar-picker-indicator:hover,
+  input[type='time']::-webkit-calendar-picker-indicator:hover,
+  input[type='month']::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.14) transparent;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.22);
+    background-clip: padding-box;
+  }
+}
+
+/* OS setting, unless the user chose "Full motion" (html[data-motion='full']): every loop stops at its first frame. */
+@media (prefers-reduced-motion: reduce) {
+  html:not([data-motion='full']) *,
+  html:not([data-motion='full']) *::before,
+  html:not([data-motion='full']) *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  html:not([data-motion='full']) .lift:hover {
+    transform: none;
+  }
+}
+
+/* User preference from Settings -> Appearance: html[data-motion='reduce'] (data-reduced-motion is the legacy flag). */
+html[data-motion='reduce'] *,
+html[data-motion='reduce'] *::before,
+html[data-motion='reduce'] *::after,
+html[data-reduced-motion='true'] *,
+html[data-reduced-motion='true'] *::before,
+html[data-reduced-motion='true'] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+html[data-motion='reduce'] .lift:hover,
+html[data-reduced-motion='true'] .lift:hover {
+  transform: none;
+}
+
+/* One-time left-to-right reveal for chart lines (DESIGN 3.8: draw on mount, then still). */
+@keyframes reveal-x {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}

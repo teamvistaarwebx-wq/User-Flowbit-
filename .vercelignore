@@ -1,0 +1,18 @@
+# Never upload these with `npx vercel` (the CLI does not reliably follow .gitignore).
+# Uploaded files: employee documents, receipts, payslips. Production files live in the bucket.
+# Anchored to the root so src/lib/storage is still uploaded.
+/storage/
+# Secrets and local logins
+.env*
+!.env.example
+*.local.md
+.local-test/
+# Build output and tooling
+.next*
+node_modules/
+coverage/
+*.tsbuildinfo
+.DS_Store
+# Internal working notes and design sources
+docs/archive/
+docs/design/

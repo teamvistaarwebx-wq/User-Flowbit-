@@ -1,0 +1,535 @@
+<section class="chapter c-folio" id="folio">
+  <header>
+    <div class="eyebrow">Folio · Invoicing</div>
+    <h2>Send GST invoices and get paid</h2>
+    <p>Folio is where you quote, invoice, record payments, chase dues and see profit. Owners, admins and the finance role use all of it; the sales role can work with quotes. Open it from <b>Rail → Folio</b>.</p>
+  </header>
+
+  <article class="topic" id="folio-overview">
+    <h3>How Folio fits together</h3>
+    <p>The Folio side panel has four groups. <span class="ui">Invoicing</span> holds <span class="ui">Folio</span> (the receivables dashboard), <span class="ui">Invoices</span>, <span class="ui">Quotes</span>, <span class="ui">Receipts</span>, <span class="ui">Recurring</span>, <span class="ui">Credit notes</span> and <span class="ui">Clients</span>. <span class="ui">Money in</span> holds <span class="ui">Collections</span>, <span class="ui">Ledgers</span> and <span class="ui">Forecast</span>. <span class="ui">Money out</span> holds <span class="ui">Expenses</span> and <span class="ui">Profit &amp; loss</span>. <span class="ui">Insights</span> holds <span class="ui">Reports</span> and <span class="ui">Settings</span>.</p>
+    <p>A few ideas run through every page:</p>
+    <ul>
+      <li><b>Firms.</b> You can bill from more than one business. A GST-registered firm issues <b>Tax Invoices</b> with a GST breakup. A non-GST firm issues <b>Sale Invoices</b> with no tax. Many pages have a firm switch: <span class="ui">Combined</span> or one firm (for example <span class="ui">Vistaar WebX</span> or <span class="ui">Vistaar Solutions</span>).</li>
+      <li><b>Drafts have no number.</b> An invoice gets its number only when you issue it. After that its figures are locked. The only way to reduce an issued invoice is a credit note.</li>
+      <li><b>Money arrives against a client.</b> You record a payment first, then apply it to one or more invoices. Anything not applied waits as advance credit.</li>
+      <li><b>Financial year is April to March.</b> Each firm keeps its own number series per document type, restarting every 1 April.</li>
+    </ul>
+    <div class="tip"><p>Set up Folio in this order: add your firm in <span class="ui">Settings</span>, add a client, then raise the first invoice. If no firm exists, every Folio page shows a <b>Set up a firm first</b> callout.</p></div>
+  </article>
+
+  <article class="topic" id="folio-home">
+    <h3>Folio home</h3>
+    <p class="where"><span>Open: <b>Rail → Folio</b></span><span><code>/app/folio</code></span><span>Who: owner, admin, finance</span></p>
+    <p>Where the money stands today, and what needs a person. It greets you by name with today's date.</p>
+    <figure class="shot"><img src="shots/folio-home.jpg" alt="Folio home with an aging bar, metric tiles for outstanding, overdue, collected and billed this month, and a Needs a person panel" loading="lazy" width="1440" height="900"><figcaption>The aging bar sits on top; the four tiles below it link to the pages behind each number.</figcaption></figure>
+    <h4>On this page</h4>
+    <ul>
+      <li><span class="ui">Work the queue</span>, <span class="ui">Record payment</span> and <span class="ui">New invoice</span> buttons at the top right.</li>
+      <li>Firm switch (<span class="ui">Combined</span> or one firm) and period switch: <span class="ui">This month</span>, <span class="ui">Last month</span>, <span class="ui">This FY</span>, <span class="ui">Last FY</span>, <span class="ui">Custom</span>.</li>
+      <li>An unapplied-money banner, for example "₹1,50,000.00 received but not applied to any invoice", with <span class="ui">Apply it</span>. It opens the receipts list filtered to unapplied payments.</li>
+      <li><b>Receivables by age</b>: every open invoice in five buckets, <span class="ui">Not yet due</span>, <span class="ui">1–30 days</span>, <span class="ui">31–60 days</span>, <span class="ui">61–90 days</span> and <span class="ui">Over 90 days</span>, each with its share of the book. <span class="ui">Aging report</span> opens the full report.</li>
+      <li>Metric tiles:
+        <ul>
+          <li><span class="ui">Outstanding</span>: open invoice balances less unapplied money (net receivable).</li>
+          <li><span class="ui">Overdue</span>: past-due balances, with the invoice count and share of the book.</li>
+          <li><span class="ui">Collected this month</span>: payments received, compared with last month.</li>
+          <li><span class="ui">Billed this month</span>: issued invoices, tax included, with the number of drafts waiting.</li>
+        </ul>
+      </li>
+      <li><b>Billed vs collected</b>: bars for the last six months.</li>
+      <li><b>Needs a person</b>: <span class="ui">Follow-ups due today</span>, <span class="ui">Drafts to issue</span>, <span class="ui">Retainers to bill</span> and <span class="ui">DSO · last 90 days</span> (days sales outstanding: what is owed against what you billed in the last 90 days, expressed in days).</li>
+      <li><b>Top debtors</b>: clients with overdue money, with <span class="ui">Late since</span>, <span class="ui">Owed</span> and <span class="ui">Overdue</span>. Click a client to open their ledger.</li>
+      <li><b>Expected billing</b>: what active retainers and dated milestones should bill in the next 3 and 6 months, before GST. <span class="ui">View forecast</span> opens the forecast.</li>
+      <li><b>Profit and loss</b>: net income, costs and net profit for the period, with links to <span class="ui">Expenses</span> and <span class="ui">Full P&amp;L</span>.</li>
+    </ul>
+    <div class="note"><p>Amounts on tiles are shortened (₹11.3L, ₹60K). The full figure is on the page the tile opens.</p></div>
+  </article>
+
+  <article class="topic" id="folio-clients">
+    <h3>Clients</h3>
+    <p class="where"><span>Open: <b>Rail → Folio → Clients</b></span><span><code>/app/clients</code></span><span>Who: owner, admin, finance, sales</span></p>
+    <p>One client list shared by Work, Orbit and Folio. A client you add in Orbit can be invoiced in Folio straight away, and the invoices and balances show on the same client page.</p>
+    <figure class="shot"><img src="shots/clients.jpg" alt="Clients list with columns for primary contact, status, owner, pipeline, outstanding, projects and last activity" loading="lazy" width="1440" height="900"><figcaption>The Outstanding column comes from Folio: what each client still owes.</figcaption></figure>
+    <h4>On this page</h4>
+    <ul>
+      <li><span class="ui">Search clients</span>, <span class="ui">Export</span> and <span class="ui">Add client</span>.</li>
+      <li>Filters: <span class="ui">Status</span> (default <span class="ui">Active and leads</span>), <span class="ui">Owner</span>, <span class="ui">Tag</span>, and <span class="ui">Sort</span>.</li>
+      <li>Columns: <span class="ui">Client</span>, <span class="ui">Primary contact</span>, <span class="ui">Status</span>, <span class="ui">Owner</span>, <span class="ui">Pipeline</span>, <span class="ui">Outstanding</span>, <span class="ui">Projects</span>, <span class="ui">Last activity</span>.</li>
+    </ul>
+
+    <h4>Add a client</h4>
+    <figure class="shot"><img src="shots/client-new.jpg" alt="New client form with kind, name, contact details, tax, billing address, relationship and first contact sections" loading="lazy" width="1440" height="900"><figcaption>GSTIN and state on this form decide whether Folio charges CGST + SGST or IGST.</figcaption></figure>
+    <ol class="steps">
+      <li>Click <span class="ui">Add client</span>.</li>
+      <li>Pick the <span class="ui">Kind</span>: <span class="ui">Company</span> or <span class="ui">Individual</span>.</li>
+      <li>Enter the <span class="ui">Name</span> (the legal name that prints on invoices) and, if you like, a shorter <span class="ui">Display name</span>.</li>
+      <li>Fill <span class="ui">Email</span>, <span class="ui">Phone</span> and <span class="ui">Website</span>.</li>
+      <li>Under <span class="ui">Tax</span>, enter the <span class="ui">GSTIN</span> if the client is registered. The GSTIN is 15 characters and fills the <span class="ui">State</span> for you. Add the <span class="ui">PAN</span>. For an unregistered client, pick the <span class="ui">State</span> yourself.</li>
+      <li>Under <span class="ui">Billing address</span>, fill <span class="ui">Line 1</span>, <span class="ui">Line 2</span>, <span class="ui">City</span>, <span class="ui">Address state</span>, <span class="ui">PIN code</span> and <span class="ui">Country</span>.</li>
+      <li>Under <span class="ui">Relationship</span>, set the <span class="ui">Owner</span>, <span class="ui">Source</span>, <span class="ui">Sector</span>, <span class="ui">Tags</span> (comma separated) and <span class="ui">Notes</span>.</li>
+      <li>Optionally add a <span class="ui">First contact</span> with name, role, email and phone.</li>
+      <li>Click <span class="ui">Add client</span>.</li>
+    </ol>
+    <div class="warn"><p>Get the state right. If the GSTIN's first two digits do not match the billing state, Folio refuses it, for example "This GSTIN is registered in state 27, but the billing address is in state 23." A wrong state means the wrong tax type on every invoice.</p></div>
+
+    <h4>The client page and billing profile</h4>
+    <figure class="shot"><img src="shots/client.jpg" alt="Client page for Aarav Retail with tiles for pipeline, projects, outstanding and overdue, a details form and a Billing card" loading="lazy" width="1440" height="900"><figcaption>The Billing card on the right holds the client's Folio settings: firm, terms, TDS and credit limit.</figcaption></figure>
+    <p>The header shows status, GSTIN and state. Tabs: <span class="ui">Overview</span>, <span class="ui">Contacts</span>, <span class="ui">Projects</span>, <span class="ui">Deals</span>, <span class="ui">Invoices</span>, <span class="ui">Ledger</span>, <span class="ui">Activity</span>. Tiles show <span class="ui">Outstanding</span> (issued and not yet paid) and <span class="ui">Overdue</span> (past the due date). <span class="ui">New invoice</span> opens the builder with this client already picked.</p>
+    <p>The <b>Billing</b> card is the client's billing profile. Click its <span class="ui">Edit</span> to change:</p>
+    <ul>
+      <li><b>Bills from</b>: the default firm for this client. The invoice builder picks it first.</li>
+      <li><b>Payment terms</b> in days. If blank, the firm's default applies (15 days unless changed).</li>
+      <li><b>Place of supply</b>: "Same as billing state", or another state when the service is delivered elsewhere.</li>
+      <li><b>Export client</b>: makes new invoices default to Export (zero-rated).</li>
+      <li><b>Default GST rate</b> for this client's lines.</li>
+      <li><b>Credit limit</b> in rupees. Blank means no limit. The builder warns when the client's outstanding plus the new invoice goes over it.</li>
+      <li><b>TDS</b>: turn it on if the client deducts tax at source, then enter the section (default 194J) and rate (default 10%).</li>
+      <li><b>Billing recipients</b>: who gets invoices and who gets reminders, with name, email and phone. Mark one as primary.</li>
+      <li><b>Reminders paused</b>: the automatic reminder run skips this client.</li>
+      <li><b>Opening balance</b> and the date it is <b>as on</b>: what the client owed before you started Folio. Only people who can issue invoices can set it.</li>
+    </ul>
+    <div class="note"><p>An opening balance behaves like an invoice: payments can be applied to it and it shows in aging and the ledger. It stays out of GST reports, revenue and numbering, and has no PDF. You can change it only while no payment is applied to it.</p></div>
+  </article>
+
+  <article class="topic" id="folio-quotes">
+    <h3>Quotes and proformas</h3>
+    <p class="where"><span>Open: <b>Rail → Folio → Quotes</b></span><span><code>/app/folio/quotes</code></span><span>Who: owner, admin, finance, sales</span></p>
+    <p>Send a price before the work starts, then turn it into an invoice in one click. A <b>Quotation</b> is an offer. A <b>Proforma invoice</b> is a request for advance payment; it says it is not a tax invoice, and the tax invoice is issued when payment arrives.</p>
+    <figure class="shot"><img src="shots/folio-quotes.jpg" alt="Quotes list with status filters and two rows, a sent quote and an accepted proforma" loading="lazy" width="1440" height="900"><figcaption>Status tabs across the top; the badge before each number says Quote or Proforma.</figcaption></figure>
+    <h4>On this page</h4>
+    <ul>
+      <li><span class="ui">New quote</span> and <span class="ui">New proforma</span>.</li>
+      <li>Status tabs: <span class="ui">All</span>, <span class="ui">Draft</span>, <span class="ui">Sent</span>, <span class="ui">Accepted</span>, <span class="ui">Expired</span>, <span class="ui">Declined</span>, <span class="ui">Converted</span>. A draft or sent quote past its <b>Valid until</b> date shows as Expired.</li>
+      <li>Search by number, subject or client, and a type filter: <span class="ui">Quotes and proformas</span>, <span class="ui">Quotes</span> or <span class="ui">Proformas</span>.</li>
+      <li>Columns: <span class="ui">Number</span>, <span class="ui">Client</span>, <span class="ui">Date</span>, <span class="ui">Valid until</span>, <span class="ui">Status</span>, <span class="ui">Total</span>.</li>
+    </ul>
+
+    <h4>Create a quote</h4>
+    <figure class="shot"><img src="shots/folio-quote-new.jpg" alt="New quote form with a Quotation or Proforma invoice choice, firm, client, quote date and valid until" loading="lazy" width="1440" height="900"><figcaption>The quote builder is the invoice builder with a validity date in place of payment terms.</figcaption></figure>
+    <ol class="steps">
+      <li>Click <span class="ui">New quote</span> (or <span class="ui">New proforma</span>).</li>
+      <li>Under <span class="ui">Document</span>, choose <span class="ui">Quotation</span> or <span class="ui">Proforma invoice</span>.</li>
+      <li>Pick <span class="ui">Billing from</span> and the <span class="ui">Client</span>.</li>
+      <li>Set the <span class="ui">Quote date</span> and <span class="ui">Valid until</span>. Validity defaults to 15 days; you can change the default in Folio → Settings → Tax.</li>
+      <li>Add a <span class="ui">Subject</span>, check <span class="ui">Place of supply</span> and <span class="ui">Supply</span>, and add lines exactly as on an invoice (see below).</li>
+      <li>Click <span class="ui">Save quote</span>. The quote gets its number now (for example VWX-QT/2026-27/0001). Quote numbers are not statutory, so gaps are fine.</li>
+    </ol>
+
+    <h4>Send, accept and convert</h4>
+    <div class="tip"><p>The screenshot of this page is being retaken. The Online link and activity card shows whether the client has opened the quote.</p></div>
+    <p>The quote page shows badges for kind, document type, status and supply type; <b>Prepared for</b>; <b>Dates</b> (date, valid until, place of supply, sent); the lines; and a <b>Summary</b> with the total in words.</p>
+    <ol class="steps">
+      <li>Click <span class="ui">Email to client</span> to send the PDF to the client's billing recipients. This marks the quote as sent. <span class="ui">PDF</span> opens the document.</li>
+      <li>Sending creates a private online link, shown under <b>Online link and activity</b>. Use <span class="ui">Copy</span> to share it yourself, or <span class="ui">Turn off link</span> to stop it working. The client can open it without signing in and accept or decline with their name and a comment.</li>
+      <li>When the client replies, click <span class="ui">Accept</span> or <span class="ui">Decline</span>. Decline asks for a reason.</li>
+      <li>Click <span class="ui">Convert to invoice</span>. Folio creates a <b>draft</b> invoice with the same firm, client, lines, discount, notes and terms, dated today. Review it and issue it from the invoice page.</li>
+    </ol>
+    <div class="note"><p>A quote stays editable (<span class="ui">Edit</span>) until it is converted. You can convert from draft, sent or accepted, but not a declined quote, and not an expired one until you extend <b>Valid until</b>. If the converted draft is deleted or the invoice is voided, the quote goes back to Accepted. Converting needs invoice permission as well as quote permission.</p></div>
+  </article>
+
+  <article class="topic" id="folio-invoices">
+    <h3>Invoices</h3>
+    <p class="where"><span>Open: <b>Rail → Folio → Invoices</b></span><span><code>/app/folio/invoices</code></span><span>Who: owner, admin, finance</span></p>
+    <p>Every tax and sale invoice in one list, from drafts to paid.</p>
+    <figure class="shot"><img src="shots/folio-invoices.jpg" alt="Invoices list with firm and period switches, status tabs and rows showing document badge, number, client, firm, dates, status, total and balance" loading="lazy" width="1440" height="900"><figcaption>The header line shows how much is billed and how much is still owed today.</figcaption></figure>
+    <h4>On this page</h4>
+    <ul>
+      <li><span class="ui">New invoice</span>, and <span class="ui">Generate retainer drafts</span> when retainer periods are due (the button shows how many).</li>
+      <li>Firm switch and period switch (<span class="ui">All time</span>, <span class="ui">This month</span>, <span class="ui">Last month</span>, <span class="ui">This FY</span>, <span class="ui">Last FY</span>, <span class="ui">Custom</span>).</li>
+      <li>Status tabs: <span class="ui">All</span>, <span class="ui">Drafts</span>, <span class="ui">Open</span>, <span class="ui">Overdue</span>, <span class="ui">Paid</span>, <span class="ui">Void</span>, <span class="ui">Written off</span>.</li>
+      <li>Search by number, subject, PO or client, and a document filter: <span class="ui">Any document</span>, <span class="ui">Tax invoices</span>, <span class="ui">Sale invoices</span>.</li>
+      <li>Columns: <span class="ui">Invoice</span> (TAX or SALE badge, number or "Draft", subject), <span class="ui">Client</span>, <span class="ui">Firm</span>, <span class="ui">Date</span>, <span class="ui">Due</span>, <span class="ui">Status</span>, <span class="ui">Total</span>, <span class="ui">Balance</span>.</li>
+    </ul>
+
+    <h4>Invoice statuses</h4>
+    <p>An invoice has exactly five statuses. Two more labels can appear on top of them.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Status</th><th>What it means</th><th>What moves it</th></tr></thead>
+      <tbody>
+        <tr><td>Draft</td><td>Being prepared. No number, not a legal document, figures still editable.</td><td>Issue it, or delete it.</td></tr>
+        <tr><td>Issued</td><td>Numbered and locked. Nothing paid yet.</td><td>A payment, TDS or credit note applied to it.</td></tr>
+        <tr><td>Part paid</td><td>Some money, TDS or credit applied, some balance left.</td><td>More money applied, or a payment released or bounced.</td></tr>
+        <tr><td>Paid</td><td>Cash, TDS and credit notes together cover the total.</td><td>Goes back down if a payment bounces, is released, or a credit note is cancelled.</td></tr>
+        <tr><td>Void</td><td>Cancelled. Final. The number stays used.</td><td>Nothing; void is the end.</td></tr>
+        <tr><td><i>Overdue {n}d</i></td><td>Label on an issued or part-paid invoice past its due date.</td><td>Paying it, or the balance reaching zero.</td></tr>
+        <tr><td><i>Written off</i></td><td>Label when the remaining balance was written off as bad debt. The status itself does not change; the balance becomes zero.</td><td><span class="ui">Undo write-off</span>.</td></tr>
+      </tbody>
+    </table></div>
+    <p>The flow is: Draft → Issued → Part paid → Paid. Settlement moves an invoice between Issued, Part paid and Paid by itself, based on the money applied. You only act to issue, void or write off.</p>
+
+    <h4>Create an invoice, line by line</h4>
+    <figure class="shot"><img src="shots/folio-invoice-new.jpg" alt="New invoice builder with the Who and when card on the left and a Totals panel with Create draft on the right" loading="lazy" width="1440" height="900"><figcaption>The Totals panel updates as you type, using the same calculation Folio applies when it saves.</figcaption></figure>
+    <ol class="steps">
+      <li>Click <span class="ui">New invoice</span>.</li>
+      <li>Under <b>Who and when</b>, pick <span class="ui">Billing from</span>. The hint says what it issues: "Issues a Tax Invoice with a GST breakup." for a GST firm, or a sale invoice with no tax for a non-GST one.</li>
+      <li>Pick the <span class="ui">Client</span>. Folio fills the firm, terms, TDS and place of supply from the client's billing profile.</li>
+      <li>Check the <span class="ui">Invoice date</span> (today by default) and <span class="ui">Payment terms (days)</span>. The due date shows under it, for example "Due 23 Oct 2026".</li>
+      <li>Write a one-line <span class="ui">Subject</span>, choose the <span class="ui">Billing type</span> (<span class="ui">One-time</span>, <span class="ui">Retainer</span>, <span class="ui">Milestone</span> or <span class="ui">Advance</span>) and add the <span class="ui">Client PO reference</span> if they gave one.</li>
+      <li>Pick the <span class="ui">Bank account to print</span>. Account numbers show masked here.</li>
+      <li>On a tax invoice, check <span class="ui">Place of supply</span> (default <span class="ui">From the client</span>) and <span class="ui">Supply</span>: <span class="ui">Auto (from the states)</span>, <span class="ui">Export (zero-rated)</span> or <span class="ui">SEZ (zero-rated)</span>. Tick <span class="ui">Reverse charge applies</span> only if it does; it needs a client with a GSTIN.</li>
+      <li>Optionally set <span class="ui">Service period from</span> and <span class="ui">Service period to</span>. They print on the invoice.</li>
+      <li>Under <b>What you are billing</b>, for each line:
+        <ul>
+          <li>Pick a <span class="ui">Service</span> from your catalogue, or keep <span class="ui">Free text</span>. A service fills the description, SAC, unit, rate and GST rate.</li>
+          <li>Fill <span class="ui">Description</span>, <span class="ui">SAC</span> (the HSN/SAC code, 4 to 8 digits), <span class="ui">Qty</span> (up to 3 decimals, so 7.5 hours works), <span class="ui">Unit</span>, <span class="ui">Rate ₹</span>, <span class="ui">Disc %</span> and <span class="ui">GST %</span>.</li>
+          <li>Under the line you see its taxable value, tax and line total.</li>
+          <li>Click <span class="ui">Add line</span> for more. <span class="ui">Remove line</span> works while there is more than one.</li>
+        </ul>
+      </li>
+      <li>Under <b>Discount and notes</b>, set an <span class="ui">Invoice discount</span> (<span class="ui">None</span>, <span class="ui">Percentage</span> or <span class="ui">Flat amount (₹)</span>) if needed. Edit <span class="ui">Notes on the document</span> and <span class="ui">Terms</span> (both prefilled from the firm), and add <span class="ui">Internal notes</span>, which are never printed.</li>
+      <li>Check the <b>Totals</b> panel and click <span class="ui">Create draft</span>. The draft opens; it has no number yet.</li>
+    </ol>
+
+    <h4>How the tax is worked out</h4>
+    <ul>
+      <li><b>CGST + SGST or IGST.</b> Folio compares the firm's state with the place of supply. Same state: the GST is split equally into CGST and SGST. Different states: the whole GST is IGST. If either state is unknown, Folio uses IGST. For example, ₹1,00,000 at 18% is CGST ₹9,000 + SGST ₹9,000 within Madhya Pradesh, or IGST ₹18,000 to Maharashtra. In a union territory without a legislature, SGST prints as UTGST.</li>
+      <li><b>Place of supply</b> comes from the client's billing profile override, then their GSTIN, then their state, then their billing address state. Override it on the invoice only when the service is delivered elsewhere.</li>
+      <li><b>Export and SEZ</b> supplies are zero-rated: lines keep their value and carry no tax.</li>
+      <li><b>Sale invoices</b> (non-GST firm) never carry tax; the GST column is hidden.</li>
+      <li><b>Discounts come before tax.</b> Line discount first, then the invoice discount is spread across lines in proportion to their value. Tax is charged on what remains (the taxable value).</li>
+      <li><b>Rounding.</b> The total is rounded to the nearest rupee once, shown as a <b>Round off</b> line between −₹0.49 and +₹0.50. You can turn this off in Folio → Settings → Tax.</li>
+      <li><b>TDS.</b> If the client deducts TDS, the invoice shows the expected TDS (calculated on the taxable value, never on the GST) and an <b>Expect in bank</b> figure. TDS is printed beside the total, not deducted from it. For example ₹1,00,000 + IGST ₹18,000 with 10% TDS: total ₹1,18,000, TDS ₹10,000, expect ₹1,08,000 in the bank.</li>
+      <li>Allowed GST rates are 0, 5, 12, 18 and 28% unless you change them in Folio → Settings → Tax.</li>
+    </ul>
+
+    <h4>Invoice numbers and the financial year</h4>
+    <ul>
+      <li>Numbers look like <b>VWX/2026-27/0007</b>: firm prefix, financial year, sequence.</li>
+      <li>Each firm has its own series, restarting on 1 April. The year comes from the invoice date.</li>
+      <li>A number is used only when you issue. Drafts never take one, so deleting a draft leaves no gap.</li>
+      <li>A voided invoice keeps its number. A GST series may contain cancellations but not gaps.</li>
+      <li>You cannot issue an invoice dated in the future, or dated before the last issued invoice in the same series.</li>
+    </ul>
+
+    <h4>The invoice page</h4>
+    <figure class="shot"><img src="shots/folio-invoice.jpg" alt="Draft sale invoice for Meera Jewellers with Edit, Delete draft, Issue and Duplicate buttons, a draft callout, billed to, dates, two lines and a summary" loading="lazy" width="1440" height="900"><figcaption>A draft shows which number it will take when issued, here VSL/2026-27/0006.</figcaption></figure>
+    <p>The page shows badges (TAX or SALE, status, billing type, supply type), <b>Billed to</b>, <b>Dates</b> (invoice date, due date, terms, service period, your PO, place of supply), the <b>Lines</b>, notes and terms, and a <b>Summary</b> with subtotal, discount, taxable value, tax, round off, total in words, received, TDS received, credit notes, written off and <b>Balance due</b>. Issued invoices also show <b>Payments against this invoice</b>, <b>Credit notes</b> and <b>Chase history</b> (reminders sent and follow-ups logged).</p>
+
+    <h4>Edit and issue a draft</h4>
+    <ol class="steps">
+      <li>Open the draft. Click <span class="ui">Edit</span> to change anything, then save.</li>
+      <li>Click <span class="ui">Issue</span>. The dialog shows the number it will take and an <span class="ui">Invoice date</span> field (not in the future, and not before the last invoice in this series).</li>
+      <li>Click <span class="ui">Issue invoice</span>. The number is assigned, the client's and your firm's details are frozen onto the invoice, and the figures lock.</li>
+    </ol>
+    <div class="warn"><p>After issue you cannot edit the invoice. To reduce it, raise a credit note. To cancel it entirely, void it (only possible before any money or credit is applied).</p></div>
+    <p>Other draft actions: <span class="ui">Delete draft</span> ("Nothing has been issued, so this leaves no trace and spends no number.") and <span class="ui">Duplicate</span>, which makes a new draft with the same lines dated today.</p>
+
+    <h4>Send the invoice</h4>
+    <ol class="steps">
+      <li>On an issued invoice, click <span class="ui">PDF</span> to open or download it. Drafts have no PDF; they are not legal documents.</li>
+      <li>Click <span class="ui">Email</span> to send it. Pick recipients under <span class="ui">To</span> (from the client's billing recipients), add a <span class="ui">Cc</span> if needed, check the <span class="ui">Subject</span> and <span class="ui">Message</span> (prefilled with amount, due date and your bank details), and click <span class="ui">Send</span>. The PDF is attached.</li>
+      <li>Sending creates a private online link, shown under <b>Online link and activity</b>, with <span class="ui">Copy</span> and <span class="ui">Turn off link</span>. Your client can view the invoice, download the PDF and pay, without signing in. The card shows when they open it.</li>
+    </ol>
+    <div class="note"><p>If an online payment gateway is connected, an <b>Online payment</b> card offers a payment link for the balance. Payments made through it record the receipt by themselves. If no email provider is set up, sending is logged but nothing is delivered, and Folio says so.</p></div>
+
+    <h4>Actions on an issued invoice</h4>
+    <ul>
+      <li><span class="ui">Record payment</span>: opens Record payment with this invoice already filled in.</li>
+      <li><span class="ui">Send reminder</span> and <span class="ui">Add follow-up</span>: see Collections.</li>
+      <li><span class="ui">Raise credit note</span>: see Credit notes.</li>
+      <li><span class="ui">Void</span>: only when nothing is paid, no TDS is received and no credit note exists. A reason is required. The number stays used, because a GST series may contain cancellations but not gaps. A void releases any linked milestone or quote.</li>
+      <li><span class="ui">Write off</span>: for a debt you will not collect. Reason required. The invoice stands, the balance stops counting as receivable, and the ledger shows a write-off, not a payment. <span class="ui">Undo write-off</span> makes it receivable again.</li>
+      <li><span class="ui">Duplicate</span>: a new draft with the same content.</li>
+    </ul>
+  </article>
+
+  <article class="topic" id="folio-receipts">
+    <h3>Receipts: recording and applying payments</h3>
+    <p class="where"><span>Open: <b>Rail → Folio → Receipts</b></span><span><code>/app/folio/receipts</code></span><span>Who: owner, admin, finance</span></p>
+    <p>Every rupee that arrived, and which invoices it settled. A payment is recorded against a client first and then applied to invoices. Whatever is not applied stays as advance credit.</p>
+    <figure class="shot"><img src="shots/folio-receipts.jpg" alt="Receipts list with filters for unapplied, bounced and cancelled, a mode filter, and rows showing receipt number, client, firm, date, mode, amount and unapplied" loading="lazy" width="1440" height="900"><figcaption>The Unapplied column shows money no invoice knows about yet.</figcaption></figure>
+    <h4>On this page</h4>
+    <ul>
+      <li><span class="ui">Record payment</span>, the firm switch and the period switch.</li>
+      <li>Filter tabs: <span class="ui">All</span>, <span class="ui">Unapplied only</span>, <span class="ui">Bounced</span>, <span class="ui">Cancelled</span>.</li>
+      <li>Search by number, reference or client, and a mode filter (<span class="ui">Bank transfer</span>, <span class="ui">UPI</span>, <span class="ui">Cheque</span>, <span class="ui">Cash</span>, <span class="ui">Card</span>, <span class="ui">Payment gateway</span>, <span class="ui">Adjustment</span>, <span class="ui">Other</span>).</li>
+      <li>Columns: <span class="ui">Receipt</span>, <span class="ui">Client</span>, <span class="ui">Firm</span>, <span class="ui">Received</span>, <span class="ui">Mode · reference</span>, <span class="ui">Amount</span>, <span class="ui">Unapplied</span>.</li>
+    </ul>
+
+    <h4>Record a payment</h4>
+    <figure class="shot"><img src="shots/folio-receipt-new.jpg" alt="Record payment form with client, received into, amount, date, mode, reference and notes, and an Allocation panel showing received, applied and unapplied" loading="lazy" width="1440" height="900"><figcaption>Choose the client first; their open invoices appear under What it settles.</figcaption></figure>
+    <ol class="steps">
+      <li>Click <span class="ui">Record payment</span>.</li>
+      <li>Pick the <span class="ui">Client</span> and <span class="ui">Received into</span> (the firm whose bank received it). Only that firm's invoices can be settled by this money.</li>
+      <li>Enter <span class="ui">Amount received (₹)</span> and <span class="ui">Received on</span> (today or earlier).</li>
+      <li>Pick <span class="ui">How it arrived</span> and type the <span class="ui">Reference</span>: the UTR, cheque number or gateway id, whatever the bank statement shows. For a cheque, add the cheque date.</li>
+      <li>Under <b>What it settles</b>, the client's open invoices appear, oldest due first. Type an amount against each invoice, or click <span class="ui">Apply oldest first</span> to fill them in order. If the client deducts TDS, a TDS box appears on each row, prefilled with the TDS still expected.</li>
+      <li>Watch the <b>Allocation</b> panel: <span class="ui">Received</span>, <span class="ui">Applied</span>, <span class="ui">Unapplied</span>. You cannot apply more than you received.</li>
+      <li>Click <span class="ui">Record payment</span>.</li>
+    </ol>
+    <div class="note"><p>Leave every row blank to hold the whole amount as an advance. TDS is not cash, so it does not count against the amount received, but cash plus TDS together settle the invoice. An invoice becomes Part paid or Paid automatically.</p></div>
+
+    <h4>Apply advance credit later, release, bounce or cancel</h4>
+    <div class="tip"><p>The screenshot of this page is being retaken. An advance of ₹1,50,000 waiting to be applied; the TDS hint shows what the client is expected to deduct.</p></div>
+    <ol class="steps">
+      <li>Open the receipt. <b>Applied to</b> lists the invoices it settled.</li>
+      <li>Under <b>Apply the remaining</b>, pick an open <span class="ui">Invoice</span> of the same client and firm, check the <span class="ui">Amount (₹)</span> and <span class="ui">TDS (₹)</span>, and click <span class="ui">Apply</span>.</li>
+      <li>To undo an application, click <span class="ui">Release</span> on that row. The invoice is owed again and the money returns to unapplied credit.</li>
+      <li>If a cheque bounces, click <span class="ui">Mark bounced</span> and enter the date and reason. Every invoice it settled is owed again and returns to Collections. The record stays, marked Bounced.</li>
+      <li>If the receipt was entered by mistake, click <span class="ui">Cancel receipt</span> with a reason, then record it again correctly.</li>
+    </ol>
+    <div class="warn"><p>Receipts are never edited or deleted. To correct one, cancel it and record it again.</p></div>
+    <p>The receipt also has an <b>Online link and activity</b> card with <span class="ui">Create link</span>, so you can send the client a link to their receipt.</p>
+  </article>
+
+  <article class="topic" id="folio-credit-notes">
+    <h3>Credit notes</h3>
+    <p class="where"><span>Open: <b>Rail → Folio → Credit notes</b></span><span><code>/app/folio/credit-notes</code></span><span>Who: owner, admin, finance</span></p>
+    <p>The only way to reduce an issued invoice, for a post-sale discount, a deficiency in service, a correction or a cancellation.</p>
+    <figure class="shot"><img src="shots/folio-credit-notes.jpg" alt="Credit notes list with status tabs and one issued credit note against a Zenith Motors invoice" loading="lazy" width="1440" height="900"><figcaption>Each credit note links to the invoice it reduces.</figcaption></figure>
+    <p>The list has status tabs (<span class="ui">All</span>, <span class="ui">Issued</span>, <span class="ui">Cancelled</span>), a search box, and columns <span class="ui">Number</span>, <span class="ui">Client</span>, <span class="ui">Against</span>, <span class="ui">Date</span>, <span class="ui">Reason</span>, <span class="ui">Status</span>, <span class="ui">Total</span>.</p>
+    <h4>Raise a credit note</h4>
+    <figure class="shot"><img src="shots/folio-credit-note-new.jpg" alt="New credit note page listing issued invoices with something outstanding to pick from" loading="lazy" width="1440" height="900"><figcaption>Only invoices with a balance outstanding are offered.</figcaption></figure>
+    <ol class="steps">
+      <li>Click <span class="ui">Pick an invoice</span> (or <span class="ui">Raise credit note</span> on the invoice itself).</li>
+      <li>Search by <span class="ui">Invoice number</span> and click the invoice.</li>
+      <li>Choose the mode: <b>Full</b> credits everything still creditable, or <b>By line</b> lets you type a credit amount against each line.</li>
+      <li>Set the note date, pick a reason and write the reason text (it prints on the note).</li>
+      <li>Check the live totals; tax is reversed the same way it was charged (CGST + SGST or IGST).</li>
+      <li>Click <span class="ui">Issue credit note</span> and confirm. It takes the next credit-note number (for example VWX-CN/2026-27/0001) and reduces what the client owes.</li>
+    </ol>
+    <div class="note"><p>A credit note cannot exceed what is still outstanding on the invoice. If the invoice is already paid and the client needs a refund, release the payment from the invoice first. Cancelling a credit note makes the invoice owed again; its number stays used.</p></div>
+  </article>
+
+  <article class="topic" id="folio-recurring">
+    <h3>Recurring: retainers and billing plans</h3>
+    <p class="where"><span>Open: <b>Rail → Folio → Recurring</b></span><span><code>/app/folio/recurring</code></span><span>Who: owner, admin, finance</span></p>
+    <p>Retainers that draft their own invoices every period, and billing plans that bill a fixed project in phases.</p>
+    <figure class="shot"><img src="shots/folio-recurring.jpg" alt="Recurring page with tiles for active retainers, monthly run rate and due for billing, a due callout and a retainers table with Bill now buttons" loading="lazy" width="1440" height="900"><figcaption>Dates in red with "· due" are periods that have not been billed yet.</figcaption></figure>
+    <h4>On the Retainers tab</h4>
+    <ul>
+      <li>Tiles: <span class="ui">Active retainers</span>, <span class="ui">Monthly run rate</span> (quarterly ÷ 3, half-yearly ÷ 6, annual ÷ 12) and <span class="ui">Due for billing</span>.</li>
+      <li>Columns: <span class="ui">Retainer</span> (with firm code), <span class="ui">Client</span>, <span class="ui">Every</span>, <span class="ui">Next invoice</span>, <span class="ui">Status</span> (Active, Paused, Ended), <span class="ui">Raised</span> (invoices so far), <span class="ui">Amount</span>, and row buttons <span class="ui">Bill now</span>, <span class="ui">Edit retainer</span> and <span class="ui">More</span>.</li>
+      <li>Header buttons: <span class="ui">Forecast</span>, <span class="ui">Generate {n} due drafts</span>, <span class="ui">New retainer</span>.</li>
+    </ul>
+    <h4>Set up a retainer</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">New retainer</span>.</li>
+      <li>Pick the client and firm, and enter a name, description (it becomes the invoice line), SAC, amount per period and GST %.</li>
+      <li>Choose the frequency (monthly, quarterly, half-yearly or annual), start date, optional end date and billing day (1 to 31; a 31 bills on the 30th in April).</li>
+      <li>Choose whether to bill in advance (the invoice covers the coming period) or in arrears (the period just ended). Set payment terms and leave auto-generate on to let the daily run create drafts.</li>
+      <li>Save. The first partial period is not prorated.</li>
+    </ol>
+    <h4>Bill retainers</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">Generate {n} due drafts</span>, or <span class="ui">Bill now</span> on one row.</li>
+      <li>Each due retainer gets one draft invoice per missed period, with the service period in the subject. Nothing is issued and nothing reaches the client.</li>
+      <li>Open <span class="ui">Invoices</span> → <span class="ui">Drafts</span>, review each draft and issue it.</li>
+    </ol>
+    <div class="note"><p>Missed periods catch up rather than being lost, and running generation twice never bills anyone twice. Deleting a generated draft or voiding its invoice makes that period due again. Changing a retainer's amount affects future drafts only. Use <span class="ui">More</span> to pause, resume or end a retainer, or to see its invoices.</p></div>
+    <h4>Billing plans (milestones)</h4>
+    <p>Open the <span class="ui">Billing plans</span> tab for projects agreed at a fixed value and billed in stages. The table shows each plan with its phase count, client, status, a billed meter, the amount invoiced and the total value.</p>
+    <figure class="shot"><img src="shots/folio-recurring-plan.jpg" alt="Billing plan page for Shopify Replatform (PLN-0001, Nirvana Wellness LLP): Put on hold, Mark completed and Cancel plan buttons, a Billed so far meter at 65%, value and left-to-bill figures, and a Phases table with due date, status, invoice and amount" loading="lazy" width="1440" height="900"><figcaption>A billing plan. Each phase becomes a draft invoice when you raise it; the meter shows how much of the plan value is invoiced.</figcaption></figure>
+    <ol class="steps">
+      <li>Create a plan: pick client and firm, name it (a code such as PLN-0001 is given automatically), and enter the total value before tax, GST %, SAC, start and target end. You can link a Work project.</li>
+      <li>Add phases. Each phase has a name, a due date and either a share of the total (%) or a flat amount, never both. The editor shows how much of the value you have allocated.</li>
+      <li>On the plan's page, tiles show value, invoiced, left to bill and client. When a phase is ready, click <span class="ui">Raise invoice</span> and confirm. Folio creates a draft for that phase's amount; review and issue it.</li>
+      <li>Phase status follows its invoice: pending, invoiced when issued, paid when the invoice is paid. Use <span class="ui">Cancel phase</span> for work that will not be billed, and <span class="ui">Put on hold</span>, <span class="ui">Make active</span>, <span class="ui">Mark completed</span> or <span class="ui">Cancel plan</span> for the plan as a whole.</li>
+    </ol>
+    <div class="note"><p>"Invoiced" on a plan counts value before tax, because the plan value is agreed before tax. An invoiced or paid phase cannot change its amount. Deleting a phase's draft or voiding its invoice frees the phase to be invoiced again.</p></div>
+  </article>
+
+  <article class="topic" id="folio-collections">
+    <h3>Collections: chasing what is owed</h3>
+    <p class="where"><span>Open: <b>Rail → Folio → Collections</b></span><span><code>/app/folio/collections</code></span><span>Who: owner, admin, finance</span></p>
+    <p>Who to chase today, oldest debt first. It combines your team's follow-ups with automatic payment reminders.</p>
+    <figure class="shot"><img src="shots/folio-collections.jpg" alt="Collections page with an aging bar, tiles for due today, overdue, over 60 days and over 90 days, and Your queue today with Close, Snooze and Drop buttons" loading="lazy" width="1440" height="900"><figcaption>Your queue lists follow-ups due or late, with how many days late each one is.</figcaption></figure>
+    <h4>On this page</h4>
+    <ul>
+      <li><span class="ui">Record a payment</span>, <span class="ui">New follow-up</span> and the firm switch.</li>
+      <li><b>Aging</b> bar and tiles: <span class="ui">Due today</span> (follow-ups), <span class="ui">Overdue</span>, <span class="ui">Over 60 days</span>, <span class="ui">Over 90 days</span> ("Consider writing off").</li>
+      <li><b>Your queue today</b>: follow-ups due or late, <span class="ui">Mine</span> or <span class="ui">Everyone</span>. Each row shows client, invoice, channel, days late, balance, and <span class="ui">Close</span>, <span class="ui">Snooze</span>, <span class="ui">Drop</span>.</li>
+      <li><b>Everything overdue</b>: oldest first, then the larger balance. Columns <span class="ui">Invoice</span>, <span class="ui">Client</span>, <span class="ui">Due</span>, <span class="ui">Age</span>, <span class="ui">Balance</span>, <span class="ui">Last reminder</span>, with <span class="ui">Email</span> reminder buttons.</li>
+      <li><b>Messages to send by hand</b>: reminders the automatic run composed for a person to send from their own phone, each with an open button and <span class="ui">Mark sent</span>. This list appears only if you ticked that channel in Folio settings.</li>
+    </ul>
+    <h4>The automatic reminder schedule</h4>
+    <p>Every day Folio checks open invoices against the cadence in Folio → Settings → Reminders. The default is <b>−3, 0, 7, 15 and 30</b> days from the due date: a heads-up 3 days before, a note on the due date, then reminders at 7, 15 and 30 days late. The tone rises with age: Advance notice, Due today, Gentle reminder (up to 15 days late), Firm reminder (up to 45), Final notice.</p>
+    <ul>
+      <li>Only invoices with a balance above zero are chased, so paid invoices stop automatically.</li>
+      <li>Each reminder goes once per invoice, channel and step. If several steps were missed, only the latest is sent, so a client never gets a pile of emails at once.</li>
+      <li>Email goes to the client's billing recipients marked to receive reminders.</li>
+      <li>Clients with reminders paused, and inactive clients, are skipped.</li>
+    </ul>
+    <h4>Send a reminder by hand</h4>
+    <ol class="steps">
+      <li>In <b>Everything overdue</b>, click <span class="ui">Email</span> on the invoice (or <span class="ui">Send reminder</span> on the invoice page).</li>
+      <li>Pick the contact. Folio drafts the message from the invoice in the right tone; edit the <span class="ui">Subject</span> and <span class="ui">Message</span> if you like.</li>
+      <li>Check the message and send it. Every reminder is recorded, so the chase history stays complete. Sending reminders from your own WhatsApp Business number is coming soon.</li>
+    </ol>
+    <h4>Work follow-ups</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">New follow-up</span>. Pick the client, optionally one of their invoices, the due date, channel (call, email, meeting or note), subject, notes and who it is assigned to.</li>
+      <li>When you have spoken to the client, click <span class="ui">Close</span>. Write what happened (required, even if it was nothing), the date they committed to pay, and optionally <b>Chase again on</b>, which opens the next follow-up automatically.</li>
+      <li>Click <span class="ui">Snooze</span> to bring it back on a later date.</li>
+      <li>Click <span class="ui">Drop</span> only for a follow-up raised by mistake. If you actually spoke to them, use Close so the outcome stays on record.</li>
+    </ol>
+  </article>
+
+  <article class="topic" id="folio-expenses">
+    <h3>Expenses</h3>
+    <p class="where"><span>Open: <b>Rail → Folio → Expenses</b></span><span><code>/app/folio/expenses</code></span><span>Who: owner, admin, finance</span></p>
+    <p>Money paid out by your firms: rent, software, travel, vendors and freelancers. Expenses feed the profit and loss view.</p>
+    <figure class="shot"><img src="shots/folio-expenses.jpg" alt="Expenses list with tiles for paid this year, input tax to claim and cost in the P&amp;L, and rows with date, vendor, category, firm, payment mode, GST and amount" loading="lazy" width="1440" height="900"><figcaption>Rows marked "Repeats monthly" can be copied forward each month.</figcaption></figure>
+    <h4>On this page</h4>
+    <ul>
+      <li><span class="ui">Export CSV</span>, <span class="ui">Copy {n} recurring from {last month}</span> and <span class="ui">Book expense</span>, plus firm and period switches.</li>
+      <li>Tiles: total paid in the period, <b>Input tax to claim</b> (GST on bills marked claimable) and <b>Cost in the P&amp;L</b> (amount paid less claimable GST).</li>
+      <li>Search by vendor, description or reference, and a category filter (Rent, Salaries &amp; wages, Software &amp; subscriptions, Travel, Marketing, Creator/freelancer payments, Office &amp; utilities, Professional fees, Bank charges, Taxes &amp; fees, Other).</li>
+      <li>Columns: <span class="ui">Paid on</span>, <span class="ui">Paid to</span>, <span class="ui">Category</span>, <span class="ui">Firm</span>, <span class="ui">Paid by</span>, <span class="ui">GST</span>, <span class="ui">Amount</span>.</li>
+    </ul>
+    <h4>Book an expense</h4>
+    <figure class="shot"><img src="shots/folio-expense-new.jpg" alt="Book expense form with paid to, category, amount, date, GST on the bill, attach the bill, paying firm and account, and a repeats every month switch" loading="lazy" width="1440" height="900"><figcaption>Enter the amount that left the account, GST included, then say how much of it was GST.</figcaption></figure>
+    <ol class="steps">
+      <li>Click <span class="ui">Book expense</span>.</li>
+      <li>Fill <span class="ui">Paid to</span>, <span class="ui">Category</span>, <span class="ui">Amount paid (₹)</span> (GST included), <span class="ui">Paid on</span> and <span class="ui">What for</span>.</li>
+      <li>Under <b>GST on the bill</b>, enter <span class="ui">GST in the amount (₹)</span> and the <span class="ui">Vendor GSTIN</span>. Leave GST blank if the bill has none. Keep <span class="ui">Claim this GST as input tax</span> ticked only when the bill is in this firm's name and GSTIN and the expense qualifies.</li>
+      <li>Attach the bill (PDF or photo, up to 4 MB) and add notes.</li>
+      <li>Pick the paying <span class="ui">Firm</span>, <span class="ui">How it was paid</span>, <span class="ui">Paid from</span>, the <span class="ui">Account</span> and a <span class="ui">Reference</span> (UTR, cheque or card slip number).</li>
+      <li>Turn on <span class="ui">Every month</span> for rent, subscriptions and retainers you pay, so you can copy it forward next month in one click.</li>
+      <li>Click <span class="ui">Book expense</span>.</li>
+    </ol>
+    <div class="tip"><p>Match the input tax figure with your GSTR-2B before claiming it. Folio shows what you marked claimable; it does not file anything.</p></div>
+  </article>
+
+  <article class="topic" id="folio-ledger">
+    <h3>Ledgers and statements</h3>
+    <p class="where"><span>Open: <b>Rail → Folio → Ledgers</b></span><span><code>/app/folio/ledger</code></span><span>Who: owner, admin, finance</span></p>
+    <p>Every client's balance in one table, and a full statement of account for each client.</p>
+    <figure class="shot"><img src="shots/folio-ledger.jpg" alt="Ledgers page listing client balances with terms, last billed, overdue, outstanding, unapplied credit and net receivable" loading="lazy" width="1440" height="900"><figcaption>Net receivable is outstanding less any advance credit the client already paid.</figcaption></figure>
+    <ul>
+      <li>Filters <span class="ui">All clients</span> and <span class="ui">Overdue only</span>, and <span class="ui">Search clients</span>.</li>
+      <li>Columns: <span class="ui">Client</span>, <span class="ui">Terms</span>, <span class="ui">Last billed</span>, <span class="ui">Overdue</span>, <span class="ui">Outstanding</span>, <span class="ui">Unapplied credit</span>, <span class="ui">Net receivable</span>.</li>
+    </ul>
+    <h4>Read and send a client statement</h4>
+    <ol class="steps">
+      <li>Click a client. Their statement opens with their billing terms, TDS and credit limit at the top.</li>
+      <li>Set from and to dates if you want a period. The statement then starts with a brought-forward balance from before that date.</li>
+      <li>Read the rows: date, type, document, particulars, debit (invoices and opening balance) and credit (payments, TDS deducted, credit notes, write-offs), with a running balance. The closing line says, for example, "Aarav Retail owes ₹1,45,000.", "We hold ₹X of the client's money as credit." or "The account is square."</li>
+      <li>Switch to the <b>Monthly</b> view for opening, billed, received and closing by month.</li>
+      <li>Download the CSV or the statement PDF, or email the statement to the client's recipients. You can also record a payment or start a new invoice from here.</li>
+    </ol>
+    <div class="note"><p>Aging uses the due date: Not yet due, 1–30, 31–60, 61–90 and Over 90 days. Bounced and cancelled receipts do not appear in the ledger.</p></div>
+  </article>
+
+  <article class="topic" id="folio-pnl">
+    <h3>Profit and loss</h3>
+    <p class="where"><span>Open: <b>Rail → Folio → Profit &amp; loss</b></span><span><code>/app/folio/pnl</code></span><span>Who: owner, admin, finance</span></p>
+    <p>A management view of income against costs, month by month. It is not your statutory accounts; your CA's books remain the record for filing.</p>
+    <figure class="shot"><img src="shots/folio-pnl.jpg" alt="Profit and loss page with tiles for net income, costs, net profit and salaries, and a bar chart of net income against costs by month" loading="lazy" width="1440" height="900"><figcaption>The callout at the top explains exactly what is counted.</figcaption></figure>
+    <ul>
+      <li><b>Income</b> is the taxable value of invoices issued in each month, less credit notes. GST is never counted as income.</li>
+      <li><b>Costs</b> are expenses booked in Folio (claimable GST left out) plus salaries from released Muster payroll.</li>
+      <li>No accruals, depreciation, provisions or income tax.</li>
+      <li>Tiles: <span class="ui">Net income</span>, <span class="ui">Costs</span>, <span class="ui">Net profit</span> (with margin) and <span class="ui">Salaries</span>.</li>
+      <li><b>Income against costs</b> chart and a <b>Month by month</b> table: invoiced, less credit notes, net income, each cost category, salaries, total costs and net profit.</li>
+      <li>Firm and period switches, <span class="ui">Expenses</span> link and <span class="ui">Export CSV</span>.</li>
+    </ul>
+  </article>
+
+  <article class="topic" id="folio-forecast">
+    <h3>Billing forecast</h3>
+    <p class="where"><span>Open: <b>Rail → Folio → Forecast</b></span><span><code>/app/folio/forecast</code></span><span>Who: owner, admin, finance</span></p>
+    <p>What your active retainers and pending milestones should bill over the coming months, before GST.</p>
+    <figure class="shot"><img src="shots/folio-forecast.jpg" alt="Billing forecast with totals from retainers and milestones, a by-month chart, a next to bill list and tables by firm and by client" loading="lazy" width="1440" height="900"><figcaption>Every billing date not yet issued counts, including periods already due.</figcaption></figure>
+    <ul>
+      <li>Firm switch and horizon: <span class="ui">Next 3 months</span> or <span class="ui">Next 6 months</span>. <span class="ui">Export CSV</span>.</li>
+      <li>Totals: expected billing, the part from retainers, the part from milestones (pending phases with a due date in range), and GST on top, giving an approximate amount to invoice tax included.</li>
+      <li><b>By month</b> chart, <b>Next to bill</b> list (each retainer date or milestone with client, firm and amount), and tables <b>By firm</b> and <b>By client</b>.</li>
+    </ul>
+    <div class="tip"><p>A milestone appears here only if its phase has a due date. Add due dates to your plan phases to make the forecast complete.</p></div>
+  </article>
+
+  <article class="topic" id="folio-bank">
+    <h3>Bank reconciliation: import a statement</h3>
+    <p class="where"><span>Open: <b>Folio → Bank</b></span><span><code>/app/folio/bank</code></span><span>Who: finance</span></p>
+    <p>Import your bank statement and Flowbit suggests which invoice each deposit pays, so receipts are recorded in a few clicks instead of one by one.</p>
+    <ol class="steps">
+      <li>Under <span class="ui">Import a bank statement</span>, pick the firm and its bank account, then the file: CSV or XLSX from HDFC, ICICI, SBI, Axis or Kotak, or "Other bank" and map the columns yourself. Old <code>.xls</code> files need saving as <code>.xlsx</code> or <code>.csv</code> first.</li>
+      <li>Check the <span class="ui">Preview</span> and import. Rows already imported before are skipped.</li>
+      <li>In <span class="ui">Money in to match</span>, each deposit shows the invoice it most likely pays, with a confidence. Flowbit looks at the balance (also less 2% or 10% TDS), the invoice number, a UTR the client shared, the client's name and the due date.</li>
+      <li>Confirm the match. Flowbit records the receipt, allocates it (with any TDS) and marks the invoice paid. Use <span class="ui">Pick an invoice</span> to choose another, or <span class="ui">Split across invoices</span> when one deposit pays several invoices of the same client.</li>
+      <li>In <span class="ui">Money out</span>, book each withdrawal as an expense (Flowbit suggests the category, payee and mode) or ignore it.</li>
+    </ol>
+    <div class="note"><p>Imported the wrong file? <span class="ui">Undo</span> on a statement within 7 days removes its rows and cancels the receipts and expenses it created.</p></div>
+  </article>
+
+  <article class="topic" id="folio-einvoice">
+    <h3>E-invoice (IRN) and e-way bill</h3>
+    <p class="where"><span>Set up: <b>Folio → Settings → E-invoice</b></span><span>Use: <b>an issued invoice → E-invoice</b></span><span>Who: finance</span></p>
+    <p>If your aggregate turnover is above ₹5 crore, Flowbit can get an IRN for your B2B tax invoices from the Invoice Registration Portal through your GST Suvidha Provider (GSP), and print the signed QR code on the invoice PDF.</p>
+    <ol class="steps">
+      <li>In <span class="ui">Folio → Settings → E-invoice</span>, choose the GST firm, tick <span class="ui">Generate IRNs for B2B tax invoices</span> and <span class="ui">Aggregate turnover is above ₹5 crore</span>.</li>
+      <li>Pick the <span class="ui">Environment</span> (sandbox first, then production) and enter your GSP's <span class="ui">GSP API address</span>, <span class="ui">Client ID</span>, <span class="ui">Client secret</span>, <span class="ui">API username</span> and <span class="ui">API password</span>. They are stored encrypted.</li>
+      <li>Issue an invoice to a client with a GSTIN, then click <span class="ui">Generate IRN</span> on it. The IRN, acknowledgement number and date, and the QR code are saved and printed on the PDF.</li>
+      <li>For goods on the move, fill the transport details and click <span class="ui">Generate e-way bill</span>.</li>
+    </ol>
+    <ul>
+      <li><span class="ui">Cancel IRN</span> works within 24 hours and not while an e-way bill exists. Cancelling an IRN does not void the invoice in Flowbit; void it separately if needed.</li>
+      <li>Not covered yet: export invoices, reverse charge and IRNs for credit notes.</li>
+    </ul>
+  </article>
+
+  <article class="topic" id="folio-reports">
+    <h3>Reports</h3>
+    <p class="where"><span>Open: <b>Rail → Folio → Reports</b></span><span><code>/app/folio/reports</code></span><span>Who: owner, admin, finance</span></p>
+    <p>GST return preparation, registers and money reports, each exportable as CSV.</p>
+    <figure class="shot"><img src="shots/folio-reports.jpg" alt="Reports page on the GST summary with report tabs, GST section tabs, period switch and a table of taxable value and tax by supply type and rate" loading="lazy" width="1440" height="900"><figcaption>Credit notes appear as their own negative row so net tax is visible.</figcaption></figure>
+    <ol class="steps">
+      <li>Pick a report tab, then a period (<span class="ui">This month</span>, <span class="ui">Last month</span>, <span class="ui">This FY</span>, <span class="ui">Last FY</span>, <span class="ui">Custom</span>). The default is the start of the financial year to today.</li>
+      <li>For GST, pick the section and the GST firm (each GSTIN files separately).</li>
+      <li>Click <span class="ui">Export CSV</span> to download what is on screen.</li>
+    </ol>
+    <div class="tbl"><table>
+      <thead><tr><th>Report</th><th>What it shows</th></tr></thead>
+      <tbody>
+        <tr><td>GST</td><td>Issued tax invoices of one GST firm, for GSTR-1 preparation. Sections: <span class="ui">Summary</span> (by supply type and rate), <span class="ui">B2B</span> (clients with GSTIN), <span class="ui">B2C large</span>, <span class="ui">B2C small</span>, <span class="ui">Exports</span>, <span class="ui">Credit notes</span>, <span class="ui">HSN</span> (by SAC and rate) and <span class="ui">Documents</span> (first and last number, count and voided per series). Sale invoices, drafts, voids and opening balances are left out.</td></tr>
+        <tr><td>Sales register</td><td>Every non-draft invoice in number order, every firm, voids included with their status, then credit notes as negative rows.</td></tr>
+        <tr><td>Collections</td><td>Recorded receipts: amount, applied, TDS and unapplied, with the total received.</td></tr>
+        <tr><td>Aging</td><td>One row per client across the five age buckets. Always as of today, not the period end.</td></tr>
+        <tr><td>Revenue</td><td>Taxable value of issued invoices less credit notes, by client (with share, warning at 30% or more from one client) or by month.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="warn"><p>Reports help you prepare returns; they do not file them. Check the B2C large threshold and the figures with your CA before filing.</p></div>
+  </article>
+
+  <article class="topic" id="folio-settings">
+    <h3>Folio settings</h3>
+    <p class="where"><span>Open: <b>Rail → Folio → Settings</b></span><span><code>/app/folio/settings</code></span><span>Who: owner, admin, finance</span></p>
+    <p>The businesses you bill from, their number series and banks, tax rates, terms, services and reminders.</p>
+    <figure class="shot"><img src="shots/folio-settings.jpg" alt="Folio settings on the Firms tab showing a GST firm marked Default and a non-GST firm, with a side menu of settings tabs" loading="lazy" width="1440" height="900"><figcaption>Each firm card shows its state, GSTIN, PAN and which kind of invoice it issues.</figcaption></figure>
+    <h4>Tabs</h4>
+    <ul>
+      <li><b>Billing from</b>
+        <ul>
+          <li><span class="ui">Firms</span>: each firm that bills. <span class="ui">Add firm</span> or <span class="ui">Edit</span> to set code, legal name, trade name, kind (GST or Non-GST), GSTIN, PAN, CIN/LLPIN, address with state, email, phone, website and logo, and mark the default and active firm.</li>
+          <li><span class="ui">Banks</span>: each firm's accounts (label, account name, number, IFSC, bank, branch, UPI ID, default). This is the only page that shows full account numbers; elsewhere they are masked.</li>
+          <li><span class="ui">Series</span>: prefixes for invoices, credit notes, receipts, quotes and proformas, and number padding. It shows the next invoice number.</li>
+          <li><span class="ui">Signatory</span>: name, title and signature image printed in the signature block of every document.</li>
+        </ul>
+      </li>
+      <li><b>Documents</b>
+        <ul>
+          <li><span class="ui">Tax</span>: <span class="ui">Allowed GST rates</span>, <span class="ui">Round totals to the rupee</span>, <span class="ui">Show expected TDS on invoices</span> and <span class="ui">Quote validity (days)</span>.</li>
+          <li><span class="ui">Terms</span>: per firm, default payment terms in days, terms text and notes text.</li>
+          <li><span class="ui">Services</span>: your service catalogue (code, name, SAC, unit, rate, GST). Archived services leave the picker; past invoice lines keep them.</li>
+        </ul>
+      </li>
+      <li><b>Money</b>
+        <ul>
+          <li><span class="ui">Reminders</span>: <span class="ui">Send reminders automatically</span>, <span class="ui">Cadence (days)</span> (up to 8 values from −30 to 365, negative meaning before the due date), <span class="ui">Channels</span> (at least one; Email sends automatically) and <span class="ui">Automatic retainer drafts</span>, the master switch for the daily retainer run.</li>
+          <li><span class="ui">Expenses</span>: add, rename or archive expense categories.</li>
+        </ul>
+      </li>
+    </ul>
+    <h4>Add a firm</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">Add firm</span>.</li>
+      <li>Enter a short code (2 to 10 letters or digits, for example VWX; it becomes the default number prefix), the legal name and the trade name.</li>
+      <li>Choose GST or Non-GST. For GST, enter the GSTIN; its first two digits must match the firm's state.</li>
+      <li>Fill the address, contact details and logo, and save.</li>
+      <li>Add at least one bank account on <span class="ui">Banks</span> and check the prefixes on <span class="ui">Series</span>.</li>
+    </ol>
+    <div class="warn"><p>A firm's kind (GST or Non-GST) cannot change once it has issued an invoice. Changing a prefix mid-year changes only future numbers; the sequence continues. Every bank detail change is recorded in the audit log.</p></div>
+  </article>
+</section>

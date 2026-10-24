@@ -1,0 +1,28 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "regions": ["bom1"],
+  "crons": [
+    { "path": "/api/cron/messages", "schedule": "*/5 * * * *" },
+    { "path": "/api/cron/automations", "schedule": "*/5 * * * *" },
+    { "path": "/api/cron/posts", "schedule": "*/15 * * * *" },
+    { "path": "/api/cron/sequences", "schedule": "*/15 * * * *" },
+    { "path": "/api/cron/briefs", "schedule": "*/15 * * * *" },
+    { "path": "/api/cron/lead-sources", "schedule": "*/15 * * * *" },
+    { "path": "/api/cron/meetings", "schedule": "*/15 * * * *" },
+    { "path": "/api/cron/health", "schedule": "0 20 * * *" },
+    { "path": "/api/cron/task-reminders", "schedule": "30 2 * * *" },
+    { "path": "/api/cron/follow-up-reminders", "schedule": "45 2 * * *" },
+    { "path": "/api/cron/folio", "schedule": "30 3 * * *" },
+    { "path": "/api/cron/trial-reminders", "schedule": "0 4 * * *" },
+    { "path": "/api/cron/lifecycle", "schedule": "30 4 * * *" },
+    { "path": "/api/cron/billing", "schedule": "45 3 * * *" },
+    { "path": "/api/cron/health?resume=1", "schedule": "0 23 * * *" },
+    { "path": "/api/cron/task-reminders?resume=1", "schedule": "30 5 * * *" },
+    { "path": "/api/cron/follow-up-reminders?resume=1", "schedule": "45 5 * * *" },
+    { "path": "/api/cron/folio?resume=1", "schedule": "30 6 * * *" },
+    { "path": "/api/cron/trial-reminders?resume=1", "schedule": "0 7 * * *" },
+    { "path": "/api/cron/lifecycle?resume=1", "schedule": "30 7 * * *" },
+    { "path": "/api/cron/billing?resume=1", "schedule": "45 6 * * *" }
+  ]
+}

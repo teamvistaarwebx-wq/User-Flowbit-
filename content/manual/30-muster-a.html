@@ -1,0 +1,459 @@
+<section class="chapter c-muster" id="muster">
+  <header>
+    <div class="eyebrow">Muster · HR</div>
+    <h2>Run HR for your whole team</h2>
+    <p>Muster holds every employee record, the daily attendance register, leave, corrections and comp-off, payroll, expense claims, letters and HR reports in one place. HR admins run it day to day, managers approve requests from their own team, and employees use <b>My HR</b> to check in, apply for leave and download payslips.</p>
+    <p>This first half of the chapter covers people, attendance and leave. Payroll, claims, letters, reports and HR settings follow in the next part.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Who</th><th>What they do in Muster</th></tr></thead>
+      <tbody>
+        <tr><td>HR admin</td><td>Adds and edits employees, marks and locks attendance, decides leave and corrections at the HR stage, adjusts balances, runs payroll and changes HR settings.</td></tr>
+        <tr><td>HR executive</td><td>Adds and edits employees, marks attendance and decides leave. Does not see salaries or bank, PAN and Aadhaar details.</td></tr>
+        <tr><td>Manager</td><td>Sees their own reporting team and signs the manager stage of their team's leave, corrections and comp-off.</td></tr>
+        <tr><td>Employee</td><td>Uses self-service only: check in and out, ask for corrections, apply for leave, see payslips and letters.</td></tr>
+      </tbody>
+    </table></div>
+  </header>
+
+  <article class="topic" id="muster-home">
+    <h3>Muster home</h3>
+    <p class="where"><span>Open: <b>Rail → Muster</b></span><span><code>/app/hr</code></span><span>Who: HR admin, HR executive, managers</span></p>
+    <p>The dashboard is HR's morning view. It tells you who is on the board, who has come in today, who is on leave and what is waiting for your decision.</p>
+    <figure class="shot"><img src="shots/hr-home.jpg" alt="Muster home with Headcount, In today, On leave today and Approvals cards, a Today attendance bar, a Waiting on you list and an Attendance trend panel" loading="lazy" width="1440" height="900"><figcaption>The four cards at the top link straight to the page behind each number. "Waiting on you" lists only what you can decide.</figcaption></figure>
+    <h4>On this page</h4>
+    <ul>
+      <li><b>Greeting line</b>: today's date and how many people are on the board (everyone in the directory).</li>
+      <li><span class="ui">Import</span> and <span class="ui">Add employee</span> buttons for adding people.</li>
+      <li><span class="ui">Headcount</span>: people in the directory, with how many are on probation and serving notice. Opens People.</li>
+      <li><span class="ui">In today</span>: people marked in today and how many came in late. Opens the attendance register.</li>
+      <li><span class="ui">On leave today</span>: people on approved leave or marked absent today. Opens the leave calendar.</li>
+      <li><span class="ui">Approvals</span>: everything waiting on you, with the number of leave requests called out. Opens Leave.</li>
+      <li><b>Today</b>: a bar showing how many of the team are In, Remote, Late, on Half day, On leave, Absent or Not in yet, with avatars under each group. Click an avatar to open that person's Attendance tab, or <span class="ui">Open register</span> for the full day sheet.</li>
+      <li><b>Waiting on you</b>: one line per queue with a count: <span class="ui">Leave requests</span>, <span class="ui">Attendance corrections</span>, <span class="ui">Comp-off claims</span> and <span class="ui">People missing payroll details</span>. Each line opens the right page, already filtered.</li>
+      <li><b>Attendance</b>: present percentage over a range, with counts of Late, Absent, On leave and WFH days, and an area chart per day. Pick <span class="ui">Today</span>, <span class="ui">1M</span>, <span class="ui">6M</span>, <span class="ui">1Y</span> or <span class="ui">Custom</span>; for a custom range set <span class="ui">From</span> and <span class="ui">To</span> and click <span class="ui">Show range</span>.</li>
+      <li><b>Teams</b>: a donut chart of headcount by department.</li>
+      <li><b>Birthdays &amp; anniversaries</b>: the next 30 days, including work anniversaries in years.</li>
+      <li><b>Joiners &amp; exits</b>: people joining or leaving within 30 days either side of today, marked Joining, Leaving or Left.</li>
+    </ul>
+    <h4>Clear your queue each morning</h4>
+    <ol class="steps">
+      <li>Open <span class="ui">Muster home</span> from the HR side menu.</li>
+      <li>Under <b>Waiting on you</b>, click <span class="ui">Leave requests</span> and approve or reject each one.</li>
+      <li>Come back and do the same for <span class="ui">Attendance corrections</span> and <span class="ui">Comp-off claims</span>.</li>
+      <li>Click <span class="ui">People missing payroll details</span> to see who has no salary structure, bank account or PAN. Fix these before the month's payroll.</li>
+      <li>Click <span class="ui">Open register</span> and mark anyone who has not checked in.</li>
+    </ol>
+    <div class="note"><p>A manager's dashboard counts only their own team's requests. A request shows under "Waiting on you" only when it is at a stage you are allowed to sign.</p></div>
+  </article>
+
+  <article class="topic" id="muster-people">
+    <h3>People directory</h3>
+    <p class="where"><span>Open: <b>HR → People</b></span><span><code>/app/hr/people</code></span><span>Who: HR, finance, managers (own team)</span></p>
+    <p>The directory lists everyone on your books. From here you open a profile, add someone, import a spreadsheet or export the list.</p>
+    <figure class="shot"><img src="shots/hr-people.jpg" alt="People directory with status tabs Current, Probation, Serving notice, Past and Everyone, team filter chips, a search box and a table of employees with status badges and a Payroll ready column" loading="lazy" width="1440" height="900"><figcaption>Status badges are coloured by stage. The Payroll ready column names exactly what is missing for anyone who is not ready.</figcaption></figure>
+    <h4>On this page</h4>
+    <ul>
+      <li><span class="ui">Export</span>, <span class="ui">Import</span> and <span class="ui">Add employee</span> at the top right.</li>
+      <li><b>Status tabs</b>: <span class="ui">Current</span> (default; everyone in the directory), <span class="ui">Probation</span>, <span class="ui">Serving notice</span>, <span class="ui">Past</span> (people who have left) and <span class="ui">Everyone</span> (including people who have not joined yet).</li>
+      <li><span class="ui">Search name, code or email</span>.</li>
+      <li><b>Team chips</b>: <span class="ui">All teams</span> or one department. <span class="ui">Missing payroll details</span> shows only people who are not payroll ready.</li>
+      <li><b>Columns</b>: Person (name and designation), Code, Department, Status, Type, Joined and Payroll ready. Click Person, Code or Joined to sort.</li>
+    </ul>
+    <h4>Payroll ready</h4>
+    <p>A person on payroll is <b>Ready</b> when they have a salary structure, a bank account (number and IFSC) and a PAN. Otherwise the column lists what is missing, for example "No bank account, PAN". Payroll skips or flags people who are not ready, so clear these before generating a month.</p>
+    <h4>The 13 employment statuses</h4>
+    <p>Every person has one status. It decides whether they appear in the directory and whether payroll pays them. The status picker groups them by stage.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Status</th><th>Stage</th><th>In directory</th><th>On payroll</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td>Candidate</td><td>Before joining</td><td>No</td><td>No</td><td>In the hiring process. No offer has been made.</td></tr>
+        <tr><td>Offered</td><td>Before joining</td><td>No</td><td>No</td><td>An offer has been issued and is awaiting acceptance.</td></tr>
+        <tr><td>Joining pending</td><td>Before joining</td><td>No</td><td>No</td><td>Offer accepted, joining date not yet reached.</td></tr>
+        <tr><td>Intern</td><td>Working</td><td>Yes</td><td>Yes</td><td>On an internship with a defined end date.</td></tr>
+        <tr><td>Probation</td><td>Working</td><td>Yes</td><td>Yes</td><td>Employed, within the probation period.</td></tr>
+        <tr><td>Active</td><td>Working</td><td>Yes</td><td>Yes</td><td>Employed and working normally.</td></tr>
+        <tr><td>Confirmed</td><td>Working</td><td>Yes</td><td>Yes</td><td>Probation completed and confirmed in the role.</td></tr>
+        <tr><td>Notice period</td><td>Leaving</td><td>Yes</td><td>Yes</td><td>Serving notice. Still working and still paid.</td></tr>
+        <tr><td>Resigned</td><td>Leaving</td><td>Yes</td><td>Yes</td><td>Resignation accepted, notice not yet served out.</td></tr>
+        <tr><td>Terminated</td><td>Leaving</td><td>No</td><td>No</td><td>Employment ended by the company. Settlement may be pending.</td></tr>
+        <tr><td>Internship completed</td><td>No longer here</td><td>No</td><td>No</td><td>Internship finished. Certificate and experience letter are due.</td></tr>
+        <tr><td>Exited</td><td>No longer here</td><td>No</td><td>No</td><td>Left the organisation. Records kept for payroll history.</td></tr>
+        <tr><td>Inactive</td><td>No longer here</td><td>No</td><td>No</td><td>On the books but not working: long leave, sabbatical, dormant.</td></tr>
+      </tbody>
+    </table></div>
+    <h4>Which status can follow which</h4>
+    <p>Flowbit only offers the moves that make sense. For example, a Candidate can become Offered or Inactive; Joining pending can become Intern, Probation, Active or Inactive; Probation can become Confirmed, Active, Notice period, Resigned or Terminated; Notice period can become Resigned, Exited or Terminated, or go back to Active or Confirmed if the resignation is withdrawn. Terminated can only become Exited, and Exited is final: someone who rejoins gets a new record.</p>
+    <h4>Find a person</h4>
+    <ol class="steps">
+      <li>Open <span class="ui">People</span>.</li>
+      <li>Type part of a name, employee code or email in <span class="ui">Search name, code or email</span>, or click a team chip.</li>
+      <li>To find someone who has left, click <span class="ui">Past</span> or <span class="ui">Everyone</span> first.</li>
+      <li>Click the person's name to open their profile.</li>
+    </ol>
+    <div class="tip"><p>Use <span class="ui">Export</span> to download the current list as a spreadsheet for audits or headcount reviews.</p></div>
+  </article>
+
+  <article class="topic" id="muster-person">
+    <h3>Employee profile</h3>
+    <p class="where"><span>Open: <b>HR → People → click a name</b></span><span><code>/app/hr/people/{id}</code></span><span>Who: HR, finance, the person's manager</span></p>
+    <p>The profile is the full record of one employee: their details, documents, nominees, bank and statutory numbers, notes, attendance, leave, letters and payslips.</p>
+    <figure class="shot"><img src="shots/hr-person.jpg" alt="Employee profile for Aditi Sharma showing a Confirmed badge, Edit, Change status and Draft letter buttons, a summary panel, ten tabs from Profile to Payslips, and Contact, Onboarding, Emergency contact and Flowbit access cards" loading="lazy" width="1440" height="900"><figcaption>The header shows the essentials at a glance. The Onboarding card tracks joining documents and missing details.</figcaption></figure>
+    <h4>Header</h4>
+    <ul>
+      <li>Name, status badge, designation and department.</li>
+      <li><span class="ui">Edit</span> opens the edit form. <span class="ui">Change status</span> moves the person to a new status. <span class="ui">Draft letter</span> starts a letter for them.</li>
+      <li>Summary: Code, Type, Joined, Reports to, Email and Phone.</li>
+    </ul>
+    <h4>Tabs</h4>
+    <div class="tbl"><table>
+      <thead><tr><th>Tab</th><th>What it shows</th></tr></thead>
+      <tbody>
+        <tr><td><span class="ui">Profile</span></td><td>Contact (work and personal email, phone, date of birth, gender, address), Emergency contact, the Onboarding card, Flowbit access, and Exit details once someone is leaving or has left.</td></tr>
+        <tr><td><span class="ui">Job</span></td><td>Role and dates (code, department, designation, reporting manager, joining and original joining date, last working day, work location, type, status, notice period), Statutory coverage (Provident fund, ESI, Professional tax, Overtime) and, for people who may see pay, Current salary with <span class="ui">Edit salary</span>.</td></tr>
+        <tr><td><span class="ui">Documents</span></td><td>Marksheets, ID proof and signed letters. Upload PDF or image files; archive a wrong file with a reason. Files are never hard-deleted.</td></tr>
+        <tr><td><span class="ui">Nominees</span></td><td>Who receives PF, gratuity or insurance benefits, with each nominee's share. Shares for one scheme cannot go above 100%.</td></tr>
+        <tr><td><span class="ui">Bank &amp; statutory</span></td><td>PAN, UAN, ESIC number, Aadhaar, PF number, bank, account holder, account number and IFSC, plus the history of bank changes. Changes made in self-service show as Not verified until HR verifies them.</td></tr>
+        <tr><td><span class="ui">Remarks</span></td><td>HR notes about the person, newest first, and an Activity timeline of every change to the record.</td></tr>
+        <tr><td><span class="ui">Attendance</span></td><td>The person's month: working days, payable so far, late days, leave and loss of pay, with the last ten corrections and HR overrides.</td></tr>
+        <tr><td><span class="ui">Leave</span></td><td>Their balances per leave type and their last twenty requests.</td></tr>
+        <tr><td><span class="ui">Letters</span></td><td>Offer, confirmation and experience letters issued to them, with <span class="ui">Draft a letter</span>. Letters that state pay are locked for people who cannot see salaries.</td></tr>
+        <tr><td><span class="ui">Payslips</span></td><td>One payslip per payroll month, marked Published or Not published.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note"><p>Bank, PAN, Aadhaar, UAN and nominee details are shown only to roles allowed to see sensitive details. Salary is shown only to roles that can see payroll.</p></div>
+    <h4>The Onboarding card</h4>
+    <p>The card shows how many mandatory joining documents are on file (by default Aadhaar card, PAN card, 10th and 12th marksheets, college marksheet or degree, and bank passbook or cancelled cheque) and lists <b>Details still needed</b>, such as UAN or an emergency contact. Nobody ticks this list; it fills itself as documents are uploaded and details are saved.</p>
+    <h4>Link a login (Flowbit access)</h4>
+    <p>A person with a linked login gets self-service, check-in and approvals. Their check-ins then feed the attendance register.</p>
+    <ol class="steps">
+      <li>On the <span class="ui">Profile</span> tab, find the <b>Flowbit access</b> card.</li>
+      <li>If it says <b>Not linked to a login</b>, choose a member under <span class="ui">Link an existing member…</span> and click <span class="ui">Link</span>.</li>
+      <li>To remove the link, click <span class="ui">Unlink</span>. Their login stays, but it stops showing this employee record and their check-ins stop feeding the register.</li>
+    </ol>
+    <h4>Change someone's status</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">Change status</span>.</li>
+      <li>Pick the <span class="ui">New status</span>. Only allowed moves are listed.</li>
+      <li>For Notice period or Resigned, enter the <span class="ui">Resignation date</span>. Notice is counted from this date.</li>
+      <li>For Exited, Terminated or Internship completed, enter the <span class="ui">Last working day</span> (it may be in the future) and why they are leaving.</li>
+      <li>Click <span class="ui">Change status</span> or <span class="ui">Record exit</span>.</li>
+    </ol>
+    <div class="warn"><p>Someone cannot start work (Intern, Probation or Active) until enough joining documents are in, 60% of the mandatory list by default. An HR admin can still start them by filling in <span class="ui">Start anyway: why?</span>. The reason and the missing documents are kept in the audit log.</p></div>
+    <div class="note"><p>Nobody can change their own status or exit date. Ask another HR admin or the owner.</p></div>
+  </article>
+
+  <article class="topic" id="muster-people-new">
+    <h3>Add an employee</h3>
+    <p class="where"><span>Open: <b>People → Add employee</b></span><span><code>/app/hr/people/new</code></span><span>Who: HR admin, HR executive</span></p>
+    <p>Use this form to add one person. Only five fields are needed now; the rest can be filled in as documents arrive.</p>
+    <figure class="shot"><img src="shots/hr-people-new.jpg" alt="Add employee form with an Identity section on the left and a Job section on the right, Status set to Joining pending and the joining date prefilled" loading="lazy" width="1440" height="900"><figcaption>Fields marked with a red star are required. The employee code is filled in for you if you leave it blank.</figcaption></figure>
+    <h4>Form sections</h4>
+    <div class="tbl"><table>
+      <thead><tr><th>Section</th><th>Fields</th></tr></thead>
+      <tbody>
+        <tr><td><b>Identity</b></td><td><span class="ui">Full name*</span>, <span class="ui">Employee code</span> (leave blank to use the next code, for example VW-0021), <span class="ui">Work email*</span>, <span class="ui">Personal email</span>, <span class="ui">Phone</span>, <span class="ui">Date of birth</span>, <span class="ui">Gender</span>, <span class="ui">Home address</span>.</td></tr>
+        <tr><td><b>Job</b></td><td><span class="ui">Department</span>, <span class="ui">Designation</span>, <span class="ui">Reporting manager</span>, <span class="ui">Work location</span>, <span class="ui">Employment type*</span> (Full time, Part time, Intern, Contract), <span class="ui">Status*</span>, <span class="ui">Joining date*</span>, <span class="ui">Probation ends</span>, <span class="ui">Original joining date</span>, <span class="ui">Resignation date</span>, <span class="ui">Last working day</span>, <span class="ui">Reason for leaving</span>, <span class="ui">Notice period (days)</span>, <span class="ui">Start before documents are in</span>, <span class="ui">Professional tax state</span>.</td></tr>
+        <tr><td><b>Statutory coverage</b></td><td><span class="ui">PF covered</span>, <span class="ui">ESI covered</span>, <span class="ui">PT exempt</span>, <span class="ui">Overtime eligible</span>.</td></tr>
+        <tr><td><b>Emergency contact</b></td><td><span class="ui">Name</span>, <span class="ui">Phone</span>, <span class="ui">Relation</span>.</td></tr>
+        <tr><td><b>Bank &amp; statutory</b></td><td><span class="ui">PAN</span>, <span class="ui">UAN</span>, <span class="ui">ESIC number</span>, <span class="ui">Aadhaar</span>, <span class="ui">PF number</span>, <span class="ui">Bank</span>, <span class="ui">Account holder</span>, <span class="ui">Account number</span>, <span class="ui">IFSC</span>. Shown only to people who may see these details.</td></tr>
+        <tr><td><b>Notes</b></td><td><span class="ui">Anything HR should know</span>.</td></tr>
+      </tbody>
+    </table></div>
+    <h4>Add someone</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">Add employee</span> on the Muster home or People page.</li>
+      <li>Enter <span class="ui">Full name</span> and <span class="ui">Work email</span>. Leave <span class="ui">Employee code</span> blank unless you use your own codes.</li>
+      <li>Pick <span class="ui">Department</span>, <span class="ui">Designation</span> and <span class="ui">Reporting manager</span>. The manager is who signs their leave and corrections first.</li>
+      <li>Choose <span class="ui">Employment type</span> and check <span class="ui">Status</span>. New people start as <b>Joining pending</b>.</li>
+      <li>Set the <span class="ui">Joining date</span>. If they are on probation, set <span class="ui">Probation ends</span>; HR and the manager are reminded 15 days before.</li>
+      <li>Set <span class="ui">Professional tax state</span> and tick <span class="ui">PF covered</span>, <span class="ui">ESI covered</span> or <span class="ui">PT exempt</span> as they apply. Payroll deducts PF, ESI and PT only where these say so.</li>
+      <li>Fill in the emergency contact and, if you have them, PAN and bank details.</li>
+      <li>Click <span class="ui">Add employee</span>. Their profile opens.</li>
+    </ol>
+    <div class="note"><p>Use <span class="ui">Original joining date</span> only when service is continuous from an earlier date, for example after a transfer. Gratuity is counted from it. Leave <span class="ui">Notice period (days)</span> blank to follow your notice policy (by default 7 days for interns, 30 for probation and 90 for confirmed staff).</p></div>
+    <div class="warn"><p>If you do not tick <span class="ui">PF covered</span> or <span class="ui">ESI covered</span>, payroll will not deduct PF or ESI for that person. Check these for every new joiner.</p></div>
+  </article>
+
+  <article class="topic" id="muster-person-edit">
+    <h3>Edit an employee</h3>
+    <p class="where"><span>Open: <b>Profile → Edit</b></span><span><code>/app/hr/people/{id}/edit</code></span><span>Who: HR admin, HR executive</span></p>
+    <p>The edit form has the same sections as Add employee, filled with the person's current details. Every change is recorded in the audit log.</p>
+    <figure class="shot"><img src="shots/hr-person-edit.jpg" alt="Edit Aditi Sharma form with Identity fields filled in and the Job section showing Operations, Operations Lead, reporting manager Sanskaar Singh, Full time and Confirmed" loading="lazy" width="1440" height="900"><figcaption>The line under the title reminds you that changes are recorded in the audit log.</figcaption></figure>
+    <h4>Edit details</h4>
+    <ol class="steps">
+      <li>Open the person's profile and click <span class="ui">Edit</span>.</li>
+      <li>Change what you need, for example a new <span class="ui">Reporting manager</span> or a corrected <span class="ui">Phone</span>.</li>
+      <li>To record a resignation, set <span class="ui">Status</span> to Notice period and fill in <span class="ui">Resignation date</span>. For an exit, also fill in <span class="ui">Last working day</span> and <span class="ui">Reason for leaving</span>.</li>
+      <li>Click <span class="ui">Save changes</span>, or <span class="ui">Cancel</span> to leave without saving.</li>
+    </ol>
+    <div class="note"><p>A work email or employee code can belong to only one person. If you enter one that is taken, Flowbit names whose record already holds it. A date of birth that makes someone younger than 14 is refused.</p></div>
+    <div class="tip"><p>When HR changes bank details here, verify them with the person before the next payroll run. Bank changes made by the employee in self-service appear on the <span class="ui">Bank &amp; statutory</span> tab for you to verify.</p></div>
+  </article>
+
+  <article class="topic" id="muster-people-import">
+    <h3>Import employees from a spreadsheet</h3>
+    <p class="where"><span>Open: <b>Muster → Import</b> or <b>People → Import</b> (both open Settings → Import → Employees)</span><span><code>/app/settings/import/employees</code></span><span>Who: HR admin</span></p>
+    <p>Bring in your whole team at once from a CSV file. Every row is checked first, and nothing is saved until you import.</p>
+    <figure class="shot"><img src="shots/hr-people-import.jpg" alt="Import employees page with step 1 Your file, a Choose a CSV file drop area and Download the template button, and step 2 Check and import, still empty" loading="lazy" width="1440" height="900"><figcaption>Step 1 takes the file. Step 2 shows a preview of every row before anything is saved.</figcaption></figure>
+    <h4>File rules</h4>
+    <ul>
+      <li>One row per person, up to 500 rows, file up to 3 MB (the same limits as every importer; see the FAQ for the full table).</li>
+      <li>Required columns: <code>full_name</code>, <code>work_email</code>, <code>date_of_joining</code> (YYYY-MM-DD) and <code>employment_type</code> (full_time, part_time, intern or contract).</li>
+      <li>Optional columns: <code>employee_code</code>, <code>personal_email</code>, <code>phone</code>, <code>gender</code>, <code>date_of_birth</code>, <code>employment_status</code>, <code>exit_date</code>, <code>department</code>, <code>designation</code>, <code>reporting_manager</code>, <code>work_location</code>, <code>pt_state</code>, <code>pan</code>, <code>uan</code>, <code>aadhaar</code>, <code>esic_number</code>, <code>bank_name</code>, <code>bank_account_holder</code>, <code>bank_account_number</code>, <code>bank_ifsc</code>, <code>emergency_contact_name</code>, <code>emergency_contact_phone</code>, <code>emergency_contact_relation</code>, <code>notes</code>.</li>
+      <li>Departments and designations must already exist in HR settings.</li>
+      <li><code>reporting_manager</code> takes an employee code or work email.</li>
+      <li>A blank <code>employee_code</code> gets the next code. A blank status means the person starts as Joining pending.</li>
+    </ul>
+    <h4>Import your team</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">Download the template</span> and fill it in, one person per row. Save it as CSV.</li>
+      <li>Click <span class="ui">Choose a CSV file</span> and pick your file. Flowbit checks every row.</li>
+      <li>Read the preview under <b>2 · Check and import</b>. Each row shows its Line, Person and Result: <b>Ready</b>, or what is wrong.</li>
+      <li>Fix rows with errors in your spreadsheet and choose the file again, or go ahead with the rows that are ready.</li>
+      <li>Click <span class="ui">Import N people</span>. Only the ready rows are saved.</li>
+    </ol>
+    <div class="note"><p>Errors stop a row: a missing name, work email or joining date; an email or code already used (in Flowbit or earlier in the same file); a date that is not a real day; an unknown department, designation, status or manager. Warnings do not stop a row: a PAN, UAN, IFSC or account number that does not look right is left out, and an account number without an IFSC is flagged because it cannot be paid. Extra columns are ignored and listed.</p></div>
+    <div class="tip"><p>Salary columns are not imported here. Add salaries afterwards in Payroll → Salary structures.</p></div>
+  </article>
+
+  <article class="topic" id="muster-attendance">
+    <h3>Attendance register</h3>
+    <p class="where"><span>Open: <b>HR → Attendance</b></span><span><code>/app/hr/attendance</code></span><span>Who: HR admin, HR executive; managers read their team</span></p>
+    <p>The register is the record payroll reads. Check-ins from linked logins fill it on their own; HR marks anyone who did not check in and corrects days that are wrong. At month end you lock it so payroll can run.</p>
+    <figure class="shot"><img src="shots/hr-attendance.jpg" alt="Attendance page on the Month tab for October 2026: team chips, totals for people on the sheet, payable days, loss of pay and paid leave, a note about unmarked working days, and a grid of day pills per person such as P, A, LT, WO, H, SL and WFH" loading="lazy" width="1440" height="900"><figcaption>The Month tab: one row per person, one pill per day. Click a past day to change it.</figcaption></figure>
+    <h4>On this page</h4>
+    <ul>
+      <li><b>Day picker</b> (top right): step to the previous or next day, or type a date. Future days cannot be opened.</li>
+      <li><span class="ui">Corrections</span>: opens the corrections and comp-off queue.</li>
+      <li><b>Tabs</b>: <span class="ui">Day</span> (one day, everyone), <span class="ui">Month</span> (the full grid), <span class="ui">Trends</span> (charts over a range, with CSV export) and <span class="ui">Import</span> (load marks from a spreadsheet or another system).</li>
+      <li><b>Team chips</b>: <span class="ui">All teams</span> or one department.</li>
+    </ul>
+
+    <h4>Month view</h4>
+    <p>Click <span class="ui">Month</span> to see everyone's whole month as a grid: one row per person, one column per day. Each cell shows a short code, and the row ends with that person's payable days.</p>
+    <ul>
+      <li><b>Figures</b> across the top: People on the sheet (with working days this month), Payable days, Loss of pay (red when someone loses pay) and Paid leave, each with a per-person average.</li>
+      <li><b>Cell codes</b>: P Present, WFH Work from home, LT Late, HD Half day, UHD Unpaid half day, OD On duty, PL Paid leave, SL Sick leave, LOP Loss of pay, A Absent, H Holiday, WO Week off, ? Not marked yet. A cell with a white ring was set by HR. A faded cell is assumed, not marked.</li>
+      <li>Hover a holiday column to see the holiday's name. Use the month switcher to move between months and <span class="ui">Export</span> to download the month as CSV.</li>
+    </ul>
+    <h4>Change one day in the month grid</h4>
+    <ol class="steps">
+      <li>Open <span class="ui">Month</span> and click a past day in the person's row.</li>
+      <li>The dialog shows what the day is now and where it came from (check-in, approved leave or set by HR).</li>
+      <li>Under <b>Mark the day as</b>, pick the status.</li>
+      <li>Type a <span class="ui">Reason</span>, for example "Forgot to check in; was at the client site". A reason is required and kept in the audit log.</li>
+      <li>Click <span class="ui">Save</span>. To undo an earlier HR change, click <span class="ui">Remove override</span>; the day goes back to what the check-ins say.</li>
+    </ol>
+    <h4>Lock the month</h4>
+    <p>Locking freezes the month for payroll. Nobody can change its attendance, or check in for it, until it is reopened.</p>
+    <ol class="steps">
+      <li>Open <span class="ui">Month</span> on the month you want to close, after its last day.</li>
+      <li>Review rows with LOP and any days that have no record.</li>
+      <li>Click <span class="ui">Lock month</span> and confirm. The month shows a <b>Locked</b> badge with who locked it and when.</li>
+      <li>If a mistake turns up later, click <span class="ui">Reopen month</span>, answer <span class="ui">Why reopen it?</span> and confirm. Regenerate that month's payroll once the corrections are in.</li>
+    </ol>
+    <div class="warn"><p>Lock only when the month is complete. Payroll uses the locked numbers, and every unmarked working day is treated by your unmarked-day rule (see below). Only a role that sees the whole company can lock or reopen.</p></div>
+    <h4>Import punches from a biometric device</h4>
+    <p>Open <span class="ui">Import</span> and choose <span class="ui">From a biometric device</span> to load the raw punch log from an eSSL / eTimeTrackLite or ZKTeco machine (attlog.dat, or its CSV or Excel export), or any file with a user id and a punch time. Up to 50,000 punches and 3 MB per file.</p>
+    <ol class="steps">
+      <li>Choose the export. The format is detected from the file; change <span class="ui">Format</span>, or pick the user id and time columns by hand, then click <span class="ui">Check again</span>.</li>
+      <li>Punches are grouped per person and day (IST). The first punch is the in time and the last is the out time; repeats within 2 minutes are ignored, and a single punch is flagged <b>missing out</b>. Punches after midnight and before the <span class="ui">Night shift cutoff</span> (04:00 unless you change it) count for the day before.</li>
+      <li>Device ids are matched to the <b>Biometric device id</b> on each profile, then to the employee code. Any id that matches nobody is listed: choose the person and click <span class="ui">Save</span>. The id is saved on their profile, so the next import maps it by itself.</li>
+      <li>Read the preview. Each day shows in and out, the status worked out from the times (by the same rules as a check-in), and any warnings. Days in a locked month, before joining or after leaving are refused.</li>
+      <li>Click <span class="ui">Write N days</span>. Like the template import, it can be undone from Settings → Import for 7 days.</li>
+    </ol>
+    <div class="tip"><p>Set the device id on a profile under <b>Edit → Job → Biometric device id</b>, or add a <code>biometric_id</code> column when you import employees.</p></div>
+  </article>
+
+  <article class="topic" id="muster-attendance-daily">
+    <h3>Daily attendance sheet</h3>
+    <p class="where"><span>Open: <b>Attendance → Day</b></span><span><code>/app/hr/attendance</code></span><span>Who: HR admin, HR executive</span></p>
+    <p>The Day view is the quickest way to mark a whole team. Tap a status and it saves at once.</p>
+    <figure class="shot"><img src="shots/hr-attendance-daily.jpg" alt="Daily attendance sheet with each person's name, department and Not marked yet, followed by Present, Work from home, Absent, Half day and More buttons" loading="lazy" width="1440" height="900"><figcaption>Nobody is pre-selected. A row shows "Not marked yet" until someone checks in or HR taps a status.</figcaption></figure>
+    <h4>Mark today</h4>
+    <ol class="steps">
+      <li>Open <span class="ui">Attendance</span>. It opens on today. Use the arrows or the date box to open another past day, then click <span class="ui">Go</span>.</li>
+      <li>For each person, tap <span class="ui">Present</span>, <span class="ui">Work from home</span>, <span class="ui">Absent</span> or <span class="ui">Half day</span>.</li>
+      <li>For anything else, open <span class="ui">More</span>: Paid leave, Sick leave, Unpaid half day, Week off, Holiday or On duty.</li>
+      <li>When the exceptions are done, click <span class="ui">Mark remaining N present</span> to mark everyone left as present in one go.</li>
+      <li>Watch the progress bar ("12 of 18 marked") until every working person is marked.</li>
+    </ol>
+    <ul>
+      <li><b>Half day</b>: worked half the day; the other half is paid leave.</li>
+      <li><b>Unpaid half day</b>: worked half the day; the other half is not paid.</li>
+      <li><b>On duty</b>: working away from the office, for example at a client.</li>
+      <li><b>Week off</b>: a weekly off that is not in your work week, for example an alternate Saturday.</li>
+    </ul>
+    <div class="note"><p>Changing a day that already has a record (a check-in, approved leave or an earlier HR mark) asks for a reason, which is kept in the audit log. A locked month is read-only.</p></div>
+    <div class="tip"><p>The note at the top ("18 people have no record for this day") also tells you what happens to unmarked days under your rules. Follow the <span class="ui">attendance rules</span> link to change it.</p></div>
+  </article>
+
+  <article class="topic" id="muster-attendance-rules">
+    <h3>How attendance is counted</h3>
+    <p>Payroll pays for <b>payable days</b> out of the month's <b>working days</b>. These rules decide both.</p>
+    <h4>One status per person per day</h4>
+    <p>Flowbit picks the day's status in this order, and the first one that applies wins:</p>
+    <ol>
+      <li>A change made by HR (override or approved correction).</li>
+      <li>Approved leave.</li>
+      <li>The person's check-ins and check-outs.</li>
+      <li>The calendar: a holiday or weekly off.</li>
+      <li>Days still ahead are shown as upcoming and not counted.</li>
+      <li>Your unmarked-day rule.</li>
+    </ol>
+    <h4>Late, half day and absent from check-ins</h4>
+    <ul>
+      <li><b>Late</b>: the first check-in is after office start time plus the grace period. With the default hours (10:00 to 19:00, 15 minutes' grace) a check-in at 10:16 is late. A late day is still paid in full; it is counted so you can see patterns.</li>
+      <li><b>Half day</b>: the person checked out after working less than the half-day hours (4.5 hours by default). This counts as an unpaid half day: half a day of pay and half a day of LOP.</li>
+      <li><b>Absent</b>: a working day with no check-in and no other record, once the day has passed.</li>
+    </ul>
+    <h4>What each status pays</h4>
+    <div class="tbl"><table>
+      <thead><tr><th>Status</th><th>Pays</th></tr></thead>
+      <tbody>
+        <tr><td>Present, Late, Work from home, On duty</td><td>Full day</td></tr>
+        <tr><td>Paid leave, Sick leave, Half day (other half paid leave)</td><td>Full day</td></tr>
+        <tr><td>Holiday, Week off</td><td>Full day</td></tr>
+        <tr><td>Unpaid half day</td><td>Half day (0.5 LOP)</td></tr>
+        <tr><td>Absent, Loss of pay (leave not covered by balance)</td><td>Nothing (1 LOP)</td></tr>
+      </tbody>
+    </table></div>
+    <h4>Working days and loss of pay</h4>
+    <ul>
+      <li>Working days are every day of the month that is not a weekly off. Holidays stay in the count, so an absence costs the same in a month with holidays.</li>
+      <li>For each working day, LOP is the part of the day that is not paid: 1 for Absent, 0.5 for an unpaid half day.</li>
+      <li>Someone who joins or leaves mid-month is paid only for the days they were employed, but the divisor is the whole month's working days. Days before joining or after leaving show as not applicable.</li>
+    </ul>
+    <h4>Unmarked days</h4>
+    <p>Your attendance rules say what happens to a past working day with no record at all:</p>
+    <ul>
+      <li><b>Present</b> (default): paid as present when the month is locked, on an assumption rather than a record. Assumed days look faded.</li>
+      <li><b>Absent</b>: counts as absent when the month is locked, and costs a day's pay.</li>
+      <li><b>Pending</b>: not treated as worked, and the month cannot be locked until every day has been marked.</li>
+    </ul>
+  </article>
+
+  <article class="topic" id="muster-corrections">
+    <h3>Corrections and comp-off</h3>
+    <p class="where"><span>Open: <b>HR → Corrections</b></span><span><code>/app/hr/attendance/corrections</code></span><span>Who: HR admin, managers (own team)</span></p>
+    <p>Days employees asked to fix, and days off they worked. Managers sign first, then HR.</p>
+    <figure class="shot"><img src="shots/hr-corrections.jpg" alt="Corrections and comp-off page with Corrections and Comp-off tabs, Waiting on you 1 and Comp-off in hand 0 tiles, and a correction from Vikram Joshi to change Absent to On duty, pending with his manager, with Approve and Reject buttons" loading="lazy" width="1440" height="900"><figcaption>"Where it sits" tells you whose signature the request is waiting for.</figcaption></figure>
+    <h4>On this page</h4>
+    <ul>
+      <li><span class="ui">Corrections</span> and <span class="ui">Comp-off</span> tabs, and <span class="ui">Raise comp-off</span>.</li>
+      <li>Tiles: <b>Waiting on you</b> and <b>Comp-off in hand</b> (approved comp-off not yet used; lapses after 90 days by default).</li>
+      <li>Status filter: <span class="ui">Awaiting decision</span>, <span class="ui">Approved</span>, <span class="ui">All</span>.</li>
+      <li>Columns: Employee, Change (for example "Absent → On duty"), Day, Reason, Where it sits, Status, and <span class="ui">Approve</span> / <span class="ui">Reject</span> when it is your turn.</li>
+    </ul>
+    <h4>Corrections</h4>
+    <p>Employees ask for a correction from their own attendance page when a day is wrong, for example they forgot to check in. They can ask for Present, Work from home, On duty or Half day, for a past day within 15 days. Leave is not a correction: it spends a balance, so it goes through the leave screen.</p>
+    <ol class="steps">
+      <li>Open <span class="ui">Corrections</span> and stay on <span class="ui">Awaiting decision</span>.</li>
+      <li>Read the Change, Day and Reason. Check the register if needed.</li>
+      <li>Click <span class="ui">Approve</span>, or <span class="ui">Reject</span> and add a note explaining why.</li>
+      <li>On the final approval the day is updated on the register. If the month is locked, reopen it first.</li>
+    </ol>
+    <h4>Comp-off</h4>
+    <p>A comp-off is a day of leave earned by working on a weekly off or a holiday. A full day worked earns 1 day; a half day earns 0.5. The day must already be marked as worked on the register, and it must have been an off day.</p>
+    <ol class="steps">
+      <li>Click <span class="ui">Raise comp-off</span>.</li>
+      <li>Choose the employee (HR can raise for anyone they can see; others raise for themselves).</li>
+      <li>Enter the <span class="ui">Day worked</span> and <span class="ui">What was the work?</span>.</li>
+      <li>Click <span class="ui">Send for approval</span>. It follows the same manager-then-HR route as leave.</li>
+      <li>Once approved, the days appear in the Comp-off column of Leave balances and can be taken as Comp-off leave.</li>
+    </ol>
+    <div class="note"><p>Overtime is not claimed on this page. The <span class="ui">Overtime eligible</span> flag on the employee form records who is eligible.</p></div>
+  </article>
+
+  <article class="topic" id="muster-leave">
+    <h3>Leave requests</h3>
+    <p class="where"><span>Open: <b>HR → Leave</b></span><span><code>/app/hr/leave</code></span><span>Who: HR admin, HR executive, managers (own team)</span></p>
+    <p>Requests waiting on you come first. Approved leave lands on the attendance register by itself.</p>
+    <figure class="shot"><img src="shots/hr-leave.jpg" alt="Leave page with Calendar, Balances and Apply on behalf buttons, Waiting on you 3 and Pending in total 3 tiles, and a table of three pending Paid Leave requests with Approve, Reject and Withdraw" loading="lazy" width="1440" height="900"><figcaption>Siddharth's request shows "3 loss of pay" in red because his balance does not cover it.</figcaption></figure>
+    <h4>On this page</h4>
+    <ul>
+      <li><span class="ui">Calendar</span>, <span class="ui">Balances</span> and <span class="ui">Apply on behalf</span>.</li>
+      <li>Tiles: <b>Waiting on you</b> (with days requested) and <b>Pending in total</b>.</li>
+      <li>Tabs: <span class="ui">Pending</span>, <span class="ui">Approved</span>, <span class="ui">Rejected</span>, <span class="ui">All</span>, and <span class="ui">Search by name</span>.</li>
+      <li>Columns: Employee, Type, Dates, Days (with any loss of pay), Reason, Status with where it sits (for example "With Arjun Nair (manager)" or "With HR"), and the actions.</li>
+    </ul>
+    <h4>Who approves</h4>
+    <ul>
+      <li>A request goes to the person's <b>reporting manager</b> first, if they have one whose login can approve leave.</li>
+      <li>It then goes to <b>HR</b>. HR's stage needs a role that approves leave and sees everyone.</li>
+      <li>If the applicant could sign the HR stage themselves (for example the HR manager's own leave), the second stage goes to <b>management</b> instead, so nobody approves their own leave.</li>
+      <li>A rejection at any stage ends the request. An approval moves it to the next stage, and the last approval settles it. The employee is told when it is settled.</li>
+    </ul>
+    <h4>Approve or reject</h4>
+    <ol class="steps">
+      <li>Open <span class="ui">Leave</span>. Requests you can decide show <span class="ui">Approve</span> and <span class="ui">Reject</span>.</li>
+      <li>Check the Days column. Days the balance does not cover are shown as loss of pay.</li>
+      <li>Click <span class="ui">Approve</span>. If you are the manager, it moves on to HR. If you are the last stage, the days are marked on the attendance register.</li>
+      <li>To refuse, click <span class="ui">Reject</span>, write <span class="ui">Why this cannot be approved</span> and confirm. They are told, with your note.</li>
+    </ol>
+    <h4>Apply on someone's behalf</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">Apply on behalf</span>.</li>
+      <li>Choose the <span class="ui">Employee</span> and <span class="ui">Leave type</span>.</li>
+      <li>Set <span class="ui">From</span> and <span class="ui">To</span>, or tick <span class="ui">Half day</span> (it starts and ends on the same date).</li>
+      <li>Enter a <span class="ui">Reason</span>. Attach a <span class="ui">Supporting document</span> if the leave type needs one, such as a medical certificate.</li>
+      <li>Click <span class="ui">Send for approval</span>. It follows the same route as if the employee had applied.</li>
+    </ol>
+    <h4>Withdraw a request</h4>
+    <p>Click <span class="ui">Withdraw</span> on a pending request to cancel it, for example when the employee's plans change. Only pending requests can be withdrawn.</p>
+    <div class="note"><p>How days are counted: weekly offs and holidays inside the range are skipped, and a half day counts as 0.5. For paid leave types, the days are split against the balance: what the balance covers is paid, the rest becomes loss of pay.</p></div>
+    <div class="warn"><p>Leave in a locked attendance month cannot be approved. Reopen that month first, approve, then lock it again and regenerate payroll if it was already run.</p></div>
+  </article>
+
+  <article class="topic" id="muster-leave-balances">
+    <h3>Leave balances</h3>
+    <p class="where"><span>Open: <b>HR → Balances</b> or <b>Leave → Balances</b></span><span><code>/app/hr/leave/balances</code></span><span>Who: HR, managers (own team)</span></p>
+    <p>Everyone's balance for each leave type in the current leave year, worked out from the register. Remaining = carried + earned + adjusted − taken.</p>
+    <figure class="shot"><img src="shots/hr-leave-balances.jpg" alt="Leave balances table for leave year 2026-27 with Person, Department, and earned / taken / left columns for Paid Leave, Sick Leave and Comp-off, an As of date box, Show and Adjust a balance buttons" loading="lazy" width="1440" height="900"><figcaption>Amber text under a balance shows days in pending requests. "does not accrue" marks people who do not earn leave yet.</figcaption></figure>
+    <h4>On this page</h4>
+    <ul>
+      <li>The leave year and the as-of date. Change <span class="ui">As of</span> and click <span class="ui">Show</span> to see balances on another date.</li>
+      <li>One row per person with code and department, and an <b>earned / taken / left</b> cell for each leave type (for example Paid Leave, Sick Leave, Comp-off).</li>
+      <li><span class="ui">Adjust a balance</span> to correct a balance or enter an opening balance.</li>
+    </ul>
+    <h4>How leave is earned</h4>
+    <ul>
+      <li>Only full-time people who are Active, Confirmed, serving notice or Resigned earn leave. People on probation, interns and contract staff show "does not accrue".</li>
+      <li><b>Monthly</b> types credit a fixed amount on the 1st of each month. The joining month counts if they joined on or before the 15th. Credits stop after they leave.</li>
+      <li><b>Yearly, up front</b> types grant the year's quota at once, reduced for the months they were not employed and rounded to a half day.</li>
+      <li><b>Per service year</b> types grant the quota for each completed year of service.</li>
+      <li><b>On application</b> types (for example maternity) have no running balance; each request is allowed up to the quota.</li>
+      <li>At the end of the leave year, part of an unused balance carries forward (50% by default, rounded to a half day and capped per type). The leave year runs April to March by default.</li>
+      <li>Taken days come from approved leave on the attendance register.</li>
+    </ul>
+    <h4>Adjust a balance</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">Adjust a balance</span>.</li>
+      <li>Choose the <span class="ui">Employee</span> and <span class="ui">Leave type</span>.</li>
+      <li>Enter <span class="ui">Days</span>: a positive number adds, a negative number takes away (for example 2.5 or -1).</li>
+      <li>Pick the <span class="ui">Kind</span>: <b>Correction</b>, or <b>Opening balance</b> when bringing balances over from your old system.</li>
+      <li>Enter a <span class="ui">Reason</span> and click <span class="ui">Save adjustment</span>.</li>
+    </ol>
+    <div class="tip"><p>When you start using Flowbit mid-year, enter each person's opening balance once with Kind set to Opening balance, so carry-forward works from then on.</p></div>
+  </article>
+
+  <article class="topic" id="muster-leave-calendar">
+    <h3>Leave calendar</h3>
+    <p class="where"><span>Open: <b>HR → Leave calendar</b> or <b>Leave → Calendar</b></span><span><code>/app/hr/leave/calendar</code></span><span>Who: HR, managers (own team)</span></p>
+    <p>A month view of who is off. Use it before approving leave, to see whether too many people from one team are away on the same days.</p>
+    <figure class="shot"><img src="shots/hr-leave-calendar.jpg" alt="Leave calendar for October 2026 with Gandhi Jayanti and Dussehra shaded as holidays, Meera's approved leave on the 5th, pending leave for Ishaan, Siddharth and Pooja in amber, and a This month list on the right" loading="lazy" width="1440" height="900"><figcaption>Approved leave is solid purple, pending leave is amber and holidays are pink.</figcaption></figure>
+    <h4>On this page</h4>
+    <ul>
+      <li>Month switcher (previous and next month) and team chips to show one department.</li>
+      <li>The calendar: each day shows how many are off and their names, with holidays named.</li>
+      <li><b>This month</b>: everyone with leave this month, the type and dates, and Approved or Pending.</li>
+    </ul>
+    <h4>Check cover before approving</h4>
+    <ol class="steps">
+      <li>Open <span class="ui">Leave calendar</span> and move to the month of the request.</li>
+      <li>Click the team chip for the person's department.</li>
+      <li>Click a day to see who is off. If the team is thin, talk to the manager before approving.</li>
+      <li>Go back to <span class="ui">Leave</span> to approve or reject.</li>
+    </ol>
+  </article>
+</section>

@@ -1,0 +1,42 @@
+# Flowbit Slack app manifest. Paste into https://api.slack.com/apps → Create New App → From an app manifest.
+# Replace useflowbit.com with your APP_URL host if it differs, then copy from "Basic Information":
+#   Client ID → SLACK_CLIENT_ID, Client Secret → SLACK_CLIENT_SECRET, Signing Secret → SLACK_SIGNING_SECRET
+# Each Flowbit workspace then installs it from Settings → Integrations → Slack → Add to Slack.
+display_information:
+  name: Flowbit
+  description: Turn Slack messages into Flowbit tasks and see your day.
+  background_color: "#1d1b2e"
+  long_description: "Create Flowbit tasks from any message (message menu → Create Flowbit task), add tasks with /flowbit task in English or Hinglish (\"logo bhejo kal 5 baje @vikram\"), see /flowbit my day, and get task updates in a channel. People act as themselves: Slack users are matched to Flowbit members by email, with their own Flowbit permissions."
+features:
+  bot_user:
+    display_name: Flowbit
+    always_online: false
+  slash_commands:
+    - command: /flowbit
+      url: https://useflowbit.com/api/slack/commands
+      description: "task <text> · my day · help"
+      usage_hint: "task logo bhejo kal 5 baje @vikram"
+      should_escape: false
+  shortcuts:
+    - name: Create Flowbit task
+      type: message
+      callback_id: create_flowbit_task
+      description: Turn this message into a Flowbit task
+oauth_config:
+  redirect_urls:
+    - https://useflowbit.com/api/integrations/slack/callback
+  scopes:
+    bot:
+      - commands
+      - chat:write
+      - chat:write.public
+      - users:read
+      - users:read.email
+      - channels:read
+settings:
+  interactivity:
+    is_enabled: true
+    request_url: https://useflowbit.com/api/slack/interactions
+  org_deploy_enabled: false
+  socket_mode_enabled: false
+  token_rotation_enabled: false

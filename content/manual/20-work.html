@@ -1,0 +1,397 @@
+<section class="chapter c-work" id="work">
+  <header>
+    <div class="eyebrow">Work · Tasks</div>
+    <h2>Plan and track the work</h2>
+    <p>Work is where your team plans tasks and projects, meets, posts updates, logs time and sees how delivery is going. Everyone uses it; managers also approve time and read the reports.</p>
+  </header>
+
+  <article class="topic" id="work-basics">
+    <h3>Task basics: statuses, priorities and dates</h3>
+    <p>These rules apply on every Work page, on Home and in the reports.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Status</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td>To do</td><td>Not started yet.</td></tr>
+        <tr><td>In progress</td><td>Someone is working on it.</td></tr>
+        <tr><td>In review</td><td>Waiting for a check or approval.</td></tr>
+        <tr><td>Blocked</td><td>Cannot move until something else happens. A reason is required.</td></tr>
+        <tr><td>Done</td><td>Finished. Flowbit records when it was completed.</td></tr>
+      </tbody>
+    </table></div>
+    <p><b>Priority</b> is one of Low, Medium (the default), High or Urgent. Lists sort Urgent first.</p>
+    <div class="note"><p>Date rules:</p>
+      <ul>
+        <li><b>Overdue</b>: not done, and the due date is before today. It shows in red, for example "4d overdue".</li>
+        <li><b>Due today</b>: not done, and due today.</li>
+        <li><b>This week</b>: not done, and due today or in the next six days.</li>
+        <li>The due date cannot be before the start date.</li>
+        <li>Every task needs at least one assignee. New tasks are assigned to you unless you pick someone else.</li>
+      </ul>
+      <p>Assignees get a reminder on the day a task is due and again once it is overdue.</p></div>
+    <div class="note"><p><b>Blocked</b>: moving a task to Blocked opens <span class="ui">Why is this blocked?</span>. Type the reason; you can type @ to tell someone, and they get a notification. To unblock, choose any other status or click <span class="ui">Unblock</span>.</p></div>
+    <p><b>Who sees which tasks</b>: you see tasks you created, are assigned to or watch, tasks in projects you are on, tasks in spaces you belong to, and tasks of people in teams you lead. Owners, Admins and Managers see every task except other people's personal tasks.</p>
+  </article>
+
+  <article class="topic" id="work-tasks">
+    <h3>Tasks</h3>
+    <p class="where"><span>Open: <b>Rail → Tasks</b></span><span><code>/app/work/tasks</code></span><span>Who: everyone</span></p>
+    <p>Everything on your plate and your team's, as a list, a board or a calendar.</p>
+    <figure class="shot"><img src="shots/work-tasks.jpg" alt="Tasks page in Board view with columns To do, In progress, In review and Blocked, quick filters along the top and task cards showing key, priority, project code and due label" loading="lazy" width="1440" height="900"><figcaption>Board view. Each card shows the task key, priority, project code, due label and assignees.</figcaption></figure>
+    <h4>On this page</h4>
+    <ul>
+      <li>View switcher: <span class="ui">List</span>, <span class="ui">Board</span> (one column per status) and <span class="ui">Calendar</span> (tasks on their dates, with a <span class="ui">No due date</span> tray).</li>
+      <li><span class="ui">Search tasks, keys, tags</span>: searches titles, descriptions, tags, task keys such as VW-42, assignee, project and client names.</li>
+      <li><span class="ui">Filter</span>: Status, Priority, Due date, Assignee, Created by me, Project, Client, Space and list. Active filters appear as chips you can remove one by one.</li>
+      <li><span class="ui">Me</span>: only tasks assigned to you. <span class="ui">Sort</span>: choose the field and ascending or descending.</li>
+      <li><span class="ui">Views</span>: save the current filters, view and sort under a name, optionally with <span class="ui">Share with everyone</span>.</li>
+      <li>Quick links: <span class="ui">All tasks</span>, <span class="ui">My tasks</span>, <span class="ui">High priority</span>, <span class="ui">Due today</span>, <span class="ui">Overdue</span>, <span class="ui">This week</span>, <span class="ui">Blocked</span>, <span class="ui">Personal</span>.</li>
+      <li>List columns: Task Name, Assignee, Due, Priority, and a row menu with <span class="ui">Copy link</span>, <span class="ui">Move to project…</span> and delete. Badges show Blocked, Personal and subtasks done.</li>
+    </ul>
+    <h4>Create a task</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">Task</span> at the top right.</li>
+      <li>Enter a <span class="ui">Title</span> (at least 3 characters) and, if useful, a <span class="ui">Description</span>.</li>
+      <li>Set <span class="ui">Status</span>, <span class="ui">Priority</span> and <span class="ui">Assignees</span>.</li>
+      <li>Pick a <span class="ui">Start date</span> and <span class="ui">Due date</span>.</li>
+      <li>Optionally pick a <span class="ui">Project</span> (the client fills in from the project), a <span class="ui">Client</span>, and a <span class="ui">Space</span> with its <span class="ui">List</span>. If you pick a space you must pick a list too.</li>
+      <li>Add <span class="ui">Tags</span>, an <span class="ui">Estimate</span> such as 2h 30m, and any <span class="ui">Attachments</span>.</li>
+      <li>Click <span class="ui">Create task</span>. Assignees get a notification.</li>
+    </ol>
+    <div class="tip"><p>For speed, type a title in <span class="ui">Add a task and press Enter</span> at the top of the list, or in the box at the top of a board column. The task takes that column's status and is assigned to you. In the calendar, click a day to add a task due that day.</p></div>
+    <h4>Move tasks along</h4>
+    <ol class="steps">
+      <li>In Board view, drag a card to another column. Dropping into Blocked asks for a reason; dropping into Done records the completion time.</li>
+      <li>In List view, tick several rows to open the bulk bar: <span class="ui">Status</span>, <span class="ui">Priority</span>, <span class="ui">Assign to…</span>, <span class="ui">Due date</span>, <span class="ui">Project</span> or <span class="ui">Delete</span>. Tasks you are not allowed to change are skipped and the message says how many.</li>
+    </ol>
+    <h4>Personal tasks</h4>
+    <p>Open <span class="ui">Personal</span> and add a task there to make a private to-do. Only you and people you share it with see it. Personal tasks are assigned to you only and never show in team lists, dashboards or reports.</p>
+  </article>
+
+  <article class="topic" id="work-task-detail">
+    <h3>A task in detail</h3>
+    <p class="where"><span>Open: <b>Tasks → click a task</b></span><span><code>/app/work/tasks/{id}</code></span><span>Who: anyone who can see the task</span></p>
+    <p>Everything about one task: details, description, subtasks, checklist, files, time and the conversation.</p>
+    <figure class="shot"><img src="shots/work-task-detail.jpg" alt="Task detail for VW-7 Recipe blog layout with Start progress, Mark blocked, Watch, Copy link and Delete buttons, a Details panel, and Activity and comments on the right" loading="lazy" width="1440" height="900"><figcaption>The task key, status, project and space sit above the title. Comments and history are on the right.</figcaption></figure>
+    <h4>On this page</h4>
+    <ul>
+      <li>Header: key, status, project and list, who created it and when. Click the title to rename it (Enter saves, Esc cancels).</li>
+      <li>Action bar: the next step for the status (<span class="ui">Start progress</span>; <span class="ui">Send for review</span> or <span class="ui">Mark done</span>; <span class="ui">Unblock</span>; <span class="ui">Reopen</span>), <span class="ui">Mark blocked</span>, <span class="ui">Watch</span> / <span class="ui">Unwatch</span>, <span class="ui">Copy link</span> and <span class="ui">Delete</span>.</li>
+      <li><span class="ui">DETAILS</span>: Status, Priority, Assignees, Start date, Due date, Estimate, Tags, Project, Milestone, Client, Space / list. Each change saves on its own.</li>
+      <li><span class="ui">DESCRIPTION</span>: saves when you click away.</li>
+      <li>Subtasks, checklist, attachments and time logged against the task.</li>
+      <li><span class="ui">ACTIVITY &amp; COMMENTS</span> with <span class="ui">All</span>, <span class="ui">Comments</span> and <span class="ui">Activity</span> filters. <span class="ui">WATCHERS</span> lists who gets status changes and comments.</li>
+    </ul>
+    <h4>Subtasks and checklist</h4>
+    <ul>
+      <li><b>Subtasks</b> are real tasks under this one, each with its own status, assignee and dates. Type in <span class="ui">Add a subtask and press Enter</span>. A subtask cannot have its own subtasks. Cards show "done/total".</li>
+      <li><b>Checklist</b> items are simple ticks. Type in <span class="ui">Add an item and press Enter</span>.</li>
+    </ul>
+    <h4>Comment and mention someone</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">Write a comment…</span>.</li>
+      <li>Type @ and pick a person to mention them. They get a notification.</li>
+      <li>Click <span class="ui">Comment</span>, or press ⌘/Ctrl + Enter.</li>
+      <li>Use <span class="ui">Reply</span>, <span class="ui">Edit</span>, <span class="ui">Delete</span> or a reaction on any comment. Deleting a comment also deletes its replies.</li>
+    </ol>
+    <h4>Attach files and links</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">Upload files</span>, or drop files on the panel. Images and PDFs open in a preview.</li>
+      <li>For a link (Figma, Google Drive), click <span class="ui">Add a link</span>, fill <span class="ui">Title</span> and <span class="ui">URL</span>, then <span class="ui">Add link</span>.</li>
+    </ol>
+    <h4>Delete a task</h4>
+    <ol class="steps"><li>Click <span class="ui">Delete</span> and confirm with <span class="ui">Delete task</span>. Subtasks, comments and time entries go with it.</li></ol>
+    <div class="warn"><p>Deleting cannot be undone. A task with time in a submitted or approved timesheet cannot be deleted until the manager sends that week back.</p></div>
+    <p>The creator, the assignees and Managers or above can edit and delete a task.</p>
+  </article>
+
+  <article class="topic" id="work-spaces">
+    <h3>Spaces</h3>
+    <p class="where"><span>Open: <b>Rail → Spaces</b></span><span><code>/app/work/spaces</code></span><span>Who: everyone</span></p>
+    <p>A space groups lists of tasks by team or area, for example Marketing, Engineering or Design. Inside a space, tasks live in lists.</p>
+    <figure class="shot"><img src="shots/work-spaces.jpg" alt="Spaces page with Active and Archived tabs, a search box and cards for Marketing, Engineering and Design showing open tasks, progress and members" loading="lazy" width="1440" height="900"><figcaption>Each card shows open tasks, progress, number of lists and members.</figcaption></figure>
+    <h4>Create a space</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">New space</span>.</li>
+      <li>Enter a <span class="ui">Name</span> and <span class="ui">Description</span>, and pick a <span class="ui">Colour</span> and <span class="ui">Icon</span>.</li>
+      <li>Click <span class="ui">Create space</span>. You become its first member.</li>
+    </ol>
+    <p>Use the <span class="ui">Active</span> / <span class="ui">Archived</span> tabs and <span class="ui">Search spaces</span> to find one.</p>
+  </article>
+
+  <article class="topic" id="work-space-detail">
+    <h3>Inside a space</h3>
+    <p class="where"><span>Open: <b>Spaces → click a space</b></span><span><code>/app/work/spaces/{id}</code></span><span>Who: space members, Managers and above</span></p>
+    <figure class="shot"><img src="shots/work-space-detail.jpg" alt="Marketing space with Overview, Tasks and Members tabs, a lists column, a status bar, recent tasks, list progress and resources" loading="lazy" width="1440" height="900"><figcaption>The Overview tab: status split, recent tasks, progress per list and files from the space's tasks.</figcaption></figure>
+    <h4>On this page</h4>
+    <ul>
+      <li>Header: member avatars, <span class="ui">Share</span>, <span class="ui">Manage</span> (edit name, colour, icon; archive or restore) and delete.</li>
+      <li><span class="ui">LISTS</span> column: <span class="ui">All lists</span> and each list. <span class="ui">New list</span> adds one.</li>
+      <li>Tabs: <span class="ui">Overview</span> (status split, recent tasks, <span class="ui">LISTS</span> progress, <span class="ui">RESOURCES</span>), <span class="ui">Tasks</span> (the full task list, board or calendar for this space) and <span class="ui">Members</span>.</li>
+    </ul>
+    <h4>Add a list</h4>
+    <ol class="steps"><li>Click <span class="ui">New list</span>.</li><li>Enter a <span class="ui">Name</span>, optional description and colour.</li><li>Click <span class="ui">Create list</span>.</li></ol>
+    <h4>Share the space</h4>
+    <ol class="steps"><li>Open <span class="ui">Members</span> or click <span class="ui">Share</span>.</li><li>Click <span class="ui">Add people</span> and pick teammates. Members get full access to every list.</li><li>To take someone out, click <span class="ui">Remove</span>. Their tasks stay. Anyone can <span class="ui">Leave</span> a space; afterwards they see only their own tasks in it.</li></ol>
+    <div class="note"><p>Deleting a space that still has tasks archives it instead. An empty space is deleted. Archived spaces can be restored from the <span class="ui">Archived</span> tab. Lists can be archived and restored the same way.</p></div>
+  </article>
+
+  <article class="topic" id="work-projects">
+    <h3>Projects</h3>
+    <p class="where"><span>Open: <b>Rail → Project</b></span><span><code>/app/work/projects</code></span><span>Who: everyone sees projects they are on; Managers and above see all</span></p>
+    <p>A project groups the tasks, milestones and files for one piece of client or internal work, with a progress figure and a health score.</p>
+    <figure class="shot"><img src="shots/work-projects.jpg" alt="Projects page in Cards view with status and health filters, sort options and project cards showing status, health, progress, totals and due date" loading="lazy" width="1440" height="900"><figcaption>Each card shows status, health, progress and Total, Done and Overdue counts.</figcaption></figure>
+    <h4>On this page</h4>
+    <ul>
+      <li><span class="ui">Cards</span> or <span class="ui">Table</span>; <span class="ui">Active</span> or <span class="ui">Archived</span>; <span class="ui">All projects</span> or <span class="ui">My projects</span>; <span class="ui">Search name or code</span>.</li>
+      <li>Filters: <span class="ui">STATUS</span> (Planning, Active, On hold, Completed, Cancelled), <span class="ui">HEALTH</span> (On track, At risk, Off track) and client, then <span class="ui">Apply</span>.</li>
+      <li><span class="ui">SORT</span>: Date updated, Date created, Name, Health, Progress.</li>
+    </ul>
+    <h4>Create a project</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">New project</span>.</li>
+      <li>Enter the <span class="ui">Project name</span>. Leave <span class="ui">Code</span> blank to get PROJ-001, PROJ-002 and so on, or type your own such as WEB.</li>
+      <li>Pick a <span class="ui">Client</span>, or leave it as internal. <span class="ui">New client</span> opens the client form.</li>
+      <li>Set <span class="ui">Status</span>, <span class="ui">Description</span>, <span class="ui">Start date</span> and <span class="ui">End date</span>.</li>
+      <li>Choose the <span class="ui">Lead</span> and add <span class="ui">Members</span>, a <span class="ui">Colour</span> and <span class="ui">Tags</span>.</li>
+      <li>Click <span class="ui">Create project</span>. The lead gets a notification.</li>
+    </ol>
+    <div class="note"><p><b>Progress</b> is done tasks divided by all tasks (subtasks not counted). <b>Health</b> is a score out of 100 built from progress, overdue tasks, blocked tasks and how far through the timeline you are. 80 or more is On track, 60 to 79 is At risk, below 60 is Off track.</p></div>
+  </article>
+
+  <article class="topic" id="work-project-detail">
+    <h3>Inside a project</h3>
+    <p class="where"><span>Open: <b>Projects → click a project</b></span><span><code>/app/work/projects/{id}</code></span><span>Who: project lead, members, Managers and above</span></p>
+    <figure class="shot"><img src="shots/work-project-detail.jpg" alt="Project Internal ops and tooling with Overview, Tasks, Milestones, Files, Activity and Settings tabs, stat cards for Total, Completed, In progress and Overdue, and a health score of 60 out of 100" loading="lazy" width="1440" height="900"><figcaption>The Overview tab. The health card explains what is pulling the score down.</figcaption></figure>
+    <h4>Tabs</h4>
+    <ul>
+      <li><span class="ui">Overview</span>: progress rings, status, health, lead, people and timeline; cards for Total, Completed, In progress and Overdue; <span class="ui">TIMELINE</span> (time used against work done); <span class="ui">HEALTH</span>; task progress breakdown; next milestones; members; description.</li>
+      <li><span class="ui">Tasks</span>: the project's tasks as list, board or calendar. New tasks get this project and client.</li>
+      <li><span class="ui">Milestones</span>: the big moments, each with a title, due date and progress from its linked tasks. A milestone past its date and not done shows Overdue.</li>
+      <li><span class="ui">Files</span>: <span class="ui">Project files</span> you upload, plus attachments <span class="ui">From tasks</span> in this project.</li>
+      <li><span class="ui">Activity</span>: who changed what, newest first.</li>
+      <li><span class="ui">Settings</span>: edit the project and the danger zone.</li>
+    </ul>
+    <h4>Add a milestone</h4>
+    <ol class="steps"><li>Open <span class="ui">Milestones</span> and click <span class="ui">Add milestone</span>.</li><li>Enter <span class="ui">Title</span>, <span class="ui">Due date</span> and optional <span class="ui">Description</span>, then <span class="ui">Save milestone</span>.</li><li>Link tasks by choosing this milestone in each task's <span class="ui">Milestone</span> field. The task must be in the project.</li></ol>
+    <h4>Edit, archive or delete</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">Edit</span> to change details, lead or members.</li>
+      <li>When the work is finished, click <span class="ui">Archive</span>. It leaves the list and can be restored from <span class="ui">Archived</span>.</li>
+      <li><span class="ui">Delete</span> removes only empty projects, and only Owners and Admins can do it.</li>
+    </ol>
+    <div class="warn"><p>A project with tasks cannot be deleted. Delete or move its tasks first, or archive it instead.</p></div>
+  </article>
+
+  <article class="topic" id="work-teams">
+    <h3>Teams</h3>
+    <p class="where"><span>Open: <b>Rail → Team</b></span><span><code>/app/work/teams</code></span><span>Who: everyone sees teams; Managers and above create and edit</span></p>
+    <p>Teams group people who work together and show how much each team is carrying.</p>
+    <figure class="shot"><img src="shots/work-teams.jpg" alt="Teams page listing Design, Engineering and Growth cards with lead, member count, open tasks and Join button" loading="lazy" width="1440" height="900"><figcaption>Each card shows the lead (crown), members and open tasks.</figcaption></figure>
+    <h4>Create a team</h4>
+    <ol class="steps"><li>Click <span class="ui">New team</span>.</li><li>Enter <span class="ui">Team name</span> and <span class="ui">Description</span>, pick a colour, add <span class="ui">Members</span> and choose a <span class="ui">Team lead</span>.</li><li>Click <span class="ui">Create team</span>.</li></ol>
+    <p>Anyone can click <span class="ui">Join</span> on a team or <span class="ui">Leave</span> one. Team names must be unique.</p>
+    <div class="note"><p>A team lead sees the tasks of everyone in the team. Deleting a team removes its memberships; members' tasks stay.</p></div>
+  </article>
+
+  <article class="topic" id="work-team-detail">
+    <h3>Team members and workload</h3>
+    <p class="where"><span>Open: <b>Team → click a team</b></span><span><code>/app/work/teams/{id}</code></span><span>Who: everyone; Managers and above change members</span></p>
+    <figure class="shot"><img src="shots/work-team-detail.jpg" alt="Design team page with Members and Workload tabs, a member list with Lead badge, Make lead and Make member buttons, and Add people" loading="lazy" width="1440" height="900"><figcaption>The Members tab. Use the crown buttons to change the lead.</figcaption></figure>
+    <h4>Manage members</h4>
+    <ol class="steps"><li>Click <span class="ui">Add people</span>, choose people and click <span class="ui">Add to team</span>.</li><li>Click <span class="ui">Make lead</span> on a member. A team has at most one lead, so first click <span class="ui">Make member</span> on the current lead.</li><li>Use the remove icon to take someone out.</li></ol>
+    <h4>Read the workload</h4>
+    <p>Open <span class="ui">Workload</span>. For each person it shows Open, Overdue, Due in period, Blocked, Completed, Estimate open, Logged and Load. Load compares logged time with capacity (8 hours per working day). Green is under 70%, amber 70 to 100%, red over 100%. Click a person to see their tasks.</p>
+  </article>
+
+  <article class="topic" id="work-meetings">
+    <h3>Meetings</h3>
+    <p class="where"><span>Open: <b>Rail → Meeting</b></span><span><code>/app/work/meetings</code></span><span>Who: everyone</span></p>
+    <p>Agendas, attendees, notes and the action items that come out of them. You see meetings you organise or attend.</p>
+    <figure class="shot"><img src="shots/work-meetings.jpg" alt="Meetings page with List and Calendar views, Upcoming, Past and All filters, Organised by me, and a Sprint review meeting marked Next up with a Join button" loading="lazy" width="1440" height="900"><figcaption>The next meeting is marked <span class="ui">Next up</span>. <span class="ui">Join</span> appears when there is a link.</figcaption></figure>
+    <h4>Schedule a meeting</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">Schedule meeting</span>.</li>
+      <li>Fill <span class="ui">Title</span>, <span class="ui">Date</span>, <span class="ui">Start</span> and <span class="ui">End</span>.</li>
+      <li>Pick <span class="ui">Attendees</span>.</li>
+      <li>Paste a <span class="ui">Meeting link</span> (Google Meet, Zoom or Teams) and/or a <span class="ui">Location</span> such as Board room.</li>
+      <li>Write the <span class="ui">Agenda</span> and click <span class="ui">Schedule</span>. Attendees get a notification.</li>
+    </ol>
+    <div class="note"><p>End must be after start, and a meeting can be at most 12 hours. Flowbit does not create calendar events or video links for you; paste the link from your own tool.</p></div>
+  </article>
+
+  <article class="topic" id="work-meeting-detail">
+    <h3>A meeting in detail</h3>
+    <p class="where"><span>Open: <b>Meetings → click a meeting</b></span><span><code>/app/work/meetings/{id}</code></span><span>Who: organiser and attendees</span></p>
+    <figure class="shot"><img src="shots/work-meeting-detail.jpg" alt="Sprint review meeting page with Join, Edit and Cancel meeting buttons, the agenda and details, attendees with Going and No reply, a notes box and action items" loading="lazy" width="1440" height="900"><figcaption>The attendee list shows each person's reply.</figcaption></figure>
+    <h4>Reply to an invite</h4>
+    <p>Click <span class="ui">Accept</span>, <span class="ui">Maybe</span> or <span class="ui">Decline</span>. The organiser sees the count, for example "1 going, 4 no reply".</p>
+    <h4>Take notes and turn decisions into tasks</h4>
+    <ol class="steps">
+      <li>Type in the notes box. It saves when you click away.</li>
+      <li>Under <span class="ui">ACTION ITEMS</span>, type an item, pick an <span class="ui">Assignee</span> and <span class="ui">Due date</span>, and click <span class="ui">Add</span>.</li>
+      <li>Turn an item into a task with its create-task button. The task links back to the meeting.</li>
+    </ol>
+    <h4>Change or cancel</h4>
+    <p>Only the organiser can <span class="ui">Edit</span> or <span class="ui">Cancel meeting</span>. Replies are kept for people who stay on the list. A cancelled meeting stays visible, marked Cancelled, and attendees are told.</p>
+  </article>
+
+  <article class="topic" id="work-posts">
+    <h3>Posts</h3>
+    <p class="where"><span>Open: <b>Side panel → TOOLS → Posts</b></span><span><code>/app/work/posts</code></span><span>Who: everyone; announcements and policies by managers, HR and above</span></p>
+    <p>The workspace notice board: announcements, updates, kudos, polls, policies and more, each aimed at the people who need it.</p>
+    <figure class="shot"><img src="shots/work-posts.jpg" alt="Posts feed with filter tabs, sort options, Mentioned me filter, a composer box and announcement posts showing Pinned, High priority and Seen by counts" loading="lazy" width="1440" height="900"><figcaption>Pinned posts stay at the top. "Seen by 11 of 16" is the read receipt. This screenshot shows the earlier feed; post types now appear as filter chips with icons.</figcaption></figure>
+    <h4>The ten post types</h4>
+    <div class="tbl"><table>
+      <thead><tr><th>Type</th><th>Use it for</th></tr></thead>
+      <tbody>
+        <tr><td>Announcement</td><td>Something everyone must see, with a priority (Low to Urgent). It also pops up when people next open Flowbit. Managers, HR and above only.</td></tr>
+        <tr><td>Policy</td><td>A rule people must read. Each person clicks <span class="ui">I've read this</span>; the author sees who has not, can <span class="ui">Export CSV</span> and remind only them. Managers, HR and above only.</td></tr>
+        <tr><td>Update, Win, Question</td><td>Everyday news, results and questions to the team.</td></tr>
+        <tr><td>Kudos</td><td>Thank one or more people by name. They and their managers are told, and it shows on their Muster profile.</td></tr>
+        <tr><td>Poll</td><td>2 to 8 <span class="ui">Options</span>, with <span class="ui">Allow several choices</span>, <span class="ui">Anonymous votes</span> and <span class="ui">Closes on</span>. Results show as live bars after you vote.</td></tr>
+        <tr><td>Celebration, Welcome</td><td>Birthdays, work anniversaries and new joiners. Flowbit can post these by itself from Muster dates (Settings → Automations).</td></tr>
+        <tr><td>Event</td><td>Something happening, with <span class="ui">When</span> and <span class="ui">Where</span>.</td></tr>
+      </tbody>
+    </table></div>
+    <h4>Write a post</h4>
+    <ol class="steps">
+      <li>Open the composer and pick a <span class="ui">Type</span>.</li>
+      <li>Enter a <span class="ui">Title</span> and the <span class="ui">Message</span>. Add up to 4 images or GIFs, each up to 4 MB, and <span class="ui">Mention people</span> if you like.</li>
+      <li>Under <span class="ui">Who sees it and when</span>, choose the <span class="ui">Audience</span>: everyone, <span class="ui">Some roles</span>, chosen teams, departments or locations, or <span class="ui">Only mentioned people</span>.</li>
+      <li>Post now, or pick <span class="ui">At a set time</span> and a <span class="ui">Publish at (IST)</span> time up to 90 days ahead. Your scheduled posts are listed for you until they go out.</li>
+    </ol>
+    <p>Filter the feed by type, by <span class="ui">Mentioned me</span> or "about me", and sort or search it. People react and reply; the author or a moderator can edit or remove a post, and announcers can <span class="ui">Pin to top</span>.</p>
+  </article>
+
+  <article class="topic" id="work-post-detail">
+    <h3>A post in detail</h3>
+    <p class="where"><span>Open: <b>Posts → click a post</b></span><span><code>/app/work/posts/{id}</code></span><span>Who: everyone in the post's audience</span></p>
+    <figure class="shot"><img src="shots/work-post-detail.jpg" alt="Diwali holidays announcement post with Pinned and High labels, Seen by 11 of 16, and a reply box with Mention someone and Reply button" loading="lazy" width="1440" height="900"><figcaption>Opening a post marks it read for you.</figcaption></figure>
+    <ol class="steps">
+      <li>Read the post and add a reaction if you like.</li>
+      <li>Type in <span class="ui">Write a reply</span>, optionally pick someone in <span class="ui">Mention someone</span>, and click <span class="ui">Reply</span>. The author is notified.</li>
+      <li>The author and moderators can click the Seen by count to see who has read it and who has not.</li>
+    </ol>
+  </article>
+
+  <article class="topic" id="work-whiteboards">
+    <h3>Whiteboards</h3>
+    <p class="where"><span>Open: <b>Side panel → TOOLS → Whiteboard</b></span><span><code>/app/work/whiteboards</code></span><span>Who: everyone</span></p>
+    <p>Sketch flows and ideas. Boards save to the workspace as you draw.</p>
+    <figure class="shot"><img src="shots/work-whiteboards.jpg" alt="Whiteboards page with Mine, Shared with me and All tabs, Last updated and Date created sort, and a board card" loading="lazy" width="1440" height="900"><figcaption>Your boards, with tabs for boards shared with you.</figcaption></figure>
+    <ol class="steps">
+      <li>Click <span class="ui">New whiteboard</span>. It opens as "Untitled whiteboard".</li>
+      <li>Click the title to rename it.</li>
+      <li>From a card's menu: <span class="ui">Rename</span>, <span class="ui">Share</span>, <span class="ui">Duplicate</span> or <span class="ui">Delete</span>.</li>
+    </ol>
+  </article>
+
+  <article class="topic" id="work-whiteboard-detail">
+    <h3>Drawing on a whiteboard</h3>
+    <p class="where"><span>Open: <b>Whiteboards → click a board</b></span><span><code>/app/work/whiteboards/{id}</code></span><span>Who: owner and people it is shared with</span></p>
+    <figure class="shot"><img src="shots/work-whiteboard-detail.jpg" alt="Q3 retro whiteboard with drawing toolbar, coloured shapes on the canvas, Saved indicator and Share button" loading="lazy" width="1440" height="900"><figcaption>The status next to <span class="ui">Share</span> reads Saved, Saving… or Unsaved changes.</figcaption></figure>
+    <ul>
+      <li>The toolbar has select, hand (move the canvas), shapes, arrows, lines, pen, text, image and eraser. Zoom and undo are at the bottom left.</li>
+      <li>Click <span class="ui">Share</span>, pick people and click <span class="ui">Save access</span>. Shared people can edit.</li>
+    </ul>
+    <div class="note"><p>One person should edit at a time. If someone else saved first, Flowbit says the board changed elsewhere; click <span class="ui">Reload</span> to see the latest. Very large boards with many images cannot be saved.</p></div>
+  </article>
+
+  <article class="topic" id="work-time">
+    <h3>Time tracking</h3>
+    <p class="where"><span>Open: <b>Side panel → TOOLS → Time</b></span><span><code>/app/work/time</code></span><span>Who: everyone</span></p>
+    <p>Track time with the timer or log it by hand against a task or project, then submit your week for approval.</p>
+    <figure class="shot"><img src="shots/work-time.jpg" alt="Time page with a Timer card, Today 0m of 8h, a weekly timesheet from Monday to Sunday with day totals, and an Entries list with All, Billable and Non-billable filters" loading="lazy" width="1440" height="900"><figcaption>The timer at the top, the week grid in the middle, entries below.</figcaption></figure>
+    <h4>Use the timer</h4>
+    <ol class="steps">
+      <li>In <span class="ui">TIMER</span>, choose a task or project in <span class="ui">Pick a task or project</span>.</li>
+      <li>Optionally type <span class="ui">What are you working on?</span>.</li>
+      <li>Click <span class="ui">Start timer</span>. The running time shows in the top bar on every page.</li>
+      <li>Stop it from the top bar or this card. The time is logged.</li>
+    </ol>
+    <div class="note"><p>Only one timer runs at a time. Starting a new one stops the last and logs it. A running timer cannot be edited or deleted; stop it first.</p></div>
+    <h4>Log time by hand</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">Log time</span>.</li>
+      <li>Pick the <span class="ui">Task or project</span>, the <span class="ui">Date</span> and the <span class="ui">Time</span> (for example 1:30, 1h 30m or 90m).</li>
+      <li>Add a <span class="ui">Note</span>, set <span class="ui">Billable</span>, and click <span class="ui">Log time</span>.</li>
+    </ol>
+    <div class="tip"><p>In the weekly grid you can type a time straight into a day cell; it saves when you leave the cell. Use <span class="ui">Add a task or project row</span> to add a row.</p></div>
+    <h4>Submit your week</h4>
+    <ol class="steps"><li>Check the <span class="ui">DAY TOTAL</span> row against the expected hours (8 hours per working day).</li><li>Click <span class="ui">Submit week</span> and confirm. Your approver is notified.</li></ol>
+    <div class="note"><p>Once submitted, the week is locked. If your manager sends it back, the reason shows on the week and you can edit and submit again. You cannot submit an empty week.</p></div>
+  </article>
+
+  <article class="topic" id="work-time-approvals">
+    <h3>Time approvals</h3>
+    <p class="where"><span>Open: <b>Side panel → TOOLS → Time approvals</b></span><span><code>/app/work/time/approvals</code></span><span>Who: managers of the person, Managers, Admins, Owner</span></p>
+    <p>Review submitted weeks, approve them or send them back with a reason.</p>
+    <figure class="shot"><img src="shots/work-time-approvals.jpg" alt="Time approvals page with Pending, Approved and Sent back tabs and the empty state No timesheets waiting for you" loading="lazy" width="1440" height="900"><figcaption>Seen as a Manager with nothing waiting.</figcaption></figure>
+    <ol class="steps">
+      <li>Open <span class="ui">Pending</span>. Each row shows the person, the week, total and billable hours.</li>
+      <li>Click <span class="ui">Show days</span> to check the day-by-day entries.</li>
+      <li>Click <span class="ui">Approve</span>, or tick several weeks to approve them together.</li>
+      <li>To return a week, click <span class="ui">Send back</span>, write what needs fixing (at least 5 characters) and confirm.</li>
+    </ol>
+    <div class="note"><p>A week goes to the person's manager; Owners, Admins and Managers can also approve. Nobody can approve their own timesheet.</p></div>
+  </article>
+
+  <article class="topic" id="work-reports">
+    <h3>Work reports</h3>
+    <p class="where"><span>Open: <b>Rail → Reports</b></span><span><code>/app/work/reports</code></span><span>Who: everyone sees their own scope; Managers, Finance and above see all</span></p>
+    <p>Throughput, overdue work, people, project health and time for a date range.</p>
+    <figure class="shot"><img src="shots/work-reports.jpg" alt="Reports page on the Throughput tab with date presets, project, team and assignee filters, Export CSV, and a Created vs Completed line chart for October 2026" loading="lazy" width="1440" height="900"><figcaption>Pick a period, narrow by project, team or person, then export.</figcaption></figure>
+    <h4>Run a report</h4>
+    <ol class="steps">
+      <li>Pick a tab.</li>
+      <li>Choose <span class="ui">This week</span>, <span class="ui">Last week</span>, <span class="ui">This month</span>, <span class="ui">Last month</span> or <span class="ui">This quarter</span>, or type dates and click <span class="ui">Apply dates</span>.</li>
+      <li>Narrow by project, team or person, then <span class="ui">Filter</span>.</li>
+      <li>Click <span class="ui">Export CSV</span> to download the section.</li>
+    </ol>
+    <div class="tbl"><table>
+      <thead><tr><th>Tab</th><th>What it shows</th></tr></thead>
+      <tbody>
+        <tr><td>Throughput</td><td>Tasks created and completed per day, and average cycle time (from start, or creation, to done).</td></tr>
+        <tr><td>Overdue</td><td>Open tasks past due today, by age (1–3, 4–7, 8–14, 15+ days), assignee and project. Oldest first.</td></tr>
+        <tr><td>By assignee</td><td>Per person: open, completed, overdue, on-time %, average cycle, logged hours and estimate variance.</td></tr>
+        <tr><td>Project health</td><td>Every active project's lead, status, health, completion, open, overdue, blocked, schedule and logged time.</td></tr>
+        <tr><td>Time by project</td><td>Billable and non-billable hours per project and the people who logged most. Switch to <span class="ui">Only approved time</span> if needed.</td></tr>
+      </tbody>
+    </table></div>
+    <p>Personal tasks are never counted.</p>
+  </article>
+
+  <article class="topic" id="work-arc">
+    <h3>Arc assistant</h3>
+    <p class="where"><span>Open: <b>Rail → Arc</b></span><span><code>/app/arc</code></span><span>Who: everyone</span></p>
+    <p>Arc searches your workspace and drafts plans and updates for you. <b>AI reads, people decide</b>: Arc never changes anything on its own. Every draft waits for you to click <span class="ui">Apply</span>.</p>
+    <figure class="shot"><img src="shots/work-arc.jpg" alt="Arc page with the greeting Hi Sanskaar, what do you need, a search box, and Outline a project, Break down a task and Progress update buttons" loading="lazy" width="1440" height="900"><figcaption>"Arc reads, you decide: drafts change nothing until you click Apply."</figcaption></figure>
+    <h4>Search the workspace</h4>
+    <p>Type a task key like VW-42, a project, a person, or a word such as "overdue", and press Enter. Results are grouped into Tasks, Projects, Clients, People, Posts and Meetings, and only include what you are allowed to see. An exact task key opens the task.</p>
+    <h4>Outline a project</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">Outline a project</span>.</li>
+      <li>Enter a <span class="ui">Project name</span> (or tick <span class="ui">Add to an existing project</span>), a <span class="ui">Goal in one line</span> and a <span class="ui">Start date</span>.</li>
+      <li>Click <span class="ui">Draft outline</span>. Arc proposes milestones with tasks, estimates and priorities.</li>
+      <li>Edit, remove or <span class="ui">Add task</span> rows as you like.</li>
+      <li>Click <span class="ui">Apply</span> to create them, or <span class="ui">Discard</span>.</li>
+    </ol>
+    <h4>Break down a task</h4>
+    <ol class="steps"><li>Click <span class="ui">Break down a task</span> and pick an open task.</li><li>Click <span class="ui">Suggest subtasks</span>.</li><li>Edit the suggestions and click <span class="ui">Apply</span> to add them as subtasks.</li></ol>
+    <h4>Progress update</h4>
+    <ol class="steps"><li>Click <span class="ui">Progress update</span>, choose the <span class="ui">Period</span> (This week or Last week) and what it is <span class="ui">About</span> (My work, a project or a team).</li><li>Click <span class="ui">Write update</span>. Arc writes it from real data: tasks completed, overdue, blocked, time logged and what is due next.</li><li>Click <span class="ui">Copy</span>, or <span class="ui">Post as update</span> to share it in Posts.</li></ol>
+    <div class="note"><p>Each draft says whether it was drafted by Claude or built from a template. If the AI service is not set up or does not answer, Arc uses its built-in templates. The numbers always come from your workspace. <span class="ui">Clear history</span> removes your past Arc requests.</p></div>
+  </article>
+  <article class="topic" id="work-client-portal">
+    <h3>Client portal</h3>
+    <p class="where"><span>Turn on: <b>Clients → a client → Contacts → Client portal</b></span><span>Client's link: <code>/portal/your-workspace</code></span><span>Who: owners, admins and people who manage clients</span></p>
+    <p>Give a client their own sign-in to see their projects, approve work and pay invoices, without a Flowbit seat. It is part of Suite, comes with the client portal add-on, and is on during the 15-day trial. The Free plan does not include it, or any other paid add-on (custom domains, Meetings AI).</p>
+    <ol class="steps">
+      <li>Open the client, go to <span class="ui">Contacts</span>, switch the <span class="ui">Client portal</span> on and <span class="ui">Invite</span> the people at the client who should see it.</li>
+      <li>In a project's <span class="ui">Settings</span>, switch the <span class="ui">Client portal</span> card on to share that project.</li>
+      <li>On a task, tick <span class="ui">Client can see this</span>, or click <span class="ui">Send for approval</span> to ask the client to approve it (the task becomes visible to them).</li>
+    </ol>
+    <p>Clients sign in with a six-digit code sent to their email; there is no password. They see only their own company: shared projects with status, health, progress and milestones, the tasks you made visible, approvals (approve or ask for changes, with a comment), invoices and quotes with Pay now, their statement, and files on shared projects and tasks. Their answers are logged on the task as "name (client)" and you are notified.</p>
+    <div class="note"><p>The portal carries your logo, name and brand colour, and never opens the rest of Flowbit. Removing a contact signs them out for good.</p></div>
+  </article>
+</section>

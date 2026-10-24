@@ -1,0 +1,509 @@
+<section class="chapter c-muster" id="muster-pay" style="border-top:0;margin-top:0;padding-top:0">
+
+  <article class="topic" id="muster-payroll">
+    <h3>Payroll months</h3>
+    <p class="where"><span>Open: <b>HR → Pay → Payroll</b></span><span><code>/app/hr/payroll</code></span><span>Who: HR, Finance and anyone with payroll access</span></p>
+    <p>This page lists every payroll month, newest first. Each month moves through eight gates, from locked attendance to published payslips. You open a month here and then do all the work on the month's own page.</p>
+    <figure class="shot"><img src="shots/hr-payroll.jpg" alt="Payroll page with two warning banners, an October 2026 card at Gate 0 of 8, and a Payroll months table showing October 2026 and September 2026" loading="lazy" width="1440" height="900"><figcaption>The newest month sits on top with its progress bar. Banners above it warn about anything that will block or delay payroll.</figcaption></figure>
+    <h4>On this page</h4>
+    <ul>
+      <li><span class="ui">Salary structures</span> opens the page where you set each person's pay and the PF, ESI and PT rates.</li>
+      <li><span class="ui">Open a month</span> starts a new payroll month.</li>
+      <li>Warning banners. For example, <span class="ui">1 set of statutory rates awaiting confirmation</span> with a <span class="ui">Review rates</span> button, or <span class="ui">1 bank account change not verified yet</span>.</li>
+      <li>The current month card shows its stage (for example <span class="ui">Attendance open</span>), a progress bar such as <span class="ui">Gate 0 of 8</span>, and the figures <span class="ui">Employees</span>, <span class="ui">Gross</span>, <span class="ui">Deductions</span> and <span class="ui">Net payable</span>.</li>
+      <li>The <span class="ui">Payroll months</span> table has the columns <span class="ui">Month</span>, <span class="ui">Stage</span>, <span class="ui">Last step</span> (for example "Generated 29 Sep 2026 · paid 30 Sep 2026"), <span class="ui">Employees</span>, <span class="ui">Gross</span>, <span class="ui">Deductions</span>, <span class="ui">Claims</span> and <span class="ui">Net payable</span>. Click a month to open it.</li>
+    </ul>
+    <h4>Open a payroll month</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">Open a month</span>.</li>
+      <li>Pick the <span class="ui">Month</span>.</li>
+      <li>Click <span class="ui">Open month</span>. Flowbit takes you to the new month's page.</li>
+    </ol>
+    <div class="note"><p>Each calendar month can be opened only once. If it is already open, Flowbit takes you to the existing month. You can open a month before its attendance is locked, so that approved claims can be sent to it early.</p></div>
+  </article>
+
+  <article class="topic" id="muster-payroll-run">
+    <h3>Run payroll for a month</h3>
+    <p class="where"><span>Open: <b>Payroll → pick a month</b></span><span><code>/app/hr/payroll/{id}</code></span><span>Who: HR runs it, Finance approves, people with lock and release rights finish it</span></p>
+    <p>This is where a month's salaries are worked out, checked, approved, paid and sent as payslips. Only the next allowed step is shown as a button, and only to people whose role allows that step.</p>
+    <figure class="shot"><img src="shots/hr-payroll-run.jpg" alt="Payroll · October 2026 page with an eight-step progress bar, banners about locking attendance, blocked statutory rates, unscheduled claims and a bank change to verify, and empty totals" loading="lazy" width="1440" height="900"><figcaption>October 2026 before generation. Generate payroll stays disabled until attendance is locked and the statutory rates are confirmed.</figcaption></figure>
+
+    <h4>The eight gates</h4>
+    <div class="tbl"><table>
+      <thead><tr><th>#</th><th>Gate</th><th>Button</th><th>What it means</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Attendance locked</td><td>(done in Attendance)</td><td>The month register is locked, so payable and loss-of-pay days are final.</td></tr>
+        <tr><td>2</td><td>Claims closed</td><td><span class="ui">Close claim collection</span></td><td>Claim forms paid with this month's salary stop taking claims. Optional.</td></tr>
+        <tr><td>3</td><td>Generated</td><td><span class="ui">Generate payroll</span> / <span class="ui">Regenerate</span></td><td>Every person's pay is worked out and the salary register is built.</td></tr>
+        <tr><td>4</td><td>HR reviewed</td><td><span class="ui">Mark HR reviewed</span></td><td>HR has checked attendance, adjustments, holds and new joiners.</td></tr>
+        <tr><td>5</td><td>Finance approved</td><td><span class="ui">Finance approve</span></td><td>Finance confirms the salary register is correct.</td></tr>
+        <tr><td>6</td><td>Locked</td><td><span class="ui">Lock payroll</span></td><td>Every figure is frozen. The bank file can now be downloaded.</td></tr>
+        <tr><td>7</td><td>Salary released</td><td><span class="ui">Mark salaries released</span></td><td>You record the date and bank reference of the salary payment.</td></tr>
+        <tr><td>8</td><td>Payslips published</td><td><span class="ui">Publish and email payslips</span></td><td>Each person gets a PDF payslip by email and in My payslips.</td></tr>
+      </tbody>
+    </table></div>
+
+    <h4>Banners you may see</h4>
+    <ul>
+      <li><span class="ui">Lock October 2026 attendance, then generate payroll</span>, with <span class="ui">Open attendance</span>. Payroll uses the locked month register for payable and loss-of-pay days. If attendance is reopened after generation, the banner asks you to regenerate once the corrections are in.</li>
+      <li><span class="ui">Payroll is blocked</span>. No statutory rates exist for the month, or the rates have not been confirmed. Click <span class="ui">Statutory rates</span> to fix it.</li>
+      <li><span class="ui">2 approved claims are not in any payroll month</span>, with <span class="ui">Send to payroll</span>. Send them before you generate, or regenerate after, so they reach net pay.</li>
+      <li><span class="ui">1 bank account change to verify before locking</span>. It shows the old and new account (masked), the IFSC and the date. Check the change with the person, then click <span class="ui">Verify</span>.</li>
+      <li>A list of people skipped at the last generation, with the reason (for example "No salary structure is in force for this month").</li>
+      <li>Warnings in the register, such as components that do not add up to the monthly gross. Click a name to open that person's breakdown.</li>
+    </ul>
+
+    <h4>Generate payroll</h4>
+    <ol class="steps">
+      <li>Lock the month's attendance in <b>Attendance</b>.</li>
+      <li>Make sure the statutory rates for the month are confirmed (see <a href="#muster-structures">Salary structures</a>).</li>
+      <li>Send any approved claims to this month from <b>Claims</b>.</li>
+      <li>Optional: click <span class="ui">Close claim collection</span>, then <span class="ui">Close collection</span>.</li>
+      <li>Click <span class="ui">Generate payroll</span>, then <span class="ui">Generate</span>.</li>
+      <li>Read the message. It says how many people were paid and who was skipped, and why.</li>
+    </ol>
+
+    <h4>How each person's pay is worked out</h4>
+    <ol>
+      <li><b>Structure.</b> Flowbit takes the salary structure in force on the last day of the month. Anyone without one is skipped.</li>
+      <li><b>Loss of pay.</b> Each earning that is set as <span class="ui">Reduced for loss of pay</span> is paid as full amount × payable days ÷ working days. Payable and LOP days come from the locked attendance register. Absent, unpaid leave and LOP days pay nothing; an unpaid half day pays half. Paid leave, sick leave, weekly offs and holidays are paid.</li>
+      <li><b>Joiners and leavers.</b> The divisor is the whole month's working days, and only the days they were employed count as payable. So someone who joined mid-month is paid only for the part they worked.</li>
+      <li><b>Adjustments</b> added for the month (bonus, recovery, TDS) are added as earnings or deductions.</li>
+      <li><b>Statutory deductions</b> are worked out (below).</li>
+      <li><b>Claims</b> sent to this month are added as a separate reimbursement line. They are not taxed and do not count for PF, ESI or PT.</li>
+      <li><b>Net pay</b> = total earnings − total deductions + reimbursements, rounded to the rupee. If deductions are larger than earnings, net pay is set to zero and a warning appears.</li>
+    </ol>
+
+    <h4>Statutory deductions</h4>
+    <p>Rates come from the confirmed statutory version for the month, not from fixed numbers. The values below are Flowbit's starting values. Finance should check them against the company's own registrations before confirming.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Deduction</th><th>Rule</th></tr></thead>
+      <tbody>
+        <tr><td>PF (Provident Fund)</td><td>12% from the employee and 12% from the employer, on the PF wage. The PF wage is the earned amount of components set as <span class="ui">Counts for PF wage</span> (Basic in the standard set). When <span class="ui">Cap PF at the ceiling</span> is on, the PF wage is capped at the wage ceiling. The EPF wage ceiling is ₹25,000 from 17 Sep 2026 (it was ₹15,000 before). Amounts are rounded to the rupee. Not deducted for people marked as not covered by PF.</td></tr>
+        <tr><td>ESI</td><td>0.75% from the employee and 3.25% from the employer, on the ESI wage, rounded up to the rupee. Applies only when the person's full monthly gross is ₹21,000 or less. Loss of pay never brings someone into ESI.</td></tr>
+        <tr><td>Professional Tax (PT)</td><td>By the person's PT state, from that state's slabs, on the month's earned gross. Default Madhya Pradesh slabs: up to ₹18,750 nil; up to ₹25,000 ₹125; up to ₹33,333 ₹167; above that ₹208 a month. A month override can collect a different amount in one month. If no schedule exists for the state, nothing is deducted and a warning is shown.</td></tr>
+        <tr><td>LWF (Labour Welfare Fund)</td><td>A flat employee and employer amount, only in the state's remittance months (for example June and December), when the state's LWF is switched on.</td></tr>
+        <tr><td>TDS</td><td>Worked out by Flowbit when <span class="ui">Compute TDS each month from the tax worksheet</span> is on in the statutory rates (see <a href="#muster-tax">Salary tax</a>). In manual mode, add it as a deduction adjustment labelled "TDS" so it lands in the TDS column of the reports.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note"><p>Bonuses and other earning adjustments are added to total earnings but do not change the PF wage, the ESI wage or the PT slab.</p></div>
+
+    <h4>Check the salary register</h4>
+    <p>The <span class="ui">Salary register</span> lists one row per person: name and code, payable days out of working days, LOP days (red when above zero), earnings, deductions, net pay and status (<span class="ui">Ready</span>, <span class="ui">On hold</span> or <span class="ui">Excluded</span>). Use <span class="ui">Search name or code</span> to find someone. The tiles above show <span class="ui">Employees</span>, <span class="ui">Gross earnings</span>, <span class="ui">Deductions</span>, <span class="ui">Reimbursements</span> and <span class="ui">Net payable</span> with the employer cost.</p>
+    <p>Click a name to open the <span class="ui">Entry breakdown</span>: <span class="ui">Monthly gross</span>, <span class="ui">Payable days</span>, <span class="ui">Earned salary</span>, <span class="ui">Net pay</span>, the Earnings, Deductions and Employer contributions tables, and facts such as <span class="ui">PF wage</span>, <span class="ui">ESI wage</span>, <span class="ui">PT state</span> and <span class="ui">Days assumed present</span>.</p>
+
+    <h4>Add a bonus, recovery or TDS</h4>
+    <ol class="steps">
+      <li>Click the person's name in the register.</li>
+      <li>Click <span class="ui">Add adjustment</span>.</li>
+      <li>Fill <span class="ui">Label</span> (for example "Diwali bonus" or "TDS"), <span class="ui">Type</span> (<span class="ui">Earning (adds to pay)</span> or <span class="ui">Deduction (recovers)</span>), <span class="ui">Amount (₹)</span> and <span class="ui">Reason</span>.</li>
+      <li>Click <span class="ui">Add adjustment</span>.</li>
+      <li>Click <span class="ui">Regenerate</span> to apply it.</li>
+    </ol>
+    <p>To take an adjustment out, click its remove icon, give a reason and click <span class="ui">Remove</span>. It is kept on record as removed. Regenerate to apply the change.</p>
+
+    <h4>Hold or exclude someone</h4>
+    <ul>
+      <li><b>Hold pay.</b> The entry stays in the register but is not paid and its payslip is not published until you release it. Use the hold icon, give a reason (for example "Bank details being verified") and click <span class="ui">Hold pay</span>.</li>
+      <li><b>Exclude.</b> The person is left out of this month. Use the exclude icon, give a reason (for example "Paid through full and final settlement"), click <span class="ui">Exclude</span>, then regenerate.</li>
+    </ul>
+
+    <h4>Review, approve and lock</h4>
+    <ol class="steps">
+      <li>HR clicks <span class="ui">Mark HR reviewed</span>, then <span class="ui">Mark reviewed</span>.</li>
+      <li>Finance clicks <span class="ui">Finance approve</span>, then <span class="ui">Approve</span>.</li>
+      <li>Someone with lock rights clicks <span class="ui">Lock payroll</span>, then <span class="ui">Lock</span>.</li>
+    </ol>
+    <div class="warn"><p>Once locked, nothing can be regenerated, adjusted, held or have claims sent to it. If you regenerate before locking, the HR review and Finance approval are cleared and must be done again.</p></div>
+
+    <h4>Download the bank transfer file</h4>
+    <p>After the month is locked, a <span class="ui">Bank file</span> button appears above the register. It builds a CSV for bulk salary payment in net banking.</p>
+    <ol class="steps">
+      <li>Click <span class="ui">Bank file</span>.</li>
+      <li>Pick the <span class="ui">Layout</span>: <span class="ui">Generic (most banks)</span>, <span class="ui">HDFC-style</span> or <span class="ui">ICICI-style</span>.</li>
+      <li>Pick the <span class="ui">Mode</span>: NEFT or IMPS. Any single payment above ₹5,00,000 goes by NEFT.</li>
+      <li>Pick the company account to pay from, or choose <span class="ui">Another account (type it)</span> and enter the <span class="ui">Debit account number</span> (9 to 18 digits).</li>
+      <li>Set the <span class="ui">Value date</span> and the <span class="ui">Narration</span> (up to 30 letters and digits).</li>
+      <li>Click <span class="ui">Download CSV</span> and upload it to your bank.</li>
+    </ol>
+    <div class="note"><p>People with nothing to pay, no bank account, no valid IFSC or an unverified bank change are left out of the file and listed under <span class="ui">Left out of the file</span>. Pay them separately, or fix their details and download again. Banks change their templates, so check your bank's current format before the first upload. Only people who can release or lock payroll and see sensitive details can download this file.</p></div>
+    <p>The register also has <span class="ui">Register CSV</span>, <span class="ui">Statutory CSV</span> and <span class="ui">Journal CSV</span> downloads. See <a href="#muster-reports">HR reports</a>.</p>
+
+    <h4>Record the salary payment</h4>
+    <ol class="steps">
+      <li>After the bank has paid, click <span class="ui">Mark salaries released</span>.</li>
+      <li>Enter <span class="ui">Paid on</span> (it cannot be a future date) and the <span class="ui">Bank reference (UTR)</span>. Add <span class="ui">Notes</span> if useful.</li>
+      <li>Click <span class="ui">Record payment</span>. Claims in this register are marked paid at the same time.</li>
+    </ol>
+
+    <h4>Publish payslips</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">Publish and email payslips</span>, then <span class="ui">Publish</span>.</li>
+      <li>Each person gets a PDF payslip by email and can download it from My payslips. People on hold are skipped.</li>
+      <li>If someone's email fails, the message names them. They can still download the payslip themselves. Use <span class="ui">Re-send payslips</span> to send again.</li>
+    </ol>
+    <p>The payslip shows the company letterhead, the person's details (PAN, UAN, masked bank account), working, payable and LOP days, earnings, deductions, approved expense claims, net pay in figures and words, and employer contributions.</p>
+
+    <h4>Reopen a locked month</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">Reopen</span>.</li>
+      <li>Fill <span class="ui">Why it is being reopened</span>. The reason is kept in the audit log.</li>
+      <li>Click <span class="ui">Reopen</span>. The month goes back to Generated and must be reviewed, approved and locked again.</li>
+    </ol>
+    <div class="warn"><p>Reopening does not reverse salaries already paid or claims already marked paid. For small corrections, it is usually safer to add an arrears or recovery adjustment in next month's payroll.</p></div>
+  </article>
+
+  <article class="topic" id="muster-structures">
+    <h3>Salary structures</h3>
+    <p class="where"><span>Open: <b>HR → Pay → Structures</b></span><span><code>/app/hr/payroll/structures</code></span><span>Who: HR and Finance with payroll access</span></p>
+    <p>This page holds what each person is paid, the components pay is split into, and the PF, ESI and PT rates in force. It has three tabs: <span class="ui">Employee structures</span>, <span class="ui">Components</span> and <span class="ui">Statutory</span>.</p>
+    <figure class="shot"><img src="shots/hr-structures.jpg" alt="Salary structures page on the Employee structures tab, listing people with their monthly gross and start date, and a panel saying Pick someone to set their salary" loading="lazy" width="1440" height="900"><figcaption>Each person shows their monthly gross and the date their structure began. Pick a name to open the editor on the right.</figcaption></figure>
+
+    <h4>How CTC splits into components</h4>
+    <p>Each structure has a monthly gross, an annual CTC and a set of component lines. Each line has a basis:</p>
+    <ul>
+      <li><span class="ui">% of gross</span>, for example Basic at 50% of gross.</li>
+      <li><span class="ui">% of basic</span>, for example HRA at 40% of basic.</li>
+      <li><span class="ui">% of CTC</span>, a share of the monthly CTC (annual CTC ÷ 12).</li>
+      <li><span class="ui">Fixed amount</span>, for example the Special Allowance.</li>
+    </ul>
+    <p>Basic is worked out first, then the rest. The components should add up exactly to the monthly gross. For example, a monthly gross of ₹40,000 gives Basic ₹20,000 (50%), HRA ₹8,000 (40% of basic), and a Special Allowance of ₹12,000 to close the gap.</p>
+
+    <h4>Set or revise someone's salary</h4>
+    <ol class="steps">
+      <li>On <span class="ui">Employee structures</span>, use <span class="ui">Search people</span> and click the person.</li>
+      <li>Set <span class="ui">Effective from</span>. It must be after the start of their current structure.</li>
+      <li>Enter <span class="ui">Monthly gross (₹)</span> and <span class="ui">Annual CTC (₹)</span>. CTC defaults to 12 × gross.</li>
+      <li>Check the component lines (<span class="ui">Component</span>, <span class="ui">Basis</span>, <span class="ui">Value</span>, <span class="ui">Per month</span>). Use <span class="ui">Add a component</span> to add more.</li>
+      <li>Look at <span class="ui">Total of components</span>. If it does not match the gross, a note says by how much. Click <span class="ui">Close the gap</span> to adjust the Special Allowance.</li>
+      <li>Add <span class="ui">Notes</span> if useful and click <span class="ui">Save structure</span>.</li>
+    </ol>
+    <p>The old structure ends the day before the new one starts. Earlier versions stay under <span class="ui">Revision history</span>. After saving, Flowbit offers a Salary Revision letter. You cannot change your own salary.</p>
+    <div class="tip"><p>A person marked <span class="ui">No structure</span> is skipped when payroll is generated. Set their structure before generating.</p></div>
+
+    <h4>Components tab</h4>
+    <p>The list of pay components with their code, name, type (Earning, Deduction or Employer contribution), basis, default value and flags. Click <span class="ui">Load the standard set</span> to add Basic, HRA, Conveyance, Special, Other allowance, Variable pay, Incentive, Bonus, Arrears, PF, ESI, PT, TDS, advance and loan recoveries and employer PF and ESI.</p>
+    <ol class="steps">
+      <li>Click <span class="ui">Add component</span>, or the edit icon on an existing one.</li>
+      <li>Fill <span class="ui">Code</span> (capitals, like HRA), <span class="ui">Name</span>, <span class="ui">Type</span>, <span class="ui">Basis</span> and <span class="ui">Order on payslip</span>.</li>
+      <li>Tick the flags that apply: <span class="ui">Counts for PF wage</span>, <span class="ui">Counts for ESI wage</span>, <span class="ui">Counts as wages (gratuity)</span>, <span class="ui">Reduced for loss of pay</span>, <span class="ui">Taxable</span>, <span class="ui">Paid every month</span>.</li>
+      <li>Save. To stop using a component, click its retire icon and <span class="ui">Retire</span>. You can <span class="ui">Restore</span> it later.</li>
+    </ol>
+    <div class="note"><p>A percentage above 100 is refused, since it is almost always a fixed amount typed in the wrong box. BASIC, PF, ESI, PT, LWF and reimbursement are protected: they cannot be renamed, retyped or retired.</p></div>
+
+    <h4>Statutory tab</h4>
+    <p>A timeline of rate versions. Each shows when it took effect, the payroll month it applies from, a note, PF, ESI, PT by state, LWF, and who confirmed it (or <span class="ui">Proposal</span> if not yet confirmed).</p>
+    <ol class="steps">
+      <li>Click <span class="ui">Add version</span>. It starts as a copy of the latest version.</li>
+      <li>Set <span class="ui">Took effect on</span>, <span class="ui">Payroll applies from</span> (the 1st of a month) and a <span class="ui">Note</span>.</li>
+      <li>Edit PF: <span class="ui">Employee %</span>, <span class="ui">Employer %</span>, <span class="ui">Wage ceiling (₹)</span>, <span class="ui">Cap PF at the ceiling</span>, <span class="ui">Reduce the ceiling in LOP months</span>.</li>
+      <li>Edit ESI: <span class="ui">Employee %</span>, <span class="ui">Employer %</span>, <span class="ui">Covers gross up to (₹)</span>.</li>
+      <li>Add PT slabs per <span class="ui">State</span>, and LWF amounts per state, as needed.</li>
+      <li>Save the proposal. Then a Finance person checks it and clicks <span class="ui">Confirm</span>, then <span class="ui">Confirm rates</span>. Use <span class="ui">Set payroll month</span> to change which month it applies from before confirming.</li>
+    </ol>
+    <div class="warn"><p>Payroll cannot be generated for a month whose rates are not confirmed. Confirmed versions can never be edited; add a new version instead. A banner warns when the latest version still caps PF below the current EPF ceiling of ₹25,000.</p></div>
+  </article>
+
+  <article class="topic" id="muster-claims">
+    <h3>Expense claims</h3>
+    <p class="where"><span>Open: <b>HR → Pay → Claims</b></span><span><code>/app/hr/claims</code></span><span>Who: HR and Finance with claims access</span></p>
+    <p>Employees file expenses through a claim form link. Here you review each claim, approve, reduce or reject it, and send approved claims to payroll so they are paid with salary.</p>
+    <figure class="shot"><img src="shots/hr-claims.jpg" alt="Claims page with Pending, Approved, Paid and Rejected tiles, tabs from To review to All, and two submitted claims with Approve, reduce and reject buttons" loading="lazy" width="1440" height="900"><figcaption>The To review tab, with both claims ticked for bulk approval.</figcaption></figure>
+    <h4>On this page</h4>
+    <ul>
+      <li>Tiles: <span class="ui">Pending</span>, <span class="ui">Approved</span>, <span class="ui">Paid</span> and <span class="ui">Rejected</span>, each with the total in ₹ and a count.</li>
+      <li>Tabs: <span class="ui">To review</span>, <span class="ui">Approved</span>, <span class="ui">In payroll</span>, <span class="ui">Paid</span>, <span class="ui">Rejected</span>, <span class="ui">All</span>.</li>
+      <li><span class="ui">Search person or purpose</span>.</li>
+      <li>Columns: <span class="ui">Employee</span>, <span class="ui">Expense</span> (purpose, date, vendor, receipt, form), <span class="ui">Category</span>, <span class="ui">Claimed</span>, <span class="ui">Approved</span>, <span class="ui">Status</span> and <span class="ui">Decide</span>. A receipt link opens the uploaded file; "No receipt" means none was attached.</li>
+      <li><span class="ui">Forms &amp; categories</span> opens the claim forms page.</li>
+    </ul>
+    <h4>Claim statuses</h4>
+    <div class="tbl"><table>
+      <thead><tr><th>Status</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td>Submitted</td><td>Filed by the employee, waiting for a decision.</td></tr>
+        <tr><td>Approved</td><td>Approved in full. Ready to send to payroll.</td></tr>
+        <tr><td>Partially approved</td><td>Approved at a lower amount, with a note.</td></tr>
+        <tr><td>Rejected</td><td>Not approved. The employee is emailed the reason.</td></tr>
+        <tr><td>In payroll</td><td>Sent to a payroll month. Paid when that month's salaries are released.</td></tr>
+        <tr><td>Paid</td><td>Paid with salary, or marked paid separately.</td></tr>
+      </tbody>
+    </table></div>
+    <h4>Decide a claim</h4>
+    <ol class="steps">
+      <li>Open the <span class="ui">To review</span> tab and read the expense and receipt.</li>
+      <li>Click <span class="ui">Approve</span> to approve the full amount.</li>
+      <li>Or click <span class="ui">Approve a reduced amount</span>, enter <span class="ui">Amount to approve (₹)</span> (no more than claimed) and <span class="ui">Why it was reduced</span>, then click <span class="ui">Approve reduced amount</span>.</li>
+      <li>Or click <span class="ui">Reject</span>, enter a <span class="ui">Reason</span> and confirm.</li>
+    </ol>
+    <p>The employee gets an email and a notification with the decision, the approved amount and your note. To approve many at once, tick the claims and click <span class="ui">Approve ticked in full</span>.</p>
+    <div class="note"><p>You cannot decide your own claim; it is left for someone else. Once a claim is in a payroll month, its decision can no longer change.</p></div>
+    <h4>Send approved claims to payroll</h4>
+    <ol class="steps">
+      <li>Open the <span class="ui">Approved</span> tab. All claims are ticked; untick any you want to leave out.</li>
+      <li>Pick the <span class="ui">Payroll month</span>. Only months that are not locked are offered. If none is open, open one on the Payroll page first.</li>
+      <li>Click <span class="ui">Send to payroll</span>. The claims move to <span class="ui">In payroll</span>.</li>
+      <li>Generate (or regenerate) that payroll month so the claims are added to net pay as a reimbursement line.</li>
+      <li>When the month's salaries are released, the claims become <span class="ui">Paid</span>.</li>
+    </ol>
+    <h4>Pay claims outside payroll</h4>
+    <p>If you reimburse someone directly, open the <span class="ui">Approved</span> tab, tick the claims, enter the <span class="ui">UTR / UPI reference</span> and click <span class="ui">Mark paid</span>. This needs claim payment rights.</p>
+  </article>
+
+  <article class="topic" id="muster-claim-forms">
+    <h3>Claim forms and categories</h3>
+    <p class="where"><span>Open: <b>HR → Pay → Claim forms</b></span><span><code>/app/hr/claims/forms</code></span><span>Who: HR with claim form access</span></p>
+    <p>A claim form is a shareable link where people file expenses for a period. Categories are the expense types people can claim under, with an optional ceiling.</p>
+    <figure class="shot"><img src="shots/hr-claim-forms.jpg" alt="Claim forms page with Forms and Categories tabs and a table of two forms, September expenses (Closed) and October expenses (Open), with links and Copy link buttons" loading="lazy" width="1440" height="900"><figcaption>Each form has its own link, window and payroll month. Close or reopen it from the last column.</figcaption></figure>
+    <h4>On this page</h4>
+    <ul>
+      <li>Tabs: <span class="ui">Forms</span> and <span class="ui">Categories</span>.</li>
+      <li>Forms table: <span class="ui">Form</span>, <span class="ui">Link</span> (with <span class="ui">Copy link</span>), <span class="ui">Window</span>, <span class="ui">Payroll month</span>, <span class="ui">Claims</span>, <span class="ui">Status</span>, and a <span class="ui">Close</span> or <span class="ui">Reopen</span> button.</li>
+      <li>Status is Upcoming (not open yet), Open, Ended (past the deadline) or Closed (closed by HR).</li>
+    </ul>
+    <h4>Create a claim form</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">New claim form</span>.</li>
+      <li>Enter a <span class="ui">Name</span> (for example "October expenses") and the <span class="ui">Link</span> slug. People open <code>/c/your-slug</code>. The slug must be unique.</li>
+      <li>Add a <span class="ui">Description</span>, then set <span class="ui">Opens on</span> and <span class="ui">Deadline</span>. The deadline cannot be before today.</li>
+      <li>Pick the <span class="ui">Categories</span> people can use (at least one).</li>
+      <li>Optional: set <span class="ui">Most per claim (₹)</span>. Leave blank for no cap beyond ₹10,00,000.</li>
+      <li>Leave <span class="ui">Receipt required</span> on unless receipts are not needed.</li>
+      <li>Leave <span class="ui">Pay with salary</span> on and pick the <span class="ui">Payroll month</span> the claims will be paid in.</li>
+      <li>Under <span class="ui">Who can use it</span>, tick people to limit the form. With nobody ticked, everyone on payroll with a work email can use it.</li>
+      <li>Click <span class="ui">Create form</span>, then copy the link and share it with the team.</li>
+    </ol>
+    <h4>Close, reopen or edit a form</h4>
+    <ul>
+      <li>Click <span class="ui">Close</span>, then <span class="ui">Close submissions</span>. Its link stops taking claims.</li>
+      <li>Click <span class="ui">Reopen</span> to take claims again until the deadline.</li>
+      <li>Closing claim collection on a payroll month closes every open form paid with that month.</li>
+    </ul>
+
+    <figure class="shot"><img src="shots/hr-claim-form.jpg" alt="September expenses claim form page with form details, categories, who can use it, and a table of three paid claims" loading="lazy" width="1440" height="900"><figcaption>A single form: its link, window, receipt rule, cap, payroll month, categories, and the claims filed on it.</figcaption></figure>
+    <p>Click a form's name to open it. The <span class="ui">Form details</span> card shows the link with <span class="ui">Copy link</span>, <span class="ui">Window</span>, <span class="ui">Deadline</span>, <span class="ui">Receipt</span>, <span class="ui">Most per claim</span>, <span class="ui">Paid with</span> and <span class="ui">Claims so far</span>. Beside it are the categories (with any ceiling, like "Food · up to ₹2,000") and <span class="ui">Who can use it</span>. Below is <span class="ui">Claims on this form</span>. Click <span class="ui">Edit</span> to change the name, description or deadline, then <span class="ui">Save</span>.</p>
+
+    <h4>How employees use the public link</h4>
+    <ol class="steps">
+      <li>The employee opens the link. They do not need to sign in to Flowbit.</li>
+      <li>They enter <span class="ui">Your work email</span> and click <span class="ui">Send my code</span>. A six digit code is emailed if they can claim on this form. It lasts 10 minutes.</li>
+      <li>They type the code and click <span class="ui">Verify</span>. After five wrong tries they must request a new code.</li>
+      <li>They fill <span class="ui">Category</span>, <span class="ui">Date of expense</span> (not in the future), <span class="ui">Amount (₹)</span>, <span class="ui">Paid to</span>, <span class="ui">What it was for</span>, <span class="ui">Client or project</span>, <span class="ui">Paid by</span>, <span class="ui">Anything HR should know</span> and attach the <span class="ui">Receipt</span> (PDF or image, up to 4 MB).</li>
+      <li>They click <span class="ui">Submit claim</span>. Their claims on this form are listed below. <span class="ui">Not you? Sign out</span> ends the session.</li>
+    </ol>
+    <div class="note"><p>Before the form opens, the link shows the opening date. After it closes, it says the form is no longer accepting claims. An amount above the form's cap or the category's ceiling is refused.</p></div>
+
+    <h4>Categories</h4>
+    <ol class="steps">
+      <li>Open the <span class="ui">Categories</span> tab. Click <span class="ui">Load the standard set</span> to add Travel, Fuel, Food, Client Meeting, Office Purchase, Software, Courier and Other.</li>
+      <li>To add or edit one, fill <span class="ui">Code</span> (like TRAVEL), <span class="ui">Name</span>, <span class="ui">Ceiling per claim (₹)</span> (blank for no ceiling) and <span class="ui">Order</span>.</li>
+      <li>To stop using a category, click its retire icon and <span class="ui">Retire</span>.</li>
+    </ol>
+  </article>
+
+  <article class="topic" id="muster-letters">
+    <h3>HR letters</h3>
+    <p class="where"><span>Open: <b>HR → Documents → Letters</b></span><span><code>/app/hr/letters</code></span><span>Who: HR with letters access; pay letters need payroll access</span></p>
+    <p>Offer, experience, relieving and 17 more letter types, drafted with the person's details filled in, numbered, and filed on their record. Issued letters are never deleted.</p>
+    <figure class="shot"><img src="shots/hr-letters.jpg" alt="Letters page with Letters and Templates tabs, status and category filters, and a table of six letters with references like VW/HR/2026/0001" loading="lazy" width="1440" height="900"><figcaption>Every letter gets a reference number. The Emailed column shows when it was sent, or a dash if it was not.</figcaption></figure>
+    <h4>On this page</h4>
+    <ul>
+      <li>Tabs: <span class="ui">Letters</span> and <span class="ui">Templates</span>.</li>
+      <li>Status filter: <span class="ui">All</span>, <span class="ui">Drafts</span>, <span class="ui">Issued</span>, <span class="ui">Revoked</span>. Search: <span class="ui">Person or reference</span>.</li>
+      <li>Category filter: <span class="ui">Internship</span>, <span class="ui">Joining</span>, <span class="ui">Employment</span>, <span class="ui">Compensation</span>, <span class="ui">Disciplinary</span>, <span class="ui">Exit</span>, <span class="ui">Other</span>.</li>
+      <li>Columns: <span class="ui">Reference</span>, <span class="ui">Employee</span>, <span class="ui">Letter</span>, <span class="ui">Category</span>, <span class="ui">Date</span>, <span class="ui">Status</span>, <span class="ui">Emailed</span>.</li>
+    </ul>
+    <div class="note"><p>Reference numbers follow the pattern <code>VW/HR/2026/0001</code>: company prefix, HR, the year of issue and a running number. A number is never reused, so a discarded draft leaves a gap. Letters that state pay show as "Pay letter" with a lock to people without payroll access.</p></div>
+
+    <h4>The letter types</h4>
+    <div class="tbl"><table>
+      <thead><tr><th>Category</th><th>Letters</th></tr></thead>
+      <tbody>
+        <tr><td>Internship</td><td>Internship Offer Letter (states pay), Internship Completion Letter, Internship Certificate, Internship Experience Letter, Internship Recommendation Letter, Letter of Recommendation (LOR)</td></tr>
+        <tr><td>Joining</td><td>Employee Offer Letter (states pay), Appointment Letter (states pay)</td></tr>
+        <tr><td>Employment</td><td>Confirmation Letter</td></tr>
+        <tr><td>Compensation</td><td>Salary Revision Letter (states pay), Promotion Letter (states pay)</td></tr>
+        <tr><td>Disciplinary</td><td>Warning Letter, Show Cause Notice</td></tr>
+        <tr><td>Exit</td><td>Experience Letter, Termination Letter, Resignation Acceptance Letter, Relieving / Exit Letter, Full and Final Settlement Letter (states pay), No Dues / Clearance Letter</td></tr>
+        <tr><td>Other</td><td>Custom Letter: a blank letter on the letterhead where you write the body yourself</td></tr>
+      </tbody>
+    </table></div>
+
+    <h4>Draft a new letter</h4>
+    <figure class="shot"><img src="shots/hr-letter-new.jpg" alt="New letter page with a Who is it for dropdown and letter types grouped under Internship, Joining, Employment and Compensation, some with a lock icon for letters that state pay" loading="lazy" width="1440" height="900"><figcaption>The lock icon marks letters that state pay.</figcaption></figure>
+    <ol class="steps">
+      <li>Click <span class="ui">New letter</span>.</li>
+      <li>In <span class="ui">Who is it for</span>, choose the person. Their status is shown beside the name.</li>
+      <li>Under <span class="ui">Letter</span>, pick the type. Letters that suit the person's status are suggested first; intern-only letters appear only for interns.</li>
+      <li>Click <span class="ui">Draft letter</span>. The draft opens with the person's name, designation, department, dates and manager filled in.</li>
+    </ol>
+
+    <h4>Edit and issue a draft</h4>
+    <ol class="steps">
+      <li>Fill <span class="ui">Details for this letter</span>, such as the effective date, last working day, work undertaken or revised CTC. Required fields depend on the letter type.</li>
+      <li>Check <span class="ui">Issue date</span>, <span class="ui">Signed by</span> and <span class="ui">Their designation</span>.</li>
+      <li>Edit the <span class="ui">Subject</span> and <span class="ui">Body</span> directly if needed. Use <span class="ui">Preview</span> to read it as it will print.</li>
+      <li>Click <span class="ui">Save draft</span>. If you changed the details above and want the wording rebuilt from them, click <span class="ui">Rebuild from template</span>, then <span class="ui">Rebuild</span>. This replaces your hand edits.</li>
+      <li>Click <span class="ui">Issue letter</span>, then <span class="ui">Issue</span>. The wording is locked, a PDF is filed on the person's record, and they can download it from My letters.</li>
+    </ol>
+    <div class="note"><p>A letter cannot be issued while any <code>{{…}}</code> placeholder is still unfilled. Fill the field and rebuild, or edit the text. Salary figures fill in only for people with payroll access, so others cannot issue pay letters. A letter about yourself that states pay or is an exit letter is refused.</p></div>
+    <p>To throw away a draft, click <span class="ui">Discard draft</span>, then <span class="ui">Discard</span>. Only drafts can be discarded.</p>
+
+    <h4>Email, download or revoke an issued letter</h4>
+    <figure class="shot"><img src="shots/hr-letter.jpg" alt="Issued Resignation Acceptance Letter for Manish Yadav with Download PDF, Email and Revoke buttons, the letter text, and a Record card with reference, issue date, issued, emailed and states pay" loading="lazy" width="1440" height="900"><figcaption>An issued letter. The Record card shows when it was issued and emailed.</figcaption></figure>
+    <ul>
+      <li><span class="ui">Download PDF</span> gives the letter on the letterhead with reference, date, signature block and footer.</li>
+      <li><span class="ui">Email to …</span> opens a dialog with a <span class="ui">Subject</span> and <span class="ui">Message</span> drafted from the letter. Change anything, then click <span class="ui">Send</span>. The PDF goes to the person's work email. If email is not set up, nothing is sent but the letter stays saved.</li>
+      <li><span class="ui">Revoke</span> asks for a <span class="ui">Reason</span>, then <span class="ui">Revoke letter</span>. The letter stays on record and its PDF is marked REVOKED.</li>
+    </ul>
+    <div class="warn"><p>Revoking cannot be undone. Issue a fresh letter if one was wrong.</p></div>
+
+    <h4>Change a template's wording</h4>
+    <ol class="steps">
+      <li>Open the <span class="ui">Templates</span> tab and pick a template.</li>
+      <li>Edit the <span class="ui">Subject</span> and <span class="ui">Body</span>. The <span class="ui">Placeholders</span> panel lists the fields you can use, like <code>{{employee.name}}</code> or <code>{{company.name}}</code>.</li>
+      <li>Click <span class="ui">Save template</span>. New drafts use your wording; letters already written keep theirs.</li>
+      <li>To go back, click <span class="ui">Reset to shipped wording</span>, then <span class="ui">Reset</span>.</li>
+    </ol>
+  </article>
+
+  <article class="topic" id="muster-tax">
+    <h3>Salary tax: TDS, Form 138 and Form 130</h3>
+    <p class="where"><span>Open: <b>HR → Payroll → Salary tax</b></span><span><code>/app/hr/payroll/tax</code></span><span>Who: HR and finance with payroll access</span></p>
+    <p>Flowbit can work out each person's monthly TDS on salary from their salary structure and their declarations in <a href="#me-tax">My tax</a>.</p>
+    <ol class="steps">
+      <li>Set the year: when declarations are open, the proof window, your TAN and who signs Form 130.</li>
+      <li>In the statutory rates, turn on <span class="ui">Deduct salary TDS</span> and <span class="ui">Compute TDS each month from the tax worksheet</span>. With the second switch off (the default), TDS stays an adjustment you type.</li>
+      <li>When payroll is generated, each person gets a worksheet: income so far this year, this month, the months left, the standard deduction, HRA, 80C (with employee PF), 80D, NPS, home loan, slab tax, rebate, surcharge and 4% cess. What is still due is spread over the months left as the TDS line.</li>
+      <li>Review proofs: <span class="ui">Verify proofs</span> (with adjusted amounts if needed) or <span class="ui">Send back</span>. Verified amounts replace declared ones from then on.</li>
+      <li>Finance can <span class="ui">Override TDS</span> for one person's month, with a reason. It is audited.</li>
+    </ol>
+    <ul>
+      <li><b>Form 138</b> (formerly 24Q): a quarterly deductee CSV, plus the salary details for the last quarter, for your CA's return utility.</li>
+      <li><b>Form 130 (earlier Form 16) Part B</b>: a PDF per person for the year, signed by the person named in the year's settings. Part A comes from TRACES.</li>
+    </ul>
+    <div class="warn"><p>Flowbit does not file TDS returns. The tax rules for each year are kept up to date by the Flowbit team, but every screen says "Verify with your CA", and you should.</p></div>
+  </article>
+
+  <article class="topic" id="muster-reports">
+    <h3>HR reports</h3>
+    <p class="where"><span>Open: <b>HR → Documents → Reports</b></span><span><code>/app/hr/reports</code></span><span>Who: HR with reports access; salary reports need payroll access</span></p>
+    <p>Every report downloads as a CSV for Excel or your CA. Monthly reports use the month you pick at the top right.</p>
+    <figure class="shot"><img src="shots/hr-reports.jpg" alt="HR reports page with a September 2026 month picker and nine reports, each with Preview and CSV buttons" loading="lazy" width="1440" height="900"><figcaption>Use the arrows beside the month to change which month the monthly reports cover.</figcaption></figure>
+    <ol class="steps">
+      <li>Use <span class="ui">Previous month</span> and <span class="ui">Next month</span> to pick the month.</li>
+      <li>Click <span class="ui">Preview</span> to see a report on screen, or <span class="ui">CSV</span> to download it.</li>
+    </ol>
+    <div class="tbl"><table>
+      <thead><tr><th>Report</th><th>Period</th><th>What it shows</th></tr></thead>
+      <tbody>
+        <tr><td>Employee master</td><td>All time</td><td>Everyone on record, including people who have left: ID, name, work email, phone, department, designation, manager, employment type, status, joining date, work location and exit date.</td></tr>
+        <tr><td>Attendance summary</td><td>Month</td><td>Per person: working days, present, WFH, on duty, half days, paid leave, unpaid leave, absent, LOP days and payable days.</td></tr>
+        <tr><td>Leave requests</td><td>Month</td><td>Every request touching the month, with the paid and unpaid split, status and who decided.</td></tr>
+        <tr><td>Leave balances</td><td>As of today</td><td>Opening, earned, adjusted, taken and remaining per person and leave type.</td></tr>
+        <tr><td>Salary register</td><td>Payroll month</td><td>Per person: monthly gross, working, payable and LOP days, earned gross, total earnings, PF, ESI, PT, TDS, total deductions, reimbursements, net pay, employer PF and ESI.</td></tr>
+        <tr><td>PF / ESI / PT</td><td>Payroll month</td><td>Statutory wages and contributions with UAN and PAN, for filing returns: PF wage, employee and employer PF, ESI wage, employee and employer ESI, PT, TDS.</td></tr>
+        <tr><td>Payroll journal</td><td>Payroll month</td><td>Debits and credits to post the month in your books (salaries, reimbursements, employer PF and ESI, net salary payable, PF, ESI, PT and TDS payable, other recoveries), with a total row.</td></tr>
+        <tr><td>Claims</td><td>All time</td><td>Every expense claim with expense date, category, vendor, purpose, client or project, claimed and approved amounts, status and review note.</td></tr>
+        <tr><td>Gratuity</td><td>Today</td><td>Service, wage base and gratuity due at today's salaries. Opens its own page (below).</td></tr>
+      </tbody>
+    </table></div>
+    <div class="tip"><p>If the payroll journal does not balance, do not post it. Regenerate payroll and export it again.</p></div>
+  </article>
+
+  <article class="topic" id="muster-gratuity">
+    <h3>Gratuity report</h3>
+    <p class="where"><span>Open: <b>Reports → Gratuity → Open</b></span><span><code>/app/hr/reports/gratuity</code></span><span>Who: people with payroll access</span></p>
+    <p>Shows the gratuity each person would be due if they left today, at today's salary, and the company's total liability.</p>
+    <figure class="shot"><img src="shots/hr-gratuity.jpg" alt="Gratuity page with an info callout, tiles for Eligible now, Accrued liability and Qualifying within 12 months, and a Gratuity by person table" loading="lazy" width="1440" height="900"><figcaption>Three people qualify now; two more qualify within the next 12 months.</figcaption></figure>
+    <h4>On this page</h4>
+    <ul>
+      <li><span class="ui">Eligible now</span>: how many people qualify, out of those with a salary on record.</li>
+      <li><span class="ui">Accrued liability</span>: the total if everyone eligible left today.</li>
+      <li><span class="ui">Qualifying within 12 months</span>: people with at least four years' service who do not qualify yet, named.</li>
+      <li><span class="ui">Gratuity by person</span>: <span class="ui">Employee</span>, <span class="ui">Status</span>, <span class="ui">Service from</span>, <span class="ui">Served</span>, <span class="ui">Monthly wage base</span>, <span class="ui">Eligible</span>, <span class="ui">Years counted</span>, <span class="ui">Gratuity</span>. Click <span class="ui">CSV</span> to download.</li>
+    </ul>
+    <h4>How it is worked out</h4>
+    <ul>
+      <li><b>Who qualifies:</b> five or more years of service, or four years plus at least 240 days in the fifth year, or service ended by death or disability. Others show the date they will qualify, for example "From 14 Mar 2027".</li>
+      <li><b>Service</b> counts from the original joining date.</li>
+      <li><b>Monthly wage base:</b> the components set as <span class="ui">Counts as wages (gratuity)</span> (Basic in the standard set), or half of the total monthly pay, whichever is higher.</li>
+      <li><b>Years counted:</b> full years, plus one more if the extra part is over six months.</li>
+      <li><b>Formula:</b> monthly wage base ÷ 26 × 15 × years counted, capped at ₹20,00,000.</li>
+    </ul>
+    <p>Example: a wage base of ₹45,000 and 5 years counted gives ₹45,000 ÷ 26 × 15 × 5 = ₹1,29,808.</p>
+    <div class="note"><p>These are commonly applied values, not a reading of the Act. Have your CA confirm them before you rely on these figures.</p></div>
+  </article>
+
+  <article class="topic" id="muster-settings">
+    <h3>HR settings</h3>
+    <p class="where"><span>Open: <b>HR → HR settings</b></span><span><code>/app/hr/settings</code></span><span>Who: HR admins change settings; people with HR access can view them</span></p>
+    <p>Departments, holidays, leave and attendance rules for the whole workspace. Every change is audited.</p>
+    <figure class="shot"><img src="shots/hr-settings.jpg" alt="HR settings page with a section list on the left and the Departments tab showing nine departments with codes, people counts, edit and delete buttons" loading="lazy" width="1440" height="900"><figcaption>Settings are grouped under Organisation, Time and People. Departments is the first tab.</figcaption></figure>
+    <h4>The tabs</h4>
+    <div class="tbl"><table>
+      <thead><tr><th>Group</th><th>Tab</th><th>What it controls</th></tr></thead>
+      <tbody>
+        <tr><td>Organisation</td><td><span class="ui">Departments</span></td><td>Teams people belong to, each with a short code and a people count. Used for filters, reports and the register.</td></tr>
+        <tr><td>Organisation</td><td><span class="ui">Designations</span></td><td>Job titles for the people directory and letters.</td></tr>
+        <tr><td>Time</td><td><span class="ui">Holidays</span></td><td>Company and optional holidays for each year. Holidays are paid and are not counted as leave.</td></tr>
+        <tr><td>Time</td><td><span class="ui">Leave types &amp; policy</span></td><td>Each leave type and how it is earned, plus the leave year, carry forward, negative balance and notice periods.</td></tr>
+        <tr><td>Time</td><td><span class="ui">Attendance rules</span></td><td>Office hours, late and half-day rules, working days, how unmarked days count, and the correction and comp-off windows.</td></tr>
+        <tr><td>People</td><td><span class="ui">Joining documents</span></td><td>Which documents a new joiner must submit, and how complete they must be to start.</td></tr>
+        <tr><td>People</td><td><span class="ui">Policy documents</span></td><td>Company policy PDFs that every employee can read.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note"><p>There is no separate approval routing tab. Leave, corrections, comp-off and overtime go first to the person's reporting manager, then to HR (or to management when the applicant could otherwise sign HR's stage). Set the reporting manager on each person's record. There is one set of office hours for the workspace, not separate shifts. Salary components and statutory rates live in <a href="#muster-structures">Salary structures</a>; claim categories live in <a href="#muster-claim-forms">Claim forms</a>.</p></div>
+
+    <h4>Departments and designations</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">Add department</span> (or <span class="ui">Add designation</span>).</li>
+      <li>Enter the name, and for a department a code of 2 to 12 letters or digits, like PROD.</li>
+      <li>Click <span class="ui">Add department</span>. Use the pencil icon to rename, or the bin icon to remove.</li>
+    </ol>
+    <p>A department cannot be removed while people still belong to it. Move them first from their People records.</p>
+
+    <h4>Holidays</h4>
+    <ol class="steps">
+      <li>Open <span class="ui">Holidays</span> and pick the year.</li>
+      <li>Enter the <span class="ui">Date</span> and <span class="ui">Name</span>. Tick <span class="ui">Optional</span> for a holiday people may choose to take.</li>
+      <li>Click <span class="ui">Add holiday</span>.</li>
+    </ol>
+    <div class="note"><p>Holidays can be added only within a year either side of today. You cannot add or remove a holiday in a month whose attendance is locked; reopen the month first. A holiday that approved leave already covers cannot be removed.</p></div>
+
+    <h4>Leave types and policy</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">Load the standard set</span> to add PL, SL, comp-off, maternity, paternity and leave without pay, or click <span class="ui">Add leave type</span>.</li>
+      <li>Fill <span class="ui">Code</span>, <span class="ui">Name</span> and <span class="ui">How it is earned</span> (Monthly, Yearly up front, Per service year, or On application).</li>
+      <li>Set <span class="ui">Days per year</span>, <span class="ui">Days per month</span>, <span class="ui">Carry-forward cap (days)</span>, <span class="ui">Proof needed beyond (days)</span> and <span class="ui">Order</span>.</li>
+      <li>Tick <span class="ui">Paid</span>, <span class="ui">Half days allowed</span> and <span class="ui">Always needs proof</span> as needed, then save.</li>
+      <li>In the <span class="ui">Leave and notice policy</span> card, set <span class="ui">Leave year starts in</span>, <span class="ui">Carry forward (%)</span>, <span class="ui">Negative balance</span>, and the notice days for interns, probation and confirmed staff. Click <span class="ui">Save policy</span>.</li>
+    </ol>
+    <div class="tip"><p>Keep at least one unpaid leave type, so leave beyond a balance can be recorded as loss of pay.</p></div>
+
+    <h4>Attendance rules</h4>
+    <ol class="steps">
+      <li>Under <span class="ui">Office hours</span>, set <span class="ui">Day starts</span>, <span class="ui">Day ends</span>, <span class="ui">Late after (minutes past start)</span>, <span class="ui">Half day under (hours)</span> and the <span class="ui">Working days</span>. The days not ticked are weekly offs.</li>
+      <li>Under <span class="ui">Register rules</span>, choose how a working day with no check-in and no mark counts: <span class="ui">Present</span> (paid, shown as assumed), <span class="ui">Absent</span> (costs a day's pay) or <span class="ui">Unmarked</span> (blocks the month lock until every day is marked).</li>
+      <li>Set <span class="ui">Corrections allowed within (days)</span> and <span class="ui">Comp-off lapses after (days)</span> (0 means never).</li>
+      <li>Click <span class="ui">Save attendance rules</span>. They apply the next time payroll is generated.</li>
+    </ol>
+    <div class="warn"><p>The unmarked-day rule changes pay. With <span class="ui">Absent</span>, every unmarked working day costs a day's salary when the month is locked.</p></div>
+
+    <h4>Joining documents</h4>
+    <ol class="steps">
+      <li>Under <span class="ui">Mandatory documents</span>, pick the documents every joiner must submit.</li>
+      <li>Set <span class="ui">Complete enough to start (%)</span>: the share of those documents needed before someone can be made active, on probation or an intern.</li>
+      <li>Click <span class="ui">Save joining documents</span>.</li>
+    </ol>
+    <p>Below the threshold, people stay in joining. An HR admin can start them anyway by giving a reason.</p>
+
+    <h4>Policy documents</h4>
+    <ol class="steps">
+      <li>Under <span class="ui">Publish a policy</span>, enter the <span class="ui">Title</span>, <span class="ui">Category</span> and <span class="ui">Summary</span>, and attach the <span class="ui">PDF</span>.</li>
+      <li>Click <span class="ui">Publish</span>. Everyone sees it in My documents.</li>
+      <li>To take one down, click <span class="ui">Archive</span> in <span class="ui">Published policies</span>. Employees stop seeing it.</li>
+    </ol>
+  </article>
+
+</section>

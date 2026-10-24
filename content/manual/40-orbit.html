@@ -1,0 +1,451 @@
+<section class="chapter c-orbit" id="orbit">
+  <header>
+    <div class="eyebrow">Orbit · Sales</div>
+    <h2>Find, follow up and win clients</h2>
+    <p>Orbit is the sales desk. Leads are the people you are prospecting; once a meeting is done, a lead is converted into a client and a deal, and the deal carries the money to won or lost. Salespeople work their leads and follow-ups here every day; owners and managers watch the pipeline and the conversion numbers.</p>
+  </header>
+
+  <article class="topic" id="orbit-roles">
+    <h3>Who can do what</h3>
+    <p>Orbit has two levels of sales rights. A <b>salesperson</b> can add and work leads, log activity and move their own records forward. A <b>reviewer</b> (owners, admins and the built-in Sales role) can also close and reopen, move things backwards and reassign. A custom role such as "BD executive" can be given only the salesperson rights.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Right</th><th>What it allows</th><th>Who has it by default</th></tr></thead>
+      <tbody>
+        <tr><td>Read</td><td>Open Orbit and see your own leads and deals (and leads you review)</td><td>Owner, Admin, Sales, Manager</td></tr>
+        <tr><td>See everyone</td><td>See the whole team's leads, deals and activity; the <span class="ui">Whole team</span> and per-person scope pickers</td><td>Owner, Admin, Sales, Manager</td></tr>
+        <tr><td>Write</td><td>Add and import leads, log and schedule activity, move a lead forward up to Meeting done, disqualify, convert, create deals and move your own deals between open stages</td><td>Owner, Admin, Sales</td></tr>
+        <tr><td>Close (reviewer)</td><td>Mark leads Lost, move leads backwards, reopen, mark deals Won or Lost, reopen deals, change owner and reviewer, edit any record</td><td>Owner, Admin, Sales</td></tr>
+        <tr><td>Admin</td><td>Orbit settings; delete leads, deals and logged activities</td><td>Owner, Admin, Sales</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note"><p>A record outside your scope simply does not open. Without "See everyone", lists show only leads you own or review and deals you own.</p></div>
+  </article>
+
+  <article class="topic" id="orbit-home">
+    <h3>Orbit home (Today)</h3>
+    <p class="where"><span>Open: <b>Rail → Orbit</b></span><span><code>/app/orbit</code></span><span>Who: everyone with Orbit</span></p>
+    <p>The daily report. A salesperson starts the day here to see what is overdue and due today; a manager gets the pipeline at a glance.</p>
+    <figure class="shot"><img src="shots/orbit-home.jpg" alt="Orbit Today dashboard with the meetings-this-month bar, four daily counters, the Conversion 30 days card with cold 5.3% and warm 18.2%, and Won this month ₹4,20,000" loading="lazy" width="1440" height="900"><figcaption>Use the scope picker at the top right to switch between your own pipeline and the whole team.</figcaption></figure>
+
+    <h4>On this page</h4>
+    <ul>
+      <li>Scope picker (for example <span class="ui">Whole team</span>), <span class="ui">Log activity</span> and <span class="ui">New lead</span>.</li>
+      <li><b>Meetings this month</b> bar: meetings booked against the monthly target, with how many to go and the daily lead and outreach pace that keeps you on track.</li>
+      <li>Four counters for today, each with a 14-day trend line:
+        <ul>
+          <li><span class="ui">Leads added</span>: leads created today, against the daily target ("8 to go today" or "Target met").</li>
+          <li><span class="ui">Outreach sent</span>: DMs, emails, calls and follow-ups logged today, against the daily target.</li>
+          <li><span class="ui">Replies in</span>: replies logged today. A reply is what unlocks the Engaged stage.</li>
+          <li><span class="ui">Meetings booked</span>: leads that reached Meeting booked today, plus the month's count against target.</li>
+        </ul>
+      </li>
+      <li><span class="ui">Conversion · 30 days</span>: Cold and Warm conversion for leads created in the last 30 days, with their targets and an <span class="ui">On track</span> or below pill. <span class="ui">Open reports</span> goes to the full reports.</li>
+      <li><span class="ui">Won this month</span>: total ₹ of deals won this month, the change against last month, and the latest wins.</li>
+      <li><span class="ui">Pipeline value</span>: open deals by stage, with count, value and weighted value. <span class="ui">View all deals</span> opens the deal board.</li>
+      <li><span class="ui">Overdue</span> and <span class="ui">Due today</span>: planned follow-ups, with the lead or deal they belong to, how late they are and who owns them. Each row has <span class="ui">Mark done</span>, <span class="ui">Reschedule</span> and <span class="ui">Cancel</span>.</li>
+      <li><span class="ui">No next step</span>: open leads with no follow-up scheduled, with how long since they were last touched, and a <span class="ui">Schedule</span> button on each row. A warning above it counts leads that are both stale and without a next step.</li>
+    </ul>
+    <div class="note"><p>Daily targets are the weekly targets from Orbit settings divided by the number of working days in your work week. "Today" always means today in India time.</p></div>
+
+    <h4>Clear your follow-ups</h4>
+    <ol class="steps">
+      <li>Start with <span class="ui">Overdue</span>, oldest first.</li>
+      <li>Did it? Click <span class="ui">Mark done</span>, add what happened, and save. It becomes a logged activity.</li>
+      <li>Not today? Click <span class="ui">Reschedule</span> and pick a new date.</li>
+      <li>No longer needed? Click <span class="ui">Cancel</span> and, if you like, say why.</li>
+      <li>Then work through <span class="ui">No next step</span>: click <span class="ui">Schedule</span> on each lead, or open it and disqualify it if it is going nowhere.</li>
+    </ol>
+    <div class="tip"><p>Every open lead should have a dated next step. Leads without one are the ones that quietly die, and a pipeline full of them makes the conversion numbers meaningless.</p></div>
+  </article>
+
+  <article class="topic" id="orbit-leads">
+    <h3>Leads</h3>
+    <p class="where"><span>Open: <b>Orbit → Leads</b></span><span><code>/app/orbit/leads</code></span><span>Who: everyone with Orbit</span></p>
+    <p>Everyone you are talking to, by stage. Switch between a table and a board.</p>
+    <figure class="shot"><img src="shots/orbit-leads.jpg" alt="Leads table with filters for stage, sector, source, owner and next step, and rows showing company, contact, sector, source, Contacted stage, owner and next step" loading="lazy" width="1440" height="900"><figcaption>The table defaults to open leads. "Stale only" shows leads nobody has touched for a while.</figcaption></figure>
+
+    <h4>On this page</h4>
+    <ul>
+      <li><span class="ui">Search leads</span>: matches company, contact, email and phone.</li>
+      <li><span class="ui">Import CSV</span>, <span class="ui">Export</span> and <span class="ui">New lead</span>.</li>
+      <li><span class="ui">Table</span> and <span class="ui">Board</span> views.</li>
+      <li>Filters: stage (<span class="ui">Open leads</span> by default, or closed, all, or one stage), sector, source, owner, <span class="ui">Any next step</span> (overdue, today, this week, or none) and <span class="ui">Stale only</span>.</li>
+      <li>Table columns: <span class="ui">Company</span> (with contact and designation), <span class="ui">Sector</span>, <span class="ui">Source</span>, <span class="ui">Stage</span>, <span class="ui">Owner</span>, <span class="ui">Next step</span> (red when overdue, amber when due today), <span class="ui">Last touch</span> ("2d ago", or red "Stale 28d") and <span class="ui">Value</span>. Click a column title to sort.</li>
+      <li>Tick rows to get the bulk bar: assign owner, set reviewer (reviewers only), disqualify with a reason, or export the selection.</li>
+    </ul>
+
+    <h4>Lead stages and the stage machine</h4>
+    <p>Lead stages are fixed, because the Cold and Warm conversion rates are defined by them. Each stage needs proof that it really happened.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Stage</th><th>Means</th><th>To move in, you need</th></tr></thead>
+      <tbody>
+        <tr><td>New</td><td>Sourced and added. No outreach yet.</td><td>Every lead starts here</td></tr>
+        <tr><td>Contacted</td><td>At least one outreach logged</td><td>A logged DM, email, call or follow-up</td></tr>
+        <tr><td>Engaged</td><td>They replied. Any human response counts, positive or not.</td><td>A logged "Reply received"</td></tr>
+        <tr><td>Meeting booked</td><td>Invite accepted, date on record</td><td>The meeting date</td></tr>
+        <tr><td>Meeting done</td><td>The meeting happened and notes are logged</td><td>A logged meeting with notes</td></tr>
+        <tr><td>Converted</td><td>Became a client and a deal</td><td>Use <span class="ui">Convert</span> from Meeting done</td></tr>
+        <tr><td>Lost</td><td>Closed without a deal</td><td>A reason; reviewers only</td></tr>
+        <tr><td>Disqualified</td><td>Not a fit, no budget or wrong segment</td><td>A reason</td></tr>
+      </tbody>
+    </table></div>
+    <p>Allowed moves:</p>
+    <ul>
+      <li><b>Forward one step at a time</b>, for everyone, reviewers included. Trying to jump from Contacted to Meeting booked is refused: "Move one step at a time".</li>
+      <li><b>Warm sources may skip Contacted.</b> Leads from a source marked warm (Referral, Inbound and Event by default) can go from New straight to Engaged once their message is logged as a reply.</li>
+      <li><b>Backwards</b> only for reviewers. A salesperson sees "A lead can't move backwards. Ask your reviewer."</li>
+      <li><b>Disqualify</b> any open lead, with a reason. <b>Mark lost</b> needs a reviewer.</li>
+      <li><b>Reopen</b> a lost or disqualified lead: reviewers only. It goes back to the stage it was closed from, and the close reason is cleared.</li>
+      <li>A <b>converted</b> lead cannot be reopened. Carry on, or lose it, on the deal.</li>
+    </ul>
+    <div class="note"><p>The first time a lead reaches each stage is recorded and never wiped, even if it later moves back. Reports count every lead that ever reached a stage.</p></div>
+
+    <h4>Work the board</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">Board</span>. Columns are New, Contacted, Engaged, Meeting booked and Meeting done, with drop targets for Converted, Lost and Disqualified at the right.</li>
+      <li>Drag a card to the next column. If the move is allowed, it sticks; if not, it snaps back with the reason, for example "Log a 'Reply received' activity first".</li>
+      <li>Dropping on Meeting booked asks for the meeting date, time and link. Dropping on Meeting done asks you to log the meeting notes (unless a meeting is already logged). Dropping on Lost or Disqualified asks for a reason. Dropping on Converted opens the Convert dialog.</li>
+    </ol>
+    <div class="tip"><p>A red clock on a card means nothing has happened on that lead for a while (7 days by default; set in Orbit settings → General).</p></div>
+
+    <h4>Import leads from a CSV</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">Import CSV</span>, then <span class="ui">Choose a .csv file</span>. The file needs a header row.</li>
+      <li>Columns such as Company, Contact, Email, Phone, Instagram, LinkedIn, Website, Sector, Source and Notes are matched automatically, including common variants such as "Brand name", "Mobile" or "Lead source".</li>
+      <li>Check the preview: how many rows are ready, how many were skipped for having no company name, and the sector and source each row was matched to. Unknown sectors and sources become "Other".</li>
+      <li>Reviewers can pick the owner and reviewer for the whole file; otherwise the leads are yours.</li>
+      <li>Click <span class="ui">Import N leads</span>. The message says how many were imported and how many skipped.</li>
+    </ol>
+    <div class="note"><p>Every imported lead starts at New. Rows that duplicate an open lead (same company or same email) are skipped, as are duplicates inside the file. Import at most 2,000 rows at a time.</p></div>
+
+    <h4>Export</h4>
+    <ol class="steps">
+      <li>Set the filters you want.</li>
+      <li>Click <span class="ui">Export</span>. A CSV of the filtered list downloads, ready to open in Excel.</li>
+    </ol>
+  </article>
+
+  <article class="topic" id="orbit-lead-new">
+    <h3>Add a lead</h3>
+    <p class="where"><span>Open: <b>Leads → New lead</b></span><span><code>/app/orbit/leads/new</code></span><span>Who: salespeople and reviewers</span></p>
+    <p>Adding a lead takes under 30 seconds. Only the company is required; everything else can be filled in later.</p>
+    <figure class="shot"><img src="shots/orbit-lead-new.jpg" alt="New lead form with Company / brand, Contact name, Designation, Sector, Source, Email and Phone fields, a More details link and the Add lead button" loading="lazy" width="1440" height="900"><figcaption>"More details" opens the optional fields.</figcaption></figure>
+    <ol class="steps">
+      <li>Click <span class="ui">New lead</span> (on Leads or the dashboard).</li>
+      <li>Type the <span class="ui">Company / brand</span>.</li>
+      <li>Add <span class="ui">Contact name</span> and <span class="ui">Designation</span> if you know them.</li>
+      <li>Pick the <span class="ui">Sector</span> (the hint says whether it is your primary motion) and the <span class="ui">Source</span>, such as Instagram, LinkedIn or Referral.</li>
+      <li>Add <span class="ui">Email</span> and <span class="ui">Phone</span>.</li>
+      <li>Optional: click <span class="ui">More details</span> for Instagram handle, LinkedIn URL, website, ICP fit (1 = poor fit, 5 = ideal), estimated deal value in ₹, a first next step with a date, owner and reviewer (reviewers only) and notes.</li>
+      <li>Click <span class="ui">Add lead</span> to open the new lead, or <span class="ui">Save and add another</span> to keep adding.</li>
+    </ol>
+    <div class="note"><p>If an open lead already exists with the same company name or email, Orbit says so and names its owner. You can open that lead, or choose to add anyway. Without reviewer rights, the owner is you and the reviewer is the default reviewer from settings; the reviewer is told about the new lead.</p></div>
+    <div class="tip"><p>Leads can also arrive by themselves from your website form, a webhook (Zapier, Meta lead ads, JustDial) or IndiaMART. See <a href="#orbit-settings">Orbit settings → Lead capture</a>.</p></div>
+  </article>
+
+  <article class="topic" id="orbit-lead">
+    <h3>Working a lead</h3>
+    <p class="where"><span>Open: <b>Leads → click a company</b></span><span><code>/app/orbit/leads/{id}</code></span><span>Who: the owner, the reviewer, and anyone who sees everyone</span></p>
+    <p>Everything about one lead: its stage, the next step, everything that happened, and its details.</p>
+    <figure class="shot"><img src="shots/orbit-lead.jpg" alt="Lead page for a Contacted lead showing the stage rail, a Blocked message asking for a Reply received activity, a disabled Move to Engaged button, Move back, Disqualify and Mark lost, plus Upcoming, Timeline and the Lead summary card" loading="lazy" width="1440" height="900"><figcaption>The lock tells you exactly what to log before the lead can move on.</figcaption></figure>
+
+    <h4>On this page</h4>
+    <ul>
+      <li>Header: company and contact, <span class="ui">Schedule follow-up</span>, <span class="ui">Log activity</span> and (admins) <span class="ui">Delete</span>.</li>
+      <li><span class="ui">Stage</span>: the rail New → Contacted → Engaged → Meeting booked → Meeting done → Converted, the rule for the current stage, and the stage buttons. When the next move is not yet allowed, a <b>Blocked</b> note says why.</li>
+      <li><span class="ui">Upcoming</span>: planned follow-ups for this lead, each with mark done, reschedule and cancel.</li>
+      <li><span class="ui">Timeline</span>: activities and stage changes, newest first, with filters <span class="ui">All</span>, <span class="ui">Activities</span> and <span class="ui">Stage changes</span>.</li>
+      <li><span class="ui">Lead</span> card: estimated value, stage, sector, source (with "warm" if it is a warm source), ICP fit and owner.</li>
+      <li><span class="ui">Details</span>: email and phone shortcuts, and the editable fields. Click <span class="ui">Save changes</span> after editing. Only reviewers can change <span class="ui">Owner</span> and <span class="ui">Reviewer</span>.</li>
+      <li><span class="ui">Milestones</span>: when it was created, first contacted, first replied, meeting booked, meeting done, converted and closed.</li>
+    </ul>
+
+    <h4>Log an activity</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">Log activity</span>.</li>
+      <li>Under <span class="ui">What happened</span>, pick <span class="ui">DM</span>, <span class="ui">Email</span>, <span class="ui">Call</span>, <span class="ui">Follow-up</span>, <span class="ui">Reply</span>, <span class="ui">Meeting</span> or <span class="ui">Note</span>.</li>
+      <li>Check the <span class="ui">Channel</span> (Instagram, LinkedIn, Email, Phone, Video call, In person or another channel).</li>
+      <li>Set <span class="ui">When</span> if it was not just now. You can go up to 7 days back, never into the future.</li>
+      <li>Write <span class="ui">Notes</span>: what you said and what they said back. Notes are required for a meeting.</li>
+      <li>Optional: open <span class="ui">Also schedule a follow-up</span> and give the <span class="ui">Next step</span> and its <span class="ui">Due</span> date.</li>
+      <li>Click <span class="ui">Log activity</span>. If this activity unlocks the next stage, the message offers a button such as <span class="ui">Move to Engaged</span>.</li>
+    </ol>
+    <div class="warn"><p>Log a <b>Reply</b> only when a person actually responded. Engaged is the denominator of the Warm conversion rate, so a reply logged by mistake makes the numbers wrong. Logged activities cannot be edited; only an admin can delete one.</p></div>
+
+    <h4>Schedule a follow-up</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">Schedule follow-up</span> (or <span class="ui">Schedule</span> in Upcoming).</li>
+      <li>Pick the <span class="ui">Type</span> (Follow-up, Call, Email, DM or Meeting) and write a <span class="ui">Title</span>, for example "Send the deck".</li>
+      <li>Set the <span class="ui">Date</span> (today or later) and, if needed, the <span class="ui">Time</span>. For a meeting, add the <span class="ui">Meeting link</span>.</li>
+      <li>The <span class="ui">Assignee</span> is the lead owner; reviewers can pick someone else, who is notified.</li>
+      <li>Click <span class="ui">Schedule</span>. The earliest planned follow-up becomes the lead's next step in every list.</li>
+    </ol>
+
+    <h4>Move the lead through its stages</h4>
+    <ol class="steps">
+      <li>Log the evidence first (an outreach for Contacted, a reply for Engaged).</li>
+      <li>Click <span class="ui">Move to …</span> under the rail, for example <span class="ui">Move to Engaged</span>.</li>
+      <li>For <span class="ui">Meeting booked</span>, enter the <span class="ui">Date</span>, <span class="ui">Time</span> (11:00 by default) and <span class="ui">Meeting link</span>, then click <span class="ui">Mark meeting booked</span>. A planned meeting is added to Upcoming.</li>
+      <li>After the meeting, click <span class="ui">Move to Meeting done</span>, write the <span class="ui">Notes</span> of what was discussed and click <span class="ui">Mark meeting done</span>. The reviewer is told the lead is ready to convert.</li>
+      <li>Reviewers can use <span class="ui">Move back</span> and choose an earlier stage.</li>
+    </ol>
+
+    <h4>Disqualify or mark lost</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">Disqualify</span> (anyone who can edit the lead) or <span class="ui">Mark lost</span> (reviewers).</li>
+      <li>Pick the <span class="ui">Reason</span> that fits best, for example No budget, Not ICP / wrong segment, Already has an agency or Timing: revisit next quarter.</li>
+      <li>Add a <span class="ui">Detail</span> such as "Said budget opens again in Q3, told me to ping in April." Detail is required when the reason is Other.</li>
+      <li>Click <span class="ui">Mark disqualified</span> or <span class="ui">Mark lost</span>.</li>
+    </ol>
+    <div class="note"><p>A reason code is mandatory: free text alone makes the loss analysis in Reports impossible. To undo, a reviewer clicks <span class="ui">Reopen</span>; the lead returns to the stage it was closed from.</p></div>
+
+    <h4>Convert a lead into a client and a deal</h4>
+    <ol class="steps">
+      <li>When the lead is at Meeting done, click <span class="ui">Convert to client + deal</span>.</li>
+      <li>Under Client, choose <span class="ui">Create new client</span> (the company and its contact are copied over as the primary contact) or <span class="ui">Link existing client</span> and pick it. The lead's contact is added to that client.</li>
+      <li>Under Deal, check the <span class="ui">Deal title</span>, <span class="ui">Value (₹)</span> (filled from the lead's estimate), <span class="ui">Stage</span> (the first deal stage by default), <span class="ui">Expected close</span> and <span class="ui">Owner</span>.</li>
+      <li>Click <span class="ui">Convert</span>. You land on the new deal. The lead closes as Converted, with links to the client and the deal, and its activities and follow-ups move along with it.</li>
+    </ol>
+    <div class="warn"><p>Deleting a lead (admins only) removes it, its activities and its history, and reports stop counting it. A converted lead cannot be deleted; lose or delete the deal instead.</p></div>
+  </article>
+
+  <article class="topic" id="orbit-deals">
+    <h3>Deals</h3>
+    <p class="where"><span>Open: <b>Orbit → Deals</b></span><span><code>/app/orbit/deals</code></span><span>Who: everyone with Orbit</span></p>
+    <p>Money in the pipeline, by stage. A deal is what you are trying to sign with a client: a title, a value in ₹, a stage and an expected close date.</p>
+    <figure class="shot"><img src="shots/orbit-deals.jpg" alt="Deals board with Open pipeline ₹18.9L, Weighted ₹9.6L, Won this month ₹4.2L and Expected this month ₹12.9L, and columns Discovery 20%, Proposal sent 40%, Negotiation 70% and Won" loading="lazy" width="1440" height="900"><figcaption>Each column shows its count, total value and weighted value.</figcaption></figure>
+
+    <h4>On this page</h4>
+    <ul>
+      <li>Search (<span class="ui">Deal or client</span>), <span class="ui">New deal</span>, and <span class="ui">Board</span> / <span class="ui">Table</span> views.</li>
+      <li>Filters: owner, source and <span class="ui">Expected close</span> (this month, overdue or next 30 days). The table also filters by status: open, won, lost or all.</li>
+      <li>Totals:
+        <ul>
+          <li><span class="ui">Open pipeline</span>: every open deal at full value.</li>
+          <li><span class="ui">Weighted</span>: each open deal's value × its probability, added up. A ₹1,80,000 deal at 20% counts as ₹36,000.</li>
+          <li><span class="ui">Won this month</span>: value and count of deals won this month.</li>
+          <li><span class="ui">Expected this month</span>: open deals whose expected close date falls this month.</li>
+        </ul>
+      </li>
+      <li>Columns: your deal stages (by default Discovery 20%, Proposal sent 40%, Negotiation 70%), then <span class="ui">Won</span> and <span class="ui">Lost</span> for the last 90 days. <span class="ui">Show older in the table</span> finds earlier ones.</li>
+      <li>Cards: title and value, client, probability, expected close (red when past and still open), source, owner initials, the next follow-up (red when overdue) or "No next step", and days in the current stage.</li>
+    </ul>
+
+    <h4>Deal stages, win and loss</h4>
+    <ul>
+      <li>Open stages and their default probabilities are set in Orbit settings. Moving a deal to a stage sets its probability to that stage's default; you can still edit the probability on the deal.</li>
+      <li>Between open stages, a deal can move in any direction, by its owner or a reviewer.</li>
+      <li><b>Won</b> (100%) and <b>Lost</b> (0%) are fixed and need a reviewer. Lost needs a reason from the same list used for leads.</li>
+      <li>A closed deal can only be reopened by a reviewer, from the deal page. It returns to its last open stage.</li>
+      <li>When a deal is won, its client's status changes from Lead to Active.</li>
+    </ul>
+
+    <h4>Create a deal for an existing client</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">New deal</span>.</li>
+      <li>Give the deal a title (for example "Urban Pind: festive campaign").</li>
+      <li>Pick the client, or create a new one by name right there. Pick the contact from that client's contacts.</li>
+      <li>Enter the value in ₹, the stage (the probability fills in from it), the expected close date (today or later), and optionally owner, source and notes.</li>
+      <li>Save. The deal page opens.</li>
+    </ol>
+    <div class="tip"><p>Most deals come from converted leads, which fills all of this for you. Use New deal for repeat work from an existing client.</p></div>
+
+    <h4>Move, win or lose from the board</h4>
+    <ol class="steps">
+      <li>Drag a card to another open stage to move it.</li>
+      <li>Drag it to <span class="ui">Won</span>: confirm the <span class="ui">Final value (₹)</span>, optionally pick <span class="ui">Why we won</span>, set the <span class="ui">Close date</span> (today by default), and click <span class="ui">Mark won</span>.</li>
+      <li>Drag it to <span class="ui">Lost</span>: pick the <span class="ui">Reason</span>, add a <span class="ui">Detail</span>, and click <span class="ui">Mark lost</span>.</li>
+    </ol>
+  </article>
+
+  <article class="topic" id="orbit-deal">
+    <h3>A deal</h3>
+    <p class="where"><span>Open: <b>Deals → click a deal</b></span><span><code>/app/orbit/deals/{id}</code></span><span>Who: the deal owner, and anyone who sees everyone</span></p>
+    <p>One deal from first call to signature, including its billing in Folio.</p>
+    <figure class="shot"><img src="shots/orbit-deal.jpg" alt="Deal page for Urban Pind festive campaign at Discovery, with the stage bar, Mark won and Mark lost, an overdue follow-up in Upcoming, the Timeline, the Deal card showing ₹1,80,000 weighted ₹36K at 20%, and the Billing card with Create quote" loading="lazy" width="1440" height="900"><figcaption>Click a stage on the bar to move the deal there.</figcaption></figure>
+
+    <h4>On this page</h4>
+    <ul>
+      <li>Header: <span class="ui">Schedule follow-up</span>, <span class="ui">Log activity</span> and (admins) <span class="ui">Delete</span>.</li>
+      <li><span class="ui">Stage</span>: the stage bar with each stage's probability, then <span class="ui">Mark won</span> and <span class="ui">Mark lost</span>. When closed, the won or lost reason and, for reviewers, Reopen.</li>
+      <li><span class="ui">Upcoming</span> and <span class="ui">Timeline</span>, as on a lead. If the deal came from a lead, the lead's history appears as "Before conversion".</li>
+      <li><span class="ui">Deal</span> card: status (Open, Won or Lost), value, weighted value, stage, client, owner, expected close and source.</li>
+      <li><span class="ui">Billing</span>: <span class="ui">Create quote</span> (and Create invoice) in Folio, prefilled with the client, title and amount, plus any quotes or invoices made for this deal. Most teams quote after the deal is won.</li>
+      <li><span class="ui">Details</span>: title, value, probability, expected close, contact, source, sector, owner (reviewers) and notes, saved with <span class="ui">Save changes</span>. <span class="ui">Add contact</span> adds a new person to the client.</li>
+      <li><span class="ui">Client</span> card: name, status, primary contact, GSTIN and <span class="ui">Open client</span>.</li>
+    </ul>
+
+    <h4>Win a deal</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">Mark won</span>.</li>
+      <li>Confirm the <span class="ui">Final value (₹)</span>, the signed amount.</li>
+      <li>Optionally choose <span class="ui">Why we won</span> (for example Referral or trust, Case studies and proof, Price fit, Speed of response).</li>
+      <li>Set the <span class="ui">Close date</span> (today or earlier) and click <span class="ui">Mark won</span>.</li>
+      <li>In <span class="ui">Billing</span>, click <span class="ui">Create quote</span> or Create invoice to bill it in Folio.</li>
+    </ol>
+    <div class="warn"><p>Reopening a won deal that already has an invoice warns you about it. If the deal fell through, void the invoice in Folio. A deal that came from a lead cannot be deleted; mark it lost instead.</p></div>
+  </article>
+
+  <article class="topic" id="orbit-contacts">
+    <h3>Contacts</h3>
+    <p class="where"><span>Open: <b>Orbit → Contacts</b></span><span><code>/app/orbit/contacts</code></span><span>Who: everyone with Orbit and client access</span></p>
+    <p>The people you sell to. Contacts belong to clients; prospects are the contact people on your open leads.</p>
+    <figure class="shot"><img src="shots/orbit-contacts.jpg" alt="Contacts table on the Client contacts tab with name, role, client with Lead or Active status, email, phone and open deals; a star marks primary contacts" loading="lazy" width="1440" height="900"><figcaption>A star marks each client's primary contact.</figcaption></figure>
+    <h4>On this page</h4>
+    <ul>
+      <li><span class="ui">Search contacts</span> and <span class="ui">Add contact</span>.</li>
+      <li>Tabs: <span class="ui">Client contacts</span> (columns <span class="ui">Name</span>, <span class="ui">Role</span>, <span class="ui">Client</span> with its status, <span class="ui">Email</span>, <span class="ui">Phone</span> and <span class="ui">Open deals</span>) and <span class="ui">Prospects</span> (contact people on open leads, with company, stage and owner; read only, click to open the lead).</li>
+      <li>Filters: <span class="ui">Any client status</span> and <span class="ui">Primary only</span>.</li>
+    </ul>
+    <h4>Add a contact</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">Add contact</span>.</li>
+      <li>Pick the client (required), then enter the name, role, email and phone (7 to 15 digits).</li>
+      <li>Tick primary if this is now the main person; the previous primary is unset. A client's first contact is always primary.</li>
+      <li>Save. The contact page opens.</li>
+    </ol>
+    <div class="note"><p>Converting a lead brings its contact over to the client automatically. The same email cannot be used twice on one client.</p></div>
+  </article>
+
+  <article class="topic" id="orbit-contact">
+    <h3>A contact</h3>
+    <p class="where"><span>Open: <b>Contacts → click a name</b></span><span><code>/app/orbit/contacts/{id}</code></span><span>Who: everyone with Orbit and client access</span></p>
+    <p>One person: how to reach them, their client, their deals, and everything logged with them.</p>
+    <figure class="shot"><img src="shots/orbit-contact.jpg" alt="Contact page for a founder marked Primary contact with email and phone buttons, empty Upcoming and Activity sections, a Client card and one deal at Proposal sent for ₹4,20,000" loading="lazy" width="1440" height="900"><figcaption>The note under the buttons says which open deal new activity will be logged on.</figcaption></figure>
+    <ul>
+      <li>Header: <span class="ui">Edit</span>, <span class="ui">Delete</span>, <span class="ui">Schedule follow-up</span> and <span class="ui">Log activity</span>, plus email and phone shortcuts.</li>
+      <li><span class="ui">Upcoming</span> and <span class="ui">Activity</span> with this contact; the <span class="ui">Client</span> card; and <span class="ui">Deals</span> with this contact.</li>
+    </ul>
+    <ol class="steps">
+      <li>To change details, click <span class="ui">Edit</span>, update and save. You can also make the contact primary.</li>
+      <li>To record a call with them, click <span class="ui">Log activity</span>. The client and contact are already filled in, and the activity goes on the client's open deal.</li>
+      <li>To remove a contact, click <span class="ui">Delete</span> and confirm.</li>
+    </ol>
+    <div class="note"><p>A contact on open deals cannot be deleted until those deals use another contact. If you delete the primary contact, the next one becomes primary.</p></div>
+  </article>
+
+  <article class="topic" id="orbit-activities">
+    <h3>Activities</h3>
+    <p class="where"><span>Open: <b>Orbit → Activities</b></span><span><code>/app/orbit/activities</code></span><span>Who: everyone with Orbit</span></p>
+    <p>Calls, emails, DMs, meetings, notes and follow-ups across all leads, deals and clients: your follow-up queue and the log of what was done.</p>
+    <figure class="shot"><img src="shots/orbit-activities.jpg" alt="Activities page on the Today tab with Due today showing two Share retainer pricing follow-ups and an empty Done today panel" loading="lazy" width="1440" height="900"><figcaption>The tab labels carry live counts: Today 2, Overdue 12, Upcoming 51.</figcaption></figure>
+    <h4>On this page</h4>
+    <ul>
+      <li><span class="ui">Schedule</span> and <span class="ui">Log activity</span>, for any lead, deal or client.</li>
+      <li>Tabs: <span class="ui">Today</span> (due today, then <span class="ui">Done today</span>), <span class="ui">Overdue</span> (oldest first, with how late), <span class="ui">Upcoming</span> (next 30 days, grouped by date) and <span class="ui">Done</span> (the log, last 7 days by default, with a date range).</li>
+      <li>Type filters: <span class="ui">All types</span>, <span class="ui">Calls</span>, <span class="ui">Emails</span>, <span class="ui">DMs</span>, <span class="ui">Follow-ups</span>, <span class="ui">Meetings</span>, <span class="ui">Replies</span>, <span class="ui">Notes</span>. Plus <span class="ui">Related to</span> (lead, deal or client) and owner.</li>
+      <li>Each planned row: title, the record it belongs to, due date and time (red when due or late), assignee, and buttons to mark done, reschedule or cancel.</li>
+    </ul>
+    <h4>Kinds of activity</h4>
+    <div class="tbl"><table>
+      <thead><tr><th>Type</th><th>Can be planned?</th><th>Counts as</th></tr></thead>
+      <tbody>
+        <tr><td>DM, Email, Call, Follow-up</td><td>Yes</td><td>Outreach (moves a lead to Contacted)</td></tr>
+        <tr><td>Reply</td><td>No, log it when it happens</td><td>Reply (moves a lead to Engaged)</td></tr>
+        <tr><td>Meeting</td><td>Yes, with a link</td><td>Meeting held, once done with notes</td></tr>
+        <tr><td>Note</td><td>No</td><td>Just a record</td></tr>
+      </tbody>
+    </table></div>
+    <h4>Set a follow-up reminder</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">Schedule</span>.</li>
+      <li>Under <span class="ui">Related to</span>, search for the lead, deal or client.</li>
+      <li>Pick the <span class="ui">Type</span>, write the <span class="ui">Title</span>, set the <span class="ui">Date</span> and <span class="ui">Time</span>, and choose the <span class="ui">Assignee</span>.</li>
+      <li>Click <span class="ui">Schedule</span>. It appears in Upcoming, then in Today on the day, and the assignee is notified if it is not you.</li>
+      <li>When it is done, click the tick to mark it done and add what happened. Missed it? Reschedule or cancel it.</li>
+    </ol>
+    <div class="note"><p>A planned activity can be edited, rescheduled, completed or cancelled. Once logged as done, it cannot be edited, because it is the evidence behind stages and reports; only an admin can delete it, and deleting does not move any stage back.</p></div>
+  </article>
+
+  <article class="topic" id="orbit-reports">
+    <h3>Orbit reports</h3>
+    <p class="where"><span>Open: <b>Orbit → Reports</b></span><span><code>/app/orbit/reports</code></span><span>Who: everyone with Orbit (your own numbers, or the team's if you see everyone)</span></p>
+    <p>Whether the sales effort is working, and where. Reports look at the leads <b>created</b> in the chosen period and follow them through the funnel.</p>
+    <figure class="shot"><img src="shots/orbit-reports.jpg" alt="Orbit reports for the last 30 days with range buttons, the Conversion card showing cold 5.3% (4 ÷ 76) and warm 18.2% (4 ÷ 22) both on track, and the 14-day outreach volume chart" loading="lazy" width="1440" height="900"><figcaption>Every percentage shows the two numbers behind it.</figcaption></figure>
+
+    <h4>Choose the period</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">Last 7 days</span>, <span class="ui">Last 30 days</span> (default), <span class="ui">Last 90 days</span>, <span class="ui">This month</span>, <span class="ui">Last month</span> or <span class="ui">All time</span>, or set your own <span class="ui">From</span> and <span class="ui">To</span> and click <span class="ui">Apply</span>.</li>
+      <li>Narrow by sector and, if you see everyone, by owner.</li>
+      <li>Each table has <span class="ui">Download CSV</span>.</li>
+    </ol>
+    <div class="note"><p>Two kinds of number: <b>pipeline</b> numbers (leads, stages, conversion) follow the lead owner; <b>effort</b> numbers (outreach sent, replies logged) follow whoever logged the activity. All percentages are rounded to one decimal. When the bottom number is zero, the figure shows as "—".</p></div>
+
+    <h4>What each formula means</h4>
+    <div class="tbl"><table>
+      <thead><tr><th>Figure</th><th>Formula</th><th>What it tells you</th></tr></thead>
+      <tbody>
+        <tr><td>Cold conversion</td><td>Meetings booked ÷ leads contacted</td><td>How well cold outreach turns into meetings. 3–5% is realistic for pure outreach (the default target).</td></tr>
+        <tr><td>Warm conversion</td><td>Meetings booked ÷ leads who replied</td><td>How well real conversations turn into meetings. 15% is the default target.</td></tr>
+        <tr><td>Reply rate</td><td>Engaged ÷ contacted</td><td>How many people you contact answer at all.</td></tr>
+        <tr><td>Contacted %</td><td>Contacted ÷ leads added</td><td>How much of what you source actually gets outreach.</td></tr>
+        <tr><td>Open</td><td>Leads added − converted − lost − disqualified</td><td>Leads from the period still being worked.</td></tr>
+        <tr><td>Weighted value</td><td>Deal value × stage probability</td><td>A realistic view of an open pipeline.</td></tr>
+        <tr><td>Win rate (count)</td><td>Deals won ÷ (won + lost)</td><td>Share of closed deals you win.</td></tr>
+        <tr><td>Win rate (value)</td><td>₹ won ÷ (₹ won + ₹ lost)</td><td>Whether you win the big ones or only the small ones.</td></tr>
+        <tr><td>Stage velocity</td><td>Average days from entering a stage to the lead's next stage change</td><td>Where leads get stuck.</td></tr>
+      </tbody>
+    </table></div>
+    <p>One rate cannot describe both cold outreach and warm conversations, which is why there are two. The cards show <span class="ui">On track</span> when cold is at or above the cold minimum and warm is at or above the warm target.</p>
+    <div class="warn"><p>Small samples swing wildly. Below about 30 contacted leads, one meeting more or less changes the rate a lot; read the numbers as direction, not performance. The note under the Conversion card also counts leads contacted in the last 14 days, which may still convert.</p></div>
+
+    <h4>Sections</h4>
+    <ul>
+      <li><span class="ui">Conversion</span>: the two rings, with the numbers behind them.</li>
+      <li><span class="ui">Outreach volume · 14 days</span>: outreach and replies per day for the last 14 days, whatever the range. Flat days here explain flat months later.</li>
+      <li><span class="ui">Funnel</span>: Leads added, Contacted, Engaged, Meeting booked, Meeting done, Converted and Won, counting every lead that <b>ever</b> reached a stage, not where it sits now. Tiles for Open, Converted, Lost and Disqualified.</li>
+      <li><span class="ui">Stage velocity</span>: average days and sample size for each open stage.</li>
+      <li><span class="ui">Source performance</span>: per source, Leads, Contacted, Replied, Meetings, Converted, Won, Cold % and Warm %, with warm sources tagged. The source with the most leads is often not the one that produces meetings.</li>
+      <li><span class="ui">Sector split</span>: the same per sector, with your primary sector tagged. If a sector absorbs effort without producing meetings, this is the evidence to drop it.</li>
+      <li><span class="ui">By owner</span> (when you see everyone): each owner's leads, conversion, outreach they logged and deals won.</li>
+      <li><span class="ui">Deals won and lost</span>: deals closed in the period, count and ₹, and both win rates.</li>
+      <li><span class="ui">Pipeline now</span>: open deals by stage today, whatever the range, and what is expected to close this month.</li>
+      <li><span class="ui">Close reasons</span> and <span class="ui">Won reasons</span>: why leads were disqualified or lost and deals were lost or won, by reason.</li>
+    </ul>
+  </article>
+
+  <article class="topic" id="orbit-settings">
+    <h3>Orbit settings</h3>
+    <p class="where"><span>Open: <b>Orbit → Settings</b></span><span><code>/app/orbit/settings</code></span><span>Who: Orbit admins (owner, admin, sales)</span></p>
+    <p>Deal stages, sources, sectors, close reasons, targets and lead capture for the workspace. Each section saves on its own.</p>
+    <figure class="shot"><img src="shots/orbit-settings.jpg" alt="Orbit settings on the Deal stages section with Discovery 20%, Proposal sent 40% and Negotiation 70%, each with a colour, and Won 100% and Lost 0% fixed" loading="lazy" width="1440" height="900"><figcaption>Use the arrows to reorder stages; Won and Lost are always last.</figcaption></figure>
+
+    <h4>Sections</h4>
+    <ul>
+      <li><span class="ui">Deal stages</span>: 1 to 8 open stages, each with a <span class="ui">Label</span>, <span class="ui">Probability %</span> and colour. Won (100%) and Lost (0%) are fixed. A stage with open deals cannot be removed until those deals move.</li>
+      <li><span class="ui">Lead stages</span>: read only. The lead stages, their rules and guards are fixed because Cold % and Warm % are defined by them.</li>
+      <li><span class="ui">Sources</span>: where leads come from. The <b>Warm</b> toggle lets leads from that source skip Contacted. At least one source must be active.</li>
+      <li><span class="ui">Sectors</span>: your markets, with exactly one marked Primary.</li>
+      <li><span class="ui">Close reasons</span>: Lost reasons (used for lost and disqualified leads and lost deals; Other always stays) and Won reasons.</li>
+      <li><span class="ui">Targets</span>: Cold min % and Cold max %, Warm %, New leads per week, Outreach per week and Meetings per month. These drive the dashboard's daily targets and the On track pills.</li>
+      <li><span class="ui">General</span>: after how many days an untouched lead counts as stale (1 to 60, default 7), and the default reviewer for new leads.</li>
+      <li><span class="ui">Lead capture</span>: turn enquiries into leads automatically (below).</li>
+    </ul>
+
+    <h4>Change a deal stage</h4>
+    <ol class="steps">
+      <li>Open <span class="ui">Deal stages</span>.</li>
+      <li>Edit a label or probability, pick a colour, reorder with the arrows, click <span class="ui">Add</span> for a new stage, or the bin icon to remove one.</li>
+      <li>Click <span class="ui">Save</span>.</li>
+    </ol>
+    <div class="tip"><p>Keep probabilities rising down the list. Orbit warns you if a later stage has a lower probability than an earlier one.</p></div>
+    <div class="note"><p>A source, sector or reason already used by a lead or deal cannot be removed. Deactivate it instead: it disappears from the pickers but keeps its label in reports. Labels can be renamed at any time.</p></div>
+
+    <h4>Set your targets</h4>
+    <ol class="steps">
+      <li>Open <span class="ui">Targets</span>.</li>
+      <li>Set Cold min and max (cold min cannot be above cold max), Warm %, and the weekly and monthly volume targets.</li>
+      <li>Save. Revisit them: targets set once and never revised are how a role gets designed to fail.</li>
+    </ol>
+
+    <h4>Capture leads automatically</h4>
+    <ol class="steps">
+      <li>Open <span class="ui">Lead capture</span>.</li>
+      <li><b>Website form</b>: tick <span class="ui">Accept enquiries from my website</span>, list <span class="ui">Your websites (one per line)</span>, optionally a <span class="ui">Thank-you page</span>, and click <span class="ui">Save form</span>. Then paste either the <span class="ui">HTML form</span> or the <span class="ui">Script (draws the form for you)</span> snippet on your site. Every enquiry becomes a lead with source Website form and the page's UTM tags.</li>
+      <li><b>Webhook (Zapier, Meta lead ads, JustDial)</b>: turn on <span class="ui">Accept leads on this webhook</span>, then give the URL and token to the other service.</li>
+      <li><b>IndiaMART</b> (beta): tick <span class="ui">Pull IndiaMART enquiries into Orbit</span>, paste your <span class="ui">IndiaMART CRM key</span> and click <span class="ui">Save IndiaMART</span>. Orbit checks for new enquiries every 15 minutes; <span class="ui">Check now</span> checks straight away.</li>
+      <li><b>Who gets new leads</b>: choose <span class="ui">Always to one person</span> or <span class="ui">Round-robin, in turns</span> with the people who take turns, and click <span class="ui">Save</span>. The person is alerted at once.</li>
+    </ol>
+    <div class="warn"><p>Only websites you list can post to your form. If a form URL or webhook token leaks, click <span class="ui">New form URL</span> or <span class="ui">New webhook URL</span>; the old one stops working, so update your site and integrations right away.</p></div>
+  </article>
+</section>

@@ -1,0 +1,676 @@
+<section class="chapter c-admin" id="admin">
+  <header>
+    <div class="eyebrow">Settings and admin</div>
+    <h2>Run your workspace</h2>
+    <p>Settings is where the owner and admins set up the workspace: people and roles, products, plan and billing, notifications, automations, integrations, payments and data. It also holds the personal settings every user has: profile, alerts, briefs, password and appearance. Open it from <b>Rail → Settings</b>.</p>
+  </header>
+
+  <article class="topic" id="admin-overview">
+    <h3>How Settings is laid out</h3>
+    <p>The Settings side panel has six groups.</p>
+    <ul>
+      <li><b>You</b> is for everyone and changes only your own login: <span class="ui">My account (login)</span>, <span class="ui">Security</span>, <span class="ui">Appearance</span>, <span class="ui">My alerts</span>, <span class="ui">Briefs</span>, <span class="ui">Google</span> and <span class="ui">Connected apps</span>.</li>
+      <li>The other groups change things for everyone, so most of them are open only to the owner and admins (or to a custom role given the right permission): <b>Company</b> (<span class="ui">General</span>, <span class="ui">Company profile</span>, <span class="ui">Domains</span>, <span class="ui">Privacy</span>), <b>People and access</b> (<span class="ui">Members</span>, <span class="ui">Roles</span>, <span class="ui">Support access</span>, <span class="ui">Audit log</span>), <b>Plan</b> (<span class="ui">Plan &amp; billing</span>), <b>Automation and messages</b> (<span class="ui">Workspace alerts</span>, <span class="ui">Automations</span>, <span class="ui">Compliance calendar</span>, <span class="ui">Messages log</span>) and <b>Data</b> (<span class="ui">Import</span>, <span class="ui">Export</span>, <span class="ui">Integrations</span>, <span class="ui">Modules</span>).</li>
+    </ul>
+    <div class="note"><p>The owner can do everything. An admin can do everything except manage the subscription and delete the workspace. There is always exactly one owner; ownership can be handed over from <span class="ui">Members</span>.</p></div>
+  </article>
+
+  <article class="topic" id="admin-general">
+    <h3>General: workspace details</h3>
+    <p class="where"><span>Open: <b>Rail → Settings → General</b></span><span><code>/app/settings</code></span><span>Who: owner, admin</span></p>
+    <p>The workspace name and URL, and the working hours that attendance and payroll use. The company's legal details, logo and signatories live in <a href="#admin-company">Company profile</a>.</p>
+    <figure class="shot"><img src="shots/set-home.jpg" alt="General settings page with Workspace, Address and tax, Logo and Working calendar cards, and the Settings side panel listing Personal and Workspace pages" loading="lazy" width="1440" height="900"><figcaption>The Settings side panel on the left; the workspace name, URL, team size and logo on the right.</figcaption></figure>
+    <h4>On this page</h4>
+    <ul>
+      <li><span class="ui">Workspace</span> — <span class="ui">Workspace name</span> (shown in the workspace switcher, emails and the header of every PDF), <span class="ui">Workspace URL</span>, <span class="ui">How many people use this workspace?</span> and <span class="ui">How you work</span>: <span class="ui">Project-based</span> (Workspace → Projects → Tasks → Subtasks) or <span class="ui">Personal tasks</span> (My Tasks, no project setup).</li>
+      <li><span class="ui">Company profile</span> — the legal name and GSTIN, with <span class="ui">Open company profile</span> to change them, the address, the logo and the signatories.</li>
+      <li><span class="ui">Working calendar</span> — <span class="ui">Day starts</span>, <span class="ui">Day ends</span>, <span class="ui">Half day (hours)</span> and <span class="ui">Working days</span>. The time zone is fixed to Asia/Kolkata (IST).</li>
+      <li><span class="ui">Delete workspace</span> — at the bottom of the page, owner only.</li>
+    </ul>
+    <h4>Set office hours and working days</h4>
+    <ol class="steps">
+      <li>Set <span class="ui">Day starts</span> and <span class="ui">Day ends</span>, for example 10:00 AM to 07:00 PM.</li>
+      <li>Set <span class="ui">Half day (hours)</span>, for example 4.5.</li>
+      <li>Tick the <span class="ui">Working days</span>. Untick Sunday (and Saturday if you work five days).</li>
+      <li>Click <span class="ui">Save hours</span>.</li>
+    </ol>
+    <div class="note"><p>The check-in widget, attendance and the number of working days in payroll all follow this calendar. Change it before you run a month's payroll, not in the middle.</p></div>
+    <h4>Delete the workspace</h4>
+    <p>Only the owner can do this. Everyone loses access at once and billing stops. Flowbit emails you the date: the data is kept for 30 days in case you change your mind (write to support to restore it), you get a reminder 7 days before, and then it is removed for good. Flowbit's own invoices to you are kept, as the law requires.</p>
+    <div class="warn"><p>Take a full export from <span class="ui">Export</span> before you click <span class="ui">Delete workspace</span>. After 30 days the data cannot be brought back.</p></div>
+  </article>
+
+  <article class="topic" id="admin-company">
+    <h3>Company profile: letterhead and signatories</h3>
+    <p class="where"><span>Open: <b>Rail → Settings → Company profile</b></span><span><code>/app/settings/company</code></span><span>Who: owner, admin</span></p>
+    <p>What every PDF prints at the top and at the bottom: payslips, HR letters, Form 130 Part B, receipts, statements, and Folio invoices, quotes and credit notes. PDFs use the same brand colours as the app (Settings → Appearance), darkened a little where a light colour would be hard to read on paper.</p>
+    <h4>On this page</h4>
+    <ul>
+      <li><span class="ui">Company details</span> — <span class="ui">Legal name</span>, <span class="ui">Trade name</span>, <span class="ui">GST registration</span> (<span class="ui">GST registered</span> with the <span class="ui">GSTIN</span>, or <span class="ui">Not registered</span>), <span class="ui">PAN</span>, <span class="ui">CIN / LLPIN</span>, <span class="ui">Website</span>, <span class="ui">Contact email</span>, <span class="ui">Phone</span> and the full address. The GSTIN must match the state of the address.</li>
+      <li><span class="ui">Logo</span> — PNG, JPEG, SVG or WebP. Flowbit turns it into a resized PNG before it uploads.</li>
+      <li><span class="ui">Authorised signatories</span> — each with a name, designation, signature image and an optional seal or stamp. One of them is the <span class="ui">Default</span>.</li>
+      <li><span class="ui">Show signature on payslips</span> — off by default; payslips then say they are computer-generated and need no signature.</li>
+    </ul>
+    <h4>Add an authorised signatory</h4>
+    <ol class="steps">
+      <li>Under <span class="ui">Authorised signatories</span>, click <span class="ui">Add signatory</span>.</li>
+      <li>Type the <span class="ui">Name</span> and <span class="ui">Designation</span>.</li>
+      <li>Click <span class="ui">Choose signature</span> and pick a photo or scan of the signature on white paper (PNG or JPEG).</li>
+      <li>Leave <span class="ui">Remove background</span> on to make the paper transparent. Move the slider if faint ink disappears or a grey patch stays.</li>
+      <li>Optionally add a <span class="ui">Seal or stamp</span> the same way.</li>
+      <li>Click <span class="ui">Add signatory</span>.</li>
+    </ol>
+    <div class="note"><p>Only owners and admins can add, change or remove signatories, and every change is in the audit log. Signature and seal images are stored privately: they are only ever drawn into PDFs and cannot be opened or downloaded as files.</p></div>
+    <h4>Who signs what</h4>
+    <ul>
+      <li><b>HR letters</b> — the signatory set for that letter type in <span class="ui">HR settings → Letter signatories</span>, else the default. On a draft, <span class="ui">Signed by</span> picks another signatory or <span class="ui">Someone else</span> (a typed name, no signature image). The signature is fixed on the letter when it is issued, so a reprint looks the same.</li>
+      <li><b>Form 130 Part B</b> — the person in the tax-year settings. When that is an authorised signatory, their signature prints; left blank, the default signs.</li>
+      <li><b>Folio documents</b> — the firm's own signatory when it has one, else the default. A firm that leaves its logo, email, phone or website blank uses the company profile's ("Using company profile" in the firm form).</li>
+      <li><b>Receipts and statements</b> — as Folio documents.</li>
+      <li><b>Flowbit's own bills</b> (Settings → Plan &amp; billing) — always Flowbit's details, because Flowbit issues them.</li>
+    </ul>
+  </article>
+
+  <article class="topic" id="admin-profile">
+    <h3>Your profile</h3>
+    <p class="where"><span>Open: <b>Rail → Settings → My account (login)</b></span><span><code>/app/settings/profile</code></span><span>Who: everyone</span></p>
+    <p>Your name, job title and photo, and what this workspace knows about you.</p>
+    <div class="tip"><p>The screenshot of this page is being retaken. Your name shows on tasks, approvals and the audit log in every workspace you belong to.</p></div>
+    <h4>On this page</h4>
+    <ul>
+      <li><span class="ui">Your details</span> — <span class="ui">Full name</span>, <span class="ui">Job title</span> and <span class="ui">Your sign-in email</span>. The email cannot be edited here; ask a workspace owner to invite the new email if yours changes.</li>
+      <li><span class="ui">Photo</span> — PNG, JPG or WebP under 2 MB.</li>
+      <li><span class="ui">In Vistaar WebX</span> (your workspace name) — your role, department, manager, joining date and sign-in methods, with a link to your employee record. Department and manager are managed by your admin.</li>
+    </ul>
+    <h4>Change your name or photo</h4>
+    <ol class="steps">
+      <li>Edit <span class="ui">Full name</span> or <span class="ui">Job title</span> and click <span class="ui">Save profile</span>.</li>
+      <li>For a photo, click <span class="ui">Choose a file</span>, pick the image, then click <span class="ui">Upload photo</span>.</li>
+    </ol>
+      <h4>Language</h4>
+    <p>The <span class="ui">Language</span> card switches your own screens between English and हिन्दी (Hindi). Hindi covers My HR (profile, attendance, leave and payslips), check-in and breaks, and the Home attendance and Get started cards; the rest of Flowbit stays in English. Payslip PDFs print English and Hindi labels side by side when you read in Hindi. See <a href="#me-language">Flowbit in Hindi</a>.</p>
+    <h4>Email to task</h4>
+    <p>When your Flowbit server receives email, the <span class="ui">Email to task</span> card shows your private <code>tasks+…</code> address with a copy button. See <a href="#admin-email-task">Email to task</a>.</p>
+  </article>
+
+  <article class="topic" id="admin-my-alerts">
+    <h3>My alerts</h3>
+    <p class="where"><span>Open: <b>Rail → Settings → My alerts</b></span><span><code>/app/settings/profile/notifications</code></span><span>Who: everyone</span></p>
+    <p>Choose which alerts reach you, and where: in the bell (<b>In-app</b>) or by <b>Email</b>. Any switch you leave untouched follows the workspace defaults set by your admin.</p>
+    <div class="tip"><p>The screenshot of this page is being retaken. One row per kind of alert, with a switch for each channel.</p></div>
+    <h4>On this page</h4>
+    <ul>
+      <li><span class="ui">Alerts</span> — one row per kind of alert: tasks assigned to you, @mentions, blocked tasks, due today and overdue, comments and replies, task status changes, approvals waiting on you, decisions on your requests, HR reminders, attendance nudges, birthdays and anniversaries, compliance dates, meetings, follow-ups due, leads and deals, invoices and payments, payslips and letters, team and announcements, Flowbit account and security.</li>
+      <li><span class="ui">Snooze</span> — pause alert emails for <span class="ui">1 hour</span>, the <span class="ui">Rest of today</span>, or until a time you pick (<span class="ui">Until then</span>).</li>
+      <li><span class="ui">Digest</span> — <span class="ui">One email per alert</span>, <span class="ui">Hourly digest</span> (at most one alert email an hour) or <span class="ui">End-of-day digest</span> (one email at 6 pm). Urgent alerts still go at once.</li>
+      <li><span class="ui">Quiet hours</span> — follow the workspace quiet hours, set <span class="ui">My own hours</span>, or choose <span class="ui">No quiet hours</span>.</li>
+    </ul>
+    <h4>Change what reaches you</h4>
+    <ol class="steps">
+      <li>Find the row, for example <span class="ui">Task status changes</span>.</li>
+      <li>Turn the <span class="ui">In-app</span> or <span class="ui">Email</span> switch on or off.</li>
+      <li>Pick a <span class="ui">Digest</span> and <span class="ui">Quiet hours</span> option if you want fewer emails.</li>
+      <li>Click <span class="ui">Save</span>.</li>
+    </ol>
+    <div class="note"><p>Some switches are fixed by Flowbit. <b>Security</b> emails (password resets, sign-in codes, ownership changes) always go and ignore snooze and quiet hours. Comments are always emailed as an hourly digest.</p></div>
+    <div class="warn"><p>Approval and task emails have buttons (<span class="ui">Approve</span>, <span class="ui">Reject</span>, <span class="ui">Mark done</span>, <span class="ui">Snooze 1 day</span>). Each button works once, for 7 days, without signing in, for whoever has the email, so don't forward approval emails. Expense claims and bank account changes ask the person they were sent to to sign in first.</p></div>
+  </article>
+
+  <article class="topic" id="admin-briefs">
+    <h3>Briefs</h3>
+    <p class="where"><span>Open: <b>Rail → Settings → Briefs</b></span><span><code>/app/settings/profile/briefs</code></span><span>Who: everyone</span></p>
+    <p>A brief is your own summary of what needs you, sent at a time you choose. You pick the days, where it arrives and what it covers. You can have more than one, for example a morning brief and an end-of-day wrap. Times are IST.</p>
+    <figure class="shot"><img src="shots/set-briefs.jpg" alt="Briefs page with the empty state No brief yet and a Create my morning brief button" loading="lazy" width="1440" height="900"><figcaption>Before your first brief, the page offers one preset for your role.</figcaption></figure>
+    <h4>Create your first brief</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">Create my morning brief</span>. Flowbit starts you with the preset that fits your role: an owner gets everything, an employee gets Work and Approvals.</li>
+      <li>Change the <span class="ui">Name</span> if you like.</li>
+      <li>Set <span class="ui">Time (IST)</span> and <span class="ui">How often</span>: daily, weekdays, weekly on a <span class="ui">Day of the week</span>, or monthly on the 1st. Pick the <span class="ui">Days</span>.</li>
+      <li>Under <span class="ui">Where</span>, tick <span class="ui">In-app (the bell)</span>, <span class="ui">Email</span> or both.</li>
+      <li>Under <span class="ui">Sections, in order</span>, add the sections you want and use <span class="ui">Move up</span> and <span class="ui">Move down</span> to order them. <span class="ui">Remove</span> drops one.</li>
+      <li>Narrow the task sections with <span class="ui">Which tasks</span>, <span class="ui">Only these projects (none = all)</span> and <span class="ui">Only these priorities (none = all)</span>.</li>
+      <li>Tick <span class="ui">Skip when there is nothing</span> so an empty brief is not sent. Save.</li>
+    </ol>
+    <p>Use <span class="ui">Add a brief</span> later for a second one.</p>
+    <h4>Sections you can pick</h4>
+    <div class="tbl"><table>
+      <thead><tr><th>Group</th><th>What it shows</th></tr></thead>
+      <tbody>
+        <tr><td>Work</td><td>Your tasks due today, overdue, due this week, blocked, today's meetings, your timer and timesheet status</td></tr>
+        <tr><td>Approvals</td><td>Everything waiting on you, with approve links</td></tr>
+        <tr><td>Team (managers)</td><td>Who is on leave or absent today, who is late, the team's overdue tasks, workload</td></tr>
+        <tr><td>Money (owners and accounts)</td><td>Due today and overdue with the top 5 clients, yesterday's receipts, this month's billing, the week's cash forecast</td></tr>
+        <tr><td>Sales</td><td>Follow-ups due, new leads yesterday, deals closing this week</td></tr>
+        <tr><td>Compliance</td><td>Statutory dates in the next 7 days</td></tr>
+      </tbody>
+    </table></div>
+  </article>
+
+  <article class="topic" id="admin-security">
+    <h3>Security: password, two-factor and sessions</h3>
+    <p class="where"><span>Open: <b>Rail → Settings → Security</b></span><span><code>/app/settings/security</code></span><span>Who: everyone</span></p>
+    <p>Change your password, turn on two-factor sign-in and see every device you are signed in on, across all your workspaces.</p>
+    <figure class="shot"><img src="shots/set-security.jpg" alt="Security page with a Password card (current password, new password, type it again) and a Sessions list showing this browser" loading="lazy" width="1440" height="900"><figcaption>The Sessions list shows each device, the workspace, when it was last active and when it signed in.</figcaption></figure>
+    <h4>Change your password</h4>
+    <ol class="steps">
+      <li>Type your <span class="ui">Current password</span>.</li>
+      <li>Type a <span class="ui">New password</span>: at least 8 characters, with a letter and a number.</li>
+      <li>Type it again in <span class="ui">Type it again</span>.</li>
+      <li>Click <span class="ui">Change password</span>.</li>
+    </ol>
+    <div class="note"><p>Changing your password signs you out on every other device. Use this if a phone or laptop is lost.</p></div>
+    <h4>Turn on two-factor sign-in</h4>
+    <p>With two-factor sign-in, Flowbit asks for a 6-digit code from an authenticator app (Google Authenticator, Microsoft Authenticator, 1Password and similar) after your password or Google sign-in.</p>
+    <ol class="steps">
+      <li>In the <span class="ui">Two-factor sign-in</span> card, click <span class="ui">Set up two-factor sign-in</span>.</li>
+      <li>Scan the <span class="ui">QR code for your authenticator app</span>, or type the key shown under it.</li>
+      <li>Type the <span class="ui">Code from the app</span> and click <span class="ui">Turn on two-factor sign-in</span>.</li>
+      <li>Save the 10 <span class="ui">Recovery codes</span> somewhere safe (<span class="ui">Copy codes</span>), then click <span class="ui">I saved them</span>. They are shown only once; each works one time.</li>
+    </ol>
+    <p>When you sign in you can tick "remember this device for 30 days". <span class="ui">New recovery codes</span> replaces the old set, and <span class="ui">Turn off</span> goes back to password or Google alone.</p>
+    <div class="tip"><p>Owners and admins can tick <span class="ui">Require two-factor sign-in for admins</span> once their own two-factor is on. Owners and admins without it are then sent to this page before they can do anything else. Lost your phone and your codes? A workspace admin can reset your two-factor from <a href="#admin-members">Members</a>; only the owner can reset the owner's.</p></div>
+  </article>
+
+  <article class="topic" id="admin-appearance">
+    <h3>Appearance: colours, sounds and motion</h3>
+    <p class="where"><span>Open: <b>Rail → Settings → Appearance</b></span><span><code>/app/settings/appearance</code></span><span>Who: everyone (brand colours: owner, admin)</span></p>
+    <p>Sounds and motion are your own choice. Brand colours change the look for everyone in the workspace.</p>
+    <figure class="shot"><img src="shots/set-appearance.jpg" alt="Appearance page with Brand colours pickers for primary, secondary and accent, a live preview card, a Sound effects list with Test buttons, and Motion options" loading="lazy" width="1440" height="900"><figcaption>Each colour shows a contrast score so you can see whether text stays readable.</figcaption></figure>
+    <h4>Set your brand colours</h4>
+    <ol class="steps">
+      <li>Under <span class="ui">Brand colours</span>, pick or type a hex value for <span class="ui">Primary</span> (links, focus rings, active states, charts), <span class="ui">Secondary</span> (selected chips, the navigation rail, gradient depth) and <span class="ui">Accent</span> (highlights and badges).</li>
+      <li>Check the preview card and the contrast line under each colour. Aim for "Readable".</li>
+      <li>Click <span class="ui">Save colours</span>. <span class="ui">Reset to Flowbit colours</span> undoes it.</li>
+    </ol>
+    <div class="tip"><p>Primary and accent carry links and small text, so pick shades that read well on a dark background. Secondary sits behind white text, so a deeper shade works best. Brand colours are included in the Suite plan.</p></div>
+    <h4>Sounds and motion</h4>
+    <ul>
+      <li><span class="ui">Play sound effects</span> — short, quiet sounds for real actions (Click, Toggle on, Toggle off, Pop, Success, Error, Notify, Whoosh). Click <span class="ui">Test</span> next to each to hear it. The setting follows you to every workspace.</li>
+      <li><span class="ui">Motion</span> — <span class="ui">Match my device</span>, <span class="ui">Reduce motion</span> (no gradient animation and no hover lift) or <span class="ui">Full motion</span>.</li>
+    </ul>
+  </article>
+  <article class="topic" id="admin-members">
+    <h3>Members: invite, change role, disable</h3>
+    <p class="where"><span>Open: <b>Rail → Settings → Members</b></span><span><code>/app/settings/members</code></span><span>Who: owner, admin</span></p>
+    <p>Everyone who can sign in to the workspace, with their role and status. This is where you invite people, change what they can do, and cut off access when someone leaves.</p>
+    <figure class="shot"><img src="shots/set-members.jpg" alt="Members page with an Invite people button, All, Active, Invited and Disabled filters, a search box, a role filter and a table of people with role, title, department, employee code, last active and status" loading="lazy" width="1440" height="900"><figcaption>The line under the heading shows how many members you have and your seat limit.</figcaption></figure>
+    <h4>On this page</h4>
+    <ul>
+      <li>Filters: <span class="ui">All</span>, <span class="ui">Active</span>, <span class="ui">Invited</span>, <span class="ui">Disabled</span>, plus <span class="ui">Search name or email</span> and <span class="ui">Filter by role</span>.</li>
+      <li>Columns: <span class="ui">Person</span>, <span class="ui">Role</span>, <span class="ui">Title</span>, <span class="ui">Department</span>, <span class="ui">Employee</span> (links to the HR record), <span class="ui">Last active</span>, <span class="ui">Status</span>, and an actions menu at the end of each row.</li>
+    </ul>
+    <h4>Invite people</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">Invite people</span>.</li>
+      <li>If the person already has an HR record, pick it in <span class="ui">Link to an employee record</span>. This fills the email and connects their self-service.</li>
+      <li>Type one or more addresses in <span class="ui">Emails</span>, separated by commas, spaces or new lines. Up to 20 at a time.</li>
+      <li>Pick a <span class="ui">Role</span> (Member by default) and, if you like, a <span class="ui">Job title</span>.</li>
+      <li>Click <span class="ui">Send invitations</span>. Each person gets an email with a link to join. The link works for 7 days.</li>
+    </ol>
+    <div class="tip"><p>If email delivery is not set up yet, invitations are saved instead of sent. You can copy each invite link and share it yourself. To invite many people from a spreadsheet, use <span class="ui">Import → Team members</span>.</p></div>
+    <p>Pending invites appear under <span class="ui">Invited</span>. Use <span class="ui">Resend</span> to send the email again, or <span class="ui">Revoke</span> to cancel it: the link stops working and the seat is freed.</p>
+    <h4>Change someone's role</h4>
+    <ol class="steps">
+      <li>Open the row's actions menu (for example <span class="ui">Actions for Vikram Joshi</span>).</li>
+      <li>Choose <span class="ui">Change role</span>.</li>
+      <li>Pick the new role and save. It applies on their next request.</li>
+    </ol>
+    <p><span class="ui">Edit details</span> in the same menu changes title and department. When the member is linked to an employee record, department and manager are managed in <b>HR → People</b> instead.</p>
+    <h4>Disable someone who has left</h4>
+    <ol class="steps">
+      <li>Open the row's actions menu and choose <span class="ui">Disable</span>.</li>
+      <li>Confirm with <span class="ui">Disable</span>. They are signed out at once and cannot sign back in. Their tasks, records and history stay, and the seat is freed.</li>
+      <li>To bring them back, open the menu on the <span class="ui">Disabled</span> list and choose <span class="ui">Enable</span>. This uses a seat again.</li>
+    </ol>
+    <div class="note"><p>Flowbit does not delete members. Disabling keeps the audit trail intact, which matters for approvals and payroll history. To finish an exit in HR (last day, settlement), use the employee's record in Muster.</p></div>
+    <h4>Hand over ownership</h4>
+    <ol class="steps">
+      <li>As the owner, open the new owner's actions menu and choose <span class="ui">Transfer ownership</span>.</li>
+      <li>Type the workspace name to confirm, then click <span class="ui">Transfer ownership</span>.</li>
+    </ol>
+    <div class="warn"><p>The new owner gets the subscription and the right to delete the workspace. You become an admin, and cannot undo this yourself.</p></div>
+  </article>
+
+  <article class="topic" id="admin-roles">
+    <h3>Roles and permissions</h3>
+    <p class="where"><span>Open: <b>Rail → Settings → Roles</b></span><span><code>/app/settings/roles</code></span><span>Who: owner, admin</span></p>
+    <p>What each role can do. Flowbit comes with eight built-in roles. You can add your own custom roles, for example a "BD executive" who also sees Orbit reports. You give roles to people on <span class="ui">Members</span>.</p>
+    <figure class="shot"><img src="shots/set-roles.jpg" alt="Roles page showing a Role access matrix: permissions grouped by Workspace, Flowbit Work, Muster, Orbit and Folio down the side, and one column per role with ticks for granted permissions" loading="lazy" width="1440" height="900"><figcaption>Each column is a role with its head count; each row is one permission, grouped by product.</figcaption></figure>
+    <h4>The built-in roles</h4>
+    <div class="tbl"><table>
+      <thead><tr><th>Role</th><th>What it can do</th></tr></thead>
+      <tbody>
+        <tr><td>Owner</td><td>Everything, including the subscription and deleting the workspace. One per workspace.</td></tr>
+        <tr><td>Admin</td><td>Everything except the subscription and deleting the workspace.</td></tr>
+        <tr><td>HR admin</td><td>All of Muster: people, attendance, leave, claims, payroll run and approval, letters. Can read the audit log.</td></tr>
+        <tr><td>HR executive</td><td>People, attendance, leave, claims and letters. Does not see salaries, payslips or payroll, and no sensitive IDs (PAN, Aadhaar, bank).</td></tr>
+        <tr><td>Finance</td><td>Payroll approval and release, claim payouts, all of Folio and reports. Can read sensitive IDs and the audit log.</td></tr>
+        <tr><td>Manager</td><td>All of Work, approvals (leave, attendance, timesheets) for direct reports, and read access to Orbit.</td></tr>
+        <tr><td>Sales</td><td>All of Orbit, client records and Folio quotes.</td></tr>
+        <tr><td>Member</td><td>Their own tasks and self-service: attendance, leave, claims and payslips.</td></tr>
+      </tbody>
+    </table></div>
+    <h4>Key permissions at a glance</h4>
+    <div class="tbl"><table>
+      <thead><tr><th>Permission</th><th>Owner</th><th>Admin</th><th>HR admin</th><th>HR exec</th><th>Finance</th><th>Manager</th><th>Sales</th><th>Member</th></tr></thead>
+      <tbody>
+        <tr><td>Manage workspace settings, modules and integrations</td><td>Yes</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+        <tr><td>Invite members, change roles, disable access</td><td>Yes</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+        <tr><td>Create and edit roles</td><td>Yes</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+        <tr><td>Manage subscription and billing</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+        <tr><td>Delete the workspace</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+        <tr><td>Read the audit log</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td></tr>
+        <tr><td>Create and edit tasks</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+        <tr><td>Approve timesheets</td><td>Yes</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>Yes</td><td>No</td><td>No</td></tr>
+        <tr><td>Approve leave</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td></tr>
+        <tr><td>See PAN, UAN, ESIC, Aadhaar and bank details</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td></tr>
+        <tr><td>Approve payroll (finance)</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td></tr>
+        <tr><td>Release payroll and publish payslips</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td></tr>
+        <tr><td>Open Orbit; see own leads, deals and activities</td><td>Yes</td><td>Yes</td><td>No</td><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td></tr>
+        <tr><td>Issue invoices and email them</td><td>Yes</td><td>Yes</td><td>No</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td></tr>
+        <tr><td>View clients</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+      </tbody>
+    </table></div>
+    <p>The full matrix on the page lists every permission, in five groups: <b>Workspace</b>, <b>Flowbit Work</b>, <b>Muster</b>, <b>Orbit</b> and <b>Folio</b>. Click a group name to fold it.</p>
+    <h4>Create a custom role</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">New role</span>. Or, to start from an existing role, open its column menu and choose <span class="ui">Duplicate to customise</span> (built-in roles) or <span class="ui">Duplicate</span> (custom roles).</li>
+      <li>Give it a name and a short description.</li>
+      <li>Tick the permissions people with this role should have.</li>
+      <li>Save. The new role now appears in the <span class="ui">Role</span> list on <span class="ui">Members</span>.</li>
+    </ol>
+    <p>To change a custom role later, open its column menu and choose <span class="ui">Edit</span>, or tick and untick cells in its column and save. <span class="ui">Delete</span> removes a custom role.</p>
+    <div class="note"><p>Built-in roles cannot be edited; duplicate them instead. You can only grant permissions you hold yourself, so an admin cannot create a role that manages the subscription.</p></div>
+  </article>
+
+  <article class="topic" id="admin-modules">
+    <h3>Modules: turn products on or off</h3>
+    <p class="where"><span>Open: <b>Rail → Settings → Modules</b></span><span><code>/app/settings/modules</code></span><span>Who: owner, admin</span></p>
+    <p>Switch whole products on or off for everyone in the workspace. A team that does not do HR in Flowbit, for example, can hide Muster.</p>
+    <figure class="shot"><img src="shots/set-modules.jpg" alt="Modules page with four cards, Flowbit Work, Muster, Orbit and Folio, each with an on or off switch, a plan status line and a list of what it includes" loading="lazy" width="1440" height="900"><figcaption>Each card says whether the product is in your plan and whether it is on.</figcaption></figure>
+    <ul>
+      <li><b>Flowbit Work</b> — tasks, spaces, projects, teams, meetings and posts.</li>
+      <li><b>Muster</b> — people, attendance, leave, reimbursements, payroll and HR letters. The card shows your Muster tier (Starter or Business).</li>
+      <li><b>Orbit</b> — leads, deal pipeline, contacts, activities and pipeline reports.</li>
+      <li><b>Folio</b> — GST invoices, quotes and proformas, receipts, recurring retainers, credit notes and client ledgers.</li>
+      <li><b>Always on</b> — Home, Notifications and Settings, plus Clients while Work, Orbit or Folio is on.</li>
+    </ul>
+    <h4>Switch a product off</h4>
+    <ol class="steps">
+      <li>Find the product card, for example <span class="ui">Orbit</span>.</li>
+      <li>Turn off its switch (<span class="ui">Orbit on or off</span>). It leaves the rail for everyone.</li>
+      <li>Turn it on again whenever you need it.</li>
+    </ol>
+    <div class="note"><p>Switching a product off never deletes its data. It also does not change your bill: to stop paying for a product, change your plan on <span class="ui">Plan &amp; billing</span>.</p></div>
+  </article>
+
+  <article class="topic" id="admin-subscription">
+    <h3>Plan &amp; billing: plan, seats and trial</h3>
+    <p class="where"><span>Open: <b>Rail → Settings → Plan &amp; billing</b></span><span><code>/app/settings/subscription</code></span><span>Who: owner</span></p>
+    <p>Your Flowbit plan, how many seats you use, the details printed on Flowbit's GST invoices to you, and your billing history.</p>
+    <figure class="shot"><img src="shots/set-subscription.jpg" alt="Plan and billing page showing the current plan card (Suite, 25 people, monthly, renewal date), a Usage card counting people and Muster employees, Billing details fields and a Billing history table" loading="lazy" width="1440" height="900"><figcaption>The plan card shows the plan, the seat count, the price before GST and the renewal date.</figcaption></figure>
+    <h4>On this page</h4>
+    <ul>
+      <li><span class="ui">Current plan</span> — plan name, seats, billing cycle, price per month plus GST, renewal date and payment method. <span class="ui">Cancel subscription</span> sits here.</li>
+      <li><span class="ui">Usage</span> — counted live from your members, invites and employees: <span class="ui">People</span> and <span class="ui">Muster employees</span>.</li>
+      <li><span class="ui">Billing details</span> — <span class="ui">Name on the invoice</span>, <span class="ui">Billing email</span> (invoices are emailed here), <span class="ui">Mobile</span>, <span class="ui">GSTIN</span>, address and <span class="ui">State (place of supply)</span>.</li>
+      <li><span class="ui">Billing history</span> — every GST invoice Flowbit issued to you, with <span class="ui">Number</span>, <span class="ui">Date</span>, <span class="ui">Period</span>, <span class="ui">Amount</span>, <span class="ui">Payment</span>, <span class="ui">Status</span>, a <span class="ui">PDF</span> link and <span class="ui">Email again</span>.</li>
+    </ul>
+    <h4>How plans work</h4>
+    <div class="tbl"><table>
+      <thead><tr><th>Stage</th><th>Rule</th></tr></thead>
+      <tbody>
+        <tr><td>Free</td><td>Up to 5 people, all four products, free for 6 months from signup. Adding a 6th person asks you to upgrade, or to start the trial if your business has not had it. Extra Folio firms and paid add-ons (client portal, custom domains, Meetings AI) are not included. One Free workspace per business.</td></tr>
+        <tr><td>Trial</td><td>For teams of more than 5: 15 days with all features and all people. One trial per business (GSTIN, else PAN, else the owner's email). After it, pay, or trim to 5 people and go back to Free for the rest of the 6 months from signup.</td></tr>
+        <tr><td>Paid</td><td>Monthly or yearly billing. Monthly pays the list price. Yearly costs 10 months' price (2 months free). Your first yearly plan is also 50% off for its first year (a separate discount line on the invoice, with GST on the discounted amount); yearly renewals pay 10 months' price. The price shown when you upgrade is the one you pay.</td></tr>
+        <tr><td>Seats</td><td>Free: the higher of people who sign in and employees on payroll. Suite: everyone who signs in plus employees on payroll who do not sign in, so each person counts once. Separate products are each counted on their own: Work counts people who sign in, Muster counts employees on payroll, Orbit counts people whose role can work leads or deals. Pending invites count as people who sign in. An employee who only uses self-service (attendance, leave) counts as an employee, not a login.</td></tr>
+        <tr><td>Folio users</td><td>Folio on its own includes 3 users, and the limit cannot be raised. Anyone whose role has any Folio permission counts, even to view or quote: by default the Owner, Admins, Finance and Sales. For more than 3, choose Suite.</td></tr>
+      </tbody>
+    </table></div>
+    <h4>List prices (per month, before 18% GST)</h4>
+    <div class="tbl"><table>
+      <thead><tr><th>Plan</th><th>Price</th><th>Minimum</th></tr></thead>
+      <tbody>
+        <tr><td>Suite (Work, Muster Business, Orbit and Folio)</td><td>₹149 per person</td><td>10 people</td></tr>
+        <tr><td>Work</td><td>₹59 per user</td><td>5 users</td></tr>
+        <tr><td>Muster Starter (no payroll)</td><td>₹39 per employee</td><td>10 employees</td></tr>
+        <tr><td>Muster Business (with payroll, PF, ESI and PT)</td><td>₹79 per employee</td><td>10 employees</td></tr>
+        <tr><td>Orbit</td><td>₹149 per sales user</td><td>2 sales users</td></tr>
+        <tr><td>Folio</td><td>₹399 flat per workspace (2 firms and 3 users included; ₹199 per extra firm)</td><td>—</td></tr>
+      </tbody>
+    </table></div>
+    <p>Prices can change; the price shown when you upgrade is the one you pay. For example, Suite for 25 people monthly is 25 × ₹149 = ₹3,725 a month (plus 18% GST once Flowbit is GST-registered: ₹4,396 a month after rounding).</p>
+    <h4>Upgrade or start a trial</h4>
+    <ol class="steps">
+      <li>When you reach the Free limit, a panel offers <span class="ui">Upgrade</span>, and <span class="ui">Start 15-day trial</span> only while your business has not had its trial. When a trial ends, a workspace trimmed to 5 people within the 6 months from signup also sees <span class="ui">Stay on Free (5 people)</span>. When the free months end, only <span class="ui">Upgrade</span> is left. There is no separate trial of a single product: a product your plan does not include shows <span class="ui">Add to plan</span>.</li>
+      <li>Click <span class="ui">Upgrade</span>, choose the products, the number of people and monthly or yearly.</li>
+      <li>Pay by UPI, card or net banking. Flowbit emails the invoice to your billing email (a GST tax invoice once Flowbit is GST-registered; until then it says it is not a tax invoice), and it appears in <span class="ui">Billing history</span>.</li>
+    </ol>
+    <div class="note"><p>Only the owner can upgrade. Others see "Ask your workspace owner to upgrade the plan or start a trial." If online payments are not switched on for your account, the page tells you to email <b>support@useflowbit.com</b> to change your plan.</p></div>
+    <h4>Fill in your billing details</h4>
+    <ol class="steps">
+      <li>Under <span class="ui">Billing details</span>, enter the <span class="ui">Name on the invoice</span> and <span class="ui">Billing email</span>.</li>
+      <li>Add your <span class="ui">GSTIN</span> to claim input tax credit on Flowbit's invoices.</li>
+      <li>Fill the address and pick the <span class="ui">State (place of supply)</span>.</li>
+      <li>Click <span class="ui">Save billing details</span>. Changes apply to future invoices only.</li>
+    </ol>
+    <div class="warn"><p>If your plan ends without payment, the workspace becomes read-only for 30 days. <span class="ui">Export data</span> always works, without a watermark, and employees can still download old payslips. A missed renewal payment keeps full access for 7 days first. A monthly downgrade applies from the next cycle; yearly plans are not refunded.</p></div>
+  </article>
+
+  <article class="topic" id="admin-billing">
+    <h3>Bills and invoices: pay bills and autopay</h3>
+    <p class="where"><span>Open: <b>Rail → Settings → Plan &amp; billing → Bills and invoices</b></span><span><code>/app/settings/subscription?tab=bills</code></span><span>Who: owner</span></p>
+    <p>Bills to pay, Flowbit's invoices and receipts, autopay and bank transfers. </p>
+    <div class="tip"><p>The screenshot of this page is being retaken. Due bills on top, autopay status in the middle, paid invoices below.</p></div>
+    <h4>Pay a due bill</h4>
+    <ol class="steps">
+      <li>Under <span class="ui">Due bills</span>, find the bill.</li>
+      <li>Pay online, or pay by bank transfer or UPI and then send the UTR (the bank's reference number) from the same card.</li>
+      <li>When the payment arrives, the invoice is issued and listed under <span class="ui">Invoices and receipts</span> (a GST tax invoice once Flowbit is GST-registered).</li>
+    </ol>
+    <h4>Turn on autopay</h4>
+    <ol class="steps">
+      <li>Under <span class="ui">Autopay</span>, click <span class="ui">Set up autopay</span>.</li>
+      <li>Approve a UPI Autopay or e-mandate in your bank or UPI app.</li>
+      <li>The <span class="ui">Status</span> changes from Off. Your plan now renews by itself, with a notice 24 hours before every debit.</li>
+    </ol>
+    <p>Download any invoice from the <span class="ui">PDF</span> link in the <span class="ui">Invoices and receipts</span> table.</p>
+  </article>
+  <article class="topic" id="admin-notifications">
+    <h3>Workspace notification defaults</h3>
+    <p class="where"><span>Open: <b>Rail → Settings → Workspace alerts</b> (Automation and messages group)</span><span><code>/app/settings/notifications</code></span><span>Who: owner, admin</span></p>
+    <p>What the workspace sends by default, and on which channel. Each person can still change their own on <span class="ui">My alerts</span>; switches they have not touched follow these defaults.</p>
+    <div class="tip"><p>The screenshot of this page is being retaken. The same alert list as My alerts, but these are the defaults for everyone.</p></div>
+    <h4>Change a default</h4>
+    <ol class="steps">
+      <li>Under <span class="ui">Workspace defaults</span>, find the alert, for example <span class="ui">Leads and deals</span>.</li>
+      <li>Turn its <span class="ui">In-app</span> or <span class="ui">Email</span> switch on or off. Alerts always land in the bell unless you switch In-app off.</li>
+    </ol>
+    <h4>Set quiet hours</h4>
+    <ol class="steps">
+      <li>Under <span class="ui">Quiet hours</span>, set <span class="ui">From</span> and <span class="ui">Until</span>, for example 21:00 to 08:00 IST.</li>
+      <li>Click <span class="ui">Save quiet hours</span>. Alert emails that arrive in these hours wait and go out together when they end.</li>
+    </ol>
+    <div class="note"><p>Security emails always go at once. Rows marked "Fixed by Flowbit" cannot be changed.</p></div>
+  </article>
+
+  <article class="topic" id="admin-automations">
+    <h3>Automations</h3>
+    <p class="where"><span>Open: <b>Rail → Settings → Automations</b></span><span><code>/app/settings/automations</code></span><span>Who: owner, admin</span></p>
+    <p>Rules that act for you: when something happens, Flowbit sends the message, alerts the right person or adds a task. Flowbit comes with a ready set; switch each one on or off, and open it to change the wording and timing.</p>
+    <figure class="shot"><img src="shots/set-automations.jpg" alt="Automations page listing ready-made rules in Money, Team, Sales, People and Business compliance groups, each with an on or off switch, and a New automation button" loading="lazy" width="1440" height="900"><figcaption>Under each name, the grey line shows the trigger and the channels it uses.</figcaption></figure>
+    <h4>The ready-made automations</h4>
+    <div class="tbl"><table>
+      <thead><tr><th>Group</th><th>Examples</th></tr></thead>
+      <tbody>
+        <tr><td>Money</td><td>Payment received → thank-you; Part payment → acknowledgement; Invoice issued → send to client; Overdue over 30 days → owner alert + call task; Quote not accepted in 3 days → follow-up; Quote expiring in 2 days → reminder; Quote accepted → owner + convert task; Recurring invoice drafted → review; Monthly statement on the 1st; Client shares a UTR → verify task. Payment reminders link to the schedule in Folio settings.</td></tr>
+        <tr><td>Team</td><td>Task overdue 3 days → manager; Leave pending 24 hours → reminder; Leave pending 48 hours → escalate (timed from the request's current stage); Meeting in 15 minutes → attendees</td></tr>
+        <tr><td>Sales</td><td>New lead → alert the assignee + welcome the lead; Lead not contacted in 2 hours → nudge; Lead not contacted in 24 hours → sales manager; Deal idle for 7 days → nudge; Deal won → team post + owner alert</td></tr>
+        <tr><td>People</td><td>Attendance not marked by 10:30 → nudge; Forgot to check out → evening nudge; Birthday and work anniversary wishes; New joiner → welcome before Day 1; Joining documents incomplete → weekly reminder; Probation ending in 15 days; ID, contract or visa expiring in 30 days; Payslip published → "your payslip is ready" note</td></tr>
+        <tr><td>Business compliance</td><td>Statutory due date in 3 days → owner and accounts (from your <span class="ui">Compliance calendar</span>)</td></tr>
+      </tbody>
+    </table></div>
+    <h4>Edit a ready-made automation</h4>
+    <ol class="steps">
+      <li>Click its name, for example <span class="ui">Payment received → thank-you</span>.</li>
+      <li>Change the wording, the conditions or the timing.</li>
+      <li>Click <span class="ui">Test on me</span> to receive the saved version yourself, filled with sample values.</li>
+      <li>Save, and turn on its switch on the list. <span class="ui">Delete</span> removes an automation you no longer need.</li>
+    </ol>
+    <p><span class="ui">Run history</span> at the bottom of the list shows the last 30 runs: what was sent, skipped or failed, and why.</p>
+  </article>
+
+  <article class="topic" id="admin-automation-new">
+    <h3>Build a new automation</h3>
+    <p class="where"><span>Open: <b>Automations → New automation</b></span><span><code>/app/settings/automations/new</code></span><span>Who: owner, admin</span></p>
+    <p>Every automation has three parts: <b>When</b> (the trigger), <b>Only if</b> (conditions) and <b>Then</b> (one or more actions), plus timing and safety limits.</p>
+    <figure class="shot"><img src="shots/set-automation-new.jpg" alt="New automation form with When, Only if, Then 1 and Timing and safety sections, and a Save automation button" loading="lazy" width="1440" height="900"><figcaption>Read it top to bottom as a sentence: when this happens, only if that holds, then do this.</figcaption></figure>
+    <h4>Create one</h4>
+    <ol class="steps">
+      <li>Click <span class="ui">New automation</span> and give it a <span class="ui">Name</span> of 3 to 80 characters, for example "Big invoice paid → thank the owner".</li>
+      <li>Under <b>When</b>, pick how it <span class="ui">Runs</span>: <span class="ui">When something happens</span>, <span class="ui">Before or after a date</span>, or <span class="ui">On a schedule</span> (<span class="ui">Every day</span>, <span class="ui">Every week</span> or <span class="ui">Every month</span>).</li>
+      <li>Pick <span class="ui">What happens</span>, for example <span class="ui">A payment is received or a receipt recorded</span>, <span class="ui">An invoice is issued</span>, <span class="ui">A client accepts a quote online</span>, <span class="ui">A new lead arrives (form, webhook, IndiaMART)</span>, <span class="ui">A deal is won</span> or <span class="ui">A payslip is published</span>.</li>
+      <li>Under <b>Only if</b>, click <span class="ui">Add condition</span> to narrow it: pick a field, a comparison and a <span class="ui">Value</span>. Every condition must hold. Amounts are in paise, so ₹50,000 is 5000000.</li>
+      <li>Under <b>Then 1</b>, choose what to <span class="ui">Do</span>: <span class="ui">Alert people</span>, <span class="ui">Send a message</span> or <span class="ui">Add a follow-up task</span>. Choose <span class="ui">To</span> whom, and write the <span class="ui">Title</span> and <span class="ui">Details</span>.</li>
+      <li>Insert values such as <code>{{client_name}}</code>, <code>{{amount}}</code> or <code>{{invoice_number}}</code>; the list under the box shows the ones this trigger offers.</li>
+      <li>Click <span class="ui">Add a step</span> for a second action, for example an alert and a task.</li>
+      <li>Under <b>Timing and safety</b>, set <span class="ui">Wait before running (minutes)</span>, the most automated messages per contact a day (3 by default; 0 = no limit), and tick <span class="ui">Only during business hours</span> (Monday to Saturday, 10 am to 7 pm IST, the default office hours) if it messages clients.</li>
+      <li>Tick <span class="ui">Switch it on now</span> and click <span class="ui">Save automation</span>.</li>
+    </ol>
+    <div class="tip"><p>Keep the daily limit on for messages to clients, so a client never gets a flood of them. Messages from your own WhatsApp Business number are coming soon.</p></div>
+  </article>
+
+  <article class="topic" id="admin-integrations">
+    <h3>Integrations</h3>
+    <p class="where"><span>Open: <b>Rail → Settings → Integrations</b></span><span><code>/app/settings/integrations</code></span><span>Who: owner, admin</span></p>
+    <p>The outside services Flowbit connects to, and whether each one is working. Nothing secret is shown here.</p>
+    <div class="tip"><p>The screenshot of this page is being retaken. Each card shows a status such as Not configured, Not connected or Test mode.</p></div>
+    <ul>
+      <li><b>Google sign-in</b> — how many members sign in with Google, and the two addresses to register with Google: one for sign-in, one for Calendar and Gmail connections.</li>
+      <li><b>Email delivery</b> — sent, saved-not-sent and failed emails in the last 30 days, with a link to <span class="ui">Open the Messages log</span>. If it is not configured, emails are saved in the log instead of being sent.</li>
+      <li><b>Flowbit subscription payments</b> — how you pay Flowbit.</li>
+      <li><b>Your Razorpay (invoice payments)</b> — <span class="ui">Connect Razorpay</span> to add "Pay now" links to your invoices.</li>
+      <li><b>File storage</b> — how many files the workspace stores and their size.</li>
+      <li><b>Arc (AI)</b> — whether Claude is connected, and this month's AI requests against your plan's allowance. Arc reads and suggests. Nothing changes until someone clicks Apply.</li>
+    </ul>
+      <h4>Apps and connectors</h4>
+    <p>Cards at the top of the page open the connectors you set up yourself:</p>
+    <ul>
+      <li><a href="#admin-connected-apps">Connected apps</a> (also in the Settings menu) — let Claude or ChatGPT read and update Flowbit for you.</li>
+      <li><a href="#admin-slack">Slack</a> — turn Slack messages into tasks with <code>/flowbit</code>.</li>
+      <li><a href="#admin-webhooks">Webhooks</a> — send Flowbit events to Zapier, Make or your own server.</li>
+      <li><a href="#admin-email-task">Email to task</a> — forward an email to make a task.</li>
+    </ul>
+    <p>Each member connects their own Google Calendar and Gmail under <span class="ui">Settings → Google</span>; see <a href="#new-google">Google Calendar and Meet</a>.</p>
+  </article>
+
+  <article class="topic" id="admin-int-razorpay">
+    <h3>Connect Razorpay for invoice payments</h3>
+    <p class="where"><span>Open: <b>Settings → Integrations → Connect Razorpay</b></span><span><code>/app/settings/integrations/razorpay</code></span><span>Who: owner, admin</span></p>
+    <p>Collect invoice payments straight into your own Razorpay account. When a client pays through the link, Flowbit records the receipt, thanks the client and stops reminders by itself.</p>
+    <figure class="shot"><img src="shots/set-int-razorpay.jpg" alt="Razorpay integration page with Key id, Key secret and Webhook secret fields, a Connect Razorpay button and a Webhook section" loading="lazy" width="1440" height="900"><figcaption>Your webhook URL appears under Webhook once the keys are saved.</figcaption></figure>
+    <h4>Connect it</h4>
+    <ol class="steps">
+      <li>In the Razorpay Dashboard, open <b>Account &amp; Settings → API keys</b> and generate a key. It starts with <code>rzp_live_</code> (or <code>rzp_test_</code> for testing).</li>
+      <li>In Flowbit, paste the <span class="ui">Key id</span> and <span class="ui">Key secret</span>.</li>
+      <li>Make up a <span class="ui">Webhook secret</span>.</li>
+      <li>Click <span class="ui">Connect Razorpay</span>. Keys are encrypted and never shown again.</li>
+      <li>Copy the URL shown under <span class="ui">Webhook</span>. In Razorpay, open <b>Webhooks</b>, add that URL with the event <code>payment_link.paid</code> and the same webhook secret.</li>
+    </ol>
+    <div class="tip"><p>Test with <code>rzp_test_</code> keys and a small invoice first, then switch to live keys. Flowbit uses the keys only to create payment links for your invoices.</p></div>
+  </article>
+  <article class="topic" id="admin-connected-apps">
+    <h3>Connected apps: Claude and ChatGPT</h3>
+    <p class="where"><span>Open: <b>Settings → Connected apps</b></span><span><code>/app/settings/integrations/ai</code></span><span>Who: everyone, for themselves; owners and admins switch it on or off</span></p>
+    <p>Flowbit has an MCP server, so an AI app you already use can read your Flowbit workspace and make changes as you, within your own role. Ask Claude "add tasks from these meeting notes" or ask ChatGPT "which invoices are overdue?" and it works with your real data.</p>
+    <ol class="steps">
+      <li>Copy the connection URL shown on the page. It is your Flowbit address followed by <code>/mcp</code>.</li>
+      <li>In Claude, open <span class="ui">Settings → Connectors → Add custom connector</span> and paste it. In ChatGPT, turn on developer mode, create a connector and paste the same URL.</li>
+      <li>Sign in to Flowbit when asked, pick the workspace and untick anything you do not want the app to do. Then approve.</li>
+    </ol>
+    <ul>
+      <li>The app can do only what your role can do, and only within the scopes you approved.</li>
+      <li>Some things are never allowed through an AI app: attendance, payroll and salaries, issuing or voiding invoices, payments, deleting, roles, settings and billing. Salary, PAN and bank details are never sent to it.</li>
+      <li>Every change is logged as "you via Claude" (or ChatGPT). <span class="ui">History</span> lists each batch of changes, and <span class="ui">Undo</span> reverses a batch for 7 days.</li>
+      <li>Your connections are listed with when they were last used. <span class="ui">Revoke</span> cuts one off at once.</li>
+    </ul>
+    <div class="note"><p>Connected apps work on paid plans and during a trial, not on Free. Owners and admins can switch them off for the whole workspace.</p></div>
+  </article>
+
+  <article class="topic" id="admin-slack">
+    <h3>Slack</h3>
+    <p class="where"><span>Open: <b>Settings → Integrations → Slack</b></span><span><code>/app/settings/integrations/slack</code></span><span>Who: owner, admin to connect; everyone to use</span></p>
+    <p>Turn Slack messages into Flowbit tasks without leaving Slack. People act as themselves: Slack users are matched to Flowbit members by email.</p>
+    <ol class="steps">
+      <li>Click <span class="ui">Add to Slack</span> and approve the Flowbit app for your Slack workspace.</li>
+      <li>In Slack, type <code>/flowbit task logo bhejo kal 5 baje @vikram</code>. The task is read the same way as <a href="#new-quick-add">quick add</a>, Hinglish included.</li>
+      <li>Type <code>/flowbit my day</code> to see what is due for you today.</li>
+      <li>On any message, open its <span class="ui">⋯</span> menu and choose <span class="ui">Create Flowbit task</span>.</li>
+    </ol>
+    <div class="note"><p>Slack has to be set up once on your Flowbit server before <span class="ui">Add to Slack</span> works. If the card says it is not configured, ask the person who runs Flowbit.</p></div>
+  </article>
+
+  <article class="topic" id="admin-webhooks">
+    <h3>Webhooks</h3>
+    <p class="where"><span>Open: <b>Settings → Integrations → Webhooks</b></span><span><code>/app/settings/integrations/webhooks</code></span><span>Who: owner, admin</span></p>
+    <p>Send Flowbit events to Zapier, Make or your own server the moment they happen.</p>
+    <ol class="steps">
+      <li>Under <span class="ui">Add a webhook</span>, give it a name and the URL to call (http or https).</li>
+      <li>Tick the events: task created, task completed, lead created, deal won, invoice issued and invoice paid.</li>
+      <li>Save, then send a test. The <span class="ui">Delivery log</span> shows the last 50 deliveries, kept for 30 days.</li>
+    </ol>
+    <ul>
+      <li>Every delivery is signed in the <code>X-Flowbit-Signature</code> header (HMAC-SHA256), so your server can check it came from Flowbit.</li>
+      <li>Failed deliveries are retried for about 9 hours. Edit a webhook's name, URL or events, pause it, or remove it at any time.</li>
+      <li>Addresses on private networks are refused.</li>
+    </ul>
+  </article>
+
+  <article class="topic" id="admin-email-task">
+    <h3>Email to task</h3>
+    <p class="where"><span>Your address: <b>Settings → My account (login) → Email to task</b></span><span>Who: everyone with Flowbit Work</span></p>
+    <p>Forward or send any email to your private <code>tasks+…</code> address and it becomes a task assigned to you: the subject is the title, the body is the description, and attachments up to 4 MB each are added. One email makes one task.</p>
+    <ul>
+      <li>Send from the email address you sign in to Flowbit with. Mail that fails the sender's SPF, DKIM or DMARC check is refused.</li>
+      <li>By default only you can use your address. Owners and admins can turn on <span class="ui">Allow teammates to email my address</span> in <a href="#admin-security">Settings → Security</a> so members can send tasks to each other.</li>
+      <li>Keep the address private. It shows only when your Flowbit server is set up to receive email.</li>
+    </ul>
+  </article>
+
+  <article class="topic" id="admin-messages">
+    <h3>Messages log</h3>
+    <p class="where"><span>Open: <b>Rail → Settings → Messages log</b></span><span><code>/app/settings/messages</code></span><span>Who: owner, admin</span></p>
+    <p>Every email and in-app message Flowbit sent, held or skipped for this workspace, with its delivery timeline. Look here when someone says "I never got the invite" or a client says a reminder did not arrive.</p>
+    <figure class="shot"><img src="shots/set-messages.jpg" alt="Messages log with a warning that no email provider is set up, a search box, Channel, Status and Type filters, date fields and a list of messages with time, recipient, subject, channel, type and status" loading="lazy" width="1440" height="900"><figcaption>Each row shows when, to whom, the subject, the channel, the type of message and its status.</figcaption></figure>
+    <h4>On this page</h4>
+    <ul>
+      <li>Filters: <span class="ui">Search recipient or subject</span>, <span class="ui">Channel</span>, <span class="ui">Status</span>, <span class="ui">Type</span>, and <span class="ui">From</span> and <span class="ui">To</span> dates.</li>
+      <li>Statuses you will see include <b>Queued</b> (waiting to go, for example during quiet hours), <b>Saved, not sent</b> (no email provider set up yet) and <b>Failed</b>.</li>
+    </ul>
+    <h4>Check and resend a message</h4>
+    <ol class="steps">
+      <li>Search for the recipient's email, or filter by <span class="ui">Type</span> (for example Invite or Reminder).</li>
+      <li>Click the row. The panel shows the <span class="ui">Message</span>, an <span class="ui">Email preview</span> or <span class="ui">Plain text</span>, the <span class="ui">Timeline</span> of delivery events, <span class="ui">Attempts</span>, <span class="ui">Next try</span> and, if it was skipped, <span class="ui">Why it was skipped</span>.</li>
+      <li>Click <span class="ui">Send again</span> to resend it.</li>
+    </ol>
+    <div class="note"><p>If the page warns that no email provider is set up, emails are kept here but not delivered. Copy invite links from <span class="ui">Members</span> in the meantime. Message and delivery logs are kept for 13 months, then deleted.</p></div>
+  </article>
+
+  <article class="topic" id="admin-import">
+    <h3>Import centre</h3>
+    <p class="where"><span>Open: <b>Rail → Settings → Import</b></span><span><code>/app/settings/import</code></span><span>Who: owner and admins (each import also needs the matching permission)</span></p>
+    <p>Bring data in from a spreadsheet: download a template, upload it, check every row, then confirm. Nothing is saved until you confirm, and each import can be undone for 7 days.</p>
+    <figure class="shot"><img src="shots/set-import.jpg" alt="Import page listing what you can import: Team members, Employees, Attendance, Projects, Tasks, Leads, Contacts and companies, Folio clients and Folio items, with an empty Import history below" loading="lazy" width="1440" height="900"><figcaption>Pick what to import; the history below lets you undo for 7 days.</figcaption></figure>
+    <h4>What you can import</h4>
+    <ul>
+      <li><b>Team members</b> — invites with role and department; each person gets an email to join.</li>
+      <li><b>Employees</b> — joining date, department, designation, manager, and (with access) PAN and bank.</li>
+      <li><b>Attendance</b> — one row per person and day, with a status or in and out times.</li>
+      <li><b>Projects</b> and <b>Tasks</b> — Work projects and tasks with client, lead or assignee, status, priority and dates.</li>
+      <li><b>Leads</b> — company, contact, sector and source. Open duplicates are skipped.</li>
+      <li><b>Contacts and companies</b> — several rows with the same company add several contacts.</li>
+      <li><b>Folio clients</b> — billing clients with GSTIN, PAN, state and address.</li>
+      <li><b>Folio items</b> — your service catalogue: code, name, HSN/SAC, rate and GST rate.</li>
+    </ul>
+    <h4>Import a file</h4>
+    <ol class="steps">
+      <li>Click the kind of data, for example <span class="ui">Employees</span>.</li>
+      <li>Click <span class="ui">Download the template</span> and fill it in. CSV or Excel (.xlsx) both work.</li>
+      <li>Under <span class="ui">1 · Your file</span>, upload it. Flowbit checks every row.</li>
+      <li>Under <span class="ui">2 · Preview</span>, read the rows with errors, fix them in your file and upload again if needed.</li>
+      <li>Click the import button to save the rows that are ready.</li>
+    </ol>
+    <p>To reverse an import, find it in <span class="ui">Import history</span> and click <span class="ui">Undo</span> within 7 days.</p>
+    <div class="tip"><p>Import in this order: employees, then team members (linked to their employee records), then projects and tasks. Folio clients before your first invoice.</p></div>
+  </article>
+
+  <article class="topic" id="admin-export">
+    <h3>Export all your data</h3>
+    <p class="where"><span>Open: <b>Rail → Settings → Export</b></span><span><code>/app/settings/export</code></span><span>Who: owner</span></p>
+    <p>Download everything in the workspace as one ZIP file. It works even when the workspace is read-only or locked, and has no watermark.</p>
+    <figure class="shot"><img src="shots/set-export.jpg" alt="Export page with a Full export card, an Export data button and a list of what the ZIP contains" loading="lazy" width="1440" height="900"><figcaption>One button downloads the whole workspace.</figcaption></figure>
+    <ol class="steps">
+      <li>Click <span class="ui">Export data</span>. Large workspaces can take a minute.</li>
+      <li>Open the ZIP. It holds <code>workspace.json</code> (workspace details and plan), a <code>json/</code> folder with every record of every module in full detail, a <code>csv/</code> folder with the same records as spreadsheets, and a <code>files/</code> folder with stored documents, receipts and PDFs (up to 500 MB).</li>
+    </ol>
+    <div class="note"><p>Only the workspace owner can download the full export. Sign-in codes and password hashes are never included. Keep the file safe: it contains salaries, PAN and bank details.</p></div>
+  </article>
+
+  <article class="topic" id="admin-compliance">
+    <h3>Compliance calendar</h3>
+    <p class="where"><span>Open: <b>Rail → Settings → Compliance calendar</b></span><span><code>/app/settings/compliance</code></span><span>Who: owner, admin, finance (Folio settings)</span></p>
+    <p>GST, TDS, PF, ESI, professional tax and advance tax due dates for your business. Turn on the reminder in <span class="ui">Automations</span>, or add Compliance to your brief.</p>
+    <figure class="shot"><img src="shots/set-compliance.jpg" alt="Compliance calendar with a warning about government extensions, a Your filings card (GST return type, state, professional tax day, what applies checkboxes) and a Next 90 days list of due dates with Extended? buttons" loading="lazy" width="1440" height="900"><figcaption>Set what applies to you once; the next 90 days of due dates follow.</figcaption></figure>
+    <h4>Set up your filings</h4>
+    <ol class="steps">
+      <li>Under <span class="ui">GST returns</span>, choose <span class="ui">Monthly filer</span> or <span class="ui">Quarterly (QRMP)</span>.</li>
+      <li>Pick your <span class="ui">State</span>. QRMP GSTR-3B and professional tax dates follow it.</li>
+      <li>In <span class="ui">Professional tax: day of next month</span>, leave it blank for the usual day (10), type another day, or 0 to turn it off.</li>
+      <li>Under <span class="ui">What applies to you</span>, tick the filings you make: GSTR-1, GSTR-3B, PMT-06, TDS deposit, TDS return (24Q / 26Q), PF payment and ECR, ESI payment, Professional tax, Advance tax.</li>
+      <li>Click <span class="ui">Save</span>.</li>
+    </ol>
+    <h4>When the government extends a date</h4>
+    <ol class="steps">
+      <li>Find the date under <span class="ui">Next 90 days</span>, for example GSTR-3B on 20 Oct 2026.</li>
+      <li>Click <span class="ui">Extended?</span> and enter the new date. Reminders follow it.</li>
+    </ol>
+    <div class="warn"><p>The dates follow the law as of FY 2026-27. Due dates are often extended: check the GST portal, the income-tax site, EPFO and your state before relying on a date.</p></div>
+  </article>
+
+  <article class="topic" id="admin-privacy">
+    <h3>Privacy and data requests</h3>
+    <p class="where"><span>Open: <b>Rail → Settings → Privacy</b></span><span><code>/app/settings/privacy</code></span><span>Who: owner, admin</span></p>
+    <p>Answer a person's request to see or delete their data under India's data protection law (the DPDP Act), and see how long Flowbit keeps logs.</p>
+    <figure class="shot"><img src="shots/set-privacy.jpg" alt="Privacy page with a search box to find a person's data by email or phone, a list of how long logs are kept, and a note on what happens if there is a breach" loading="lazy" width="1440" height="900"><figcaption>Search by full email or phone number to find everything held about one person.</figcaption></figure>
+    <h4>Answer a data request</h4>
+    <ol class="steps">
+      <li>Type the person's full email address or phone number and click <span class="ui">Find</span>. It finds client contacts, leads and team members.</li>
+      <li>Choose export to give them a copy of their data (JSON), or erase to remove them and their message trail.</li>
+      <li>Both actions are written to the audit log without the person's name.</li>
+    </ol>
+    <p>You can also do this from a contact's or lead's own page.</p>
+    <div class="warn"><p>Erasing cannot be undone. Check you have the right person, and keep records the law requires (for example issued invoices) before you erase.</p></div>
+    <h4>How long logs are kept</h4>
+    <ul>
+      <li>Message and delivery logs and automation runs: 13 months, then deleted.</li>
+      <li>Your audit log: as long as the workspace exists.</li>
+      <li>Flowbit's invoices to you: 6 years, as the law requires.</li>
+    </ul>
+    <div class="note"><p>If a breach touches your data, Flowbit emails the workspace owner as soon as it is confirmed, and aims to do so within 24 hours, with what happened and what to do, so you can tell the Data Protection Board and the people affected within 72 hours.</p></div>
+  </article>
+
+  <article class="topic" id="admin-audit">
+    <h3>Audit log</h3>
+    <p class="where"><span>Open: <b>Rail → Settings → Audit log</b></span><span><code>/app/settings/audit</code></span><span>Who: owner, admin, HR admin, finance</span></p>
+    <p>Who changed what, and when. Entries cannot be edited or deleted, so this is your record for disputes, audits and "who did this?" questions.</p>
+    <figure class="shot"><img src="shots/set-audit.jpg" alt="Audit log with an Export CSV button, product filters (All, Workspace, Work, Muster, Orbit, Folio), search and filter fields, and a list of entries with time, person, role, summary and action code" loading="lazy" width="1440" height="900"><figcaption>Each entry shows when, who (with their role), what changed and the action code.</figcaption></figure>
+    <h4>Find a change</h4>
+    <ol class="steps">
+      <li>Pick a product tab: <span class="ui">All</span>, <span class="ui">Workspace</span>, <span class="ui">Work</span>, <span class="ui">Muster</span>, <span class="ui">Orbit</span> or <span class="ui">Folio</span>.</li>
+      <li>Narrow it with <span class="ui">Search summaries</span>, <span class="ui">Who</span>, <span class="ui">Entity</span>, <span class="ui">Action</span> and the <span class="ui">From</span> and <span class="ui">To</span> dates. For example, Who = Aditi Sharma and Action = member.role_changed shows every role she changed.</li>
+      <li>Click an entry to see the details of the change.</li>
+      <li>Click <span class="ui">Export CSV</span> to download what you filtered.</li>
+    </ol>
+    <div class="note"><p>Actions by the Flowbit support team, such as extending a trial, appear here too, marked as Flowbit support.</p></div>
+  </article>
+
+  <article class="topic" id="admin-support">
+    <h3>Support access</h3>
+    <p class="where"><span>Open: <b>Rail → Settings → Support access</b></span><span><code>/app/settings/support</code></span><span>Who: owner, admin</span></p>
+    <p>The Flowbit team sees your data only when the owner allows it, for a limited time. This page is where you approve those requests and accept the data processing agreement.</p>
+    <figure class="shot"><img src="shots/set-support.jpg" alt="Support access page with a Data processing agreement checkbox and Accept button, and an empty Requests list" loading="lazy" width="1440" height="900"><figcaption>Requests from the Flowbit team appear in the list below the agreement.</figcaption></figure>
+    <h4>Let Flowbit import your data for you</h4>
+    <ol class="steps">
+      <li>Read the <span class="ui">data processing agreement</span>.</li>
+      <li>Tick <span class="ui">I accept the data processing agreement on behalf of this workspace.</span> and click <span class="ui">Accept</span>.</li>
+      <li>When the Flowbit team asks to look at your workspace, the request shows under <span class="ui">Requests</span> and you get an email. Approve or decline it there.</li>
+    </ol>
+    <div class="note"><p>Read-only access ends on its own; import access lasts 7 days. Flowbit staff never see salary, bank or PAN details: they stay masked for every Flowbit role, admins included. Free setup by the Flowbit team is offered to yearly customers.</p></div>
+  </article>
+
+  <article class="topic" id="admin-status">
+    <h3>Status page</h3>
+    <p class="where"><span>Open: <b>useflowbit.com/status</b></span><span><code>/status</code></span><span>Who: anyone, no sign-in</span></p>
+    <p>A public page that shows whether Flowbit is working: the app, the database, file storage and email, and when each scheduled job (reminders, recurring invoices, briefs and the like) last ran. Check it first when something seems slow or an email has not arrived, then write to support.</p>
+  </article>
+</section>

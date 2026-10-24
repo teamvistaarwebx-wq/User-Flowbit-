@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Flowbit AI Architecture</title>
+<style>
+  @page { size: A4 landscape; margin: 0; }
+  :root {
+    --bg: #141414; --panel: #1c1c1e; --line: #3a3a3c; --fg: #f2f2f2; --fg2: #a8a8ad; --fg3: #7a7a80;
+    --blue: #3b6fd8; --yellow: #c9a227; --green: #3fa85a; --purple: #a05cc8; --red: #e0485a; --teal: #2aa5a0; --grey: #6b6b70;
+  }
+  * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  html, body { margin: 0; background: var(--bg); color: var(--fg); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 11.5px; line-height: 1.5; }
+  .page { width: 297mm; height: 210mm; padding: 11mm 13mm; page-break-after: always; overflow: hidden; position: relative; }
+  .page:last-child { page-break-after: auto; }
+  .frame { border: 1px solid var(--line); border-radius: 10px; height: 100%; padding: 14px 18px; position: relative; }
+  .tag { display: inline-block; border: 1px solid #555; border-radius: 6px; padding: 3px 10px; font-weight: 600; font-size: 13px; margin-bottom: 10px; }
+  h1 { font-size: 30px; margin: 0 0 6px; }
+  h2 { font-size: 18px; margin: 0 0 8px; display: flex; align-items: center; gap: 10px; }
+  h3 { font-size: 13px; margin: 10px 0 4px; color: #fff; }
+  p { margin: 0 0 6px; color: #dcdcdc; }
+  .muted { color: var(--fg2); }
+  .small { font-size: 10px; }
+  .pill { display: inline-block; font-size: 9.5px; font-weight: 700; padding: 1px 8px; border-radius: 99px; letter-spacing: .04em; vertical-align: middle; }
+  .now { background: #1f4d2c; color: #8fe0a5; }
+  .plan { background: #4a3a10; color: #f0cf6a; }
+  .todo { background: #4d1f26; color: #ff9aa6; }
+  table { width: 100%; border-collapse: collapse; font-size: 10.5px; margin: 4px 0 8px; }
+  th, td { border-bottom: 1px solid #2f2f32; padding: 4px 6px; text-align: left; vertical-align: top; }
+  th { color: #fff; background: #222225; font-weight: 600; }
+  td code, p code, li code { font-family: Consolas, monospace; font-size: 10px; background: #26262a; padding: 0 4px; border-radius: 3px; color: #e8c3ff; }
+  ol, ul { margin: 2px 0 6px 18px; padding: 0; } li { margin-bottom: 2px; color: #dcdcdc; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  .box { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; }
+  .box.b { border-color: var(--blue); } .box.y { border-color: var(--yellow); } .box.g { border-color: var(--green); } .box.p { border-color: var(--purple); } .box.r { border-color: var(--red); }
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 10px; color: var(--fg2); }
+  .legend span::before { content: ''; display: inline-block; width: 22px; height: 0; border-top: 2px solid #ccc; margin-right: 5px; vertical-align: middle; }
+  .legend .dash::before { border-top-style: dashed; border-color: var(--red); }
+  .legend .dot::before { border-top-style: dotted; border-color: #bbb; }
+  .legend .fut::before { border-top-style: dashed; border-color: var(--grey); }
+  .footer { position: absolute; bottom: 5mm; left: 13mm; right: 13mm; font-size: 9px; color: var(--fg3); display: flex; justify-content: space-between; }
+  svg { display: block; width: 100%; }
+  svg text { font-family: 'Segoe UI', system-ui, sans-serif; fill: #f2f2f2; }
+  .step { display: grid; grid-template-columns: 22px 1fr; gap: 6px; margin-bottom: 4px; }
+  .step b.n { display: inline-flex; width: 20px; height: 20px; border-radius: 50%; background: #2b2b30; border: 1px solid #555; align-items: center; justify-content: center; font-size: 10px; }
+  .step div { color: #dcdcdc; }
+  .callout { border-left: 3px solid var(--yellow); background: #221f14; padding: 6px 10px; border-radius: 4px; margin: 6px 0; }
+  .callout.blue { border-color: var(--blue); background: #141b26; }
+  .callout.red { border-color: var(--red); background: #261418; }
+  .tight table { font-size: 10px; } .tight th, .tight td { padding: 3px 6px; } .tight h3 { margin-top: 6px; }
+</style>
+</head>
+<body>
+
+<!-- Shared arrowheads -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d8d8d8"/></marker>
+    <marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e0485a"/></marker>
+    <marker id="ahg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a8a90"/></marker>
+  </defs>
+</svg>
+
+<!-- ============ PAGE 1: COVER ============ -->
+<section class="page"><div class="frame">
+  <div class="tag">⌐ Flowbit · AI Architecture</div>
+  <div style="margin-top:14px">
+    <h1>Flowbit AI Architecture</h1>
+    <p style="font-size:16px" class="muted">Arc AI · Meetings AI (notetaker bot, transcription, minutes) · Model selection &amp; credits</p>
+    <p class="muted">Version 1.0 · 16 Oct 2026 · For the Flowbit engineering team</p>
+  </div>
+  <div class="cols" style="margin-top:18px">
+    <div class="box">
+      <h3>What is in this document</h3>
+      <ol>
+        <li>The big picture: every AI piece and how they connect</li>
+        <li>Arc AI: current architecture and user flow</li>
+        <li>Meetings AI: architecture, the notetaker bot and upload flows</li>
+        <li>Meetings AI: background jobs, webhooks, limits and costs</li>
+        <li>Proposed: multi-model AI gateway (Claude, Gemini, GPT, own model later)</li>
+        <li>Proposed: credits, wallet and billing</li>
+        <li>Build phases, decisions summary, env variables and file map</li>
+        <li>Decisions: what we do and what we don't</li>
+      </ol>
+    </div>
+    <div class="box">
+      <h3>How to read the labels</h3>
+      <p><span class="pill now">BUILT</span> Live in the code today</p>
+      <p><span class="pill plan">PROPOSED</span> Agreed direction, not built yet</p>
+      <p><span class="pill todo">DECIDE</span> Needs a decision before building</p>
+      <p><span class="pill now" style="background:#1d3550;color:#9cc7ff">DECIDED</span> Agreed decision (see page 11)</p>
+      <h3 style="margin-top:12px">Arrows in the diagrams</h3>
+      <div class="legend" style="flex-direction:column;gap:4px">
+        <span>Request / data flow</span>
+        <span class="dash">Fallback, failure or retry path</span>
+        <span class="dot">Webhook / callback (async)</span>
+        <span class="fut">Future / optional</span>
+      </div>
+    </div>
+  </div>
+  <div class="box" style="margin-top:16px">
+    <h3>Words used in this document</h3>
+    <table>
+      <tr><th style="width:140px">Term</th><th>Meaning</th></tr>
+      <tr><td>Arc AI</td><td>The assistant page <code>/app/arc</code>: drafts project outlines, task breakdowns and progress updates.</td></tr>
+      <tr><td>Meetings AI</td><td>Recording → transcript → minutes of meeting (MOM) + action items. A paid add-on (<code>meetings_ai</code>).</td></tr>
+      <tr><td>Notetaker / bot</td><td>"Flowbit Notetaker", a bot run by <b>Recall.ai</b> that joins a Meet, Zoom or Teams call and records the audio.</td></tr>
+      <tr><td>Sarvam</td><td>Speech-to-text service (model <code>saaras:v4</code>, Hinglish code-mix, speaker labels). Turns audio into a transcript.</td></tr>
+      <tr><td>AI Gateway</td><td>The one function every AI request goes through (today <code>askClaude()</code>): key check, monthly cap, redaction, usage log.</td></tr>
+      <tr><td>Token / Credit</td><td>Token = the provider's billing unit (~¾ of a word). Credit = Flowbit's own unit that customers see and buy (proposed).</td></tr>
+    </table>
+  </div>
+  <div class="footer"><span>Flowbit · AI Architecture</span><span>1</span></div>
+</div></section>
+
+<!-- ============ PAGE 2: BIG PICTURE ============ -->
+<section class="page"><div class="frame">
+  <div class="tag">⌐ 1 · The big picture <span class="pill now">BUILT</span></div>
+  <svg viewBox="0 0 1100 560">
+    <!-- Client -->
+    <rect x="10" y="20" width="200" height="500" rx="10" fill="#1a2230" stroke="#3b6fd8"/>
+    <text x="24" y="44" font-size="14" font-weight="700">🖥 Client / Browser</text>
+    <g font-size="12">
+      <rect x="25" y="70" width="170" height="54" rx="8" fill="#101010" stroke="#555"/><text x="38" y="93" font-weight="600">Arc page</text><text x="38" y="111" font-size="10.5" fill="#a8a8ad">/app/arc</text>
+      <rect x="25" y="140" width="170" height="54" rx="8" fill="#101010" stroke="#555"/><text x="38" y="163" font-weight="600">Meeting page</text><text x="38" y="181" font-size="10.5" fill="#a8a8ad">Meetings AI card</text>
+      <rect x="25" y="210" width="170" height="54" rx="8" fill="#101010" stroke="#555"/><text x="38" y="233" font-weight="600">Meeting form</text><text x="38" y="251" font-size="10.5" fill="#a8a8ad">link · Google Meet hint</text>
+      <rect x="25" y="280" width="170" height="54" rx="8" fill="#101010" stroke="#555"/><text x="38" y="303" font-weight="600">Settings → Google</text><text x="38" y="321" font-size="10.5" fill="#a8a8ad">connect Calendar</text>
+      <rect x="25" y="350" width="170" height="54" rx="8" fill="#101010" stroke="#555"/><text x="38" y="373" font-weight="600">Console (staff)</text><text x="38" y="391" font-size="10.5" fill="#a8a8ad">AI caps · hours caps</text>
+    </g>
+    <!-- App server -->
+    <rect x="250" y="20" width="300" height="500" rx="10" fill="#141c2e" stroke="#3b6fd8"/>
+    <text x="264" y="44" font-size="14" font-weight="700">▲ App server (Next.js · Vercel)</text>
+    <g font-size="12">
+      <rect x="265" y="70" width="270" height="54" rx="8" fill="#101010" stroke="#555"/><text x="278" y="93" font-weight="600">Arc server actions</text><text x="278" y="111" font-size="10.5" fill="#a8a8ad">modules/work/arc/actions.ts</text>
+      <rect x="265" y="140" width="270" height="54" rx="8" fill="#101010" stroke="#555"/><text x="278" y="163" font-weight="600">Meetings AI actions</text><text x="278" y="181" font-size="10.5" fill="#a8a8ad">upload · send bot · redraft minutes</text>
+      <rect x="265" y="210" width="270" height="54" rx="8" fill="#101010" stroke="#555"/><text x="278" y="233" font-weight="600">Meeting pipeline</text><text x="278" y="251" font-size="10.5" fill="#a8a8ad">meetings/ai/pipeline.ts · bot.ts</text>
+      <rect x="265" y="280" width="270" height="54" rx="8" fill="#101010" stroke="#555"/><text x="278" y="303" font-weight="600">Webhooks</text><text x="278" y="321" font-size="10.5" fill="#a8a8ad">/api/webhooks/recall · /api/webhooks/sarvam</text>
+      <rect x="265" y="350" width="270" height="54" rx="8" fill="#101010" stroke="#555"/><text x="278" y="373" font-weight="600">Cron every 15 min</text><text x="278" y="391" font-size="10.5" fill="#a8a8ad">/api/cron/meetings · retries · purge</text>
+      <rect x="265" y="420" width="270" height="54" rx="8" fill="#101010" stroke="#555"/><text x="278" y="443" font-weight="600">Google sync</text><text x="278" y="461" font-size="10.5" fill="#a8a8ad">meetings/google-sync.ts → Meet link</text>
+    </g>
+    <!-- AI core -->
+    <rect x="590" y="20" width="230" height="290" rx="10" fill="#1d2a1f" stroke="#3fa85a"/>
+    <text x="604" y="44" font-size="14" font-weight="700">⚙ AI core</text>
+    <rect x="605" y="62" width="200" height="130" rx="8" fill="#101010" stroke="#555"/>
+    <text x="618" y="84" font-size="12" font-weight="600">AI Gateway · askClaude()</text>
+    <g font-size="10.5" fill="#cfcfcf"><text x="618" y="104">1 · API key set?</text><text x="618" y="121">2 · monthly cap left?</text><text x="618" y="138">3 · redact salary / bank / PAN</text><text x="618" y="155">4 · call the model</text><text x="618" y="172">5 · log tokens (AiUsage)</text></g>
+    <rect x="605" y="210" width="200" height="54" rx="8" fill="#101010" stroke="#555"/><text x="618" y="233" font-size="12" font-weight="600">Provider client</text><text x="618" y="251" font-size="10.5" fill="#a8a8ad">callClaude() · ai-client.ts</text>
+    <path d="M705 192 L705 208" stroke="#d8d8d8" stroke-width="1.5" marker-end="url(#ah)"/>
+    <!-- Data -->
+    <rect x="590" y="330" width="230" height="190" rx="10" fill="#2a2412" stroke="#c9a227"/>
+    <text x="604" y="354" font-size="14" font-weight="700">🗄 Data</text>
+    <rect x="605" y="368" width="200" height="66" rx="8" fill="#101010" stroke="#555"/><text x="618" y="390" font-size="12" font-weight="600">MongoDB</text><text x="618" y="407" font-size="10" fill="#a8a8ad">ArcRun · AiUsage · Meeting</text><text x="618" y="421" font-size="10" fill="#a8a8ad">MeetingTranscript · MeetingAiUsage</text>
+    <rect x="605" y="446" width="200" height="54" rx="8" fill="#101010" stroke="#555"/><text x="618" y="469" font-size="12" font-weight="600">File storage</text><text x="618" y="487" font-size="10.5" fill="#a8a8ad">S3 / R2 or local · recordings</text>
+    <!-- External -->
+    <rect x="860" y="20" width="230" height="500" rx="10" fill="#2a1a2f" stroke="#a05cc8"/>
+    <text x="874" y="44" font-size="14" font-weight="700">☁ External services</text>
+    <g font-size="12">
+      <rect x="875" y="70" width="200" height="54" rx="8" fill="#101010" stroke="#555"/><text x="888" y="93" font-weight="600">Anthropic · Claude</text><text x="888" y="111" font-size="10.5" fill="#a8a8ad">Sonnet 5.5 · Haiku 4.5</text>
+      <rect x="875" y="150" width="200" height="54" rx="8" fill="#101010" stroke="#555"/><text x="888" y="173" font-weight="600">Sarvam</text><text x="888" y="191" font-size="10.5" fill="#a8a8ad">speech → text (saaras:v4)</text>
+      <rect x="875" y="230" width="200" height="54" rx="8" fill="#101010" stroke="#555"/><text x="888" y="253" font-weight="600">Recall.ai</text><text x="888" y="271" font-size="10.5" fill="#a8a8ad">meeting bot (records audio)</text>
+      <rect x="875" y="310" width="200" height="54" rx="8" fill="#101010" stroke="#555"/><text x="888" y="333" font-weight="600">Meet / Zoom / Teams</text><text x="888" y="351" font-size="10.5" fill="#a8a8ad">the live call</text>
+      <rect x="875" y="390" width="200" height="54" rx="8" fill="#101010" stroke="#555"/><text x="888" y="413" font-weight="600">Google Calendar API</text><text x="888" y="431" font-size="10.5" fill="#a8a8ad">event + Meet link</text>
+      <rect x="875" y="456" width="200" height="50" rx="8" fill="#101010" stroke="#555"/><text x="888" y="478" font-weight="600">Email</text><text x="888" y="494" font-size="10.5" fill="#a8a8ad">consent notice · invites</text>
+    </g>
+    <!-- arrows client -> server -->
+    <g stroke="#d8d8d8" stroke-width="1.5" fill="none" marker-end="url(#ah)">
+      <path d="M195 97 L263 97"/><path d="M195 167 L263 167"/><path d="M195 237 Q230 237 230 440 L263 447"/>
+      <path d="M535 97 L600 120"/><path d="M535 237 Q570 237 600 150"/>
+      <path d="M805 237 L873 97"/>
+      <path d="M535 230 Q700 300 873 177"/>
+      <path d="M535 160 Q720 300 873 257"/>
+      <path d="M535 447 Q700 470 873 417"/>
+      <path d="M705 264 L705 366"/>
+      <path d="M975 284 L975 308"/>
+    </g>
+    <!-- webhooks -->
+    <g stroke="#bbb" stroke-width="1.4" fill="none" stroke-dasharray="2 4" marker-end="url(#ah)">
+      <path d="M873 270 Q700 330 537 307"/>
+      <path d="M873 190 Q760 330 537 315"/>
+    </g>
+    <text x="640" y="322" font-size="10" fill="#bbb">webhooks: bot done · transcript ready</text>
+    <!-- red: template fallback -->
+    <path d="M605 150 Q450 30 195 85" stroke="#e0485a" stroke-dasharray="6 5" stroke-width="1.4" fill="none" marker-end="url(#ahr)"/>
+    <text x="330" y="14" font-size="10.5" fill="#e0485a">no key / no AI on plan / cap reached / AI failed → built-in template</text>
+  </svg>
+  <div class="cols" style="margin-top:6px">
+    <p class="small muted"><b style="color:#fff">One gateway for all AI:</b> Arc and Meetings minutes both call the same <code>askClaude()</code>, so caps, redaction and usage logging apply everywhere. Only <code>ai-client.ts</code> talks to Anthropic.</p>
+    <p class="small muted"><b style="color:#fff">Three outside services for meetings:</b> Recall.ai records, Sarvam transcribes, Claude writes the minutes. Recall and Sarvam call back through webhooks; the 15-minute cron catches anything missed.</p>
+  </div>
+  <div class="footer"><span>Flowbit · AI Architecture</span><span>2</span></div>
+</div></section>
+
+<!-- ============ PAGE 3: ARC AI ARCHITECTURE ============ -->
+<section class="page"><div class="frame">
+  <div class="tag">⌐ 2 · Arc AI: architecture <span class="pill now">BUILT</span></div>
+  <svg viewBox="0 0 1100 470">
+    <!-- client -->
+    <rect x="10" y="30" width="190" height="330" rx="10" fill="#1a2230" stroke="#3b6fd8"/>
+    <text x="24" y="54" font-size="14" font-weight="700">🖥 Arc page</text>
+    <g font-size="11.5">
+      <rect x="22" y="70" width="166" height="40" rx="8" fill="#101010" stroke="#555"/><text x="34" y="95">Outline a project</text>
+      <rect x="22" y="120" width="166" height="40" rx="8" fill="#101010" stroke="#555"/><text x="34" y="145">Break down a task</text>
+      <rect x="22" y="170" width="166" height="40" rx="8" fill="#101010" stroke="#555"/><text x="34" y="195">Progress update</text>
+      <rect x="22" y="220" width="166" height="40" rx="8" fill="#101010" stroke="#555"/><text x="34" y="245">Search (no AI)</text>
+      <rect x="22" y="280" width="166" height="64" rx="8" fill="#101010" stroke="#3fa85a"/><text x="34" y="302" font-weight="600">Draft card</text><text x="34" y="320" font-size="10.5" fill="#a8a8ad">Review → Apply</text><text x="34" y="335" font-size="10.5" fill="#a8a8ad">or Discard</text>
+    </g>
+    <!-- server action -->
+    <rect x="235" y="30" width="200" height="330" rx="10" fill="#141c2e" stroke="#3b6fd8"/>
+    <text x="249" y="54" font-size="14" font-weight="700">▲ Server action</text>
+    <g font-size="11.5">
+      <rect x="248" y="70" width="174" height="66" rx="8" fill="#101010" stroke="#555"/><text x="260" y="92" font-weight="600">arc/actions.ts</text><text x="260" y="110" font-size="10.5" fill="#a8a8ad">permission: arc.use</text><text x="260" y="125" font-size="10.5" fill="#a8a8ad">builds system + prompt</text>
+      <rect x="248" y="150" width="174" height="66" rx="8" fill="#101010" stroke="#555"/><text x="260" y="172" font-weight="600">JSON check (zod)</text><text x="260" y="190" font-size="10.5" fill="#a8a8ad">invalid → retry once</text><text x="260" y="205" font-size="10.5" fill="#a8a8ad">retry not counted to cap</text>
+      <rect x="248" y="230" width="174" height="56" rx="8" fill="#101010" stroke="#555"/><text x="260" y="252" font-weight="600">Save ArcRun</text><text x="260" y="270" font-size="10.5" fill="#a8a8ad">source: ai | template</text>
+      <rect x="248" y="296" width="174" height="50" rx="8" fill="#101010" stroke="#555"/><text x="260" y="317" font-weight="600">apply-actions.ts</text><text x="260" y="334" font-size="10.5" fill="#a8a8ad">creates tasks / milestones</text>
+    </g>
+    <!-- gateway -->
+    <rect x="470" y="30" width="300" height="330" rx="10" fill="#1d2a1f" stroke="#3fa85a"/>
+    <text x="484" y="54" font-size="14" font-weight="700">⚙ AI Gateway · arc/claude.ts</text>
+    <g font-size="11.5">
+      <rect x="485" y="68" width="270" height="40" rx="8" fill="#101010" stroke="#555"/><text x="497" y="93">1 · ANTHROPIC_API_KEY set?  → else <tspan fill="#e0485a">off</tspan></text>
+      <rect x="485" y="116" width="270" height="40" rx="8" fill="#101010" stroke="#555"/><text x="497" y="141">2 · cap for plan &gt; 0? → else <tspan fill="#e0485a">plan</tspan></text>
+      <rect x="485" y="164" width="270" height="40" rx="8" fill="#101010" stroke="#555"/><text x="497" y="189">3 · requests left this month? → else <tspan fill="#e0485a">cap</tspan></text>
+      <rect x="485" y="212" width="270" height="40" rx="8" fill="#101010" stroke="#555"/><text x="497" y="237">4 · redactSensitive(system, prompt)</text>
+      <rect x="485" y="260" width="270" height="40" rx="8" fill="#101010" stroke="#555"/><text x="497" y="285">5 · callClaude() → error → <tspan fill="#e0485a">failed</tspan></text>
+      <rect x="485" y="308" width="270" height="40" rx="8" fill="#101010" stroke="#555"/><text x="497" y="333">6 · recordAiUsage() → AiUsage row</text>
+    </g>
+    <!-- provider -->
+    <rect x="805" y="30" width="285" height="210" rx="10" fill="#2a1a2f" stroke="#a05cc8"/>
+    <text x="819" y="54" font-size="14" font-weight="700">☁ Anthropic (ai-client.ts)</text>
+    <g font-size="11.5">
+      <rect x="820" y="68" width="255" height="70" rx="8" fill="#101010" stroke="#555"/><text x="832" y="90" font-weight="600">tier "draft" → claude-sonnet-5-5</text><text x="832" y="108" font-size="10.5" fill="#a8a8ad">outline · breakdown · meeting minutes</text><text x="832" y="124" font-size="10.5" fill="#a8a8ad">effort low · server-side fallback beta</text>
+      <rect x="820" y="148" width="255" height="70" rx="8" fill="#101010" stroke="#555"/><text x="832" y="170" font-weight="600">tier "cheap" → claude-haiku-4-5</text><text x="832" y="188" font-size="10.5" fill="#a8a8ad">progress update rewording</text><text x="832" y="204" font-size="10.5" fill="#a8a8ad">timeout 45 s · 1 SDK retry</text>
+    </g>
+    <!-- data -->
+    <rect x="805" y="260" width="285" height="100" rx="10" fill="#2a2412" stroke="#c9a227"/>
+    <text x="819" y="284" font-size="14" font-weight="700">🗄 MongoDB</text>
+    <text x="819" y="306" font-size="11">ArcRun · the draft and its source</text>
+    <text x="819" y="324" font-size="11">AiUsage · member, task, model, tokens</text>
+    <text x="819" y="342" font-size="10.5" fill="#a8a8ad">prompt and reply text are never stored in AiUsage</text>
+    <!-- arrows -->
+    <g stroke="#d8d8d8" stroke-width="1.5" fill="none" marker-end="url(#ah)">
+      <path d="M188 90 L246 100"/><path d="M188 140 L246 105"/><path d="M188 190 L246 112"/>
+      <path d="M422 100 L483 88"/>
+      <path d="M755 280 L818 150"/>
+      <path d="M818 190 Q790 150 757 280"/>
+      <path d="M485 328 Q450 200 424 183"/>
+      <path d="M335 216 L335 228"/>
+      <path d="M248 258 L190 300"/>
+      <path d="M188 330 L246 322"/>
+      <path d="M755 328 L803 315"/>
+    </g>
+    <path d="M620 352 Q600 440 300 440 Q120 440 105 346" stroke="#e0485a" stroke-dasharray="6 5" stroke-width="1.4" fill="none" marker-end="url(#ahr)"/>
+    <text x="330" y="432" font-size="11" fill="#e0485a">any miss (off · plan · cap · failed) → built-in template draft + a note telling the user why</text>
+  </svg>
+  <div class="cols3">
+    <div class="box g"><h3 style="margin-top:0">Monthly caps (Console)</h3><p class="small">Requests per workspace per month (IST): <b>free 0</b>, <b>trial 50</b>, <b>paid 500</b>, comped / internal 500, test 50. Staff change them in Console → Settings → Arc AI.</p></div>
+    <div class="box y"><h3 style="margin-top:0">Redaction</h3><p class="small">Salary, bank and PAN details are stripped from the system prompt and the user prompt before anything leaves Flowbit (<code>lib/ai-redact.ts</code>).</p></div>
+    <div class="box r"><h3 style="margin-top:0">Never blocks the user</h3><p class="small">The gateway never throws. If AI is unavailable the user still gets a template draft (<code>templates.ts</code>) and a note explaining why.</p></div>
+  </div>
+  <div class="footer"><span>Flowbit · AI Architecture</span><span>3</span></div>
+</div></section>
+
+<!-- ============ PAGE 4: ARC AI USER FLOW ============ -->
+<section class="page"><div class="frame">
+  <div class="tag">⌐ 2 · Arc AI: user flow in detail <span class="pill now">BUILT</span></div>
+  <div class="cols">
+    <div>
+      <h3>Example: "Outline a project"</h3>
+      <div class="step"><b class="n">1</b><div>User opens <b>Arc</b> (<code>/app/arc</code>) and clicks <b>Outline a project</b>. A dialog asks for the project name, goal and start date (or an existing project).</div></div>
+      <div class="step"><b class="n">2</b><div>The browser calls the server action <code>draftOutline</code>. It checks the <code>arc.use</code> permission and, for an existing project, that the user may open it.</div></div>
+      <div class="step"><b class="n">3</b><div>The action builds the prompt: project name, goal, workspace team names, and the exact JSON shape wanted (3–6 milestones, 2–5 tasks each).</div></div>
+      <div class="step"><b class="n">4</b><div><code>askClaudeJson()</code> → <code>askClaude()</code>: key check → plan cap → monthly count → redaction → <code>callClaude()</code> on the <b>draft</b> tier (Claude Sonnet 5.5).</div></div>
+      <div class="step"><b class="n">5</b><div>The reply is parsed as JSON and checked with zod. If it is invalid, Arc asks once more with "reply with only the JSON". The retry is logged but not counted against the cap.</div></div>
+      <div class="step"><b class="n">6</b><div>Tokens are logged in <code>AiUsage</code>. The draft is saved as an <code>ArcRun</code> (status <i>draft</i>, source <i>ai</i> or <i>template</i>).</div></div>
+      <div class="step"><b class="n">7</b><div>The page refreshes and shows the <b>draft card</b>. Nothing is created yet. The user reviews and edits it.</div></div>
+      <div class="step"><b class="n">8</b><div><b>Apply</b> → <code>apply-actions.ts</code> creates the project, milestones and tasks. <b>Discard</b> → the run is marked discarded and nothing is created.</div></div>
+    </div>
+    <div>
+      <h3>The four Arc actions</h3>
+      <table>
+        <tr><th>Action</th><th>AI?</th><th>Tier / model</th><th>Output</th></tr>
+        <tr><td>Outline a project</td><td>Yes</td><td>draft · Sonnet 5.5</td><td>Milestones + tasks (JSON), Apply creates them</td></tr>
+        <tr><td>Break down a task</td><td>Yes</td><td>draft · Sonnet 5.5</td><td>3–7 subtasks, Apply adds them (same edit rule as tasks)</td></tr>
+        <tr><td>Progress update</td><td>Yes</td><td>cheap · Haiku 4.5</td><td>Facts gathered by code, AI only rewords them (max 180 words)</td></tr>
+        <tr><td>Search / task key</td><td>No</td><td>none</td><td>Workspace search results, or jump to the task</td></tr>
+      </table>
+      <h3>When the template is used</h3>
+      <table>
+        <tr><th>Reason</th><th>Cause</th><th>Note shown to user</th></tr>
+        <tr><td><code>off</code></td><td>No ANTHROPIC_API_KEY on the server</td><td>(none, template only)</td></tr>
+        <tr><td><code>plan</code></td><td>Cap is 0 (Free plan)</td><td>"AI drafting is on paid plans and trials…"</td></tr>
+        <tr><td><code>cap</code></td><td>This month's requests used up</td><td>"…resets on the 1st."</td></tr>
+        <tr><td><code>failed</code></td><td>API error, refusal, bad JSON twice</td><td>"…the AI service didn't respond."</td></tr>
+      </table>
+      <div class="callout blue"><b>Design rule:</b> facts come from Flowbit's database, the AI only writes or rewords. For the progress update the numbers, names and titles are fixed by code and the prompt forbids adding facts.</div>
+      <h3>Key files</h3>
+      <p class="small"><code>modules/work/arc/actions.ts</code> actions · <code>claude.ts</code> gateway · <code>ai-client.ts</code> Anthropic SDK · <code>usage.ts</code> caps + logging · <code>schemas.ts</code> JSON shapes · <code>templates.ts</code> fallbacks · <code>apply-actions.ts</code> Apply · <code>lib/ai-caps.ts</code> · <code>lib/ai-redact.ts</code> · <code>models/work/AiUsage.ts</code></p>
+    </div>
+  </div>
+  <div class="footer"><span>Flowbit · AI Architecture</span><span>4</span></div>
+</div></section>
+
+<!-- ============ PAGE 5: MEETINGS AI ARCHITECTURE ============ -->
+<section class="page"><div class="frame">
+  <div class="tag">⌐ 3 · Meetings AI: architecture <span class="pill now">BUILT</span></div>
+  <svg viewBox="0 0 1100 500">
+    <!-- lane labels -->
+    <text x="12" y="30" font-size="13" font-weight="700" fill="#8fb4ff">A · Notetaker bot path</text>
+    <text x="12" y="300" font-size="13" font-weight="700" fill="#8fb4ff">B · Upload path</text>
+    <!-- A lane -->
+    <g font-size="11.5">
+      <rect x="12" y="45" width="150" height="62" rx="8" fill="#1a2230" stroke="#3b6fd8"/><text x="24" y="68" font-weight="600">Meeting form</text><text x="24" y="85" font-size="10.5" fill="#a8a8ad">link pasted, or</text><text x="24" y="99" font-size="10.5" fill="#a8a8ad">Google Meet auto-link</text>
+      <rect x="190" y="45" width="150" height="62" rx="8" fill="#1a2230" stroke="#3b6fd8"/><text x="202" y="68" font-weight="600">Send notetaker</text><text x="202" y="85" font-size="10.5" fill="#a8a8ad">button on meeting page</text><text x="202" y="99" font-size="10.5" fill="#a8a8ad">before meeting ends</text>
+      <rect x="368" y="45" width="170" height="62" rx="8" fill="#141c2e" stroke="#3b6fd8"/><text x="380" y="68" font-weight="600">scheduleNotetaker()</text><text x="380" y="85" font-size="10.5" fill="#a8a8ad">link · hours left · lock</text><text x="380" y="99" font-size="10.5" fill="#a8a8ad">+ consent email (DPDP)</text>
+      <rect x="566" y="45" width="160" height="62" rx="8" fill="#2a1a2f" stroke="#a05cc8"/><text x="578" y="68" font-weight="600">Recall.ai API</text><text x="578" y="85" font-size="10.5" fill="#a8a8ad">POST /bot · join_at</text><text x="578" y="99" font-size="10.5" fill="#a8a8ad">audio_mixed_mp3</text>
+      <rect x="754" y="45" width="160" height="62" rx="8" fill="#2a1a2f" stroke="#a05cc8"/><text x="766" y="68" font-weight="600">Bot in the call</text><text x="766" y="85" font-size="10.5" fill="#a8a8ad">"Flowbit Notetaker"</text><text x="766" y="99" font-size="10.5" fill="#a8a8ad">host admits · records</text>
+      <rect x="940" y="45" width="150" height="62" rx="8" fill="#141c2e" stroke="#3b6fd8"/><text x="952" y="68" font-weight="600">/webhooks/recall</text><text x="952" y="85" font-size="10.5" fill="#a8a8ad">Svix signature</text><text x="952" y="99" font-size="10.5" fill="#a8a8ad">joined · done · failed</text>
+      <rect x="754" y="150" width="160" height="62" rx="8" fill="#141c2e" stroke="#3b6fd8"/><text x="766" y="173" font-weight="600">processBot()</text><text x="766" y="190" font-size="10.5" fill="#a8a8ad">download mp3 ≤ 200 MB</text><text x="766" y="204" font-size="10.5" fill="#a8a8ad">save as recording</text>
+    </g>
+    <g stroke="#d8d8d8" stroke-width="1.5" fill="none" marker-end="url(#ah)">
+      <path d="M162 76 L188 76"/><path d="M340 76 L366 76"/><path d="M538 76 L564 76"/><path d="M726 76 L752 76"/>
+    </g>
+    <g stroke="#bbb" stroke-width="1.4" fill="none" stroke-dasharray="2 4" marker-end="url(#ah)"><path d="M914 76 L938 76"/><path d="M1015 107 Q1015 181 916 181"/></g>
+    <!-- B lane -->
+    <g font-size="11.5">
+      <rect x="12" y="315" width="150" height="62" rx="8" fill="#1a2230" stroke="#3b6fd8"/><text x="24" y="338" font-weight="600">Own recording</text><text x="24" y="355" font-size="10.5" fill="#a8a8ad">Meet/Zoom record, phone</text><text x="24" y="369" font-size="10.5" fill="#a8a8ad">MP3·M4A·WAV·MP4 ≤ 2 h</text>
+      <rect x="190" y="315" width="150" height="62" rx="8" fill="#1a2230" stroke="#3b6fd8"/><text x="202" y="338" font-weight="600">Upload recording</text><text x="202" y="355" font-size="10.5" fill="#a8a8ad">browser reads length</text><text x="202" y="369" font-size="10.5" fill="#a8a8ad">≤ 200 MB</text>
+      <rect x="368" y="315" width="170" height="62" rx="8" fill="#141c2e" stroke="#3b6fd8"/><text x="380" y="338" font-weight="600">prepare / upload</text><text x="380" y="355" font-size="10.5" fill="#a8a8ad">hours left? then S3 PUT</text><text x="380" y="369" font-size="10.5" fill="#a8a8ad">(direct) or via server</text>
+    </g>
+    <g stroke="#d8d8d8" stroke-width="1.5" fill="none" marker-end="url(#ah)"><path d="M162 346 L188 346"/><path d="M340 346 L366 346"/></g>
+    <!-- storage -->
+    <rect x="566" y="215" width="160" height="56" rx="8" fill="#2a2412" stroke="#c9a227"/><text x="578" y="238" font-size="11.5" font-weight="600">File storage</text><text x="578" y="256" font-size="10.5" fill="#a8a8ad">recording (S3 / R2)</text>
+    <g stroke="#d8d8d8" stroke-width="1.5" fill="none" marker-end="url(#ah)"><path d="M754 195 L728 230"/><path d="M538 340 L600 273"/></g>
+    <!-- shared pipeline -->
+    <rect x="12" y="405" width="1078" height="88" rx="10" fill="#1d2a1f" stroke="#3fa85a"/>
+    <text x="24" y="425" font-size="13" font-weight="700">⚙ Shared pipeline · meetings/ai/pipeline.ts (both paths join here)</text>
+    <g font-size="11">
+      <rect x="24" y="435" width="160" height="48" rx="8" fill="#101010" stroke="#555"/><text x="34" y="455" font-weight="600">startTranscription()</text><text x="34" y="472" font-size="10" fill="#a8a8ad">job + callback token</text>
+      <rect x="208" y="435" width="160" height="48" rx="8" fill="#2a1a2f" stroke="#a05cc8"/><text x="218" y="455" font-weight="600">Sarvam saaras:v4</text><text x="218" y="472" font-size="10" fill="#a8a8ad">Hinglish · speakers</text>
+      <rect x="392" y="435" width="160" height="48" rx="8" fill="#101010" stroke="#555"/><text x="402" y="455" font-weight="600">/webhooks/sarvam</text><text x="402" y="472" font-size="10" fill="#a8a8ad">→ refreshTranscription</text>
+      <rect x="576" y="435" width="160" height="48" rx="8" fill="#101010" stroke="#555"/><text x="586" y="455" font-weight="600">finishTranscript()</text><text x="586" y="472" font-size="10" fill="#a8a8ad">save · count hours</text>
+      <rect x="760" y="435" width="150" height="48" rx="8" fill="#101010" stroke="#3fa85a"/><text x="770" y="455" font-weight="600">draftMinutes()</text><text x="770" y="472" font-size="10" fill="#a8a8ad">AI Gateway → Claude</text>
+      <rect x="934" y="435" width="146" height="48" rx="8" fill="#2a1a2f" stroke="#a05cc8"/><text x="944" y="455" font-weight="600">Claude Sonnet 5.5</text><text x="944" y="472" font-size="10" fill="#a8a8ad">tier "draft" · MOM JSON</text>
+    </g>
+    <g stroke="#d8d8d8" stroke-width="1.5" fill="none" marker-end="url(#ah)"><path d="M184 459 L206 459"/><path d="M736 459 L758 459"/><path d="M910 459 L932 459"/><path d="M646 271 L646 398 L104 398 L104 433"/></g>
+    <g stroke="#bbb" stroke-width="1.4" fill="none" stroke-dasharray="2 4" marker-end="url(#ah)"><path d="M368 459 L390 459"/><path d="M552 459 L574 459"/></g>
+    <!-- output -->
+    <rect x="800" y="250" width="290" height="118" rx="10" fill="#141c2e" stroke="#3b6fd8"/>
+    <text x="814" y="273" font-size="13" font-weight="700">📝 Written back to the meeting</text>
+    <text x="814" y="294" font-size="11">• Notes: a "Minutes" block (points, decisions)</text>
+    <text x="814" y="312" font-size="11">• Agenda: filled when it was empty</text>
+    <text x="814" y="330" font-size="11">• Action items: drafts with owner + due date</text>
+    <text x="814" y="348" font-size="11">• Organiser notified: "Minutes are ready…"</text>
+    <path d="M1007 433 L1007 370" stroke="#d8d8d8" stroke-width="1.5" fill="none" marker-end="url(#ah)"/>
+    <!-- cron -->
+    <rect x="380" y="150" width="170" height="56" rx="8" fill="#101010" stroke="#e0485a" stroke-dasharray="5 4"/><text x="392" y="173" font-size="11.5" font-weight="600">Cron · every 15 min</text><text x="392" y="191" font-size="10.5" fill="#a8a8ad">catches missed webhooks</text>
+    <path d="M550 178 Q650 150 752 175" stroke="#e0485a" stroke-dasharray="6 5" stroke-width="1.4" fill="none" marker-end="url(#ahr)"/>
+    <path d="M552 200 L556 388 L288 388 L288 433" stroke="#e0485a" stroke-dasharray="6 5" stroke-width="1.4" fill="none" marker-end="url(#ahr)"/>
+  </svg>
+  <div class="callout"><b>Which AI model gets the transcript?</b> Today the transcript goes to <b>Claude Sonnet 5.5</b> (<code>claude-sonnet-5-5</code>, the "draft" tier) through the same AI Gateway as Arc, max 4,000 output tokens, and it counts as one Arc AI request. Decided for the new design: it goes to the organiser's default model, then the workspace default, then Claude Haiku (pages 8 and 11). Sarvam (transcription) and Recall (bot) do not change.</div>
+  <div class="footer"><span>Flowbit · AI Architecture</span><span>5</span></div>
+</div></section>
+
+<!-- ============ PAGE 6: MEETINGS USER FLOWS ============ -->
+<section class="page"><div class="frame">
+  <div class="tag">⌐ 3 · Meetings AI: user flows in detail <span class="pill now">BUILT</span></div>
+  <div class="cols">
+    <div class="box b">
+      <h3 style="margin-top:0">Flow A · The bot joins the meeting</h3>
+      <div class="step"><b class="n">1</b><div><b>Create the meeting</b> (title, time IST, attendees, link). Paste a Meet / Zoom / Teams link, or leave it empty. If the organiser has connected Google Calendar, saving creates a <b>Google Meet link</b> automatically (the form says so; if not connected it shows a Connect button).</div></div>
+      <div class="step"><b class="n">2</b><div>On the meeting page, the Meetings AI card shows <b>Send notetaker</b> (needs: link, meeting not ended, user is a participant, Meetings AI on the plan, Recall keys on the server). User confirms.</div></div>
+      <div class="step"><b class="n">3</b><div>Server checks: link is Meet/Zoom/Teams, enough <b>hours left</b> for the scheduled length, and locks the meeting so two clicks can't book two bots.</div></div>
+      <div class="step"><b class="n">4</b><div>Flowbit asks Recall.ai to book a bot with the meeting link. Booked 10+ minutes ahead → it joins at the start time; later → it joins now. Every attendee gets a <b>consent email</b> (who records, why, how long it is kept). Status: <i>Booked</i>. "Call off notetaker" cancels it.</div></div>
+      <div class="step"><b class="n">5</b><div>At start time the bot opens the link as a guest named <b>Flowbit Notetaker</b>. The host must <b>admit</b> it (it waits up to 10 min, and leaves if nobody joins in 10 min). It posts a chat message that it is recording. Status: <i>In the call</i>.</div></div>
+      <div class="step"><b class="n">6</b><div>Meeting ends → Recall sends a <b>done</b> webhook → Flowbit downloads the mp3, saves it as the meeting's recording and starts transcription. Backups: <b>Fetch from bot</b> button and the cron (after 20 min, up to 5 tries).</div></div>
+      <div class="step"><b class="n">7</b><div>From here it is the <b>shared pipeline</b> (steps 8–11 on the right).</div></div>
+    </div>
+    <div class="box g">
+      <h3 style="margin-top:0">Flow B · The user records it themselves</h3>
+      <div class="step"><b class="n">1</b><div>User records the meeting another way: Meet/Zoom's own record button, a phone recorder for an in-person meeting, any tool. Up to <b>2 hours, 200 MB</b>.</div></div>
+      <div class="step"><b class="n">2</b><div>On the meeting page → <b>Upload recording</b>. The browser reads the length; the server checks the hours left this month.</div></div>
+      <div class="step"><b class="n">3</b><div>With S3/R2 storage the file goes straight to the bucket (signed PUT); otherwise through the server. Then transcription starts.</div></div>
+      <h3>Shared pipeline (both flows)</h3>
+      <div class="step"><b class="n">8</b><div><b>Sarvam</b> transcribes (Hinglish code-mix, speaker labels). It calls <code>/api/webhooks/sarvam</code> with a secret token; Flowbit then fetches the transcript. Backups: <b>Check now</b> button and the cron.</div></div>
+      <div class="step"><b class="n">9</b><div>The transcript is saved and the <b>audio hours are counted</b> against the monthly limit.</div></div>
+      <div class="step"><b class="n">10</b><div><b>Claude</b> gets the transcript + title, date, attendees, agenda and returns JSON: agenda, notes, decisions, action items (owner as spoken, due date only if said). Owners are matched to workspace members.</div></div>
+      <div class="step"><b class="n">11</b><div>Minutes go into the notes, the agenda (if empty) and draft action items. The organiser is notified. Later: rename speakers, <b>Draft minutes again</b>, delete recording/transcript; both auto-delete after the retention period (default <b>90 days</b>).</div></div>
+      <div class="callout red small">If AI is off or the cap is reached, the notes quote the transcript and say why. Upload sends no consent email (the user recorded it themselves).</div>
+    </div>
+  </div>
+  <div class="footer"><span>Flowbit · AI Architecture</span><span>6</span></div>
+</div></section>
+
+<!-- ============ PAGE 7: MEETINGS RELIABILITY / LIMITS / COSTS ============ -->
+<section class="page"><div class="frame">
+  <div class="tag">⌐ 4 · Meetings AI: background jobs, limits &amp; costs <span class="pill now">BUILT</span></div>
+  <div class="cols">
+    <div>
+      <h3>Status of a notetaker</h3>
+      <svg viewBox="0 0 520 120">
+        <g font-size="11">
+          <rect x="5" y="40" width="80" height="34" rx="17" fill="#1a2230" stroke="#3b6fd8"/><text x="22" y="61">booking</text>
+          <rect x="110" y="40" width="85" height="34" rx="17" fill="#1a2230" stroke="#3b6fd8"/><text x="124" y="61">scheduled</text>
+          <rect x="220" y="40" width="80" height="34" rx="17" fill="#1a2230" stroke="#3b6fd8"/><text x="240" y="61">joined</text>
+          <rect x="325" y="40" width="80" height="34" rx="17" fill="#1d2a1f" stroke="#3fa85a"/><text x="350" y="61">done</text>
+          <rect x="430" y="5" width="85" height="34" rx="17" fill="#261418" stroke="#e0485a"/><text x="453" y="26">failed</text>
+          <rect x="430" y="80" width="85" height="34" rx="17" fill="#222" stroke="#777"/><text x="443" y="101">cancelled</text>
+        </g>
+        <g stroke="#d8d8d8" stroke-width="1.4" fill="none" marker-end="url(#ah)"><path d="M85 57 L108 57"/><path d="M195 57 L218 57"/><path d="M300 57 L323 57"/></g>
+        <g stroke="#e0485a" stroke-width="1.3" fill="none" stroke-dasharray="5 4" marker-end="url(#ahr)"><path d="M300 48 L428 24"/><path d="M405 50 L428 30"/></g>
+        <path d="M152 74 Q300 112 428 97" stroke="#8a8a90" stroke-width="1.3" fill="none" stroke-dasharray="5 4" marker-end="url(#ahg)"/>
+      </svg>
+      <h3>Cron <code>/api/cron/meetings</code> (every 15 minutes)</h3>
+      <table>
+        <tr><th>Job</th><th>Picks up</th><th>Retries</th></tr>
+        <tr><td>Poll stuck transcripts</td><td>Sarvam jobs still "processing" after 5 min (callback missed)</td><td>each run</td></tr>
+        <tr><td>Bot pick-up</td><td>Meetings that ended 20+ min ago whose recording was not fetched</td><td>up to 5</td></tr>
+        <tr><td>Missing minutes</td><td>Transcripts done 10+ min ago without minutes (last 7 days)</td><td>up to 3</td></tr>
+        <tr><td>Retention purge</td><td>Recordings/transcripts older than the workspace's days (dry run unless <code>MEETINGS_PURGE</code>)</td><td>each run</td></tr>
+      </table>
+      <h3>Security of webhooks</h3>
+      <p class="small">Recall: Svix signature with <code>RECALL_WEBHOOK_SECRET</code>; the bot id, workspace and meeting must all match. Sarvam: a one-time token per job, only its hash is stored. Both reply 200 fast and do the work afterwards (<code>after()</code>).</p>
+    </div>
+    <div>
+      <h3>Limits</h3>
+      <table>
+        <tr><th>Limit</th><th>Value</th><th>Where</th></tr>
+        <tr><td>Meetings AI hours / month</td><td>Free 0 · Trial 1 h · Paid 5 h per seat</td><td><code>lib/meeting-caps.ts</code>, Console</td></tr>
+        <tr><td>Arc AI requests / month (also used by minutes)</td><td>Free 0 · Trial 50 · Paid 500</td><td><code>lib/ai-caps.ts</code>, Console</td></tr>
+        <tr><td>Recording length / size</td><td>2 hours · 200 MB</td><td><code>pipeline.ts</code>, <code>actions.ts</code></td></tr>
+        <tr><td>Retention</td><td>Default 90 days (7 – 3650)</td><td>Settings → Privacy</td></tr>
+        <tr><td>Bot waiting room / nobody joined</td><td>10 min each, then it leaves</td><td><code>recall.ts</code></td></tr>
+      </table>
+      <h3>What one meeting costs Flowbit</h3>
+      <table>
+        <tr><th>Step</th><th>Paid to</th><th>Charged by</th><th>Bot</th><th>Upload</th></tr>
+        <tr><td>Record the call</td><td>Recall.ai</td><td>~$0.50 / recording hour (Oct 2026 pay-as-you-go)</td><td>✓</td><td>–</td></tr>
+        <tr><td>Speech → text</td><td>Sarvam</td><td>per hour of audio</td><td>✓</td><td>✓</td></tr>
+        <tr><td>Minutes</td><td>Anthropic (later: chosen model)</td><td>per token, a few cents</td><td>✓</td><td>✓</td></tr>
+      </table>
+      <div class="callout"><b>Pricing rule:</b> the per-seat Meetings AI add-on must cover Recall + Sarvam. The hours limit counts transcribed audio, which is about the same length the bot records.</div>
+      <h3>Bot options (provider behind <code>MeetingBotProvider</code>)</h3>
+      <p class="small"><b>Keep Recall.ai now</b> (built, reliable, no monthly fee). Cheaper APIs (MeetingBaaS, Skribby) = one new adapter. Self-hosted bots: not worth it yet. <b>Future free path:</b> import recordings from Google Meet / Zoom APIs.</p>
+    </div>
+  </div>
+  <div class="footer"><span>Flowbit · AI Architecture</span><span>7</span></div>
+</div></section>
+
+<!-- ============ PAGE 8: PROPOSED MULTI-MODEL GATEWAY ============ -->
+<section class="page"><div class="frame">
+  <div class="tag">⌐ 5 · Proposed: multi-model AI gateway <span class="pill plan">PROPOSED</span></div>
+  <svg viewBox="0 0 1100 440">
+    <!-- client -->
+    <rect x="10" y="20" width="200" height="400" rx="10" fill="#1a2230" stroke="#3b6fd8"/>
+    <text x="24" y="44" font-size="14" font-weight="700">🖥 Who picks the model</text>
+    <g font-size="11.5">
+      <rect x="22" y="60" width="176" height="60" rx="8" fill="#101010" stroke="#555"/><text x="34" y="82" font-weight="600">Arc prompt dropdown</text><text x="34" y="100" font-size="10.5" fill="#a8a8ad">per request</text>
+      <rect x="22" y="132" width="176" height="60" rx="8" fill="#101010" stroke="#555"/><text x="34" y="154" font-weight="600">My default model</text><text x="34" y="172" font-size="10.5" fill="#a8a8ad">saved on the member</text>
+      <rect x="22" y="204" width="176" height="60" rx="8" fill="#101010" stroke="#555"/><text x="34" y="226" font-weight="600">Workspace admin</text><text x="34" y="244" font-size="10.5" fill="#a8a8ad">allowed models + default</text>
+      <rect x="22" y="276" width="176" height="60" rx="8" fill="#101010" stroke="#555"/><text x="34" y="298" font-weight="600">Meeting minutes</text><text x="34" y="316" font-size="10.5" fill="#a8a8ad">organiser's default → Haiku</text>
+      <rect x="22" y="348" width="176" height="60" rx="8" fill="#101010" stroke="#555"/><text x="34" y="370" font-weight="600">Console (staff)</text><text x="34" y="388" font-size="10.5" fill="#a8a8ad">enable/disable · prices</text>
+    </g>
+    <!-- gateway -->
+    <rect x="245" y="20" width="330" height="400" rx="10" fill="#1d2a1f" stroke="#3fa85a"/>
+    <text x="259" y="44" font-size="14" font-weight="700">⚙ AI Gateway · askAi()</text>
+    <g font-size="11.5">
+      <rect x="260" y="58" width="300" height="40" rx="8" fill="#101010" stroke="#555"/><text x="272" y="83">1 · resolve model: request → user → workspace</text>
+      <rect x="260" y="104" width="300" height="40" rx="8" fill="#101010" stroke="#555"/><text x="272" y="129">2 · allowed? enabled in catalog? key set?</text>
+      <rect x="260" y="150" width="300" height="40" rx="8" fill="#101010" stroke="#c9a227"/><text x="272" y="175">3 · enough credits? (estimate) → wallet</text>
+      <rect x="260" y="196" width="300" height="40" rx="8" fill="#101010" stroke="#555"/><text x="272" y="221">4 · redact (unchanged)</text>
+      <rect x="260" y="242" width="300" height="40" rx="8" fill="#101010" stroke="#555"/><text x="272" y="267">5 · provider.call() via the adapter</text>
+      <rect x="260" y="288" width="300" height="40" rx="8" fill="#101010" stroke="#c9a227"/><text x="272" y="313">6 · cost = tokens × price → credits</text>
+      <rect x="260" y="334" width="300" height="40" rx="8" fill="#101010" stroke="#c9a227"/><text x="272" y="359">7 · debit wallet (atomic) + log AiUsage</text>
+      <text x="272" y="398" font-size="10.5" fill="#a8a8ad">JSON check + template fallback stay as today</text>
+    </g>
+    <!-- catalog -->
+    <rect x="610" y="20" width="200" height="190" rx="10" fill="#2a2412" stroke="#c9a227"/>
+    <text x="624" y="44" font-size="14" font-weight="700">📚 Model catalog</text>
+    <g font-size="10.5"><text x="624" y="66" fill="#a8a8ad">key → provider · model id · price</text>
+      <text x="624" y="88">claude-haiku → claude-haiku-5-5</text><text x="624" y="108">gemini-flash → latest stable</text><text x="624" y="128">gpt-6-luna → openai (default)</text><text x="624" y="148">gpt-5.6-luna → openai</text><text x="624" y="168" fill="#8a8a90">flowbit → ollama (later)</text><text x="624" y="194" fill="#a8a8ad">UI stores only the key</text></g>
+    <!-- wallet -->
+    <rect x="610" y="230" width="200" height="190" rx="10" fill="#2a2412" stroke="#c9a227"/>
+    <text x="624" y="254" font-size="14" font-weight="700">💳 Credit wallet</text>
+    <g font-size="10.5"><text x="624" y="276">Included: N credits / seat / month</text><text x="624" y="296">AI credits add-on (per seat)</text><text x="624" y="316">Top-up packs (later)</text><text x="624" y="340" fill="#a8a8ad">AiCreditLedger: every grant</text><text x="624" y="356" fill="#a8a8ad">and every debit</text><text x="624" y="380" fill="#a8a8ad">pooled per workspace</text><text x="624" y="398" fill="#a8a8ad">billing via Razorpay</text></g>
+    <!-- adapters -->
+    <rect x="845" y="20" width="245" height="400" rx="10" fill="#2a1a2f" stroke="#a05cc8"/>
+    <text x="859" y="44" font-size="14" font-weight="700">☁ Provider adapters</text>
+    <g font-size="11.5">
+      <rect x="860" y="60" width="215" height="66" rx="8" fill="#101010" stroke="#555"/><text x="872" y="82" font-weight="600">Anthropic</text><text x="872" y="100" font-size="10.5" fill="#a8a8ad">Claude Haiku</text><text x="872" y="115" font-size="10.5" fill="#a8a8ad">today's ai-client.ts</text>
+      <rect x="860" y="138" width="215" height="66" rx="8" fill="#101010" stroke="#555"/><text x="872" y="160" font-weight="600">Google</text><text x="872" y="178" font-size="10.5" fill="#a8a8ad">Gemini Flash</text><text x="872" y="193" font-size="10.5" fill="#a8a8ad">GEMINI_API_KEY</text>
+      <rect x="860" y="216" width="215" height="66" rx="8" fill="#101010" stroke="#555"/><text x="872" y="238" font-weight="600">OpenAI</text><text x="872" y="256" font-size="10.5" fill="#a8a8ad">GPT-5.6 Luna · GPT-6 Luna</text><text x="872" y="271" font-size="10.5" fill="#a8a8ad">OPENAI_API_KEY</text>
+      <rect x="860" y="294" width="215" height="66" rx="8" fill="#101010" stroke="#777" stroke-dasharray="5 4"/><text x="872" y="316" font-weight="600" fill="#bbb">Ollama (self-hosted)</text><text x="872" y="334" font-size="10.5" fill="#8a8a90">Flowbit's own model · future</text><text x="872" y="349" font-size="10.5" fill="#8a8a90">OpenAI-compatible base URL</text>
+      <text x="872" y="388" font-size="10.5" fill="#a8a8ad">one interface: AiProvider.call()</text><text x="872" y="404" font-size="10.5" fill="#a8a8ad">same reply shape for all</text>
+    </g>
+    <g stroke="#d8d8d8" stroke-width="1.5" fill="none" marker-end="url(#ah)">
+      <path d="M198 90 L258 78"/><path d="M198 162 L258 82"/><path d="M198 234 L258 124"/><path d="M198 306 L258 260"/>
+      <path d="M560 78 L608 80"/><path d="M560 170 L608 300"/><path d="M560 355 L608 350"/>
+      <path d="M560 262 Q700 225 858 93"/><path d="M560 262 Q700 230 858 171"/><path d="M560 262 Q700 245 858 249"/>
+    </g>
+    <path d="M560 262 Q700 285 858 327" stroke="#8a8a90" stroke-width="1.4" fill="none" stroke-dasharray="5 4" marker-end="url(#ahg)"/>
+    <path d="M198 378 Q230 380 608 120" stroke="#8a8a90" stroke-width="1.2" fill="none" stroke-dasharray="3 4" marker-end="url(#ahg)"/>
+  </svg>
+  <div class="cols3">
+    <div class="box"><h3 style="margin-top:0">Why a catalog key</h3><p class="small">The user picks <code>gemini-flash</code>, never a raw model id. Upgrading the model behind it changes one catalog line, not every user's setting. Staff can switch a model off during an outage.</p></div>
+    <div class="box"><h3 style="margin-top:0">Why adapters</h3><p class="small">Same idea as <code>TranscriptionProvider</code> (Sarvam) and <code>MeetingBotProvider</code> (Recall) that already exist. Adding our own Ollama model later = one adapter + one catalog line.</p></div>
+    <div class="box"><h3 style="margin-top:0">What changes for features</h3><p class="small">Arc and minutes stop passing a tier and pass the resolved model. <code>askClaude</code> → <code>askAi</code>. JSON checks, redaction and templates stay. Transcription (Sarvam) and the bot (Recall) are not affected.</p></div>
+  </div>
+  <div class="footer"><span>Flowbit · AI Architecture</span><span>8</span></div>
+</div></section>
+
+<!-- ============ PAGE 9: CREDITS ============ -->
+<section class="page"><div class="frame">
+  <div class="tag">⌐ 6 · Proposed: credits, wallet &amp; billing <span class="pill plan">PROPOSED</span></div>
+  <div class="cols">
+    <div>
+      <h3>Tokens inside, credits outside</h3>
+      <p>Providers bill Flowbit in <b>tokens</b>, and each model has its own price per token (input and output priced differently). Customers see and buy <b>credits</b>, Flowbit's own unit. The gateway converts tokens to credits using each model's price, so cheaper models use fewer credits and Flowbit never sells below cost.</p>
+      <svg viewBox="0 0 520 150">
+        <g font-size="11">
+          <rect x="5" y="20" width="110" height="56" rx="8" fill="#1d2a1f" stroke="#3fa85a"/><text x="16" y="43" font-weight="600">AI call</text><text x="16" y="61" fill="#a8a8ad" font-size="10">2,000 in · 1,000 out</text>
+          <rect x="140" y="20" width="120" height="56" rx="8" fill="#2a2412" stroke="#c9a227"/><text x="151" y="43" font-weight="600">× model price</text><text x="151" y="61" fill="#a8a8ad" font-size="10">from catalog (USD)</text>
+          <rect x="285" y="20" width="105" height="56" rx="8" fill="#2a2412" stroke="#c9a227"/><text x="296" y="43" font-weight="600">÷ credit value</text><text x="296" y="61" fill="#a8a8ad" font-size="10">e.g. 1 credit = $0.001</text>
+          <rect x="415" y="20" width="100" height="56" rx="8" fill="#141c2e" stroke="#3b6fd8"/><text x="426" y="43" font-weight="600">credits</text><text x="426" y="61" fill="#a8a8ad" font-size="10">rounded up</text>
+        </g>
+        <g stroke="#d8d8d8" stroke-width="1.4" fill="none" marker-end="url(#ah)"><path d="M115 48 L138 48"/><path d="M260 48 L283 48"/><path d="M390 48 L413 48"/></g>
+        <text x="5" y="104" font-size="10.5" fill="#a8a8ad">Example with made-up prices: Model A ($1 / $5 per 1M tokens) → $0.007 → 7 credits.</text>
+        <text x="5" y="122" font-size="10.5" fill="#a8a8ad">Model B ($0.50 / $3 per 1M tokens) → $0.004 → 4 credits. Same 3,000 tokens, different cost.</text>
+        <text x="5" y="140" font-size="10.5" fill="#a8a8ad">The dropdown can show "about 7 credits per draft" so users see the trade-off.</text>
+      </svg>
+      <h3>Where credits come from</h3>
+      <table>
+        <tr><th>Source</th><th>How</th><th>Expires</th></tr>
+        <tr><td>Included</td><td>With the plan: free 0, trial flat, paid N per seat (same formula as meeting hours)</td><td>Monthly reset (IST)</td></tr>
+        <tr><td>AI credits add-on</td><td>Paid per seat, next to <code>meetings_ai</code> in <code>ADD_ONS</code>, on the Razorpay subscription</td><td>Monthly</td></tr>
+        <tr><td>Top-up packs (later)</td><td>One-time purchase when a workspace runs out mid-month</td><td>12 months</td></tr>
+      </table>
+      <p class="small muted">Spent in order: included → add-on → top-up (soonest to expire first). Pooled for the whole workspace (seats × N), like Meetings AI hours.</p>
+    </div>
+    <div>
+      <h3>Data changes</h3>
+      <table>
+        <tr><th>Collection</th><th>Change</th></tr>
+        <tr><td><code>AiUsage</code></td><td>+ <code>provider</code>, <code>modelKey</code>, <code>costUsd</code> (what Flowbit paid), <code>credits</code> (what we charged) → margin reports for free</td></tr>
+        <tr><td><code>AiCreditLedger</code> (new)</td><td>One row per grant (monthly, add-on, top-up) and per debit. Audit trail for disputes.</td></tr>
+        <tr><td>Member / Org settings</td><td>Default model per member; allowed models + default per workspace</td></tr>
+        <tr><td>Console settings</td><td>Catalog overrides: enabled, prices, credit value, USD→INR rate</td></tr>
+      </table>
+      <h3>Rules for safe charging</h3>
+      <ul>
+        <li><b>Check before, charge after:</b> estimate from max tokens, call, then debit the real amount. A tiny overdraft is acceptable.</li>
+        <li><b>Atomic debit</b> (<code>$inc</code> with a condition) so two requests at once can't both spend the last credits.</li>
+        <li><b>JSON retries:</b> Flowbit absorbs them (the model's fault); failed calls and refusals are never charged.</li>
+        <li><b>Outage:</b> template fallback + a "Try with another model" button, never a silent switch.</li>
+        <li><b>Self-hosted model:</b> no per-token bill, so give it an internal price (GPU cost) and credits still work.</li>
+      </ul>
+      <h3>What does NOT use credits</h3>
+      <p class="small">Meeting <b>transcription</b> (Sarvam) and the <b>bot</b> (Recall) stay on the <b>hours</b> limit. Only the minutes step (text AI) spends credits. So a bot-recorded meeting uses hours + credits.</p>
+      <div class="callout blue small"><b>Privacy:</b> adding Google and OpenAI means listing them as subprocessors (<code>modules/marketing/legal/providers.ts</code>) and updating the privacy policy. Redaction runs for every provider.</div>
+    </div>
+  </div>
+  <div class="footer"><span>Flowbit · AI Architecture</span><span>9</span></div>
+</div></section>
+
+<!-- ============ PAGE 10: PHASES / DECISIONS / ENV / FILES ============ -->
+<section class="page"><div class="frame tight">
+  <div class="tag">⌐ 7 · Build phases, decisions, config &amp; file map</div>
+  <div class="cols">
+    <div>
+      <h3>Build phases</h3>
+      <svg viewBox="0 0 520 96">
+        <g font-size="11">
+          <rect x="2" y="10" width="118" height="76" rx="8" fill="#1d2a1f" stroke="#3fa85a"/><text x="12" y="31" font-weight="700">Phase 1</text><text x="12" y="49" font-size="10">Adapters + catalog</text><text x="12" y="63" font-size="10">+ model dropdown</text><text x="12" y="77" font-size="10" fill="#c9a227">log costUsd now</text>
+          <rect x="134" y="10" width="118" height="76" rx="8" fill="#2a2412" stroke="#c9a227"/><text x="144" y="31" font-weight="700">Phase 2</text><text x="144" y="49" font-size="10">Credits + ledger</text><text x="144" y="63" font-size="10">included per seat</text><text x="144" y="77" font-size="10">usage screen</text>
+          <rect x="266" y="10" width="118" height="76" rx="8" fill="#141c2e" stroke="#3b6fd8"/><text x="276" y="31" font-weight="700">Phase 3</text><text x="276" y="49" font-size="10">AI credits add-on</text><text x="276" y="63" font-size="10">Razorpay per seat</text><text x="276" y="77" font-size="10">top-ups (optional)</text>
+          <rect x="398" y="10" width="118" height="76" rx="8" fill="#222" stroke="#777" stroke-dasharray="5 4"/><text x="408" y="31" font-weight="700" fill="#bbb">Phase 4</text><text x="408" y="49" font-size="10" fill="#aaa">Own model (Ollama)</text><text x="408" y="63" font-size="10" fill="#aaa">server + adapter</text><text x="408" y="77" font-size="10" fill="#aaa">internal token price</text>
+        </g>
+        <g stroke="#d8d8d8" stroke-width="1.4" fill="none" marker-end="url(#ah)"><path d="M120 48 L132 48"/><path d="M252 48 L264 48"/><path d="M384 48 L396 48"/></g>
+      </svg>
+      <h3>Decisions summary <span class="pill now" style="background:#1d3550;color:#9cc7ff">DECIDED</span> <span class="small muted">details on page 11</span></h3>
+      <table>
+        <tr><th>#</th><th>Question</th><th>Decision</th></tr>
+        <tr><td>1</td><td>Exact model ids</td><td><code>claude-haiku-5-5</code> · latest stable Gemini Flash · <code>gpt-6-luna</code> (default) + <code>gpt-5.6-luna</code></td></tr>
+        <tr><td>2</td><td>Which model writes meeting minutes</td><td>Organiser's default → workspace default → Claude Haiku; dropdown on "Draft minutes again"</td></tr>
+        <tr><td>3</td><td>Value of 1 credit; included credits per seat</td><td>Round rupee value; price at 2–3× real cost; numbers set after 2–4 weeks of <code>costUsd</code> data</td></tr>
+        <tr><td>4</td><td>Pool per workspace or per user</td><td>Workspace pool; optional per-member limit later</td></tr>
+        <tr><td>5</td><td>Charge for JSON retries</td><td>No, Flowbit absorbs (max 1 retry)</td></tr>
+        <tr><td>6</td><td>Provider outage behaviour</td><td>Template + "Try with another model"; never a silent switch</td></tr>
+        <tr><td>7</td><td>Do credits expire</td><td>Included + add-on: monthly. Top-ups: 12 months</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3>Environment variables</h3>
+      <table>
+        <tr><th>Variable</th><th>For</th><th></th></tr>
+        <tr><td><code>ANTHROPIC_API_KEY</code></td><td>Claude (Arc + minutes)</td><td><span class="pill now">NOW</span></td></tr>
+        <tr><td><code>SARVAM_API_KEY</code></td><td>Transcription</td><td><span class="pill now">NOW</span></td></tr>
+        <tr><td><code>RECALL_API_KEY</code>, <code>RECALL_REGION</code>, <code>RECALL_WEBHOOK_SECRET</code></td><td>Notetaker bot + webhook <code>{APP_URL}/api/webhooks/recall</code></td><td><span class="pill now">NOW</span></td></tr>
+        <tr><td><code>GOOGLE_CLIENT_ID</code>, <code>GOOGLE_CLIENT_SECRET</code></td><td>Google Calendar connect + Meet links (OAuth, scope <code>calendar.events</code>)</td><td><span class="pill now">NOW</span></td></tr>
+        <tr><td><code>APP_ENCRYPTION_KEY</code></td><td>32-byte key that seals Google tokens</td><td><span class="pill now">NOW</span></td></tr>
+        <tr><td><code>APP_URL</code></td><td>Builds callback / webhook URLs (must match Google redirect URIs)</td><td><span class="pill now">NOW</span></td></tr>
+        <tr><td><code>STORAGE_DRIVER</code> (+ S3/R2 keys)</td><td>Recordings storage, direct uploads</td><td><span class="pill now">NOW</span></td></tr>
+        <tr><td><code>MEETINGS_PURGE</code></td><td>Turns the retention purge from dry run to real</td><td><span class="pill now">NOW</span></td></tr>
+        <tr><td><code>GEMINI_API_KEY</code>, <code>OPENAI_API_KEY</code></td><td>New adapters</td><td><span class="pill plan">PLAN</span></td></tr>
+        <tr><td><code>OLLAMA_BASE_URL</code></td><td>Own model, later</td><td><span class="pill plan">PLAN</span></td></tr>
+      </table>
+      <h3>File map</h3>
+      <table>
+        <tr><th>Area</th><th>Files</th></tr>
+        <tr><td>Arc AI</td><td><code>src/modules/work/arc/*</code> · <code>src/components/work/arc/*</code> · <code>src/app/app/arc/page.tsx</code></td></tr>
+        <tr><td>AI caps / redaction / usage</td><td><code>src/lib/ai-caps.ts</code> · <code>src/lib/ai-redact.ts</code> · <code>src/models/work/AiUsage.ts</code></td></tr>
+        <tr><td>Meetings AI</td><td><code>src/modules/work/meetings/ai/*</code> (pipeline, bot, recall, sarvam, minutes, job, purge)</td></tr>
+        <tr><td>Webhooks / cron</td><td><code>src/app/api/webhooks/recall</code> · <code>/sarvam</code> · <code>src/app/api/cron/meetings</code></td></tr>
+        <tr><td>Google / Meet link</td><td><code>src/modules/google/*</code> · <code>meetings/google-sync.ts</code> · <code>api/integrations/google/*</code></td></tr>
+        <tr><td>UI</td><td><code>meeting-ai-card.tsx</code> · <code>meeting-form-dialog.tsx</code></td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="footer"><span>Flowbit · AI Architecture</span><span>10</span></div>
+</div></section>
+
+<!-- ============ PAGE 11: DECISIONS ============ -->
+<section class="page"><div class="frame tight">
+  <div class="tag">⌐ 8 · Decisions: what we do and what we don't <span class="pill now" style="background:#1d3550;color:#9cc7ff">DECIDED</span></div>
+  <table style="font-size:10px">
+    <tr><th style="width:22px">#</th><th style="width:140px">Topic</th><th>✅ Do</th><th style="width:270px">❌ Don't</th></tr>
+    <tr><td>1</td><td><b>Model ids</b></td><td>Claude Haiku → <code>claude-haiku-5-5</code> (also move Arc's progress update off <code>claude-haiku-4-5</code>). Gemini Flash → latest <b>stable</b> id, copied from Google's model page. OpenAI → <code>gpt-6-luna</code> as default + <code>gpt-5.6-luna</code>; hide the unused one once data exists.</td><td>Use preview / experimental versions. Show raw model ids to users (show "Gemini Flash").</td></tr>
+    <tr><td>2</td><td><b>Minutes model</b></td><td>Organiser's default model → workspace default → Claude Haiku. Model dropdown on "Draft minutes again". Show "this meeting used X credits" on the meeting page.</td><td>Keep minutes hard-wired to Sonnet 5.5 (bigger and pricier than the catalog models, and the user can't control it).</td></tr>
+    <tr><td>3</td><td><b>Credit value &amp; included credits</b></td><td>Build Phase 1 first and log real <code>costUsd</code> for 2–4 weeks, then set numbers. 1 credit = a round rupee value (e.g. ₹0.10 of customer price). Selling price 2–3× real provider cost. Size included credits as "about N drafts per seat per month". Show an estimate in the dropdown ("about 3 credits").</td><td>Guess numbers before there is data. Sell at cost. Show tokens to customers.</td></tr>
+    <tr><td>4</td><td><b>Pool</b></td><td>One pool per workspace (seats × credits per seat), like Meetings AI hours. Later: optional per-member monthly limit set by admins. Warn admins at 80% and 100%.</td><td>Separate wallets per user (more code; light users' credits sit unused while heavy users run out).</td></tr>
+    <tr><td>5</td><td><b>JSON retries</b></td><td>Flowbit absorbs the cost; keep the max of one retry; still log retry cost to spot models that fail often.</td><td>Charge for retries, failed calls or refusals. Charge only when the user gets an AI result.</td></tr>
+    <tr><td>6</td><td><b>Provider outage</b></td><td>Template draft + a "Try with another model" button. Console switch to disable a model everywhere. Minutes: template, cron retries (up to 3), then "Draft minutes again" with another model.</td><td>Silently switch providers (the user chose the model; another may cost more or send data to a company they didn't pick).</td></tr>
+    <tr><td>7</td><td><b>Expiry</b></td><td>Included credits: monthly reset, no rollover. Add-on credits: monthly. Top-ups: 12 months from purchase. Spend order: included → add-on → top-up.</td><td>Make credits never expire (unused prepaid credits stay on the books forever).</td></tr>
+  </table>
+  <h3>General rules</h3>
+  <div class="cols">
+    <table style="font-size:10px">
+      <tr><th>✅ Do</th></tr>
+      <tr><td>Log the real cost of every request from day one (Phase 1)</td></tr>
+      <tr><td>Test each new provider with a small internal group before releasing it to all customers</td></tr>
+      <tr><td>Add Google and OpenAI to the subprocessor list and privacy policy before launch</td></tr>
+      <tr><td>Keep redaction and JSON validation for every provider</td></tr>
+      <tr><td>Build our own Ollama model last, once usage volumes are known</td></tr>
+    </table>
+    <table style="font-size:10px">
+      <tr><th>❌ Don't</th></tr>
+      <tr><td>Launch paid credits before there is cost data</td></tr>
+      <tr><td>Let customers bring their own API keys yet (complicates billing and support)</td></tr>
+      <tr><td>Send data to new providers before the legal pages are updated</td></tr>
+      <tr><td>Assume every model follows the JSON format equally well; test each one</td></tr>
+      <tr><td>Start the self-hosted model now (GPU servers are expensive if barely used)</td></tr>
+    </table>
+  </div>
+  <div class="callout blue small"><b>In one line:</b> workspace credit pool · minutes use the organiser's model (fallback Haiku) · Flowbit absorbs retries · no silent provider switching · top-ups expire after 12 months · set credit prices only after 2–4 weeks of real cost data.</div>
+  <div class="footer"><span>Flowbit · AI Architecture</span><span>11</span></div>
+</div></section>
+
+</body>
+</html>
