@@ -23,10 +23,9 @@ export const workspaceKindOf = (org: { workspaceKind?: string | null } | null | 
 export type WorkspaceKindDef = {
   key: WorkspaceKind
   label: string
-  /** Onboarding card: "I'm a freelancer". */
+  /** Onboarding card: "I'm a freelancer" and one short line under it. */
   title: string
-  description: string
-  bestFor: string
+  tagline: string
   /** Products the kind can use at all; the plan and Settings → Modules narrow it further. */
   products: readonly ProductKey[]
   /** Built-in roles that make no sense without the products above (hidden from pickers, refused on invite). */
@@ -42,8 +41,7 @@ export const WORKSPACE_KIND_DEFS: Record<WorkspaceKind, WorkspaceKindDef> = {
     key: 'freelancer',
     label: 'Freelancer',
     title: "I'm a freelancer",
-    description: 'Run your own projects, win clients and send GST invoices, with collaborators when you need them.',
-    bestFor: 'consultants, designers, developers, creators',
+    tagline: 'Solo work',
     products: ['work', 'orbit', 'folio'],
     // HR roles only act on Muster (people, attendance, payroll), which a freelancer workspace does not have.
     hiddenRoles: ['hr_admin', 'hr_exec'],
@@ -54,8 +52,7 @@ export const WORKSPACE_KIND_DEFS: Record<WorkspaceKind, WorkspaceKindDef> = {
     key: 'agency',
     label: 'Agency',
     title: 'I run an agency',
-    description: 'Deliver client projects with a salaried team: work, people, sales and invoicing together.',
-    bestFor: 'digital, creative, marketing and dev agencies',
+    tagline: 'Client work with a team',
     products: ['work', 'muster', 'orbit', 'folio'],
     hiddenRoles: [],
     defaultTeamSize: '2-5',
@@ -65,8 +62,7 @@ export const WORKSPACE_KIND_DEFS: Record<WorkspaceKind, WorkspaceKindDef> = {
     key: 'business',
     label: 'Business',
     title: 'I run a business',
-    description: 'Manage an in-house team: HR and payroll, tasks, customers and invoicing.',
-    bestFor: 'startups, traders, manufacturers, clinics, firms',
+    tagline: 'An in-house team',
     products: ['work', 'muster', 'orbit', 'folio'],
     hiddenRoles: [],
     defaultTeamSize: '2-5',
